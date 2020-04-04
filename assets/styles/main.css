@@ -358,18 +358,18 @@ footer a {
 }
 
 footer .copyright {
-  color: #007Cf0;
+  color: #004f99;
   margin: 3em 0 2em 0;
   text-align: center;
 }
 
 footer .copyright a {
-  color: #f98525;
+  color: #007Cf0;
 }
 
 footer .copyright ul.links {
   display: inline-block;
-  background: #004f99;
+  background: #072635;
   border-radius: 5px;
   padding: 0.85em 2.25em 0.85em 2.25em;
 }

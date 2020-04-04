@@ -136,17 +136,17 @@ footer {
   }
 
   .copyright {
-    color: $azure;
+    color: $usafaBlue;
     margin: 3em 0 2em 0;
     text-align: center;
 
     a {
-      color: $princetonOrange;
+      color: $azure;
     }
 
     ul.links {
       display: inline-block;
-      background: $usafaBlue;
+      background: $maastrichtBlue;
       border-radius: 5px;
       padding: 0.85em 2.25em 0.85em 2.25em;
     }
