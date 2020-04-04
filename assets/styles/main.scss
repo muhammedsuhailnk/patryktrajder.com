@@ -85,14 +85,15 @@ ul.links {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  margin-left: -45px;
-  padding-top: 2rem;
+  margin-left: -2.5rem;
+  margin-top: -0.5rem;
 
   > * {
     min-width: 20rem;
     flex-basis: 0;
     flex-grow: 1;
-    margin-left: 45px;
+    margin-left: 2.5rem;
+    margin-top: 2.5rem;
   }
 }
 
