@@ -62,7 +62,25 @@ ul.links {
 
 .gallery {
   margin: 0 auto;
-  width: 60%;
+  width: 80%;
+
+  .preview {
+    margin: 0 auto;
+    width: 80%;
+  }
+
+  .thumbList {
+    display: flex;
+    height: 100px;
+    margin: 1rem -1rem 0 0;
+    overflow-x: scroll;
+
+    img {
+      height: 100%;
+      margin-left: 1rem;
+      width: auto;
+    }
+  }
 }
 
 .more {
@@ -153,5 +171,9 @@ footer {
       border-radius: 5px;
       padding: 0.85em 2.25em 0.85em 2.25em;
     }
+  }
+
+  .row {
+    align-items: flex-start;
   }
 }
