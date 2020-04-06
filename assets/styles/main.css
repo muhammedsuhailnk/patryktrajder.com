@@ -165,7 +165,7 @@ header {
   position: relative;
   background: white;
   border-bottom: solid 1px #ccc;
-  padding-top: 2em;
+  padding-top: em;
   text-align: center;
 }
 
@@ -291,6 +291,10 @@ ul.links li:first-child {
   color: #007Cf0;
 }
 
+.productList > h3 {
+  margin-bottom: 0rem;
+}
+
 .row {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -330,6 +334,10 @@ ul.links li:first-child {
 
 .topGap {
   margin-top: 2rem;
+}
+
+.topGapMedium {
+  margin-top: 3rem;
 }
 
 .topGapLarge {

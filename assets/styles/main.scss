@@ -2,13 +2,6 @@
 @import "variables.scss";
 @import "base.scss";
 
-#contact {
-  ul {
-    li {
-    }
-  }
-}
-
 ul.dots {
   margin-left: 2rem;
 
@@ -81,6 +74,12 @@ ul.links {
   }
 }
 
+.productList {
+  > h3 {
+    margin-bottom: 0rem;
+  }
+}
+
 .row {
   align-items: center;
   display: flex;
@@ -114,6 +113,10 @@ ul.links {
 
 .topGap {
   margin-top: 2rem;
+}
+
+.topGapMedium {
+  margin-top: 3rem;
 }
 
 .topGapLarge {
