@@ -1,0 +1,39 @@
+{
+  "name": "patryktrajder.com",
+  "version": "1.0.0",
+  "description": "Youtuber's portfolio website",
+  "main": "index.js",
+  "scripts": {
+    "babel": "./node_modules/.bin/babel src -d dist",
+    "dev": "webpack --watch --mode=development",
+    "dist": "webpack --mode=production",
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JakubJanowski/patryktrajder.com.git"
+  },
+  "keywords": [
+    "portfolio"
+  ],
+  "author": "Jakub Janowski",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/JakubJanowski/patryktrajder.com/issues"
+  },
+  "homepage": "https://github.com/JakubJanowski/patryktrajder.com#readme",
+  "private": true,
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "path": "^0.12.7",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.8.7",
+    "@shopify/draggable": "^1.0.0-beta.8"
+  }
+}

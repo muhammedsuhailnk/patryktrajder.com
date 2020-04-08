@@ -288,16 +288,29 @@ ul.links li:first-child {
 }
 
 .gallery .thumbList {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   height: 100px;
   margin: 1rem -1rem 0 0;
-  overflow-x: scroll;
+  overflow: hidden;
 }
 
-.gallery .thumbList img {
-  height: 100%;
+.gallery .thumbList .thumbListItems {
+  cursor: move;
+  cursor: grab;
+  cursor: -webkit-grab;
+  height: 140px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.gallery .thumbList .thumbListItems:active {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.gallery .thumbList .thumbListItems img {
+  display: inline-block;
+  height: 100px;
   margin-left: 1rem;
   width: auto;
 }
