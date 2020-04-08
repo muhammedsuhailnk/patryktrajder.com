@@ -253,21 +253,20 @@ ul.links li:first-child {
   margin: 0 auto;
 }
 
-.categories ul {
-  margin-left: -1rem;
-}
-
 .categories ul > li {
   background-color: #f4f9ff;
   color: #007Cf0;
   display: inline-block;
-  margin-left: 1rem;
   padding: 1rem;
 }
 
 .categories ul > li:hover {
   background-color: #eff4f9;
   color: #004f99;
+}
+
+.categories ul > li + li {
+  margin-left: 1rem;
 }
 
 .container {
@@ -282,9 +281,10 @@ ul.links li:first-child {
   width: 80%;
 }
 
-.gallery .preview {
+.gallery .preview img {
+  height: 400px;
   margin: 0 auto;
-  width: 80%;
+  width: auto;
 }
 
 .gallery .thumbList {

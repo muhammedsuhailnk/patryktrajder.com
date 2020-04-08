@@ -37,18 +37,20 @@ ul.links {
 
 .categories {
   ul {
-    margin-left: -1rem;
     > li {
       background-color: $aliceBlue;
       color: $azure;
       display: inline-block;
-      margin-left: 1rem;
       padding: 1rem;
 
       &:hover {
         background-color: #eff4f9;
         color: $usafaBlue;
       }
+    }
+
+    > li + li {
+      margin-left: 1rem;
     }
   }
 }
@@ -65,8 +67,11 @@ ul.links {
   width: 80%;
 
   .preview {
-    margin: 0 auto;
-    width: 80%;
+    img {
+      height: 400px;
+      margin: 0 auto;
+      width: auto;
+    }
   }
 
   .thumbList {

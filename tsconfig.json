@@ -1,16 +1,15 @@
 {
   "compilerOptions": {
     "alwaysStrict": true,
-    "baseUrl": "./src",
+    "baseUrl": "./assets/scripts",
     "declaration": true,
-    "lib": ["ES2020", "DOM"],
+    "lib": ["ES6", "DOM"],
     "module": "es6",
     "moduleResolution": "node",
-    "outDir": "./dist",
+    "outDir": "dist",
     "sourceMap": true,
     "strict": true,
     "target": "es5"
   },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules", "**/*.spec.ts", "dist", "**/*.d.ts"]
 }
