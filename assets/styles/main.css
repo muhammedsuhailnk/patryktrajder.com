@@ -278,18 +278,19 @@ ul.links li:first-child {
 
 .gallery {
   margin: 0 auto;
-  width: 80%;
+  max-width: 55rem;
 }
 
 .gallery .preview img {
-  height: 400px;
+  height: auto;
   margin: 0 auto;
   width: auto;
+  max-width: 100%;
 }
 
 .gallery .thumbList {
   height: 100px;
-  margin: 1rem -1rem 0 0;
+  margin-top: 1rem;
   overflow: hidden;
 }
 
@@ -311,8 +312,11 @@ ul.links li:first-child {
 .gallery .thumbList .thumbListItems img {
   display: inline-block;
   height: 100px;
-  margin-left: 1rem;
   width: auto;
+}
+
+.gallery .thumbList .thumbListItems img + img {
+  margin-left: 1rem;
 }
 
 .more {
