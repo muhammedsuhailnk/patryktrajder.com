@@ -1,5 +1,3 @@
-//import { Draggable } from "@shopify/draggable";
-
 const lists: HTMLCollectionOf<Element> = document.getElementsByClassName(
   "thumbListItems"
 );

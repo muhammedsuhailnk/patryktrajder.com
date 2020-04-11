@@ -76,16 +76,18 @@ ul.links {
   }
 
   .thumbList {
-    height: 100px;
+    height: 10.3vw;
+    max-height: 6rem;
     margin-top: 1rem;
     overflow: hidden;
+    width: auto;
 
     .thumbListItems {
       cursor: move;
       cursor: grab;
       cursor: -moz-grab;
       cursor: -webkit-grab;
-      height: 140px;
+      height: 8rem;
       overflow-x: scroll;
       overflow-y: hidden;
       white-space: nowrap;
@@ -98,7 +100,8 @@ ul.links {
 
       img {
         display: inline-block;
-        height: 100px;
+        height: 10.3vw;
+        max-height: 6rem;
         width: auto;
       }
 
