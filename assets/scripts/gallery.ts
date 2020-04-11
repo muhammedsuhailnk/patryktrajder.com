@@ -7,27 +7,36 @@ for (let i = 0; i < lists.length; i++) {
 }
 
 function setUpSlider(slider: HTMLElement) {
+  let abortClick: boolean = false;
   let isGrabbing: boolean = false;
   let startX: number;
   let scrollStartLeft: number;
 
+  let handlePointerMove = (e: PointerEvent) => {
+    if (!isGrabbing) return;
+    const offset = e.pageX - startX;
+    if (offset > abortClickDistance || offset < -abortClickDistance)
+      abortClick = true;
+    slider.scrollLeft = scrollStartLeft - offset;
+  };
+
+  let handleDragEnd = (e: PointerEvent) => {
+    isGrabbing = false;
+    slider.releasePointerCapture(e.pointerId);
+    slider.removeEventListener("pointermove", handlePointerMove);
+    slider.removeEventListener("pointerup", handleDragEnd);
+    slider.removeEventListener("lostpointercapture", handleDragEnd);
+  };
+
   slider.addEventListener("pointerdown", (e) => {
+    abortClick = false;
     isGrabbing = true;
     startX = e.pageX;
     scrollStartLeft = slider.scrollLeft;
     slider.setPointerCapture(e.pointerId);
-  });
-
-  slider.addEventListener("pointerup", (e) => {
-    isGrabbing = false;
-    slider.releasePointerCapture(e.pointerId);
-  });
-
-  slider.addEventListener("pointermove", (e) => {
-    if (!isGrabbing) return;
-    e.preventDefault();
-    const offset = e.pageX - startX;
-    slider.scrollLeft = scrollStartLeft - offset;
+    slider.addEventListener("pointermove", handlePointerMove);
+    slider.addEventListener("pointerup", handleDragEnd);
+    slider.addEventListener("lostpointercapture", handleDragEnd);
   });
 
   for (let i = 0; i < slider.childNodes.length; i++)
@@ -41,6 +50,22 @@ function setupSliderItem(item: HTMLImageElement, slider: HTMLElement) {
   let startX: number;
   let scrollStartLeft: number;
 
+  let handlePointerMove = (e: PointerEvent) => {
+    if (!isGrabbing) return;
+    const offset = e.pageX - startX;
+    if (offset > abortClickDistance || offset < -abortClickDistance)
+      abortClick = true;
+    slider.scrollLeft = scrollStartLeft - offset;
+  };
+
+  let handleDragEnd = (e: PointerEvent) => {
+    isGrabbing = false;
+    item.releasePointerCapture(e.pointerId);
+    item.removeEventListener("pointermove", handlePointerMove);
+    item.removeEventListener("pointerup", handleDragEnd);
+    item.removeEventListener("lostpointercapture", handleDragEnd);
+  };
+
   item.addEventListener("pointerdown", (e) => {
     e.stopPropagation();
     abortClick = false;
@@ -48,22 +73,9 @@ function setupSliderItem(item: HTMLImageElement, slider: HTMLElement) {
     startX = e.pageX;
     scrollStartLeft = slider.scrollLeft;
     item.setPointerCapture(e.pointerId);
-  });
-
-  item.addEventListener("pointerup", (e) => {
-    e.stopPropagation();
-    isGrabbing = false;
-    item.releasePointerCapture(e.pointerId);
-  });
-
-  item.addEventListener("pointermove", (e) => {
-    if (!isGrabbing) return;
-    e.preventDefault();
-    e.stopPropagation();
-    const offset = e.pageX - startX;
-    if (offset > abortClickDistance || offset < -abortClickDistance)
-      abortClick = true;
-    slider.scrollLeft = scrollStartLeft - offset;
+    item.addEventListener("pointermove", handlePointerMove);
+    item.addEventListener("pointerup", handleDragEnd);
+    item.addEventListener("lostpointercapture", handleDragEnd);
   });
 
   item.addEventListener("click", (e) => {

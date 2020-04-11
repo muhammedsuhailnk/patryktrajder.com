@@ -4,33 +4,34 @@ for (var i = 0; i < lists.length; i++) {
     setUpSlider(lists[i]);
 }
 function setUpSlider(slider) {
+    var abortClick = false;
     var isGrabbing = false;
     var startX;
     var scrollStartLeft;
+    var handlePointerMove = function (e) {
+        if (!isGrabbing)
+            return;
+        var offset = e.pageX - startX;
+        if (offset > abortClickDistance || offset < -abortClickDistance)
+            abortClick = true;
+        slider.scrollLeft = scrollStartLeft - offset;
+    };
+    var handleDragEnd = function (e) {
+        isGrabbing = false;
+        slider.releasePointerCapture(e.pointerId);
+        slider.removeEventListener("pointermove", handlePointerMove);
+        slider.removeEventListener("pointerup", handleDragEnd);
+        slider.removeEventListener("lostpointercapture", handleDragEnd);
+    };
     slider.addEventListener("pointerdown", function (e) {
-        console.log("pointerdown " + e.pointerId);
+        abortClick = false;
         isGrabbing = true;
         startX = e.pageX;
         scrollStartLeft = slider.scrollLeft;
         slider.setPointerCapture(e.pointerId);
-    });
-    slider.addEventListener("pointerup", function (e) {
-        console.log("pointerup " + e.pointerId);
-        isGrabbing = false;
-        slider.releasePointerCapture(e.pointerId);
-    });
-    slider.addEventListener("contextmenu", function (e) {
-        console.log("contextmenu");
-        isGrabbing = false;
-        //slider.releasePointerCapture(e.pointerId);
-    });
-    slider.addEventListener("pointermove", function (e) {
-        if (!isGrabbing)
-            return;
-        e.preventDefault();
-        console.log("pointermove " + e.pointerId);
-        var offset = e.pageX - startX;
-        slider.scrollLeft = scrollStartLeft - offset;
+        slider.addEventListener("pointermove", handlePointerMove);
+        slider.addEventListener("pointerup", handleDragEnd);
+        slider.addEventListener("lostpointercapture", handleDragEnd);
     });
     for (var i = 0; i < slider.childNodes.length; i++)
         setupSliderItem(slider.childNodes[i], slider);
@@ -41,31 +42,31 @@ function setupSliderItem(item, slider) {
     var isGrabbing = false;
     var startX;
     var scrollStartLeft;
+    var handlePointerMove = function (e) {
+        if (!isGrabbing)
+            return;
+        var offset = e.pageX - startX;
+        if (offset > abortClickDistance || offset < -abortClickDistance)
+            abortClick = true;
+        slider.scrollLeft = scrollStartLeft - offset;
+    };
+    var handleDragEnd = function (e) {
+        isGrabbing = false;
+        item.releasePointerCapture(e.pointerId);
+        item.removeEventListener("pointermove", handlePointerMove);
+        item.removeEventListener("pointerup", handleDragEnd);
+        item.removeEventListener("lostpointercapture", handleDragEnd);
+    };
     item.addEventListener("pointerdown", function (e) {
         e.stopPropagation();
-        console.log("i pointerdown" + " " + e.pageX + " " + slider.scrollLeft);
         abortClick = false;
         isGrabbing = true;
         startX = e.pageX;
         scrollStartLeft = slider.scrollLeft;
         item.setPointerCapture(e.pointerId);
-    });
-    item.addEventListener("pointerup", function (e) {
-        e.stopPropagation();
-        console.log("i pointerup");
-        isGrabbing = false;
-        item.releasePointerCapture(e.pointerId);
-    });
-    item.addEventListener("pointermove", function (e) {
-        if (!isGrabbing)
-            return;
-        e.preventDefault();
-        e.stopPropagation();
-        console.log("i pointermove " + e.pageX + " " + startX + " " + scrollStartLeft);
-        var offset = e.pageX - startX;
-        if (offset > abortClickDistance || offset < -abortClickDistance)
-            abortClick = true;
-        slider.scrollLeft = scrollStartLeft - offset;
+        item.addEventListener("pointermove", handlePointerMove);
+        item.addEventListener("pointerup", handleDragEnd);
+        item.addEventListener("lostpointercapture", handleDragEnd);
     });
     item.addEventListener("click", function (e) {
         if (abortClick)
@@ -73,7 +74,6 @@ function setupSliderItem(item, slider) {
         var offset = e.pageX - startX;
         if (offset > abortClickDistance || offset < -abortClickDistance)
             return;
-        console.log("i click");
         showPreview(item);
     });
 }
