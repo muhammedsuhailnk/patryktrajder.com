@@ -99,10 +99,17 @@ ul.links {
       }
 
       img {
+        cursor: pointer;
         display: inline-block;
         height: 10.3vw;
         max-height: 6rem;
         width: auto;
+
+        &:active {
+          cursor: grabbing;
+          cursor: -moz-grabbing;
+          cursor: -webkit-grabbing;
+        }
       }
 
       img + img {

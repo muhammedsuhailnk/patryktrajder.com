@@ -126,8 +126,7 @@ blockquote {
   quotes: none;
 }
 
-blockquote:before,
-blockquote:after {
+blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
@@ -155,11 +154,11 @@ q:before {
 
 * {
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 header {
@@ -190,7 +189,7 @@ nav > ul > li > a {
 }
 
 nav > ul > li > a:hover {
-  color: #007cf0;
+  color: #007Cf0;
 }
 
 nav > ul > li.current > a {
@@ -256,7 +255,7 @@ ul.links li:first-child {
 
 .categories ul > li {
   background-color: #f4f9ff;
-  color: #007cf0;
+  color: #007Cf0;
   display: inline-block;
   padding: 1rem;
 }
@@ -313,10 +312,16 @@ ul.links li:first-child {
 }
 
 .gallery .thumbList .thumbListItems img {
+  cursor: pointer;
   display: inline-block;
   height: 10.3vw;
   max-height: 6rem;
   width: auto;
+}
+
+.gallery .thumbList .thumbListItems img:active {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
 }
 
 .gallery .thumbList .thumbListItems img + img {
@@ -329,7 +334,7 @@ ul.links li:first-child {
 }
 
 .more:hover {
-  color: #007cf0;
+  color: #007Cf0;
 }
 
 .productList > h3 {
@@ -338,13 +343,13 @@ ul.links li:first-child {
 
 .row {
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+      flex-wrap: wrap;
   margin-left: -2.5rem;
   margin-top: -0.5rem;
 }
@@ -352,10 +357,10 @@ ul.links li:first-child {
 .row > * {
   min-width: 20rem;
   -ms-flex-preferred-size: 0;
-  flex-basis: 0;
+      flex-basis: 0;
   -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   margin-left: 2.5rem;
   margin-top: 2.5rem;
 }
@@ -391,8 +396,8 @@ body {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 footer {
@@ -413,7 +418,7 @@ footer .copyright {
 }
 
 footer .copyright a {
-  color: #007cf0;
+  color: #007Cf0;
 }
 
 footer .copyright ul.links {
@@ -425,6 +430,6 @@ footer .copyright ul.links {
 
 footer .row {
   -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
