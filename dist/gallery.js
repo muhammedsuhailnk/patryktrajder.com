@@ -1,5 +1,4 @@
 "use strict";
-//import { Draggable } from "@shopify/draggable";
 var lists = document.getElementsByClassName("thumbListItems");
 for (var i = 0; i < lists.length; i++) {
     setUpSlider(lists[i]);
@@ -9,28 +8,34 @@ function setUpSlider(slider) {
     var startX;
     var scrollStartLeft;
     slider.addEventListener("pointerdown", function (e) {
-        console.log("pointerdown");
+        console.log("pointerdown " + e.pointerId);
         isGrabbing = true;
         startX = e.pageX;
         scrollStartLeft = slider.scrollLeft;
         slider.setPointerCapture(e.pointerId);
     });
     slider.addEventListener("pointerup", function (e) {
-        console.log("pointerup");
+        console.log("pointerup " + e.pointerId);
         isGrabbing = false;
         slider.releasePointerCapture(e.pointerId);
+    });
+    slider.addEventListener("contextmenu", function (e) {
+        console.log("contextmenu");
+        isGrabbing = false;
+        //slider.releasePointerCapture(e.pointerId);
     });
     slider.addEventListener("pointermove", function (e) {
         if (!isGrabbing)
             return;
         e.preventDefault();
-        console.log("pointermove");
+        console.log("pointermove " + e.pointerId);
         var offset = e.pageX - startX;
         slider.scrollLeft = scrollStartLeft - offset;
     });
     for (var i = 0; i < slider.childNodes.length; i++)
         setupSliderItem(slider.childNodes[i], slider);
 }
+var abortClickDistance = 10;
 function setupSliderItem(item, slider) {
     var abortClick = false;
     var isGrabbing = false;
@@ -58,7 +63,7 @@ function setupSliderItem(item, slider) {
         e.stopPropagation();
         console.log("i pointermove " + e.pageX + " " + startX + " " + scrollStartLeft);
         var offset = e.pageX - startX;
-        if (offset > 10 || offset < -10)
+        if (offset > abortClickDistance || offset < -abortClickDistance)
             abortClick = true;
         slider.scrollLeft = scrollStartLeft - offset;
     });
@@ -66,7 +71,7 @@ function setupSliderItem(item, slider) {
         if (abortClick)
             return;
         var offset = e.pageX - startX;
-        if (offset > 10 || offset < -10)
+        if (offset > abortClickDistance || offset < -abortClickDistance)
             return;
         console.log("i click");
         showPreview(item);

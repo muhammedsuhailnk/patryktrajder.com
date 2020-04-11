@@ -12,7 +12,6 @@ function setUpSlider(slider: HTMLElement) {
   let scrollStartLeft: number;
 
   slider.addEventListener("pointerdown", (e) => {
-    console.log("pointerdown");
     isGrabbing = true;
     startX = e.pageX;
     scrollStartLeft = slider.scrollLeft;
@@ -20,7 +19,6 @@ function setUpSlider(slider: HTMLElement) {
   });
 
   slider.addEventListener("pointerup", (e) => {
-    console.log("pointerup");
     isGrabbing = false;
     slider.releasePointerCapture(e.pointerId);
   });
@@ -28,7 +26,6 @@ function setUpSlider(slider: HTMLElement) {
   slider.addEventListener("pointermove", (e) => {
     if (!isGrabbing) return;
     e.preventDefault();
-    console.log("pointermove");
     const offset = e.pageX - startX;
     slider.scrollLeft = scrollStartLeft - offset;
   });
@@ -46,7 +43,6 @@ function setupSliderItem(item: HTMLImageElement, slider: HTMLElement) {
 
   item.addEventListener("pointerdown", (e) => {
     e.stopPropagation();
-    console.log("i pointerdown" + " " + e.pageX + " " + slider.scrollLeft);
     abortClick = false;
     isGrabbing = true;
     startX = e.pageX;
@@ -56,7 +52,6 @@ function setupSliderItem(item: HTMLImageElement, slider: HTMLElement) {
 
   item.addEventListener("pointerup", (e) => {
     e.stopPropagation();
-    console.log("i pointerup");
     isGrabbing = false;
     item.releasePointerCapture(e.pointerId);
   });
@@ -65,9 +60,6 @@ function setupSliderItem(item: HTMLImageElement, slider: HTMLElement) {
     if (!isGrabbing) return;
     e.preventDefault();
     e.stopPropagation();
-    console.log(
-      "i pointermove " + e.pageX + " " + startX + " " + scrollStartLeft
-    );
     const offset = e.pageX - startX;
     if (offset > abortClickDistance || offset < -abortClickDistance)
       abortClick = true;
@@ -78,7 +70,6 @@ function setupSliderItem(item: HTMLImageElement, slider: HTMLElement) {
     if (abortClick) return;
     const offset = e.pageX - startX;
     if (offset > abortClickDistance || offset < -abortClickDistance) return;
-    console.log("i click");
     showPreview(item);
   });
 }
