@@ -46,12 +46,15 @@ function setupSliderItem(item, slider) {
         if (!isGrabbing)
             return;
         var offset = e.pageX - startX;
-        if (offset > abortClickDistance || offset < -abortClickDistance)
+        if (offset > abortClickDistance || offset < -abortClickDistance) {
             abortClick = true;
+            item.classList.add("dragging");
+        }
         slider.scrollLeft = scrollStartLeft - offset;
     };
     var handleDragEnd = function (e) {
         isGrabbing = false;
+        item.classList.remove("dragging");
         item.releasePointerCapture(e.pointerId);
         item.removeEventListener("pointermove", handlePointerMove);
         item.removeEventListener("pointerup", handleDragEnd);

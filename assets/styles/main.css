@@ -298,8 +298,9 @@ ul.links li:first-child {
 
 .gallery .thumbList .thumbListItems {
   cursor: move;
-  cursor: grab;
+  cursor: url("/assets/cursors/grab.cur"), auto;
   cursor: -webkit-grab;
+  cursor: grab;
   height: 8rem;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -307,8 +308,9 @@ ul.links li:first-child {
 }
 
 .gallery .thumbList .thumbListItems:active {
-  cursor: grabbing;
+  cursor: url("/assets/cursors/grabbing.cur"), auto;
   cursor: -webkit-grabbing;
+  cursor: grabbing;
 }
 
 .gallery .thumbList .thumbListItems img {
@@ -319,9 +321,11 @@ ul.links li:first-child {
   width: auto;
 }
 
-.gallery .thumbList .thumbListItems img:active {
-  cursor: grabbing;
+.gallery .thumbList .thumbListItems img.dragging:active {
+  cursor: move;
+  cursor: url("/assets/cursors/grabbing.cur"), auto;
   cursor: -webkit-grabbing;
+  cursor: grabbing;
 }
 
 .gallery .thumbList .thumbListItems img + img {

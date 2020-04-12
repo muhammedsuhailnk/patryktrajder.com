@@ -84,18 +84,20 @@ ul.links {
 
     .thumbListItems {
       cursor: move;
-      cursor: grab;
+      cursor: url("/assets/cursors/grab.cur"), auto;
       cursor: -moz-grab;
       cursor: -webkit-grab;
+      cursor: grab;
       height: 8rem;
       overflow-x: scroll;
       overflow-y: hidden;
       white-space: nowrap;
 
       &:active {
-        cursor: grabbing;
+        cursor: url("/assets/cursors/grabbing.cur"), auto;
         cursor: -moz-grabbing;
         cursor: -webkit-grabbing;
+        cursor: grabbing;
       }
 
       img {
@@ -105,10 +107,12 @@ ul.links {
         max-height: 6rem;
         width: auto;
 
-        &:active {
-          cursor: grabbing;
+        &.dragging:active {
+          cursor: move;
+          cursor: url("/assets/cursors/grabbing.cur"), auto;
           cursor: -moz-grabbing;
           cursor: -webkit-grabbing;
+          cursor: grabbing;
         }
       }
 
