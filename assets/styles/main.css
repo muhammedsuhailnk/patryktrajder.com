@@ -158,10 +158,10 @@ q:before {
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-header {
+body > header {
   position: relative;
   background: white;
   border-bottom: solid 1px #ccc;
@@ -169,7 +169,7 @@ header {
   text-align: center;
 }
 
-header h1 {
+body > header h1 {
   color: #051923;
   font-weight: 100;
 }
@@ -194,6 +194,17 @@ nav > ul > li > a:hover {
 
 nav > ul > li.current > a {
   font-weight: 900;
+}
+
+main {
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 0 1rem;
+  width: 70rem;
+}
+
+main img {
+  border-radius: 10px;
 }
 
 h1 {
@@ -267,13 +278,6 @@ ul.links li:first-child {
 
 .categories ul > li + li {
   margin-left: 1rem;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 100%;
-  padding: 0 1rem;
-  width: 70rem;
 }
 
 .gallery {
@@ -369,10 +373,6 @@ ul.links li:first-child {
   margin-top: 2.5rem;
 }
 
-.rounded-images img {
-  border-radius: 10px;
-}
-
 .shrink {
   width: 80%;
 }
@@ -413,6 +413,13 @@ footer {
 
 footer a {
   color: #f4f9ff;
+}
+
+footer section.container {
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 0 1rem;
+  width: 70rem;
 }
 
 footer .copyright {

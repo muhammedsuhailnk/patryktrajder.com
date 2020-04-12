@@ -55,13 +55,6 @@ ul.links {
   }
 }
 
-.container {
-  margin: 0 auto;
-  max-width: 100%;
-  padding: 0 1rem;
-  width: 70rem;
-}
-
 .gallery {
   margin: 0 auto;
   max-width: 55rem;
@@ -154,12 +147,6 @@ ul.links {
   }
 }
 
-.rounded-images {
-  img {
-    border-radius: 10px;
-  }
-}
-
 .shrink {
   width: 80%;
 }
@@ -194,6 +181,13 @@ footer {
 
   a {
     color: $aliceBlue;
+  }
+
+  section.container {
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 0 1rem;
+    width: 70rem;
   }
 
   .copyright {

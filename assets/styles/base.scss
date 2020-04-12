@@ -5,19 +5,19 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
-header {
-  position: relative;
-  background: white;
-  border-bottom: solid 1px #ccc;
-  padding-top: 2em;
-  text-align: center;
+  > header {
+    position: relative;
+    background: white;
+    border-bottom: solid 1px #ccc;
+    padding-top: 2em;
+    text-align: center;
 
-  h1 {
-    color: $eerieBlack;
-    font-weight: 100;
+    h1 {
+      color: $eerieBlack;
+      font-weight: 100;
+    }
   }
 }
 
@@ -47,6 +47,17 @@ nav {
   }
 }
 
+main {
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 0 1rem;
+  width: 70rem;
+
+  img {
+    border-radius: 10px;
+  }
+}
+
 h1 {
   font-size: 2.5rem;
   margin-bottom: 2.5rem;
@@ -54,17 +65,17 @@ h1 {
 
 h2 {
   font-size: 2rem;
-  margin-bottom: 1rem;;
+  margin-bottom: 1rem;
 }
 
 h3 {
   font-size: 1.6rem;
-  margin-bottom: 1rem;;
+  margin-bottom: 1rem;
 }
 
 h4 {
   font-size: 1.5rem;
-  margin-bottom: 1rem;;
+  margin-bottom: 1rem;
 }
 
 p {
