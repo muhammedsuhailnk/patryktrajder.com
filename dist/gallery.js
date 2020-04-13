@@ -1,5 +1,6 @@
 "use strict";
 var abortClickDistance = 3;
+var bodyOverflow = document.body.style.overflow;
 var galleries = document.getElementsByClassName("gallery");
 for (var i = 0; i < galleries.length; i++) {
     var list = galleries[i].querySelector(".thumbListItems");
@@ -81,12 +82,6 @@ function setUpSliderItem(item, slider) {
         showPreview(item);
     });
 }
-function closeFullImage(button) {
-    var overlay = button.closest(".full");
-    if (!overlay)
-        return;
-    overlay.style.display = "none";
-}
 function showFullImage(img) {
     var gallery = img.closest(".gallery");
     if (!gallery)
@@ -99,6 +94,7 @@ function showFullImage(img) {
     if (!fullImg)
         return;
     fullImg.src = img.src.replace("-h400.jpg", ".jpg");
+    document.body.style.overflow = "hidden";
 }
 function showPreview(img) {
     var gallery = img.closest(".gallery");
@@ -109,10 +105,16 @@ function showPreview(img) {
         return;
     previewImg.src = img.src.replace("h100.jpg", "h400.jpg");
 }
-function setUpZoom(container) {
-    var img = container.querySelector("img");
+function setUpZoom(full) {
+    var img = full.querySelector("img");
     if (!img)
         return;
+    var button = full.querySelector(".close");
+    button === null || button === void 0 ? void 0 : button.addEventListener("click", function () {
+        document.body.style.overflow = bodyOverflow;
+        full.style.display = "none";
+        zoomOut();
+    });
     var abortClick = false;
     var isGrabbing = false;
     var startX;
@@ -132,8 +134,8 @@ function setUpZoom(container) {
         }
         var left = startLeft + offsetX;
         var top = startTop + offsetY;
-        var maxLeft = container.clientWidth / 2;
-        var maxTop = container.clientHeight / 2;
+        var maxLeft = full.clientWidth / 2;
+        var maxTop = full.clientHeight / 2;
         var minLeft = maxLeft - img.naturalWidth;
         var minTop = maxTop - img.naturalHeight;
         left = Math.min(Math.max(left, minLeft), maxLeft);
@@ -162,8 +164,28 @@ function setUpZoom(container) {
         img.addEventListener("pointerup", handleDragEnd);
         img.addEventListener("lostpointercapture", handleDragEnd);
     };
+    var zoomOut = function () {
+        full.classList.remove("zoom");
+        img.style.left = "0";
+        img.style.top = "0";
+        img.style.bottom = "0";
+        img.style.right = "0";
+        img.removeEventListener("pointerdown", handlePointerDown);
+    };
+    var zoomIn = function (x, y) {
+        var xRatio = x / img.width;
+        var yRatio = y / img.height;
+        var left = -xRatio * img.naturalWidth + full.clientWidth / 2;
+        var top = -yRatio * img.naturalHeight + full.clientHeight / 2;
+        img.style.left = left + "px";
+        img.style.top = top + "px";
+        img.style.bottom = "auto";
+        img.style.right = "auto";
+        full.classList.add("zoom");
+        img.addEventListener("pointerdown", handlePointerDown);
+    };
     img.addEventListener("click", function (e) {
-        if (container.classList.contains("zoom")) {
+        if (full.classList.contains("zoom")) {
             if (abortClick)
                 return;
             var offsetX = e.x - startX;
@@ -171,25 +193,12 @@ function setUpZoom(container) {
             if (Math.abs(offsetX) > abortClickDistance ||
                 Math.abs(offsetY) > abortClickDistance)
                 return;
-            container.classList.remove("zoom");
-            img.style.left = "0";
-            img.style.top = "0";
-            img.style.bottom = "0";
-            img.style.right = "0";
-            img.removeEventListener("pointerdown", handlePointerDown);
+            zoomOut();
         }
         else {
-            var xRatio = e.offsetX / img.width;
-            var yRatio = e.offsetY / img.height;
-            var left = -xRatio * img.naturalWidth + container.clientWidth / 2;
-            var top_1 = -yRatio * img.naturalHeight + container.clientHeight / 2;
-            img.style.left = left + "px";
-            img.style.top = top_1 + "px";
-            img.style.bottom = "auto";
-            img.style.right = "auto";
-            container.classList.add("zoom");
-            img.addEventListener("pointerdown", handlePointerDown);
+            zoomIn(e.offsetX, e.offsetY);
         }
     });
 }
+function zoomOut(full, img) { }
 //# sourceMappingURL=gallery.js.map
