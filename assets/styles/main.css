@@ -298,54 +298,75 @@ ul.links li:first-child {
   background-color: rgba(0, 0, 0, 0.5);
   bottom: 0;
   display: none;
-  padding: 1rem;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
 }
 
-.gallery .full img {
+.gallery .full .container {
+  margin: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.gallery .full .container img {
   border-radius: 0;
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
-  height: auto;
-  left: 0;
-  right: 0;
   margin: auto;
   max-height: 100%;
   max-width: 100%;
   width: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
 }
 
-.gallery .full img.zoom {
+.gallery .full .container .close {
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  color: #051923;
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+}
+
+.gallery .full .container .close:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.gallery .full .container .close:active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.gallery .full .container .close svg.icon {
+  width: 3em;
+  height: 3em;
+}
+
+.gallery .full.zoom .container {
+  margin: 0;
+}
+
+.gallery .full.zoom .container img {
   cursor: -webkit-zoom-out;
   cursor: zoom-out;
   max-height: none;
   max-width: none;
 }
 
-.gallery .full .close {
-  background-color: transparent;
-  cursor: pointer;
-  outline: none;
-  color: #051923;
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-}
-
-.gallery .full .close:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-.gallery .full .close:active {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-.gallery .full .close svg.icon {
-  width: 3em;
-  height: 3em;
+.gallery .full.zoom .container img.dragging:active {
+  cursor: move;
+  cursor: url("/assets/cursors/grabbing.cur"), auto;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
 }
 
 .gallery .preview img {

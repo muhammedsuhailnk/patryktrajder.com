@@ -1,20 +1,22 @@
 "use strict";
+var abortClickDistance = 3;
 var galleries = document.getElementsByClassName("gallery");
 for (var i = 0; i < galleries.length; i++) {
-    var list = galleries[i].getElementsByClassName("thumbListItems")[0];
-    setUpSlider(list);
+    var list = galleries[i].querySelector(".thumbListItems");
+    if (list)
+        setUpSlider(list);
+    var full = galleries[i].querySelector(".full");
+    if (full)
+        setUpZoom(full);
 }
 function setUpSlider(slider) {
-    var abortClick = false;
     var isGrabbing = false;
     var startX;
     var scrollStartLeft;
     var handlePointerMove = function (e) {
         if (!isGrabbing)
             return;
-        var offset = e.pageX - startX;
-        if (offset > abortClickDistance || offset < -abortClickDistance)
-            abortClick = true;
+        var offset = e.x - startX;
         slider.scrollLeft = scrollStartLeft - offset;
     };
     var handleDragEnd = function (e) {
@@ -25,9 +27,8 @@ function setUpSlider(slider) {
         slider.removeEventListener("lostpointercapture", handleDragEnd);
     };
     slider.addEventListener("pointerdown", function (e) {
-        abortClick = false;
         isGrabbing = true;
-        startX = e.pageX;
+        startX = e.x;
         scrollStartLeft = slider.scrollLeft;
         slider.setPointerCapture(e.pointerId);
         slider.addEventListener("pointermove", handlePointerMove);
@@ -35,10 +36,9 @@ function setUpSlider(slider) {
         slider.addEventListener("lostpointercapture", handleDragEnd);
     });
     for (var i = 0; i < slider.childNodes.length; i++)
-        setupSliderItem(slider.childNodes[i], slider);
+        setUpSliderItem(slider.childNodes[i], slider);
 }
-var abortClickDistance = 10;
-function setupSliderItem(item, slider) {
+function setUpSliderItem(item, slider) {
     var abortClick = false;
     var isGrabbing = false;
     var startX;
@@ -46,8 +46,8 @@ function setupSliderItem(item, slider) {
     var handlePointerMove = function (e) {
         if (!isGrabbing)
             return;
-        var offset = e.pageX - startX;
-        if (offset > abortClickDistance || offset < -abortClickDistance) {
+        var offset = e.x - startX;
+        if (Math.abs(offset) > abortClickDistance) {
             abortClick = true;
             item.classList.add("dragging");
         }
@@ -65,7 +65,7 @@ function setupSliderItem(item, slider) {
         e.stopPropagation();
         abortClick = false;
         isGrabbing = true;
-        startX = e.pageX;
+        startX = e.x;
         scrollStartLeft = slider.scrollLeft;
         item.setPointerCapture(e.pointerId);
         item.addEventListener("pointermove", handlePointerMove);
@@ -75,8 +75,8 @@ function setupSliderItem(item, slider) {
     item.addEventListener("click", function (e) {
         if (abortClick)
             return;
-        var offset = e.pageX - startX;
-        if (offset > abortClickDistance || offset < -abortClickDistance)
+        var offset = e.x - startX;
+        if (Math.abs(offset) > abortClickDistance)
             return;
         showPreview(item);
     });
@@ -109,14 +109,87 @@ function showPreview(img) {
         return;
     previewImg.src = img.src.replace("h100.jpg", "h400.jpg");
 }
-function toggleZoom(img) {
-    if (img.classList.contains("zoom")) {
-        img.classList.remove("zoom");
-    }
-    else {
-        img.classList.add("zoom");
-        var imgHeight = img.naturalHeight;
-        var imgWidth = img.naturalWidth;
-    }
+function setUpZoom(container) {
+    var img = container.querySelector("img");
+    if (!img)
+        return;
+    var abortClick = false;
+    var isGrabbing = false;
+    var startX;
+    var startY;
+    var startLeft;
+    var startTop;
+    var handlePointerMove = function (e) {
+        if (!isGrabbing)
+            return;
+        e.preventDefault();
+        var offsetX = e.x - startX;
+        var offsetY = e.y - startY;
+        if (Math.abs(offsetX) > abortClickDistance ||
+            Math.abs(offsetY) > abortClickDistance) {
+            abortClick = true;
+            img.classList.add("dragging");
+        }
+        var left = startLeft + offsetX;
+        var top = startTop + offsetY;
+        var maxLeft = container.clientWidth / 2;
+        var maxTop = container.clientHeight / 2;
+        var minLeft = maxLeft - img.naturalWidth;
+        var minTop = maxTop - img.naturalHeight;
+        left = Math.min(Math.max(left, minLeft), maxLeft);
+        top = Math.min(Math.max(top, minTop), maxTop);
+        img.style.left = left + "px";
+        img.style.top = top + "px";
+    };
+    var handleDragEnd = function (e) {
+        isGrabbing = false;
+        img.classList.remove("dragging");
+        img.releasePointerCapture(e.pointerId);
+        img.removeEventListener("pointermove", handlePointerMove);
+        img.removeEventListener("pointerup", handleDragEnd);
+        img.removeEventListener("lostpointercapture", handleDragEnd);
+    };
+    var handlePointerDown = function (e) {
+        e.stopPropagation();
+        abortClick = false;
+        isGrabbing = true;
+        startX = e.x;
+        startY = e.y;
+        startLeft = parseFloat(img.style.left);
+        startTop = parseFloat(img.style.top);
+        img.setPointerCapture(e.pointerId);
+        img.addEventListener("pointermove", handlePointerMove);
+        img.addEventListener("pointerup", handleDragEnd);
+        img.addEventListener("lostpointercapture", handleDragEnd);
+    };
+    img.addEventListener("click", function (e) {
+        if (container.classList.contains("zoom")) {
+            if (abortClick)
+                return;
+            var offsetX = e.x - startX;
+            var offsetY = e.y - startY;
+            if (Math.abs(offsetX) > abortClickDistance ||
+                Math.abs(offsetY) > abortClickDistance)
+                return;
+            container.classList.remove("zoom");
+            img.style.left = "0";
+            img.style.top = "0";
+            img.style.bottom = "0";
+            img.style.right = "0";
+            img.removeEventListener("pointerdown", handlePointerDown);
+        }
+        else {
+            var xRatio = e.offsetX / img.width;
+            var yRatio = e.offsetY / img.height;
+            var left = -xRatio * img.naturalWidth + container.clientWidth / 2;
+            var top_1 = -yRatio * img.naturalHeight + container.clientHeight / 2;
+            img.style.left = left + "px";
+            img.style.top = top_1 + "px";
+            img.style.bottom = "auto";
+            img.style.right = "auto";
+            container.classList.add("zoom");
+            img.addEventListener("pointerdown", handlePointerDown);
+        }
+    });
 }
 //# sourceMappingURL=gallery.js.map
