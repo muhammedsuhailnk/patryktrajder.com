@@ -1,7 +1,8 @@
 "use strict";
-var lists = document.getElementsByClassName("thumbListItems");
-for (var i = 0; i < lists.length; i++) {
-    setUpSlider(lists[i]);
+var galleries = document.getElementsByClassName("gallery");
+for (var i = 0; i < galleries.length; i++) {
+    var list = galleries[i].getElementsByClassName("thumbListItems")[0];
+    setUpSlider(list);
 }
 function setUpSlider(slider) {
     var abortClick = false;
@@ -80,9 +81,42 @@ function setupSliderItem(item, slider) {
         showPreview(item);
     });
 }
+function closeFullImage(button) {
+    var overlay = button.closest(".full");
+    if (!overlay)
+        return;
+    overlay.style.display = "none";
+}
+function showFullImage(img) {
+    var gallery = img.closest(".gallery");
+    if (!gallery)
+        return;
+    var overlay = gallery.querySelector(".full");
+    if (!overlay)
+        return;
+    overlay.style.display = "block";
+    var fullImg = overlay.querySelector("img");
+    if (!fullImg)
+        return;
+    fullImg.src = img.src.replace("-h400.jpg", ".jpg");
+}
 function showPreview(img) {
     var gallery = img.closest(".gallery");
-    var previewImg = gallery === null || gallery === void 0 ? void 0 : gallery.querySelector(".preview > img");
+    if (!gallery)
+        return;
+    var previewImg = gallery.querySelector(".preview > img");
+    if (!previewImg)
+        return;
     previewImg.src = img.src.replace("h100.jpg", "h400.jpg");
+}
+function toggleZoom(img) {
+    if (img.classList.contains("zoom")) {
+        img.classList.remove("zoom");
+    }
+    else {
+        img.classList.add("zoom");
+        var imgHeight = img.naturalHeight;
+        var imgWidth = img.naturalWidth;
+    }
 }
 //# sourceMappingURL=gallery.js.map

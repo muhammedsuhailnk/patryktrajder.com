@@ -233,6 +233,15 @@ p {
   text-align: justify;
 }
 
+svg.icon {
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
 ul.dots {
   margin-left: 2rem;
 }
@@ -285,7 +294,62 @@ ul.links li:first-child {
   max-width: 55rem;
 }
 
+.gallery .full {
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  display: none;
+  padding: 1rem;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.gallery .full img {
+  border-radius: 0;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+  height: auto;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+}
+
+.gallery .full img.zoom {
+  cursor: -webkit-zoom-out;
+  cursor: zoom-out;
+  max-height: none;
+  max-width: none;
+}
+
+.gallery .full .close {
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  color: #051923;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.gallery .full .close:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.gallery .full .close:active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.gallery .full .close svg.icon {
+  width: 3em;
+  height: 3em;
+}
+
 .gallery .preview img {
+  cursor: pointer;
   height: auto;
   margin: 0 auto;
   width: auto;

@@ -1,9 +1,10 @@
-const lists: HTMLCollectionOf<Element> = document.getElementsByClassName(
-  "thumbListItems"
+const galleries: HTMLCollectionOf<Element> = document.getElementsByClassName(
+  "gallery"
 );
 
-for (let i = 0; i < lists.length; i++) {
-  setUpSlider(lists[i] as HTMLElement);
+for (let i = 0; i < galleries.length; i++) {
+  const list = galleries[i].getElementsByClassName("thumbListItems")[0];
+  setUpSlider(list as HTMLElement);
 }
 
 function setUpSlider(slider: HTMLElement) {
@@ -89,10 +90,37 @@ function setupSliderItem(item: HTMLImageElement, slider: HTMLElement) {
   });
 }
 
+function closeFullImage(button: HTMLButtonElement) {
+  const overlay = button.closest<HTMLElement>(".full");
+  if (!overlay) return;
+  overlay.style.display = "none";
+}
+
+function showFullImage(img: HTMLImageElement) {
+  const gallery = img.closest(".gallery");
+  if (!gallery) return;
+  const overlay = gallery.querySelector<HTMLElement>(".full");
+  if (!overlay) return;
+  overlay.style.display = "block";
+  const fullImg = overlay.querySelector<HTMLImageElement>("img");
+  if (!fullImg) return;
+  fullImg.src = img.src.replace("-h400.jpg", ".jpg");
+}
+
 function showPreview(img: HTMLImageElement) {
   const gallery = img.closest(".gallery");
-  const previewImg = gallery?.querySelector(
-    ".preview > img"
-  ) as HTMLImageElement;
+  if (!gallery) return;
+  const previewImg = gallery.querySelector<HTMLImageElement>(".preview > img");
+  if (!previewImg) return;
   previewImg.src = img.src.replace("h100.jpg", "h400.jpg");
+}
+
+function toggleZoom(img: HTMLImageElement) {
+  if (img.classList.contains("zoom")) {
+    img.classList.remove("zoom");
+  } else {
+    img.classList.add("zoom");
+    let imgHeight = img.naturalHeight;
+    let imgWidth = img.naturalWidth;
+  }
 }

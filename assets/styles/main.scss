@@ -2,6 +2,15 @@
 @import "variables.scss";
 @import "base.scss";
 
+svg.icon {
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
 ul.dots {
   margin-left: 2rem;
 
@@ -59,8 +68,65 @@ ul.links {
   margin: 0 auto;
   max-width: 55rem;
 
+  .full {
+    background-color: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    display: none;
+    padding: 1rem;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+
+    img {
+      border-radius: 0;
+      cursor: -moz-zoom-in;
+      cursor: -webkit-zoom-in;
+      cursor: zoom-in;
+      height: auto;
+      left: 0;
+      right: 0;
+      margin: auto;
+      max-height: 100%;
+      max-width: 100%;
+      width: auto;
+
+      &.zoom {
+        cursor: -moz-zoom-out;
+        cursor: -webkit-zoom-out;
+        cursor: zoom-out;
+        max-height: none;
+        max-width: none;
+      }
+    }
+
+    .close {
+      background-color: transparent;
+      cursor: pointer;
+      outline: none;
+      color: $eerieBlack;
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+
+      &:active {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      svg.icon {
+        width: 3em;
+        height: 3em;
+      }
+    }
+  }
+
   .preview {
     img {
+      cursor: pointer;
       height: auto;
       margin: 0 auto;
       width: auto;
