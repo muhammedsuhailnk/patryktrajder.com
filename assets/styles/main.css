@@ -235,11 +235,19 @@ p {
 
 svg.icon {
   display: inline-block;
-  width: 3em;
-  height: 3em;
-  stroke-width: 0;
-  stroke: currentColor;
   fill: currentColor;
+  height: 3em;
+  stroke: currentColor;
+  stroke-width: 0;
+  width: 3em;
+}
+
+#icon-facebook {
+  color: #4267b2;
+}
+
+#icon-youtube {
+  color: #ff0000;
 }
 
 ul.dots {
@@ -465,6 +473,15 @@ ul.links li:first-child {
 .single-out {
   font-weight: 500;
   margin-bottom: 0.5rem;
+}
+
+.social-media a + a {
+  margin-left: 1rem;
+}
+
+.social-media svg {
+  height: 2rem;
+  width: 2rem;
 }
 
 .topGap {

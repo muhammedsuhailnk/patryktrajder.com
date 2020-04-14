@@ -172,11 +172,11 @@ function setUpZoom(full) {
         img.style.right = "0";
         img.removeEventListener("pointerdown", handlePointerDown);
     };
-    var zoomIn = function (x, y) {
-        var xRatio = x / img.width;
-        var yRatio = y / img.height;
-        var left = -xRatio * img.naturalWidth + full.clientWidth / 2;
-        var top = -yRatio * img.naturalHeight + full.clientHeight / 2;
+    var zoomIn = function (e) {
+        var xRatio = e.offsetX / img.width;
+        var yRatio = e.offsetY / img.height;
+        var left = -xRatio * img.naturalWidth + e.x;
+        var top = -yRatio * img.naturalHeight + e.y;
         img.style.left = left + "px";
         img.style.top = top + "px";
         img.style.bottom = "auto";
@@ -196,7 +196,7 @@ function setUpZoom(full) {
             zoomOut();
         }
         else {
-            zoomIn(e.offsetX, e.offsetY);
+            zoomIn(e);
         }
     });
 }

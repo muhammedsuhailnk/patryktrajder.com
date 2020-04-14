@@ -183,11 +183,11 @@ function setUpZoom(full: HTMLElement) {
     img.removeEventListener("pointerdown", handlePointerDown);
   };
 
-  let zoomIn = (x: number, y: number) => {
-    let xRatio = x / img.width;
-    let yRatio = y / img.height;
-    let left = -xRatio * img.naturalWidth + full.clientWidth / 2;
-    let top = -yRatio * img.naturalHeight + full.clientHeight / 2;
+  let zoomIn = (e: MouseEvent) => {
+    let xRatio = e.offsetX / img.width;
+    let yRatio = e.offsetY / img.height;
+    let left = -xRatio * img.naturalWidth + e.x;
+    let top = -yRatio * img.naturalHeight + e.y;
     img.style.left = left + "px";
     img.style.top = top + "px";
     img.style.bottom = "auto";
@@ -210,7 +210,7 @@ function setUpZoom(full: HTMLElement) {
 
       zoomOut();
     } else {
-      zoomIn(e.offsetX, e.offsetY);
+      zoomIn(e);
     }
   });
 }
