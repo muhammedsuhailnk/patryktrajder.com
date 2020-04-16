@@ -28,7 +28,11 @@ gulp.task("html", function () {
   });
 });
 
+gulp.task("favicon", function () {
+  return gulp.src("favicon.ico").pipe(gulp.dest("dist/favicon.ico"));
+});
+
 gulp.task(
   "dist",
-  gulp.series(["cursors", "icons", "images", "styles", "html"])
+  gulp.series(["cursors", "icons", "images", "styles", "html", "favicon"])
 );
