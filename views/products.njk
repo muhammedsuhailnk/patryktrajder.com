@@ -1,0 +1,70 @@
+{% extends "layout.njk" %}
+{% set tab = "products" %}
+
+{% block body %}
+  <section class="banner">
+    <img src="/assets/images/productsBanner.jpg"/>
+  </section>
+
+  <main>
+    <section class="categories topGap">
+      <ul>
+        <li>
+          <p>
+            <a href="#diyTools">Narzędzia DIY</a>
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="#gadgets">Gadżety</a>
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="diyTools" class="topGap productList">
+      <h2>
+          Narzędzia DIY
+        </h2>
+      <h3 class="topGapMedium">
+        <a href="superbooster2000/">Tube Notcher - Super Booster 2000</a>
+      </h3>
+      <div class="row twoColumns">
+        <div>
+          <p>
+              Sprawdź zestaw do złożenia, który został ulepszony o m.in.
+              hartowany wał - taki sam jakiego używa się do produkcji siłowników
+              w maszynach budowlanych -, specjalną końcówkę do szybkiej wymiany
+              otwornic, kątownik z podziałką do łatwego i szybkiego ustawienia
+              przyrządu pod daną pracę, zawleczki - aby docisk materiału zawsze
+              trzymał się na swoim miejscu -, blokadę kąta dla powtarzalosci
+              cięć, i kilka innych ulepszeń, które znacząco podnoszą komfort
+              pracy. Jednak zarazem podniosły cenę 😉 Moim celem było stworzenie
+              produktu o jak najlepszych paramatrach oraz w cenie przystępnej
+              dla każdego. Na początku zakładałem sprzedaż zestawu trochę
+              taniej, jednak doszedłem do wniosku, że podniesienie jakości
+              bedzie dobrą decyzją.
+            </p>
+          <p class="more">
+            <a href="superbooster2000/">Więcej informacji...</a>
+          </p>
+        </div>
+        <div>
+          <a href="superbooster2000/">
+            <img src="/assets/images/superBooster2000/thumb-w1120.jpg"/>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="gadgets" class="topGapLarge">
+      <h2>
+          Gadżety
+        </h2>
+      <p>
+          Jeśli chcecie jakieś kubki czy koszulki, dajcie znać na
+          <a href="mailto:chcekubek@trajder.com">chcekubek@trajder.com</a> xD
+        </p>
+    </section>
+  </main>
+{% endblock %}
