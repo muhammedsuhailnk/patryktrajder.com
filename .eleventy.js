@@ -1,6 +1,6 @@
 module.exports = {
   dir: {
-    input: "views",
+    input: "src/views",
     output: "dist",
     includes: "templates",
   },

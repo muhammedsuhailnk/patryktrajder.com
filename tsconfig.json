@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "alwaysStrict": true,
-    "baseUrl": "./assets/scripts",
+    "baseUrl": "src/scripts",
     "declaration": true,
     "lib": ["ES6", "DOM"],
     "module": "es6",
