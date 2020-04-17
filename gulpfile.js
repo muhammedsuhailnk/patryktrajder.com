@@ -2,53 +2,95 @@ const exec = require("child_process").exec;
 const gulp = require("gulp");
 const sass = require("gulp-sass");
 
-gulp.task("cname", function () {
-  return gulp.src("CNAME").pipe(gulp.dest("dist"));
-});
+const distDir = "dist";
+const deployBranch = "gh-pages";
 
-gulp.task("cursors", function () {
-  return gulp.src("assets/cursors/**/*").pipe(gulp.dest("dist/assets/cursors"));
-});
+function cname() {
+  return gulp.src("CNAME").pipe(gulp.dest(distDir));
+}
 
-gulp.task("html", function (cb) {
+function cursors() {
+  return gulp
+    .src("assets/cursors/**/*")
+    .pipe(gulp.dest(distDir + "/assets/cursors"));
+}
+
+function favicon() {
+  return gulp.src("favicon.ico").pipe(gulp.dest(distDir));
+}
+
+function gitDelete(cb) {
+  exec("git branch -D " + deployBranch, function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+}
+
+function gitPush(cb) {
+  exec("git push -f origin " + deployBranch + ":" + deployBranch, function (
+    err,
+    stdout,
+    stderr
+  ) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+}
+
+function gitSplit(cb) {
+  exec(
+    "git subtree split --prefix " + distDir + " -b " + deployBranch,
+    function (err, stdout, stderr) {
+      console.log(stdout);
+      console.log(stderr);
+      cb(err);
+    }
+  );
+}
+
+function html(cb) {
   exec("eleventy", function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
     cb(err);
   });
-});
+}
 
-gulp.task("icons", function () {
-  return gulp.src("assets/icons/**/*").pipe(gulp.dest("dist/assets/icons"));
-});
+function icons() {
+  return gulp
+    .src("assets/icons/**/*")
+    .pipe(gulp.dest(distDir + "/assets/icons"));
+}
 
-gulp.task("images", function () {
-  return gulp.src("assets/images/**/*").pipe(gulp.dest("dist/assets/images"));
-});
+function images() {
+  return gulp
+    .src("assets/images/**/*")
+    .pipe(gulp.dest(distDir + "/assets/images"));
+}
 
-gulp.task("scripts", function (cb) {
+function scripts(cb) {
   exec("tsc", function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
     cb(err);
   });
-});
+}
 
-gulp.task("styles", function () {
+function styles() {
   return gulp
     .src("src/styles/main.scss")
     .pipe(sass())
-    .pipe(gulp.dest("dist/src/styles"));
-});
+    .pipe(gulp.dest(distDir + "/src/styles"));
+}
 
-gulp.task("favicon", function () {
-  return gulp.src("favicon.ico").pipe(gulp.dest("dist"));
-});
+gulp.task("assets", gulp.parallel(cursors, favicon, icons, images));
 
-gulp.task("assets", gulp.series(["cursors", "favicon", "icons", "images"]));
+gulp.task("deploy", gulp.series(gitSplit, gitPush, gitDelete));
 
-gulp.task("src", gulp.series(["html", "scripts", "styles"]));
+gulp.task("src", gulp.parallel(html, scripts, styles));
 
-gulp.task("dev", gulp.series(["assets", "src"]));
+gulp.task("dev", gulp.parallel("assets", "src"));
 
-gulp.task("dist", gulp.series(["assets", "cname", "src"]));
+gulp.task("dist", gulp.series(gulp.parallel("assets", cname, "src"), "deploy"));
