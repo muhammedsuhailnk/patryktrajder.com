@@ -1,4 +1,4 @@
-const exec = require("child_process").exec;
+const { spawn } = require("child_process");
 const gulp = require("gulp");
 const sass = require("gulp-sass");
 
@@ -19,43 +19,9 @@ function favicon() {
   return gulp.src("favicon.ico").pipe(gulp.dest(distDir));
 }
 
-function gitDelete(cb) {
-  exec("git branch -D " + deployBranch, function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-}
-
-function gitPush(cb) {
-  exec("git push -f origin " + deployBranch + ":" + deployBranch, function (
-    err,
-    stdout,
-    stderr
-  ) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-}
-
-function gitSplit(cb) {
-  exec(
-    "git subtree split --prefix " + distDir + " -b " + deployBranch,
-    function (err, stdout, stderr) {
-      console.log(stdout);
-      console.log(stderr);
-      cb(err);
-    }
-  );
-}
-
 function html(cb) {
-  exec("eleventy", function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
+  const process = spawn("eleventy", [], { shell: true, stdio: "inherit" });
+  process.on("exit", cb);
 }
 
 function icons() {
@@ -71,11 +37,8 @@ function images() {
 }
 
 function scripts(cb) {
-  exec("tsc", function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
+  const process = spawn("tsc", [], { shell: true, stdio: "inherit" });
+  process.on("exit", cb);
 }
 
 function styles() {
@@ -87,7 +50,23 @@ function styles() {
 
 gulp.task("assets", gulp.parallel(cursors, favicon, icons, images));
 
-gulp.task("deploy", gulp.series(gitSplit, gitPush, gitDelete));
+gulp.task("deploy", function (cb) {
+  const process = spawn(
+    "cd " +
+      distDir +
+      " && git init" +
+      " && git add ." +
+      ' && git commit -m "deploy"' +
+      " && git remote add origin https://github.com/JakubJanowski/patryktrajder.com.git" +
+      " && git push --force origin master:" +
+      deployBranch +
+      " && rimraf .git" +
+      " && cd ..",
+    [],
+    { shell: true, stdio: "inherit" }
+  );
+  process.on("exit", cb);
+});
 
 gulp.task("src", gulp.parallel(html, scripts, styles));
 
