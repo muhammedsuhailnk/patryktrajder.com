@@ -2,6 +2,10 @@ const exec = require("child_process").exec;
 const gulp = require("gulp");
 const sass = require("gulp-sass");
 
+gulp.task("cname", function () {
+  return gulp.src("CNAME").pipe(gulp.dest("dist"));
+});
+
 gulp.task("cursors", function () {
   return gulp.src("assets/cursors/**/*").pipe(gulp.dest("dist/assets/cursors"));
 });
@@ -38,7 +42,7 @@ gulp.task("styles", function () {
 });
 
 gulp.task("favicon", function () {
-  return gulp.src("favicon.ico").pipe(gulp.dest("dist/favicon.ico"));
+  return gulp.src("favicon.ico").pipe(gulp.dest("dist"));
 });
 
 gulp.task("assets", gulp.series(["cursors", "favicon", "icons", "images"]));
@@ -46,3 +50,5 @@ gulp.task("assets", gulp.series(["cursors", "favicon", "icons", "images"]));
 gulp.task("src", gulp.series(["html", "scripts", "styles"]));
 
 gulp.task("dev", gulp.series(["assets", "src"]));
+
+gulp.task("dist", gulp.series(["assets", "cname", "src"]));
