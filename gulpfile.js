@@ -50,6 +50,14 @@ function styles() {
 
 gulp.task("assets", gulp.parallel(cursors, favicon, icons, images));
 
+gulp.task("clean", function (cb) {
+  const process = spawn("rimraf " + distDir, [], {
+    shell: true,
+    stdio: "inherit",
+  });
+  process.on("exit", cb);
+});
+
 gulp.task("deploy", function (cb) {
   const process = spawn(
     "cd " +
@@ -72,4 +80,7 @@ gulp.task("src", gulp.parallel(html, scripts, styles));
 
 gulp.task("dev", gulp.parallel("assets", "src"));
 
-gulp.task("dist", gulp.series(gulp.parallel("assets", cname, "src"), "deploy"));
+gulp.task(
+  "dist",
+  gulp.series("clean", gulp.parallel("assets", cname, "src"), "deploy")
+);
