@@ -19,9 +19,8 @@ function favicon() {
   return gulp.src("favicon.ico").pipe(gulp.dest(distDir));
 }
 
-function html(cb) {
-  const process = spawn("eleventy", [], { shell: true, stdio: "inherit" });
-  process.on("exit", cb);
+function html() {
+  return spawn("eleventy", [], { shell: true, stdio: "inherit" });
 }
 
 function icons() {
@@ -36,9 +35,8 @@ function images() {
     .pipe(gulp.dest(distDir + "/assets/images"));
 }
 
-function scripts(cb) {
-  const process = spawn("tsc", [], { shell: true, stdio: "inherit" });
-  process.on("exit", cb);
+function scripts() {
+  return spawn("tsc", [], { shell: true, stdio: "inherit" });
 }
 
 function styles() {
@@ -50,16 +48,15 @@ function styles() {
 
 gulp.task("assets", gulp.parallel(cursors, favicon, icons, images));
 
-gulp.task("clean", function (cb) {
-  const process = spawn("rimraf " + distDir, [], {
+gulp.task("clean", function () {
+  return spawn("rimraf " + distDir, [], {
     shell: true,
     stdio: "inherit",
   });
-  process.on("exit", cb);
 });
 
-gulp.task("deploy", function (cb) {
-  const process = spawn(
+gulp.task("deploy", function () {
+  return spawn(
     "cd " +
       distDir +
       " && git init" +
@@ -73,7 +70,6 @@ gulp.task("deploy", function (cb) {
     [],
     { shell: true, stdio: "inherit" }
   );
-  process.on("exit", cb);
 });
 
 gulp.task("src", gulp.parallel(html, scripts, styles));
