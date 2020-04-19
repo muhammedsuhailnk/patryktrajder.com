@@ -3,8 +3,59 @@
 
 {% block body %}
 
-    <img src="/assets/images/projectsBanner.jpg"/>
+    <div class="center-text">
+        <img src="/assets/images/projectsBanner.jpg"/>
+        <h1>Poznaj lepiej moje projekty</h1>
+    </div>
+    <main>
+        <section class="categories topGap">
+            <ul>
+                <li>
+                    <p>
+                        <a href="#diyTools">Narzędzia DIY</a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a href="#gadgets">Wasze projekty</a>
+                    </p>
+                </li>
+            </ul>
+        </section>
 
-    <h2>Poznaj lepiej moje projekty</h1>
+        <section id="diyTools" class="topGap productList">
+            <h3>
+          Narzędzia DIY
+        </h2>
+            <h4 class="topGapMedium">
+                <a href="hydraulic-power-pack/">Mobilny Agregat Hydrauliczny - Budowa</a>
+            </h3>
+            <div class="row twoColumns">
+                <div>
+                    <p>
+             Sprawdz jak zrobić mobilny agregat hydrauliczny . Wykorzystam go do mojej prasy, oraz wielu innych urządzeń związanych z hydrauliką które mam nadzieje w przyszłości zbuduje .
+Większość elementów takich jak: stal , silnik elektryczny , rozdzielacz pochodzą ze złomu, co pozwoliło na obniżenie kosztów budowy do minimum ;) 
+            </p>
+                    <p class="more">
+                        <a href="hydraulic-power-pack/">Więcej informacji...</a>
+                    </p>
+                </div>
+                <div>
+                    <a href="hydraulic-power-pack/">
+                        <img src="/assets/images/projects/thumb1.jpg"/>
+                    </a>
+                </div>
+            </div>
+        </section>
 
+        <section id="gadgets" class="topGapLarge">
+            <h3>
+          Projekty Widzów:
+        </h2>
+            <p>
+          Jeśli chcesz pochwalić się swoim projektem wyślij go na
+          <a href="mailto:chcekubek@trajder.com">chwalipieta@trajder.com</a> xD
+        </p>
+        </section>
+    </main>
 {% endblock %}

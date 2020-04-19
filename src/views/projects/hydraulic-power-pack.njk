@@ -1,0 +1,228 @@
+{% extends "layout.njk" %}
+{% set tab = "products" %}
+
+{% block head %}
+    <script defer src="/src/scripts/gallery.js"></script>
+{% endblock %}
+
+{% block icons %}
+    <symbol id="icon-close" viewbox="0 0 32 32">
+        <path d="M25.333 8.547l-1.88-1.88-7.453 7.453-7.453-7.453-1.88 1.88 7.453 7.453-7.453 7.453 1.88 1.88 7.453-7.453 7.453 7.453 1.88-1.88-7.453-7.453z"></path>
+    </symbol>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <article>
+            <section class="topGap">
+                <div class="gallery">
+                    <div class="full">
+                        <div class="container">
+                            <img/>
+                            <button class="close">
+                                <svg class="icon">
+                                    <use xlink:href="#icon-close"></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preview">
+                        <img
+                onclick="showFullImage(this)"
+                src="/assets/images/superBooster2000/gallery1-h400.jpg"
+/>
+                    </div>
+                    <div class="thumbList">
+                        <div class="thumbListItems">
+                            <img
+                  draggable="false"
+                  src="/assets/images/superBooster2000/gallery1-h100.jpg"
+/><img
+                  draggable="false"
+                  src="/assets/images/superBooster2000/gallery2-h100.jpg"
+/><img
+                  draggable="false"
+                  src="/assets/images/superBooster2000/gallery3-h100.jpg"
+/><img
+                  draggable="false"
+                  src="/assets/images/superBooster2000/gallery4-h100.jpg"
+/><img
+                  draggable="false"
+                  src="/assets/images/superBooster2000/gallery5-h100.jpg"
+/><img
+                  draggable="false"
+                  src="/assets/images/superBooster2000/detail6-h100.jpg"
+/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="row">
+                    <div>
+                        <p>
+               Gdy zabierałem się za budowę mojego agregatu nie miałem żadnego pojęcia o hydraulice, zakładałem że jest to temat bardzo prosty jednak szybko zrozumiałem że nawet do tak prostej budowy po raz kolejny potrzebuję matematyki której w szkole nie chciałem się uczyć z myślą ( i tak mi się do niczego nie przyda) 
+Zbieranie doświadczenia z tej dziedziny było dla mnie wyjątkowo trudne z racji na brak znajomych w branży oraz słaby dostęp do informacji w internecie, z pomocą książek i research, w internecie po 2-3 tygodniach byłem gotowy do podjęcia pracy, wieże że Ty z moich poradnikiem zdobędziesz wiedzę jeszcze w przeciągu 10 minut 🙂 
+Która pozwoli Tobie uniknąć niepotrzebnych wydatków. 
+Chciałbym zaznaczyć na starcie że większość rad jest ,, z życia wzięte,  kształtowane moimi błędami, "
+I nie biorę odpowiedzialności za to co będziecie robić tak więc uważajcie - z hydrauliką nie ma żartów 😀
+
+Zaczynajmy. 
+              </p>
+                    </div>
+                    <div>
+                        <img src="/assets/images/projects/thumb1.jpg"/>
+                    </div>
+                </div>
+
+                <div class="topGap">
+                    <p class="single-out">Do pierwszego etapu budowy potrzebujemy:</p>
+
+                    <ul class="dots">
+                        <li>
+                            <p>silnik elektryczny</p>
+                        </li>
+                        <li>
+                            <p>łącznik dzbanowy</p>
+                        </li>
+                        <li>
+                            <p>pompę hydrauliczna</p>
+                        </li>
+                        <li>
+                            <p>sprzęgło kłowe</p>
+                        </li>
+
+                        <p class="topGap">
+              
+                        Prace najlepiej zacząć od połączenia silnika elektrycznego z pompą, jest to bardzo łatwe zadanie jeśli mamy większy budżet, ponieważ do tego celu są już gotowe części, musimy kupić silnik z mocowaniem kołnierzowym, łącznik dzwonowy, sprzęgło kłowe, oraz pompę , musimy zwrócić uwagę aby wszystkie części były ze sobą kompatybilne.
+            </p>
+                    </div>
+
+                    <div class="row">
+                        <div>
+                            <img src="/assets/images/projects/hydraulicPowerPack/detail1-m1120.jpg"/>
+                        </div>
+                        <div>
+                            <p>
+                W moim projekcie wykorzystałem silnik z odzysku który znalazłem na złomie, łącznik dzwonowy musiałem zrobić samemu ponieważ orginalny nie pasowałby do mojego silnika, na szczęście orginalne sprzęgło kłowe udało mi się zastosować. 
+              </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div>
+                            <img src="/assets/images/projects/hydraulicPowerPack/detail8.jpg"/>
+                        </div>
+                        <div>
+                            <p>
+                Przy wyborze pompy musimy najpierw zastanowić się do czego chcemy ją używać,  ponieważ każda pompa ma dwie najważniejsze właściwości: ciśnienie robocze oraz wydajność litrów na minutę. 
+Pierwszy parametr jest od " mocy" a drugi od szybkości wysuwu tłoka.
+              </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div>
+                            <img src="/assets/images/projects/hydraulicPowerPack/detail3-m1120.jpg"/>
+                        </div>
+                        <div>
+                            <p>
+              Wzór aby obliczyć szybkość wysuwu tłoka dla przykladowej wartości 8l/minute, i tłoczyska fi 100:<br>Xy/t/100=2 czyli 1cm w czasie 1sekundy<br>wzór aby obliczyć jaką moc w tonach uzyskamy na danym ciśnieniu:<br> 100/x2=300/2
+              </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div>
+                            <img src="/assets/images/projects/hydraulicPowerPack/detail4-m1120.jpg"/>
+                        </div>
+                        <div>
+                            <p>
+                
+    Dla przykładu jeśli chcemy używać jej do prasy, to kupujemy pompę z jak największym maksymalnym ciśnieniem i zarazem jak najmniejszym przepływem litrów na minutę aby uzyskać wolna dokładna pracę, a zarazem duża moc.
+              </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div>
+                            <img src="/assets/images/projects/hydraulicPowerPack/detail5-m1120.jpg"/>
+                        </div>
+                        <div>
+                            <p>
+                Z kolei przy budowie łuparki, sprawa wygląda całkiem odwrotnie ponieważ potrzebujemy bardzo szybki wysów tłoka, jednocześnie nie potrzebujemy niesamowicie dużej mocy.Ja w moim przypadku chciałem pójść na kompromis ponieważ chcę zastosować mój agregat zarówno do prasy jak i łuparki, więc dobrałem parametry pomiędzy, jednak jak wiadomo jeśli coś jest do wszystkiego to jest do... 😉
+              </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div>
+                            <img src="/assets/images/projects/hydraulicPowerPack/detail6-m1120.jpg"/>
+                        </div>
+                        <div>
+                            <p>
+               Pamiętajmy również że im większe parametry dobieramy czy to mocy czy litrów na minutę, wprost proporcjonalnie zwiększa się zapotrzebowanie na wielkość silnika elektrycznego. 
+    Aby wszystko mialo ręce i nogi poniżej przedstawiam Tobie wzór matematyczny z którego ja korzystałem
+    Kilka przykładów<br>Na szybkość wysuwu X=23,=3=xx==x/<br>Na moc w tonach jaka uzyskamy:xy=s/xs=s
+              </p>
+                        </div>
+                    </div>
+
+                    <section>
+
+                                <div class="topGap">
+                                    <p class="single-out">Myślę że najtrudniejsze gotowe. Zanim przejdziemy do kolejnego etapu musimy skompletować następujące części::</p>
+
+                                    <ul class="dots">
+                                        <li>
+                                            <p>Łącznik grodziowy</p>
+                                        </li>
+                                        <li>
+                                            <p>Filtr oleju ( tutaj też musimy dobrać odpowiedni do naszej pompy musi mieć odpowdni przepływ oleju, najlepiej jeśli nie będzie to na styku tylko co najmniej 2 x więcej) </p>
+                                        </li>
+                                        <li>
+                                            <p>korek wlewu</p>
+                                        </li>
+                                        <li>
+                                            <p>uszczelki</p>
+                                        </li>
+
+                                        <div class="row">
+                                            <div>
+                                                <img src="/assets/images/projects/hydraulicPowerPack/detail7-m1120.jpg"/>
+                                            </div>
+                                            <div>
+                                                <p>
+              
+
+
+gdy już mamy fizycznie powyższe elementy możemy przejść do budowy zbiornika, jest to o tyle ważne aby móc przypasować powyższe części do wierconych i wycinanych przez nas otworów,
+ Jeśli chodzi o sam zbiornik musimy po raz kolejny zastanowić się do czego chcemy używać nasz agregat jeśli chcemy do konkretnej jednej rzeczy to sprawa jest bardzo prosta, jednak gdy podobnie do mnie budujesz agregat do wszystkiego to musimy iść na kompromisy. 
+
+
+              </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div>
+                                                <img src="/assets/images/projects/hydraulicPowerPack/detail9-m1120.jpg"/>
+                                            </div>
+                                            <div>
+                                                <p>
+            Do projektowania zbiornika musimu znać kilka wartości 
+Pojemność naszego cylindra, ( albo wszystkich cylindrów które chcemy zasilać) w maksymalnym wysuwie oraz dlugość przewodów hydraulicznych: 
+
+Wzór na obliczenie pojemności cylidrów:
+Xy=x/y:3.14
+
+Wzór na obliczenie pojemności przewodów:
+Xy=x/y:3.14=10
+                        </div>
+                                            </div>
+
+                                        </section>
+                                    </article>
+                                </main>
+                            {% endblock %}

@@ -72,6 +72,25 @@ ul.links {
   }
 }
 
+.center-text {
+  position: relative;
+  text-align: center;
+
+  h1 {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1em;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 300;
+    text-shadow: 0 0 10px black;
+  }
+}
+
 .gallery {
   margin: 0 auto;
   max-width: 55rem;
