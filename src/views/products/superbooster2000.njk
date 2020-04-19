@@ -1,14 +1,12 @@
-{% extends "layout.njk" %}
+{% extends "templates/layout.njk" %}
 {% set tab = "products" %}
 
 {% block head %}
   <script defer src="/src/scripts/gallery.js"></script>
 {% endblock %}
 
-{% block icons %}
-  <symbol id="icon-close" viewbox="0 0 32 32">
-    <path d="M25.333 8.547l-1.88-1.88-7.453 7.453-7.453-7.453-1.88 1.88 7.453 7.453-7.453 7.453 1.88 1.88 7.453-7.453 7.453 7.453 1.88-1.88-7.453-7.453z"></path>
-  </symbol>
+{% block vectors %}
+  {% include "vectors/close.sym" %}
 {% endblock %}
 
 {% block body %}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Patryk Trajder</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="/src/styles/main.css"/>
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <svg
+            aria-hidden="true"
+            style="position: absolute; width: 0; height: 0; overflow: hidden;"
+        >
+            <defs>
+                {% include "vectors/facebook.sym" %}
+                {% include "vectors/youtube.sym" %}
+                {% include "vectors/instagram.sym" %}
+                {% block vectors %}{% endblock %}
+            </defs>
+        </svg>
+
+        <header>
+            <h2>
+                <a href="/index.html">Patryk Trajder</a>
+            </h1>
+            <nav>
+                <ul>
+                    <li {% if tab == "home" %}class="current"{% endif %}>
+                        <a href="/">Witaj</a>
+                    </li>
+                    <li {% if tab == "about" %}class="current"{% endif %}>
+                        <a href="/about/">O mnie</a>
+                    </li>
+                    <li {% if tab == "products" %}class="current"{% endif %}>
+                        <a href="/products/">Produkty</a>
+                    </li>
+                    <li {% if tab == "projects" %}class="current"{% endif %}>
+                        <a href="/projects/">Projekty</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Kontakt</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        {% block body %}{% endblock %}
+
+        <footer>
+            <section id="contact" class="container">
+                <div class="row">
+                    <h3>Kontakt</h2>
+                    <div class="social-media">
+                        <a href="https://www.youtube.com/channel/UCg3hDpgzJpqBMBo4K-0aGrw">
+                            <svg class="icon">
+                                <use xlink:href="#icon-youtube"></use>
+                            </svg>
+                        </a>
+                        <a href="https://facebook.com/trajder.serwis">
+                            <svg class="icon">
+                                <use xlink:href="#icon-facebook"></use>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/patryktrajder/">
+                            <svg class="icon">
+                                <use xlink:href="#icon-instagram"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <address class="row">
+                    <section>
+                        <h5>W sprawie zakupu:</h4>
+                        <p>
+                            <a href="mailto:sklep@trajder.com">sklep@trajder.com</a>
+                        </p>
+                        <p>
+                            <a href="https://facebook.com/trajder.serwis"
+                >facebook.com/trajder.serwis</a
+              >
+                        </p>
+                    </section>
+                    <section>
+                        <h5>Współpraca / zapytania biznesowe:</h4>
+                        <p>
+                            <a href="mailto:patryk@trajder.com">patryk@trajder.com</a>
+                        </p>
+                    </section>
+                </address>
+            </section>
+            <section class="copyright">
+                <ul class="links">
+                    <li>&copy; Patryk Trajder. All rights reserved.</li>
+                    <li>
+            Design:
+            <a href="http://github.com/jakubjanowski">Jakub Janowski</a>
+                    </li>
+                </ul>
+            </section>
+        </footer>
+    </body>
+</html>
