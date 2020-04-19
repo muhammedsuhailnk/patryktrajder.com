@@ -8,10 +8,10 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
   > header {
-    position: relative;
     background: white;
     border-bottom: solid 1px #ccc;
     padding-top: 2em;
+    position: relative;
     text-align: center;
 
     h2 {
@@ -49,9 +49,9 @@ nav {
 
 main {
   margin: 0 auto;
-  max-width: 100%;
   padding: 0 1rem;
   width: 70rem;
+  max-width: 100%;
 
   img {
     border-radius: 10px;

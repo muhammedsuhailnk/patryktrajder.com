@@ -1,6 +1,6 @@
 module.exports = {
   dir: {
-    includes: "includes",
+    includes: "_includes",
     input: "src/views",
     output: "dist",
   },
