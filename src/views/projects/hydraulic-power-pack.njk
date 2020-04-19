@@ -1,75 +1,27 @@
 {% extends "templates/layout.njk" %}
-{% set tab = "products" %}
+{% set tab = "projects" %}
 
 {% block head %}
-    <script defer src="/src/scripts/gallery.js"></script>
+    <script defer="defer" src="/src/scripts/gallery.js"></script>
 {% endblock %}
 
-{% block icons %}
-    <symbol id="icon-close" viewbox="0 0 32 32">
-        <path d="M25.333 8.547l-1.88-1.88-7.453 7.453-7.453-7.453-1.88 1.88 7.453 7.453-7.453 7.453 1.88 1.88 7.453-7.453 7.453 7.453 1.88-1.88-7.453-7.453z"></path>
-    </symbol>
+{% block vectors %}
+    {% include "vectors/close.sym" %}
 {% endblock %}
 
 {% block body %}
     <main>
         <article>
             <section class="topGap">
-                <div class="gallery">
-                    <div class="full">
-                        <div class="container">
-                            <img/>
-                            <button class="close">
-                                <svg class="icon">
-                                    <use xlink:href="#icon-close"></use>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="preview">
-                        <img
-                onclick="showFullImage(this)"
-                src="/assets/images/superBooster2000/gallery1-h400.jpg"
-/>
-                    </div>
-                    <div class="thumbList">
-                        <div class="thumbListItems">
-                            <img
-                  draggable="false"
-                  src="/assets/images/superBooster2000/gallery1-h100.jpg"
-/><img
-                  draggable="false"
-                  src="/assets/images/superBooster2000/gallery2-h100.jpg"
-/><img
-                  draggable="false"
-                  src="/assets/images/superBooster2000/gallery3-h100.jpg"
-/><img
-                  draggable="false"
-                  src="/assets/images/superBooster2000/gallery4-h100.jpg"
-/><img
-                  draggable="false"
-                  src="/assets/images/superBooster2000/gallery5-h100.jpg"
-/><img
-                  draggable="false"
-                  src="/assets/images/superBooster2000/detail6-h100.jpg"
-/>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section>
+                <header>
+                    <h3>Jak zbudować mobilny agregat hydrauliczny</h3>
+                </header>
                 <div class="row">
                     <div>
                         <p>
-               Gdy zabierałem się za budowę mojego agregatu nie miałem żadnego pojęcia o hydraulice, zakładałem że jest to temat bardzo prosty jednak szybko zrozumiałem że nawet do tak prostej budowy po raz kolejny potrzebuję matematyki której w szkole nie chciałem się uczyć z myślą ( i tak mi się do niczego nie przyda) 
-Zbieranie doświadczenia z tej dziedziny było dla mnie wyjątkowo trudne z racji na brak znajomych w branży oraz słaby dostęp do informacji w internecie, z pomocą książek i research, w internecie po 2-3 tygodniach byłem gotowy do podjęcia pracy, wieże że Ty z moich poradnikiem zdobędziesz wiedzę jeszcze w przeciągu 10 minut 🙂 
-Która pozwoli Tobie uniknąć niepotrzebnych wydatków. 
-Chciałbym zaznaczyć na starcie że większość rad jest ,, z życia wzięte,  kształtowane moimi błędami, "
-I nie biorę odpowiedzialności za to co będziecie robić tak więc uważajcie - z hydrauliką nie ma żartów 😀
+                            Gdy zaczynałem budowę agregatu nie miałem żadnego pojęcia o hydraulice. Zakładałem, że jest to temat bardzo prosty. Szybko zrozumiałem, że nawet do tak pozornie prostej budowy po raz kolejny (o zgrozo!) potrzebuję matematyki, której w szkole nie chciałem się uczyć myśląc ,,i tak mi się to do niczego nie przyda’’. Zbieranie doświadczenia z tej dziedziny było dla mnie wyjątkowo trudne z racji na brak znajomych w branży oraz słaby dostęp do informacji. Po wyczerpującym research’u w Internecie i książkach, po 2-3 tygodniach byłem gotowy do podjęcia pracy. Z racji, że zdobyte przeze mnie informacje i spostrzeżenia podaję Ci ,,na tacy’’ liczę, że Ty uzbrojony w moje wskazówki i głowę na karku zdobędziesz tę tajemną wiedzę w 10 minut. 🙂 Mam też nadzieję, że unikniesz niepotrzebnych wydatków, wypadków i zaoszczędzisz czas. Większość rad jest ,,z życia wzięte’’ i oparte są na moich błędach. Nie biorę odpowiedzialności za to, co będziecie robić we własnych warsztatach, tak więc uważajcie - z hydrauliką serio nie ma żartów. 😀
 
-Zaczynajmy. 
-              </p>
+                        </p>
                     </div>
                     <div>
                         <img src="/assets/images/projects/thumb1.jpg"/>
@@ -92,137 +44,165 @@ Zaczynajmy.
                         <li>
                             <p>sprzęgło kłowe</p>
                         </li>
+                    </ul>
 
-                        <p class="topGap">
-              
-                        Prace najlepiej zacząć od połączenia silnika elektrycznego z pompą, jest to bardzo łatwe zadanie jeśli mamy większy budżet, ponieważ do tego celu są już gotowe części, musimy kupić silnik z mocowaniem kołnierzowym, łącznik dzwonowy, sprzęgło kłowe, oraz pompę , musimy zwrócić uwagę aby wszystkie części były ze sobą kompatybilne.
-            </p>
+                    <p class="topGap">
+                        Pracę najlepiej zacząć od połączenia silnika elektrycznego z pompą. Jest to bardzo łatwe zadanie jeśli masz większy budżet, ponieważ do tego celu dostępne są gotowe części. Musisz kupić silnik z mocowaniem kołnierzowym, łącznik dzwonowy, sprzęgło kłowe, oraz pompę. Pamiętaj jednak, aby wszystkie części były ze sobą kompatybilne.
+                    </p>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <img src="/assets/images/projects/hydraulicPowerPack/detail1-m1120.jpg"/>
+                    </div>
+                    <div>
+                        <p>
+                            Ja w moim projekcie wykorzystałem silnik z odzysku, który znalazłem na złomie. Łącznik dzwonowy zrobiłem sam, ponieważ oryginalny nie pasowałby do mojego silnika. Na szczęście udało mi się zastosować oryginalne sprzęgło kłowe.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <img src="/assets/images/projects/hydraulicPowerPack/detail4-m1120.jpg"/>
+                    </div>
+                    <div>
+                        <p>
+                            Przy wyborze pompy oraz silnika musisz najpierw zastanowić się do czego chcesz ich używać. Jest to istotne ze względu na oczekiwane parametry tj. ciśnienie robocze oraz wydajność litrów na minutę. Pierwszy parametr dotyczy "mocy", a drugi szybkości wysuwu tłoka.
+
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <img src="/assets/images/projects/hydraulicPowerPack/detail3-m1120.jpg"/>
+                    </div>
+                    <div>
+                        <p>
+                            Dla przykładu jeśli chcesz używać agregatu do prasy, to powinieneś kupić pompę z jak największym maksymalnym ciśnieniem i zarazem jak najmniejszym przepływem litrów na minutę. W ten sposób uzyskasz wolną, dokładną pracę, a zarazem dużą moc.Z kolei przy budowie łuparki, sprawa wygląda całkiem odwrotnie – będziesz potrzebował bardzo szybkiego wysuwu tłoka, przy stosunkowo niedużej mocy.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <img src="/assets/images/projects/hydraulicPowerPack/detail5-m1120.jpg"/>
+                    </div>
+                    <div>
+                        <p>
+                            Mój agregat ma służyć zarówno do prasy jak i łuparki, więc poszedłem na kompromis i dobrałem parametry pomiędzy; jednak jak powszechnie wiadomo ,,jeśli coś jest do wszystkiego to jest do …. (sam sobie dokończ)’’.😉
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <img src="/assets/images/projects/hydraulicPowerPack/detail5-m1120.jpg"/>
+                    </div>
+                    <div>
+                        <p>
+                            Pamiętaj również, że zwiększenie parametrów mocy lub litrów na minutę zwiększa wprost proporcjonalnie zapotrzebowanie na wielkość silnika elektrycznego.Aby wszystko ułatwić przedstawiam wzór matematyczny, z którego korzystałem:<br>Na szybkość wysuwu<br>Na moc w tonach jaka uzyskamy<br>Jaki silnik potrzebujemy
+
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <img src="/assets/images/projects/hydraulicPowerPack/detail6-m1120.jpg"/>
+                    </div>
+                    <div>
+                        <p>
+                            ( obliczenia )
+                        </p>
+                    </div>
+                </div>
+
+                <div class="topGap">
+                    <p class="single-out">Najtrudniejsze już za Tobą. Teraz musisz skompletować pozostałe części, aby móc przejść do następnego etapu:</p>
+
+                    <ul class="dots">
+                        <li>
+                            <p>Łącznik grodziowy</p>
+                        </li>
+                        <li>
+                            <p>Filtr oleju odpowiedni do Twojej pompy (musi zapewniać odpowiedni przepływ oleju, najlepiej jeśli nie będzie to na ,,styku’’, a co najmniej 2 x więcej)
+                            </p>
+                        </li>
+                        <li>
+                            <p>Korek wlewu</p>
+                        </li>
+                        <li>
+                            <p>Uszczelki</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <img src="/assets/images/projects/hydraulicPowerPack/detail7-m1120.jpg"/>
+                    </div>
+                    <div>
+                        <p>
+
+                            Gdy już posiadasz powyższe elementy, możesz przejść do budowy zbiornika. Pamiętaj o wstępnym przypasowaniu wszystkich elementów- jest to ważne żeby dopasować je do później wierconych i wycinanych otworów.
+
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <img src="/assets/images/projects/hydraulicPowerPack/detail9-m1120.jpg"/>
+                    </div>
+                    <div>
+                        <p>
+                            Do projektowania zbiornika musisz znać kilka wartości:<br>pojemność Twojego cylindra, ( ew. wszystkich cylindrów, które będą zasilane) w maksymalnym wysuwie<br>Do tego celu wykorzystaj wzór: jdnsjadnas<br>(UWAGA ZNOWU MATEMATYKA!)<br>długość przewodów, którą obliczysz wzorem : xy=wxsv<br>
+                        </p>
                     </div>
 
-                    <div class="row">
-                        <div>
-                            <img src="/assets/images/projects/hydraulicPowerPack/detail1-m1120.jpg"/>
-                        </div>
-                        <div>
-                            <p>
-                W moim projekcie wykorzystałem silnik z odzysku który znalazłem na złomie, łącznik dzwonowy musiałem zrobić samemu ponieważ orginalny nie pasowałby do mojego silnika, na szczęście orginalne sprzęgło kłowe udało mi się zastosować. 
-              </p>
-                        </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <img src="/assets/images/projects/hydraulicPowerPack/detail13-w1120.jpg"/>
                     </div>
+                    <div>
+                        <p>
+                            Gdy już wiesz, że potrzebujesz przykładowo 20l oleju na same siłowniki i przewody, to polecam Ci powiększyć tę wartość przynajmniej 3 razy. (WTF?) Dlaczego?<br>
+                            Już wyjaśniam.
 
-                    <div class="row">
-                        <div>
-                            <img src="/assets/images/projects/hydraulicPowerPack/detail8.jpg"/>
-                        </div>
-                        <div>
-                            <p>
-                Przy wyborze pompy musimy najpierw zastanowić się do czego chcemy ją używać,  ponieważ każda pompa ma dwie najważniejsze właściwości: ciśnienie robocze oraz wydajność litrów na minutę. 
-Pierwszy parametr jest od " mocy" a drugi od szybkości wysuwu tłoka.
-              </p>
-                        </div>
+                        </p>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div>
-                            <img src="/assets/images/projects/hydraulicPowerPack/detail3-m1120.jpg"/>
-                        </div>
-                        <div>
-                            <p>
-              Wzór aby obliczyć szybkość wysuwu tłoka dla przykladowej wartości 8l/minute, i tłoczyska fi 100:<br>Xy/t/100=2 czyli 1cm w czasie 1sekundy<br>wzór aby obliczyć jaką moc w tonach uzyskamy na danym ciśnieniu:<br> 100/x2=300/2
-              </p>
-                        </div>
-                    </div>
+                <div class="topGap">
+                    <p class="single-out">Po pierwsze:</p>
 
-                    <div class="row">
-                        <div>
-                            <img src="/assets/images/projects/hydraulicPowerPack/detail4-m1120.jpg"/>
-                        </div>
-                        <div>
-                            <p>
-                
-    Dla przykładu jeśli chcemy używać jej do prasy, to kupujemy pompę z jak największym maksymalnym ciśnieniem i zarazem jak najmniejszym przepływem litrów na minutę aby uzyskać wolna dokładna pracę, a zarazem duża moc.
-              </p>
-                        </div>
-                    </div>
+                    <p class="indent">
+                        Ssaka pompy nie mocujemy na samym dole zbiornika, aby nie zaciągał brudu z dołu.</p>
 
-                    <div class="row">
-                        <div>
-                            <img src="/assets/images/projects/hydraulicPowerPack/detail5-m1120.jpg"/>
-                        </div>
-                        <div>
-                            <p>
-                Z kolei przy budowie łuparki, sprawa wygląda całkiem odwrotnie ponieważ potrzebujemy bardzo szybki wysów tłoka, jednocześnie nie potrzebujemy niesamowicie dużej mocy.Ja w moim przypadku chciałem pójść na kompromis ponieważ chcę zastosować mój agregat zarówno do prasy jak i łuparki, więc dobrałem parametry pomiędzy, jednak jak wiadomo jeśli coś jest do wszystkiego to jest do... 😉
-              </p>
-                        </div>
-                    </div>
+                    <p class="single-out">Po drugie:</p>
 
-                    <div class="row">
-                        <div>
-                            <img src="/assets/images/projects/hydraulicPowerPack/detail6-m1120.jpg"/>
-                        </div>
-                        <div>
-                            <p>
-               Pamiętajmy również że im większe parametry dobieramy czy to mocy czy litrów na minutę, wprost proporcjonalnie zwiększa się zapotrzebowanie na wielkość silnika elektrycznego. 
-    Aby wszystko mialo ręce i nogi poniżej przedstawiam Tobie wzór matematyczny z którego ja korzystałem
-    Kilka przykładów<br>Na szybkość wysuwu X=23,=3=xx==x/<br>Na moc w tonach jaka uzyskamy:xy=s/xs=s
-              </p>
-                        </div>
-                    </div>
+                    <p class="indent">Podczas pracy agregatu olej się nagrzewa, a co za tym idzie będzie go więcej. Gdy będzie go więcej to dłużej będzie się nagrzewać</p>
 
-                    <section>
+                    <p class="single-out">Po trzecie:</p>
 
-                        <div class="topGap">
-                            <p class="single-out">Myślę że najtrudniejsze gotowe. Zanim przejdziemy do kolejnego etapu musimy skompletować następujące części::</p>
+                    <p class="indent">
+                        Praca nawet nowego siłownika powoduje delikatne straty oleju. Im większy będziemy mieli zapas, tym rzadziej będziemy musieli go uzupełniać.</p>
 
-                            <ul class="dots">
-                                <li>
-                                    <p>Łącznik grodziowy</p>
-                                </li>
-                                <li>
-                                    <p>Filtr oleju ( tutaj też musimy dobrać odpowiedni do naszej pompy musi mieć odpowdni przepływ oleju, najlepiej jeśli nie będzie to na styku tylko co najmniej 2 x więcej) </p>
-                                </li>
-                                <li>
-                                    <p>korek wlewu</p>
-                                </li>
-                                <li>
-                                    <p>uszczelki</p>
-                                </li>
+                    <p class="single-out">Po czwarte:</p>
 
-                                <div class="row">
-                                    <div>
-                                        <img src="/assets/images/projects/hydraulicPowerPack/detail7-m1120.jpg"/>
-                                    </div>
-                                    <div>
-                                        <p>
-              
+                    <p class="indent">Myśl przyszłościowo - jeśli będziesz chciał kiedyś podłączyć większy siłownik, to nie będziesz musiał przerabiać zbiornika.</p>
 
+                    <p class="topGap">
+                        Oczywiście duży zbiornik to nie tylko zalety, ale i wady. Jak idzie się łatwo domyślić większy zbiornik będzie cięższy, a co za tym idzie mniej mobilny. Ponadto będzie potrzebował więcej oleju do pracy, więc jednostkowy koszt zakupu oleju będzie wyższy.
+                    </p>
+                </div>
 
-gdy już mamy fizycznie powyższe elementy możemy przejść do budowy zbiornika, jest to o tyle ważne aby móc przypasować powyższe części do wierconych i wycinanych przez nas otworów,
- Jeśli chodzi o sam zbiornik musimy po raz kolejny zastanowić się do czego chcemy używać nasz agregat jeśli chcemy do konkretnej jednej rzeczy to sprawa jest bardzo prosta, jednak gdy podobnie do mnie budujesz agregat do wszystkiego to musimy iść na kompromisy. 
+            </section>
+        </article>
+    </main>
 
-
-              </p>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div>
-                                        <img src="/assets/images/projects/hydraulicPowerPack/detail9-m1120.jpg"/>
-                                    </div>
-                                    <div>
-                                        <p>
-            Do projektowania zbiornika musimu znać kilka wartości 
-Pojemność naszego cylindra, ( albo wszystkich cylindrów które chcemy zasilać) w maksymalnym wysuwie oraz dlugość przewodów hydraulicznych: 
-
-Wzór na obliczenie pojemności cylidrów:
-Xy=x/y:3.14
-
-Wzór na obliczenie pojemności przewodów:
-Xy=x/y:3.14=10
-                        </div>
-                                    </div>
-
-                                </section>
-                            </article>
-                        </main>
-                    {% endblock %}
+{% endblock %}

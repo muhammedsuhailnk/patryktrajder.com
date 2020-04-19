@@ -19,6 +19,10 @@ svg.icon {
   color: #ff0000;
 }
 
+p.indent {
+  margin-left: 2rem;
+}
+
 ul.dots {
   margin-left: 2rem;
 
@@ -50,6 +54,25 @@ ul.links {
   img {
     margin: 0 auto;
   }
+
+  &.center-text {
+    position: relative;
+    text-align: center;
+
+    h1 {
+      bottom: 0;
+      color: white;
+      font-weight: 300;
+      height: 1em;
+      left: 0;
+      margin: auto;
+      position: absolute;
+      right: 0;
+      top: 0;
+      text-shadow: 0 0 10px black;
+      text-transform: uppercase;
+    }
+  }
 }
 
 .categories {
@@ -69,25 +92,6 @@ ul.links {
     > li + li {
       margin-left: 1rem;
     }
-  }
-}
-
-.center-text {
-  position: relative;
-  text-align: center;
-
-  h1 {
-    position: absolute;
-    margin: auto;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1em;
-    color: white;
-    text-transform: uppercase;
-    font-weight: 300;
-    text-shadow: 0 0 10px black;
   }
 }
 
