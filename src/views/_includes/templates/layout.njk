@@ -8,10 +8,7 @@
         {% block head %}{% endblock %}
     </head>
     <body>
-        <svg
-            aria-hidden="true"
-            style="position: absolute; width: 0; height: 0; overflow: hidden;"
-        >
+        <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;">
             <defs>
                 {% include "vectors/facebook.sym" %}
                 {% include "vectors/youtube.sym" %}
@@ -23,19 +20,19 @@
         <header>
             <h2>
                 <a href="/index.html">Patryk Trajder</a>
-            </h1>
+            </h2>
             <nav>
                 <ul>
-                    <li {% if tab == "home" %}class="current"{% endif %}>
+                    <li {% if tab === "home" %} class="current" {% endif %}>
                         <a href="/">Witaj</a>
                     </li>
-                    <li {% if tab == "about" %}class="current"{% endif %}>
+                    <li {% if tab === "about" %} class="current" {% endif %}>
                         <a href="/about/">O mnie</a>
                     </li>
-                    <li {% if tab == "products" %}class="current"{% endif %}>
+                    <li {% if tab === "products" %} class="current" {% endif %}>
                         <a href="/products/">Produkty</a>
                     </li>
-                    <li {% if tab == "projects" %}class="current"{% endif %}>
+                    <li {% if tab === "projects" %} class="current" {% endif %}>
                         <a href="/projects/">Projekty</a>
                     </li>
                     <li>
@@ -52,7 +49,7 @@
                 <div class="row">
                     <h3>Kontakt</h2>
                     <div class="social-media">
-                        <a href="https://www.youtube.com/channel/UCg3hDpgzJpqBMBo4K-0aGrw">
+                        <a href="https://www.youtube.com/channel/ucg3hdpgzjpqbmbo4k-0agrw">
                             <svg class="icon">
                                 <use xlink:href="#icon-youtube"></use>
                             </svg>
@@ -71,18 +68,16 @@
                 </div>
                 <address class="row">
                     <section>
-                        <h5>W sprawie zakupu:</h4>
+                        <h5>W sprawie zakupu:</h5>
                         <p>
                             <a href="mailto:sklep@trajder.com">sklep@trajder.com</a>
                         </p>
                         <p>
-                            <a href="https://facebook.com/trajder.serwis"
-                >facebook.com/trajder.serwis</a
-              >
+                            <a href="https://facebook.com/trajder.serwis">facebook.com/trajder.serwis</a >
                         </p>
                     </section>
                     <section>
-                        <h5>Współpraca / zapytania biznesowe:</h4>
+                        <h5>Współpraca / zapytania biznesowe:</h5>
                         <p>
                             <a href="mailto:patryk@trajder.com">patryk@trajder.com</a>
                         </p>
@@ -93,8 +88,8 @@
                 <ul class="links">
                     <li>&copy; Patryk Trajder. All rights reserved.</li>
                     <li>
-            Design:
-            <a href="http://github.com/jakubjanowski">Jakub Janowski</a>
+                        Design:
+                        <a href="http://github.com/jakubjanowski">Jakub Janowski</a>
                     </li>
                 </ul>
             </section>
