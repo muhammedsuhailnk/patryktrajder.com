@@ -39,6 +39,12 @@ function scripts() {
   return spawn("tsc", [], { shell: true, stdio: "inherit" });
 }
 
+function typescripts() {
+  return gulp
+    .src("src/scripts/**/*.ts")
+    .pipe(gulp.dest(distDir + "/src/scripts"));
+}
+
 function styles() {
   return gulp
     .src("src/styles/main.scss")
@@ -51,7 +57,7 @@ gulp.task("assets", gulp.parallel(cursors, favicon, icons, images));
 gulp.task("clean", function () {
   return spawn("rimraf " + distDir, [], {
     shell: true,
-    stdio: "inherit",
+    stdio: "inherit"
   });
 });
 
@@ -74,7 +80,7 @@ gulp.task("deploy", function () {
 
 gulp.task("src", gulp.parallel(html, scripts, styles));
 
-gulp.task("dev", gulp.parallel("assets", "src"));
+gulp.task("dev", gulp.parallel("assets", "src", typescripts));
 
 gulp.task(
   "dist",
