@@ -1,0 +1,138 @@
+.gallery {
+  margin: 0 auto;
+  max-width: 55rem;
+
+  .full {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .container {
+      bottom: 0;
+      left: 0;
+      margin: 1rem;
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      img {
+        border-radius: 0;
+        cursor: -moz-zoom-in;
+        cursor: -webkit-zoom-in;
+        cursor: zoom-in;
+        margin: auto;
+        max-height: 100%;
+        max-width: 100%;
+        position: absolute;
+        width: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .close {
+        color: $eerieBlack;
+        cursor: pointer;
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        &:active {
+          background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        svg.icon {
+          height: 3em;
+          width: 3em;
+        }
+      }
+    }
+
+    &.zoom {
+      .container {
+        margin: 0;
+        img {
+          cursor: -moz-zoom-out;
+          cursor: -webkit-zoom-out;
+          cursor: zoom-out;
+          max-height: none;
+          max-width: none;
+
+          &.dragging:active {
+            cursor: move;
+            cursor: url("/assets/cursors/grabbing.cur"), auto;
+            cursor: -moz-grabbing;
+            cursor: -webkit-grabbing;
+            cursor: grabbing;
+          }
+        }
+      }
+    }
+  }
+
+  .preview {
+    img {
+      cursor: pointer;
+      height: auto;
+      margin: 0 auto;
+      width: auto;
+      max-width: 100%;
+    }
+  }
+
+  .thumbList {
+    height: 10.3vw;
+    max-height: 6rem;
+    margin-top: 1rem;
+    overflow: hidden;
+    width: auto;
+
+    .thumbListItems {
+      cursor: move;
+      cursor: url("/assets/cursors/grab.cur"), auto;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+      cursor: grab;
+      height: 8rem;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      white-space: nowrap;
+
+      &:active {
+        cursor: url("/assets/cursors/grabbing.cur"), auto;
+        cursor: -moz-grabbing;
+        cursor: -webkit-grabbing;
+        cursor: grabbing;
+      }
+
+      img {
+        cursor: pointer;
+        display: inline-block;
+        height: 10.3vw;
+        max-height: 6rem;
+        width: auto;
+
+        &.dragging:active {
+          cursor: move;
+          cursor: url("/assets/cursors/grabbing.cur"), auto;
+          cursor: -moz-grabbing;
+          cursor: -webkit-grabbing;
+          cursor: grabbing;
+        }
+      }
+
+      img + img {
+        margin-left: 2%;
+      }
+    }
+  }
+}

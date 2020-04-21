@@ -21,41 +21,9 @@ body {
   }
 }
 
-nav {
-  margin-bottom: 0.5rem;
-
-  > ul {
-    > li {
-      display: inline-block;
-      margin: 0 0.35rem 2rem 0.35rem;
-
-      > a {
-        color: $eerieBlack;
-        padding: 0.6rem 1.2rem;
-
-        &:hover {
-          color: $azure;
-        }
-      }
-
-      &.current {
-        > a {
-          font-weight: 900;
-        }
-      }
-    }
-  }
-}
-
-main {
-  margin: 0 auto;
-  padding: 0 1rem;
-  width: 70rem;
-  max-width: 100%;
-
-  img {
-    border-radius: 10px;
-  }
+button {
+  background-color: transparent;
+  outline: none;
 }
 
 h1 {
@@ -80,6 +48,47 @@ h4 {
 h5 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 70rem;
+  max-width: 100%;
+
+  img {
+    border-radius: 10px;
+  }
+}
+
+nav {
+  margin-bottom: 0.5rem;
+
+  > ul {
+    > li {
+      display: inline-block;
+      margin: 0 0.35rem 2rem 0.35rem;
+
+      > a {
+        color: $eerieBlack;
+        padding: 0.6rem 1.2rem;
+
+        &:hover {
+          color: $azure;
+        }
+      }
+
+      &.current {
+        > a {
+          font-weight: 900;
+        }
+      }
+    }
+  }
 }
 
 p {

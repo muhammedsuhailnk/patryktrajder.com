@@ -214,5 +214,3 @@ function setUpZoom(full: HTMLElement) {
     }
   });
 }
-
-function zoomOut(full: HTMLElement, img: HTMLImageElement) {}
