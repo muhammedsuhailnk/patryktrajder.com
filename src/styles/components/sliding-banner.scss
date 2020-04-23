@@ -2,71 +2,81 @@
   background-color: black;
   position: relative;
 
-  ul {
-    left: 0;
-    right: 0;
-    bottom: 5%;
-    position: absolute;
-    text-align: center;
+  .container {
+    margin: 0 auto;
+    max-width: 120rem;
+    position: relative;
 
-    li.circle {
-      background: white;
-      border-radius: 50%;
-      cursor: pointer;
-      display: inline-block;
-      height: 10px;
-      width: 10px;
-      opacity: 25%;
+    ul {
+      left: 0;
+      right: 0;
+      bottom: 5%;
+      position: absolute;
+      text-align: center;
 
-      &:hover {
-        opacity: 50%;
+      li.circle {
+        background: white;
+        border-radius: 50%;
+        cursor: pointer;
+        display: inline-block;
+        height: 10px;
+        width: 10px;
+        opacity: 25%;
+
+        &:hover {
+          opacity: 50%;
+        }
+
+        &.current {
+          opacity: 1;
+        }
       }
 
-      &.current {
+      li + li {
+        margin-left: 15px;
+      }
+    }
+
+    .arrow {
+      color: white;
+      cursor: pointer;
+      display: none;
+      height: 6rem;
+      margin: auto;
+      opacity: 50%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+
+      &.left {
+        left: 0;
+      }
+
+      &.right {
+        right: 0;
+      }
+
+      &:hover {
         opacity: 1;
       }
     }
 
-    li + li {
-      margin-left: 15px;
-    }
-  }
+    .images {
+      display: flex;
+      //overflow: hidden;
 
-  .arrow {
-    color: white;
-    cursor: pointer;
-    display: none;
-    height: 6rem;
-    margin: auto;
-    opacity: 50%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-
-    &.left {
-      left: 0;
-    }
-
-    &.right {
-      right: 0;
+      img {
+        -webkit-transition-duration: 0.5s;
+        -moz-transition-duration: 0.5s;
+        -o-transition-duration: 0.5s;
+        transition-duration: 5s;
+      }
     }
 
     &:hover {
-      opacity: 1;
-    }
-  }
-
-  .images {
-    display: flex;
-
-    img {
-      margin: 0 auto;
-    }
-  }
-
-  &:hover {
-    .arrow {
-      display: block;
+      .arrow {
+        display: block;
+      }
     }
   }
 }

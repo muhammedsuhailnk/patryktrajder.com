@@ -1,21 +1,39 @@
 class SlidingBanner {
+  private readonly firstPicture: HTMLImageElement;
+  private readonly images: HTMLElement;
   private readonly nPictures: number = 0;
   private readonly navDots: HTMLUListElement;
-
-  private currentPicture: number = 0;
+  private currentIndex: number = 0;
+  private nAddedCopies: number = 0;
+  private previousClonedPicture: HTMLImageElement | null = null;
+  private wrapping: boolean = false;
 
   constructor(banner: Element) {
-    const images = banner.querySelector(".images") as HTMLElement;
-    this.nPictures = images.childElementCount;
+    this.images = banner.querySelector(".images") as HTMLElement;
+    this.navDots = banner.querySelector("ul") as HTMLUListElement;
+    this.firstPicture = this.images.children[0] as HTMLImageElement;
+    this.nPictures = this.images.childElementCount;
+    if (this.nPictures < 2) return;
 
     const leftArrow = banner.querySelector(".left") as HTMLElement;
     const rightArrow = banner.querySelector(".right") as HTMLElement;
-    this.navDots = banner.querySelector("ul") as HTMLUListElement;
 
+    this.setUpImages();
     this.setUpNavDots();
     leftArrow.addEventListener("click", this.slideBannerLeft);
     rightArrow.addEventListener("click", this.slideBannerRight);
   }
+
+  private resetImagePositions = () => {
+    for (let i = 0; i < this.nPictures; i++) {
+      let image = this.images.children[0] as HTMLElement;
+    }
+  };
+
+  private setUpImages = () => {
+    for (let i = 0; i < this.nPictures; i++)
+      (this.images.children[i] as HTMLElement).dataset.index = i.toString();
+  };
 
   private setUpNavDots = () => {
     if (this.nPictures === 0) return;
@@ -41,23 +59,84 @@ class SlidingBanner {
   };
 
   private slideBannerLeft = () => {
-    this.slide((this.currentPicture - 1 + this.nPictures) % this.nPictures);
+    const newIndex = (this.currentIndex - 1 + this.nPictures) % this.nPictures;
+    if (this.wrapping || this.currentIndex === 0) {
+      this.wrapping = true;
+      this.updateNavDots(newIndex);
+      const pictureRef = this.images.children[
+        this.nAddedCopies + newIndex
+      ] as HTMLImageElement;
+      const pictureCopy = pictureRef.cloneNode() as HTMLImageElement;
+
+      const currentFirstPicture = this.images.children[0] as HTMLImageElement;
+      let leftMargin = parseFloat(
+        window.getComputedStyle(currentFirstPicture).marginLeft
+      );
+      leftMargin = (leftMargin / currentFirstPicture.width) * 100 - 100;
+
+      currentFirstPicture.className = "notransition";
+      currentFirstPicture.style.marginLeft = "0";
+
+      if (this.nAddedCopies > 0)
+        pictureCopy.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
+      pictureCopy.style.marginLeft = leftMargin + "%";
+      this.images.insertBefore(pictureCopy, this.images.children[0]);
+      window.getComputedStyle(pictureCopy).marginLeft; // flush pending style changes
+      currentFirstPicture.className = "";
+      pictureCopy.style.marginLeft = "0";
+
+      this.nAddedCopies++;
+
+      this.previousClonedPicture?.removeEventListener(
+        "transitionend",
+        this.handleTransitionEnd
+      );
+      pictureCopy.addEventListener("transitionend", this.handleTransitionEnd);
+
+      this.previousClonedPicture = pictureCopy;
+    } else {
+      this.slide(newIndex);
+    }
+  };
+
+  private handleTransitionEnd = () => {
+    do this.images.removeChild(this.images.children[0]);
+    while (--this.nAddedCopies > 0);
+    this.firstPicture.className = "notransition";
+    this.firstPicture.style.marginLeft = "-" + this.currentIndex * 100 + "%";
+    window.getComputedStyle(this.firstPicture).marginLeft; // flush pending style changes
+    this.firstPicture.className = "";
+    this.previousClonedPicture = null;
+    this.wrapping = false;
   };
 
   private slideBannerRight = () => {
-    this.slide((this.currentPicture + 1) % this.nPictures);
+    let newIndex = (this.currentIndex + 1) % this.nPictures;
+    this.slide(newIndex);
+
+    // let firstPicture = this.images.children[0] as HTMLElement;
+    // let secondPicture = this.images.children[1] as HTMLElement;
+    // this.images.insertBefore(firstPicture, null);
+
+    // firstPicture.style.marginLeft = "0";
+    // secondPicture.style.marginLeft = "-100%";
   };
 
   private handleNavDotClick = (li: HTMLLIElement) => {
     let index = Number(li.dataset.index);
-    if (index === this.currentPicture) return;
+    if (index === this.currentIndex) return;
     this.slide(index);
   };
 
   private slide = (newIndex: number) => {
-    this.navDots.children[this.currentPicture].classList.remove("current");
+    this.updateNavDots(newIndex);
+    this.firstPicture.style.marginLeft = "-" + newIndex * 100 + "%";
+  };
+
+  private updateNavDots = (newIndex: number) => {
+    this.navDots.children[this.currentIndex].classList.remove("current");
     this.navDots.children[newIndex].classList.add("current");
-    this.currentPicture = newIndex;
+    this.currentIndex = newIndex;
   };
 }
 

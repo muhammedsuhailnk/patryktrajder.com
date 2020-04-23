@@ -106,6 +106,14 @@ ul.links {
   }
 }
 
+.notransition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  -ms-transition: none !important;
+  transition: none !important;
+}
+
 .productList {
   > h4 {
     margin-bottom: 0rem;
