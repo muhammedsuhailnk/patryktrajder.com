@@ -6,6 +6,7 @@ class SlidingBanner {
   private readonly navDots: HTMLUListElement;
   private currentIndex: number = 0;
   private isTimerSet: boolean = false;
+  private isTimerStopped: boolean = false;
   private nAddedCopiesLeft: number = 0;
   private nAddedCopiesRight: number = 0;
   private realCurrentIndex: number = 0;
@@ -30,6 +31,16 @@ class SlidingBanner {
     this.setUpNavDots();
     leftArrow.addEventListener("click", () => this.slideBannerLeft(1));
     rightArrow.addEventListener("click", () => this.slideBannerRight(1));
+    banner.addEventListener("pointerenter", () => {
+      window.clearTimeout(this.timer);
+      this.isTimerSet = false;
+      this.isTimerStopped = true;
+    });
+    banner.addEventListener("pointerleave", () => {
+      this.timer = window.setTimeout(this.autoSlide, SlidingBanner.interval);
+      this.isTimerSet = true;
+      this.isTimerStopped = false;
+    });
   }
 
   private autoSlide = () => {
@@ -72,7 +83,7 @@ class SlidingBanner {
   private handleFirstPictureTransitionEnd = () => {
     this.firstPicture.style.transitionTimingFunction = "ease";
     this.sliding = false;
-    if (!this.isTimerSet) {
+    if (!this.isTimerSet && !this.isTimerStopped) {
       this.timer = window.setTimeout(this.autoSlide, SlidingBanner.interval);
       this.isTimerSet = true;
     }
