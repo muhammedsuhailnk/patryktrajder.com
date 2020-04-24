@@ -1,5 +1,5 @@
 class SlidingBanner {
-  private static interval: number = 5000; // ms
+  private static interval: number = 500; // ms
   private readonly firstPicture: HTMLImageElement;
   private readonly images: HTMLElement;
   private readonly nPictures: number = 0;
@@ -31,17 +31,21 @@ class SlidingBanner {
     this.setUpNavDots();
     leftArrow.addEventListener("click", () => this.slideBannerLeft(1));
     rightArrow.addEventListener("click", () => this.slideBannerRight(1));
-    banner.addEventListener("pointerenter", () => {
-      window.clearTimeout(this.timer);
-      this.isTimerSet = false;
-      this.isTimerStopped = true;
-    });
-    banner.addEventListener("pointerleave", () => {
-      this.timer = window.setTimeout(this.autoSlide, SlidingBanner.interval);
-      this.isTimerSet = true;
-      this.isTimerStopped = false;
-    });
+    banner.addEventListener("pointerenter", this.handlePointerEnter);
+    banner.addEventListener("pointerleave", this.handlePointerLeave);
   }
+
+  private handlePointerEnter = () => {
+    window.clearTimeout(this.timer);
+    this.isTimerSet = false;
+    this.isTimerStopped = true;
+  };
+
+  private handlePointerLeave = () => {
+    this.timer = window.setTimeout(this.autoSlide, SlidingBanner.interval);
+    this.isTimerSet = true;
+    this.isTimerStopped = false;
+  };
 
   private autoSlide = () => {
     this.slideBannerRight(1);

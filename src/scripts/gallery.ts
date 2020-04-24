@@ -69,7 +69,7 @@ function setUpSliderItem(item: HTMLImageElement, slider: HTMLElement) {
     item.removeEventListener("lostpointercapture", handleDragEnd);
   };
 
-  item.addEventListener("pointerdown", (e) => {
+  item.addEventListener("pointerdown", (e: PointerEvent) => {
     e.stopPropagation();
     abortClick = false;
     isGrabbing = true;
@@ -81,7 +81,7 @@ function setUpSliderItem(item: HTMLImageElement, slider: HTMLElement) {
     item.addEventListener("lostpointercapture", handleDragEnd);
   });
 
-  item.addEventListener("click", (e) => {
+  item.addEventListener("click", (e: MouseEvent) => {
     if (abortClick) return;
     const offset = e.x - startX;
     if (Math.abs(offset) > abortClickDistance) return;
