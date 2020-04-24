@@ -1,5 +1,5 @@
 class SlidingBanner {
-  private static interval: number = 500; // ms
+  private static interval: number = 5000; // ms
   private readonly firstPicture: HTMLImageElement;
   private readonly images: HTMLElement;
   private readonly nPictures: number = 0;
@@ -34,18 +34,6 @@ class SlidingBanner {
     banner.addEventListener("pointerenter", this.handlePointerEnter);
     banner.addEventListener("pointerleave", this.handlePointerLeave);
   }
-
-  private handlePointerEnter = () => {
-    window.clearTimeout(this.timer);
-    this.isTimerSet = false;
-    this.isTimerStopped = true;
-  };
-
-  private handlePointerLeave = () => {
-    this.timer = window.setTimeout(this.autoSlide, SlidingBanner.interval);
-    this.isTimerSet = true;
-    this.isTimerStopped = false;
-  };
 
   private autoSlide = () => {
     this.slideBannerRight(1);
@@ -100,6 +88,18 @@ class SlidingBanner {
     let slideBy = index - this.currentIndex;
     if (slideBy < 0) this.slideBannerLeft(-slideBy);
     else this.slideBannerRight(slideBy);
+  };
+
+  private handlePointerEnter = () => {
+    window.clearTimeout(this.timer);
+    this.isTimerSet = false;
+    this.isTimerStopped = true;
+  };
+
+  private handlePointerLeave = () => {
+    this.timer = window.setTimeout(this.autoSlide, SlidingBanner.interval);
+    this.isTimerSet = true;
+    this.isTimerStopped = false;
   };
 
   private handleTransitionEnd = () => {
