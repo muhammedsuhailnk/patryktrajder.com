@@ -188,7 +188,6 @@ class SlidingBanner {
     if (this.realCurrentIndex >= this.images.childElementCount) {
       this.overflowRight(newIndex, by);
     } else {
-      console.log("slide right");
       this.slide(newIndex);
     }
   };
