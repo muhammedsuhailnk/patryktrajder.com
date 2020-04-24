@@ -1,22 +1,27 @@
 class SlidingBanner {
+  private static interval: number = 5000; // ms
   private readonly firstPicture: HTMLImageElement;
   private readonly images: HTMLElement;
   private readonly nPictures: number = 0;
   private readonly navDots: HTMLUListElement;
   private currentIndex: number = 0;
-  private realCurrentIndex: number = 0;
+  private isTimerSet: boolean = false;
   private nAddedCopiesLeft: number = 0;
   private nAddedCopiesRight: number = 0;
+  private realCurrentIndex: number = 0;
   private realFirstPicture: HTMLImageElement;
   private sliding: boolean = false;
+  private timer: number;
 
   constructor(banner: Element) {
     this.images = banner.querySelector(".images") as HTMLElement;
     this.navDots = banner.querySelector("ul") as HTMLUListElement;
+    this.nPictures = this.images.childElementCount;
     this.realFirstPicture = this.firstPicture = this.images
       .children[0] as HTMLImageElement;
-    this.nPictures = this.images.childElementCount;
-    if (this.nPictures < 2) return;
+    this.timer = window.setTimeout(this.autoSlide, SlidingBanner.interval);
+    this.isTimerSet = true;
+    if (this.nPictures <= 1) return;
 
     const leftArrow = banner.querySelector(".left") as HTMLElement;
     const rightArrow = banner.querySelector(".right") as HTMLElement;
@@ -26,6 +31,10 @@ class SlidingBanner {
     leftArrow.addEventListener("click", () => this.slideBannerLeft(1));
     rightArrow.addEventListener("click", () => this.slideBannerRight(1));
   }
+
+  private autoSlide = () => {
+    this.slideBannerRight(1);
+  };
 
   private setUpImages = () => {
     for (let i = 0; i < this.nPictures; i++)
@@ -63,6 +72,10 @@ class SlidingBanner {
   private handleFirstPictureTransitionEnd = () => {
     this.firstPicture.style.transitionTimingFunction = "ease";
     this.sliding = false;
+    if (!this.isTimerSet) {
+      this.timer = window.setTimeout(this.autoSlide, SlidingBanner.interval);
+      this.isTimerSet = true;
+    }
   };
 
   private handleNavDotClick = (li: HTMLLIElement) => {
@@ -99,8 +112,6 @@ class SlidingBanner {
   private overflowLeft = (newIndex: number, by: number) => {
     let pictureCopy;
     let pictureRef;
-
-    this.updateNavDots(newIndex);
 
     let leftMargin = parseFloat(
       window.getComputedStyle(this.realFirstPicture).marginLeft
@@ -147,8 +158,6 @@ class SlidingBanner {
     let pictureCopy;
     let pictureRef;
 
-    this.updateNavDots(newIndex);
-
     for (let i = by - 1; i > 0; i--) {
       pictureRef = this.images.children[this.nAddedCopiesLeft + newIndex - i];
       pictureCopy = pictureRef.cloneNode() as HTMLImageElement;
@@ -174,6 +183,7 @@ class SlidingBanner {
 
   private slideBannerLeft = (by: number) => {
     const newIndex = (this.currentIndex - by + this.nPictures) % this.nPictures;
+    this.updateNavDots(newIndex);
     if (this.realCurrentIndex < by) {
       this.overflowLeft(newIndex, by);
     } else {
@@ -185,6 +195,7 @@ class SlidingBanner {
   private slideBannerRight = (by: number) => {
     let newIndex = (this.currentIndex + by) % this.nPictures;
     this.realCurrentIndex += by;
+    this.updateNavDots(newIndex);
     if (this.realCurrentIndex >= this.images.childElementCount) {
       this.overflowRight(newIndex, by);
     } else {
@@ -193,7 +204,6 @@ class SlidingBanner {
   };
 
   private slide = (newIndex: number) => {
-    this.updateNavDots(newIndex);
     this.realFirstPicture.style.marginLeft =
       "-" + this.realCurrentIndex * 100 + "%";
     if (this.sliding)
@@ -205,6 +215,8 @@ class SlidingBanner {
     this.navDots.children[this.currentIndex].classList.remove("current");
     this.navDots.children[newIndex].classList.add("current");
     this.currentIndex = newIndex;
+    window.clearTimeout(this.timer);
+    this.isTimerSet = false;
   };
 }
 
