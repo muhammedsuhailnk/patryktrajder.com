@@ -4,14 +4,17 @@ class SlidingBanner {
   private readonly nPictures: number = 0;
   private readonly navDots: HTMLUListElement;
   private currentIndex: number = 0;
-  private nAddedCopies: number = 0;
-  private previousClonedPicture: HTMLImageElement | null = null;
-  private wrapping: boolean = false;
+  private realCurrentIndex: number = 0;
+  private nAddedCopiesLeft: number = 0;
+  private nAddedCopiesRight: number = 0;
+  private realFirstPicture: HTMLImageElement;
+  private sliding: boolean = false;
 
   constructor(banner: Element) {
     this.images = banner.querySelector(".images") as HTMLElement;
     this.navDots = banner.querySelector("ul") as HTMLUListElement;
-    this.firstPicture = this.images.children[0] as HTMLImageElement;
+    this.realFirstPicture = this.firstPicture = this.images
+      .children[0] as HTMLImageElement;
     this.nPictures = this.images.childElementCount;
     if (this.nPictures < 2) return;
 
@@ -20,19 +23,18 @@ class SlidingBanner {
 
     this.setUpImages();
     this.setUpNavDots();
-    leftArrow.addEventListener("click", this.slideBannerLeft);
-    rightArrow.addEventListener("click", this.slideBannerRight);
+    leftArrow.addEventListener("click", () => this.slideBannerLeft(1));
+    rightArrow.addEventListener("click", () => this.slideBannerRight(1));
   }
-
-  private resetImagePositions = () => {
-    for (let i = 0; i < this.nPictures; i++) {
-      let image = this.images.children[0] as HTMLElement;
-    }
-  };
 
   private setUpImages = () => {
     for (let i = 0; i < this.nPictures; i++)
       (this.images.children[i] as HTMLElement).dataset.index = i.toString();
+
+    this.firstPicture.addEventListener(
+      "transitionend",
+      this.handleFirstPictureTransitionEnd
+    );
   };
 
   private setUpNavDots = () => {
@@ -58,79 +60,146 @@ class SlidingBanner {
     }
   };
 
-  private slideBannerLeft = () => {
-    const newIndex = (this.currentIndex - 1 + this.nPictures) % this.nPictures;
-    if (this.wrapping || this.currentIndex === 0) {
-      this.wrapping = true;
-      this.updateNavDots(newIndex);
-      const pictureRef = this.images.children[
-        this.nAddedCopies + newIndex
-      ] as HTMLImageElement;
-      const pictureCopy = pictureRef.cloneNode() as HTMLImageElement;
-
-      const currentFirstPicture = this.images.children[0] as HTMLImageElement;
-      let leftMargin = parseFloat(
-        window.getComputedStyle(currentFirstPicture).marginLeft
-      );
-      leftMargin = (leftMargin / currentFirstPicture.width) * 100 - 100;
-
-      currentFirstPicture.className = "notransition";
-      currentFirstPicture.style.marginLeft = "0";
-
-      if (this.nAddedCopies > 0)
-        pictureCopy.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
-      pictureCopy.style.marginLeft = leftMargin + "%";
-      this.images.insertBefore(pictureCopy, this.images.children[0]);
-      window.getComputedStyle(pictureCopy).marginLeft; // flush pending style changes
-      currentFirstPicture.className = "";
-      pictureCopy.style.marginLeft = "0";
-
-      this.nAddedCopies++;
-
-      this.previousClonedPicture?.removeEventListener(
-        "transitionend",
-        this.handleTransitionEnd
-      );
-      pictureCopy.addEventListener("transitionend", this.handleTransitionEnd);
-
-      this.previousClonedPicture = pictureCopy;
-    } else {
-      this.slide(newIndex);
-    }
-  };
-
-  private handleTransitionEnd = () => {
-    do this.images.removeChild(this.images.children[0]);
-    while (--this.nAddedCopies > 0);
-    this.firstPicture.className = "notransition";
-    this.firstPicture.style.marginLeft = "-" + this.currentIndex * 100 + "%";
-    window.getComputedStyle(this.firstPicture).marginLeft; // flush pending style changes
-    this.firstPicture.className = "";
-    this.previousClonedPicture = null;
-    this.wrapping = false;
-  };
-
-  private slideBannerRight = () => {
-    let newIndex = (this.currentIndex + 1) % this.nPictures;
-    this.slide(newIndex);
-
-    // let firstPicture = this.images.children[0] as HTMLElement;
-    // let secondPicture = this.images.children[1] as HTMLElement;
-    // this.images.insertBefore(firstPicture, null);
-
-    // firstPicture.style.marginLeft = "0";
-    // secondPicture.style.marginLeft = "-100%";
+  private handleFirstPictureTransitionEnd = () => {
+    this.firstPicture.style.transitionTimingFunction = "ease";
+    this.sliding = false;
   };
 
   private handleNavDotClick = (li: HTMLLIElement) => {
     let index = Number(li.dataset.index);
     if (index === this.currentIndex) return;
-    this.slide(index);
+
+    let slideBy = index - this.currentIndex;
+    if (slideBy < 0) this.slideBannerLeft(-slideBy);
+    else this.slideBannerRight(slideBy);
+  };
+
+  private handleTransitionEnd = () => {
+    const realFirstPic = this.realFirstPicture as HTMLImageElement;
+    realFirstPic.removeEventListener("transitionend", this.handleTransitionEnd);
+
+    while (this.nAddedCopiesLeft > 0) {
+      this.images.removeChild(this.images.children[0]);
+      this.nAddedCopiesLeft--;
+    }
+    while (this.nAddedCopiesRight > 0) {
+      this.images.removeChild(this.images.lastChild as ChildNode);
+      this.nAddedCopiesRight--;
+    }
+
+    this.realCurrentIndex = this.currentIndex;
+    this.realFirstPicture = this.firstPicture;
+    this.firstPicture.className = "notransition";
+    this.firstPicture.style.marginLeft = "-" + this.currentIndex * 100 + "%";
+    window.getComputedStyle(this.firstPicture).marginLeft; // flush pending style changes
+    this.firstPicture.className = "";
+    this.handleFirstPictureTransitionEnd();
+  };
+
+  private overflowLeft = (newIndex: number, by: number) => {
+    let pictureCopy;
+    let pictureRef;
+
+    this.updateNavDots(newIndex);
+
+    let leftMargin = parseFloat(
+      window.getComputedStyle(this.realFirstPicture).marginLeft
+    );
+    leftMargin = (leftMargin / this.realFirstPicture.width) * 100 - 100;
+
+    this.realFirstPicture.className = "notransition";
+    this.realFirstPicture.style.marginLeft = "0";
+
+    for (let i = by; i > 1; i--) {
+      pictureRef = this.images.children[
+        this.nAddedCopiesLeft + newIndex + by - 1
+      ];
+      pictureCopy = pictureRef.cloneNode() as HTMLImageElement;
+      this.images.insertBefore(pictureCopy, this.realFirstPicture);
+      this.realFirstPicture = pictureCopy;
+      leftMargin -= 100;
+    }
+
+    pictureRef = this.images.children[
+      this.nAddedCopiesLeft + newIndex + by - 1
+    ];
+    pictureCopy = pictureRef.cloneNode() as HTMLImageElement;
+
+    if (this.nAddedCopiesLeft > 0)
+      pictureCopy.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
+    pictureCopy.style.marginLeft = leftMargin + "%";
+    this.images.insertBefore(pictureCopy, this.realFirstPicture);
+    window.getComputedStyle(pictureCopy).marginLeft; // flush pending style changes
+    this.realFirstPicture.className = "";
+    pictureCopy.style.marginLeft = "0";
+
+    this.nAddedCopiesLeft += by;
+
+    this.realFirstPicture.removeEventListener(
+      "transitionend",
+      this.handleTransitionEnd
+    );
+    this.realFirstPicture = pictureCopy;
+    pictureCopy.addEventListener("transitionend", this.handleTransitionEnd);
+  };
+
+  private overflowRight = (newIndex: number, by: number) => {
+    let pictureCopy;
+    let pictureRef;
+
+    this.updateNavDots(newIndex);
+
+    for (let i = by - 1; i > 0; i--) {
+      pictureRef = this.images.children[this.nAddedCopiesLeft + newIndex - i];
+      pictureCopy = pictureRef.cloneNode() as HTMLImageElement;
+      this.images.insertBefore(pictureCopy, null);
+    }
+
+    pictureRef = this.images.children[this.nAddedCopiesLeft + newIndex];
+    pictureCopy = pictureRef.cloneNode() as HTMLImageElement;
+
+    pictureCopy.style.marginLeft = "0";
+    this.images.insertBefore(pictureCopy, null);
+    this.realFirstPicture.style.marginLeft = -this.realCurrentIndex * 100 + "%";
+    if (this.nAddedCopiesRight > 0)
+      this.realFirstPicture.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
+
+    this.nAddedCopiesRight += by;
+
+    this.realFirstPicture.addEventListener(
+      "transitionend",
+      this.handleTransitionEnd
+    );
+  };
+
+  private slideBannerLeft = (by: number) => {
+    const newIndex = (this.currentIndex - by + this.nPictures) % this.nPictures;
+    if (this.realCurrentIndex < by) {
+      this.overflowLeft(newIndex, by);
+    } else {
+      this.realCurrentIndex -= by;
+      this.slide(newIndex);
+    }
+  };
+
+  private slideBannerRight = (by: number) => {
+    let newIndex = (this.currentIndex + by) % this.nPictures;
+    this.realCurrentIndex += by;
+    if (this.realCurrentIndex >= this.images.childElementCount) {
+      this.overflowRight(newIndex, by);
+    } else {
+      console.log("slide right");
+      this.slide(newIndex);
+    }
   };
 
   private slide = (newIndex: number) => {
     this.updateNavDots(newIndex);
-    this.firstPicture.style.marginLeft = "-" + newIndex * 100 + "%";
+    this.realFirstPicture.style.marginLeft =
+      "-" + this.realCurrentIndex * 100 + "%";
+    if (this.sliding)
+      this.firstPicture.style.transitionTimingFunction = "ease-out";
+    this.sliding = true;
   };
 
   private updateNavDots = (newIndex: number) => {
