@@ -138,8 +138,7 @@ ul.links {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  margin-top: -0.5rem;
-  margin-left: -2.5rem;
+  margin: -2.5rem 0 2rem -2.5rem;
 
   > * {
     flex-basis: 0;
@@ -147,6 +146,10 @@ ul.links {
     margin-top: 2.5rem;
     margin-left: 2.5rem;
     min-width: 20rem;
+  }
+
+  &.topGap {
+    margin-top: -0.5rem;
   }
 }
 
@@ -161,12 +164,12 @@ ul.links {
 
 .social-media {
   a + a {
-    margin-left: 1rem;
+    margin-left: 1.25rem;
   }
 
   svg {
-    height: 2rem;
-    width: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
   }
 }
 
