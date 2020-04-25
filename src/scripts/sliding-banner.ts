@@ -1,5 +1,5 @@
 class SlidingBanner {
-  private static interval: number = 5000; // ms
+  private static readonly interval: number = 5000; // ms
   private readonly firstPicture: HTMLImageElement;
   private readonly images: HTMLElement;
   private readonly nPictures: number = 0;
@@ -239,6 +239,4 @@ const banners: HTMLCollectionOf<Element> = document.getElementsByClassName(
   "sliding-banner"
 );
 
-for (let i = 0; i < banners.length; i++) {
-  new SlidingBanner(banners[i]);
-}
+for (let i = 0; i < banners.length; i++) new SlidingBanner(banners[i]);

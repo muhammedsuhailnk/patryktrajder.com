@@ -1,216 +1,235 @@
-const abortClickDistance: number = 3;
-const bodyOverflow = document.body.style.overflow;
-const galleries: HTMLCollectionOf<Element> = document.getElementsByClassName(
-  "gallery"
-);
+class Gallery {
+  public static readonly abortClickDistance: number = 3; // px
+  private static readonly bodyOverflow = document.body.style.overflow;
+  private readonly closeButton: HTMLButtonElement;
+  private readonly full: HTMLElement;
+  private readonly fullImg: HTMLImageElement;
+  private readonly gallery: Element;
+  private readonly previewImg: HTMLImageElement;
+  private abortClick: boolean = false;
+  private isGrabbing: boolean = false;
+  private startLeft: number = 0;
+  private startTop: number = 0;
+  private startX: number = 0;
+  private startY: number = 0;
 
-for (let i = 0; i < galleries.length; i++) {
-  const list = galleries[i].querySelector<HTMLElement>(".thumbListItems");
-  if (list) setUpSlider(list);
-  const full = galleries[i].querySelector<HTMLElement>(".full");
-  if (full) setUpZoom(full);
-}
+  constructor(gallery: Element) {
+    this.gallery = gallery;
+    this.full = gallery.querySelector(".full") as HTMLElement;
+    this.fullImg = this.full.querySelector("img") as HTMLImageElement;
+    this.closeButton = this.full.querySelector(".close") as HTMLButtonElement;
+    this.previewImg = gallery.querySelector(
+      ".preview > img"
+    ) as HTMLImageElement;
 
-function setUpSlider(slider: HTMLElement) {
-  let isGrabbing: boolean = false;
-  let startX: number;
-  let scrollStartLeft: number;
+    this.previewImg.addEventListener("click", this.showFullImage);
+    this.setUpZoom();
 
-  let handlePointerMove = (e: PointerEvent) => {
-    if (!isGrabbing) return;
-    const offset = e.x - startX;
-    slider.scrollLeft = scrollStartLeft - offset;
+    const list = gallery.querySelector<HTMLElement>(".thumbListItems");
+    if (list) new Slider(list, this);
+  }
+
+  public showPreview = (img: HTMLImageElement) => {
+    this.previewImg.src = img.src.replace("h100.jpg", "h400.jpg");
   };
 
-  let handleDragEnd = (e: PointerEvent) => {
-    isGrabbing = false;
-    slider.releasePointerCapture(e.pointerId);
-    slider.removeEventListener("pointermove", handlePointerMove);
-    slider.removeEventListener("pointerup", handleDragEnd);
-    slider.removeEventListener("lostpointercapture", handleDragEnd);
-  };
-
-  slider.addEventListener("pointerdown", (e) => {
-    isGrabbing = true;
-    startX = e.x;
-    scrollStartLeft = slider.scrollLeft;
-    slider.setPointerCapture(e.pointerId);
-    slider.addEventListener("pointermove", handlePointerMove);
-    slider.addEventListener("pointerup", handleDragEnd);
-    slider.addEventListener("lostpointercapture", handleDragEnd);
-  });
-
-  for (let i = 0; i < slider.childNodes.length; i++)
-    setUpSliderItem(slider.childNodes[i] as HTMLImageElement, slider);
-}
-
-function setUpSliderItem(item: HTMLImageElement, slider: HTMLElement) {
-  let abortClick: boolean = false;
-  let isGrabbing: boolean = false;
-  let startX: number;
-  let scrollStartLeft: number;
-
-  let handlePointerMove = (e: PointerEvent) => {
-    if (!isGrabbing) return;
-    const offset = e.x - startX;
-    if (Math.abs(offset) > abortClickDistance) {
-      abortClick = true;
-      item.classList.add("dragging");
-    }
-    slider.scrollLeft = scrollStartLeft - offset;
-  };
-
-  let handleDragEnd = (e: PointerEvent) => {
-    isGrabbing = false;
-    item.classList.remove("dragging");
-    item.releasePointerCapture(e.pointerId);
-    item.removeEventListener("pointermove", handlePointerMove);
-    item.removeEventListener("pointerup", handleDragEnd);
-    item.removeEventListener("lostpointercapture", handleDragEnd);
-  };
-
-  item.addEventListener("pointerdown", (e: PointerEvent) => {
-    e.stopPropagation();
-    abortClick = false;
-    isGrabbing = true;
-    startX = e.x;
-    scrollStartLeft = slider.scrollLeft;
-    item.setPointerCapture(e.pointerId);
-    item.addEventListener("pointermove", handlePointerMove);
-    item.addEventListener("pointerup", handleDragEnd);
-    item.addEventListener("lostpointercapture", handleDragEnd);
-  });
-
-  item.addEventListener("click", (e: MouseEvent) => {
-    if (abortClick) return;
-    const offset = e.x - startX;
-    if (Math.abs(offset) > abortClickDistance) return;
-    showPreview(item);
-  });
-}
-
-function showFullImage(img: HTMLImageElement) {
-  const gallery = img.closest(".gallery");
-  if (!gallery) return;
-  const overlay = gallery.querySelector<HTMLElement>(".full");
-  if (!overlay) return;
-  overlay.style.display = "block";
-  const fullImg = overlay.querySelector<HTMLImageElement>("img");
-  if (!fullImg) return;
-  fullImg.src = img.src.replace("-h400.jpg", ".jpg");
-  document.body.style.overflow = "hidden";
-}
-
-function showPreview(img: HTMLImageElement) {
-  const gallery = img.closest(".gallery");
-  if (!gallery) return;
-  const previewImg = gallery.querySelector<HTMLImageElement>(".preview > img");
-  if (!previewImg) return;
-  previewImg.src = img.src.replace("h100.jpg", "h400.jpg");
-}
-
-function setUpZoom(full: HTMLElement) {
-  const img = full.querySelector<HTMLImageElement>("img");
-  if (!img) return;
-
-  const button = full.querySelector<HTMLButtonElement>(".close");
-  button?.addEventListener("click", () => {
-    document.body.style.overflow = bodyOverflow;
-    full.style.display = "none";
-    zoomOut();
-  });
-
-  let abortClick: boolean = false;
-  let isGrabbing: boolean = false;
-  let startX: number;
-  let startY: number;
-  let startLeft: number;
-  let startTop: number;
-
-  let handlePointerMove = (e: PointerEvent) => {
-    if (!isGrabbing) return;
+  private handlePointerMove = (e: PointerEvent) => {
+    if (!this.isGrabbing) return;
     e.preventDefault();
-    const offsetX = e.x - startX;
-    const offsetY = e.y - startY;
+    const offsetX = e.x - this.startX;
+    const offsetY = e.y - this.startY;
     if (
-      Math.abs(offsetX) > abortClickDistance ||
-      Math.abs(offsetY) > abortClickDistance
+      Math.abs(offsetX) > Gallery.abortClickDistance ||
+      Math.abs(offsetY) > Gallery.abortClickDistance
     ) {
-      abortClick = true;
-      img.classList.add("dragging");
+      this.abortClick = true;
+      this.fullImg.classList.add("dragging");
     }
-    let left = startLeft + offsetX;
-    let top = startTop + offsetY;
-    let maxLeft = full.clientWidth / 2;
-    let maxTop = full.clientHeight / 2;
-    let minLeft = maxLeft - img.naturalWidth;
-    let minTop = maxTop - img.naturalHeight;
+    let left = this.startLeft + offsetX;
+    let top = this.startTop + offsetY;
+    let maxLeft = this.full.clientWidth / 2;
+    let maxTop = this.full.clientHeight / 2;
+    let minLeft = maxLeft - this.fullImg.naturalWidth;
+    let minTop = maxTop - this.fullImg.naturalHeight;
     left = Math.min(Math.max(left, minLeft), maxLeft);
     top = Math.min(Math.max(top, minTop), maxTop);
-    img.style.left = left + "px";
-    img.style.top = top + "px";
+    this.fullImg.style.left = left + "px";
+    this.fullImg.style.top = top + "px";
   };
 
-  let handleDragEnd = (e: PointerEvent) => {
-    isGrabbing = false;
-    img.classList.remove("dragging");
-    img.releasePointerCapture(e.pointerId);
-    img.removeEventListener("pointermove", handlePointerMove);
-    img.removeEventListener("pointerup", handleDragEnd);
-    img.removeEventListener("lostpointercapture", handleDragEnd);
+  private handleDragEnd = (e: PointerEvent) => {
+    this.isGrabbing = false;
+    this.fullImg.classList.remove("dragging");
+    this.fullImg.releasePointerCapture(e.pointerId);
+    this.fullImg.removeEventListener("pointermove", this.handlePointerMove);
+    this.fullImg.removeEventListener("pointerup", this.handleDragEnd);
+    this.fullImg.removeEventListener("lostpointercapture", this.handleDragEnd);
   };
 
-  let handlePointerDown = (e: PointerEvent) => {
+  private handlePointerDown = (e: PointerEvent) => {
     e.stopPropagation();
-    abortClick = false;
-    isGrabbing = true;
-    startX = e.x;
-    startY = e.y;
-    startLeft = parseFloat(img.style.left);
-    startTop = parseFloat(img.style.top);
-    img.setPointerCapture(e.pointerId);
-    img.addEventListener("pointermove", handlePointerMove);
-    img.addEventListener("pointerup", handleDragEnd);
-    img.addEventListener("lostpointercapture", handleDragEnd);
+    this.abortClick = false;
+    this.isGrabbing = true;
+    this.startX = e.x;
+    this.startY = e.y;
+    this.startLeft = parseFloat(this.fullImg.style.left);
+    this.startTop = parseFloat(this.fullImg.style.top);
+    this.fullImg.setPointerCapture(e.pointerId);
+    this.fullImg.addEventListener("pointermove", this.handlePointerMove);
+    this.fullImg.addEventListener("pointerup", this.handleDragEnd);
+    this.fullImg.addEventListener("lostpointercapture", this.handleDragEnd);
   };
 
-  let zoomOut = () => {
-    full.classList.remove("zoom");
-    img.style.left = "0";
-    img.style.top = "0";
-    img.style.bottom = "0";
-    img.style.right = "0";
-    img.removeEventListener("pointerdown", handlePointerDown);
+  private showFullImage = () => {
+    this.full.style.display = "block";
+    this.fullImg.src = this.previewImg.src.replace("-h400.jpg", ".jpg");
+    document.body.style.overflow = "hidden";
   };
 
-  let zoomIn = (e: MouseEvent) => {
-    let xRatio = e.offsetX / img.width;
-    let yRatio = e.offsetY / img.height;
-    let left = -xRatio * img.naturalWidth + e.x;
-    let top = -yRatio * img.naturalHeight + e.y;
-    img.style.left = left + "px";
-    img.style.top = top + "px";
-    img.style.bottom = "auto";
-    img.style.right = "auto";
-    full.classList.add("zoom");
-    img.addEventListener("pointerdown", handlePointerDown);
+  private setUpZoom = () => {
+    this.closeButton.addEventListener("click", () => {
+      document.body.style.overflow = Gallery.bodyOverflow;
+      this.full.style.display = "none";
+      this.zoomOut();
+    });
+
+    this.fullImg.addEventListener("click", (e: MouseEvent) => {
+      if (this.full.classList.contains("zoom")) {
+        if (this.abortClick) return;
+
+        const offsetX = e.x - this.startX;
+        const offsetY = e.y - this.startY;
+        if (
+          Math.abs(offsetX) > Gallery.abortClickDistance ||
+          Math.abs(offsetY) > Gallery.abortClickDistance
+        )
+          return;
+
+        this.zoomOut();
+      } else {
+        this.zoomIn(e);
+      }
+    });
   };
 
-  img.addEventListener("click", (e: MouseEvent) => {
-    if (full.classList.contains("zoom")) {
-      if (abortClick) return;
+  private zoomIn = (e: MouseEvent) => {
+    let xRatio = e.offsetX / this.fullImg.width;
+    let yRatio = e.offsetY / this.fullImg.height;
+    let left = -xRatio * this.fullImg.naturalWidth + e.x;
+    let top = -yRatio * this.fullImg.naturalHeight + e.y;
+    this.fullImg.style.left = left + "px";
+    this.fullImg.style.top = top + "px";
+    this.fullImg.style.bottom = "auto";
+    this.fullImg.style.right = "auto";
+    this.full.classList.add("zoom");
+    this.fullImg.addEventListener("pointerdown", this.handlePointerDown);
+  };
 
-      const offsetX = e.x - startX;
-      const offsetY = e.y - startY;
-      if (
-        Math.abs(offsetX) > abortClickDistance ||
-        Math.abs(offsetY) > abortClickDistance
-      )
-        return;
-
-      zoomOut();
-    } else {
-      zoomIn(e);
-    }
-  });
+  private zoomOut = () => {
+    this.full.classList.remove("zoom");
+    this.fullImg.style.left = "0";
+    this.fullImg.style.top = "0";
+    this.fullImg.style.bottom = "0";
+    this.fullImg.style.right = "0";
+    this.fullImg.removeEventListener("pointerdown", this.handlePointerDown);
+  };
 }
+
+class Slider {
+  private readonly slider: HTMLElement;
+  private isGrabbing: boolean = false;
+  private startX: number = 0;
+  private scrollStartLeft: number = 0;
+
+  constructor(slider: HTMLElement, gallery: Gallery) {
+    this.slider = slider;
+    slider.addEventListener("pointerdown", this.handlePointerDown);
+
+    for (let i = 0; i < slider.childNodes.length; i++)
+      new SliderItem(slider.childNodes[i] as HTMLImageElement, slider, gallery);
+  }
+
+  private handlePointerDown = (e: PointerEvent) => {
+    this.isGrabbing = true;
+    this.startX = e.x;
+    this.scrollStartLeft = this.slider.scrollLeft;
+    this.slider.setPointerCapture(e.pointerId);
+    this.slider.addEventListener("pointermove", this.handlePointerMove);
+    this.slider.addEventListener("pointerup", this.handleDragEnd);
+    this.slider.addEventListener("lostpointercapture", this.handleDragEnd);
+  };
+
+  private handlePointerMove = (e: PointerEvent) => {
+    if (!this.isGrabbing) return;
+    const offset = e.x - this.startX;
+    this.slider.scrollLeft = this.scrollStartLeft - offset;
+  };
+
+  private handleDragEnd = (e: PointerEvent) => {
+    this.isGrabbing = false;
+    this.slider.releasePointerCapture(e.pointerId);
+    this.slider.removeEventListener("pointermove", this.handlePointerMove);
+    this.slider.removeEventListener("pointerup", this.handleDragEnd);
+    this.slider.removeEventListener("lostpointercapture", this.handleDragEnd);
+  };
+}
+
+class SliderItem {
+  private readonly item: HTMLImageElement;
+  private readonly slider: HTMLElement;
+  private abortClick: boolean = false;
+  private isGrabbing: boolean = false;
+  private startX: number = 0;
+  private scrollStartLeft: number = 0;
+
+  constructor(item: HTMLImageElement, slider: HTMLElement, gallery: Gallery) {
+    this.item = item;
+    this.slider = slider;
+    item.addEventListener("pointerdown", this.handlePoinderDown);
+
+    item.addEventListener("click", (e: MouseEvent) => {
+      if (this.abortClick) return;
+      const offset = e.x - this.startX;
+      if (Math.abs(offset) > Gallery.abortClickDistance) return;
+      gallery.showPreview(item);
+    });
+  }
+
+  private handlePoinderDown = (e: PointerEvent) => {
+    e.stopPropagation();
+    this.abortClick = false;
+    this.isGrabbing = true;
+    this.startX = e.x;
+    this.scrollStartLeft = this.slider.scrollLeft;
+    this.item.setPointerCapture(e.pointerId);
+    this.item.addEventListener("pointermove", this.handlePointerMove);
+    this.item.addEventListener("pointerup", this.handleSliderDragEnd);
+    this.item.addEventListener("lostpointercapture", this.handleSliderDragEnd);
+  };
+
+  private handlePointerMove = (e: PointerEvent) => {
+    if (!this.isGrabbing) return;
+    const offset = e.x - this.startX;
+    if (Math.abs(offset) > Gallery.abortClickDistance) {
+      this.abortClick = true;
+      this.item.classList.add("dragging");
+    }
+    this.slider.scrollLeft = this.scrollStartLeft - offset;
+  };
+
+  private handleSliderDragEnd = (e: PointerEvent) => {
+    this.isGrabbing = false;
+    this.item.classList.remove("dragging");
+    this.item.releasePointerCapture(e.pointerId);
+    this.item.removeEventListener("pointermove", this.handlePointerMove);
+    this.item.removeEventListener("pointerup", this.handleSliderDragEnd);
+    this.item.removeEventListener(
+      "lostpointercapture",
+      this.handleSliderDragEnd
+    );
+  };
+}
+
+const galleries = document.getElementsByClassName("gallery");
+
+for (let i = 0; i < galleries.length; i++) new Gallery(galleries[i]);
