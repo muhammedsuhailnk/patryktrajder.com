@@ -1,5 +1,4 @@
 class SlidingBanner {
-  private static readonly interval: number = 5000; // ms
   private readonly firstPicture: HTMLImageElement;
   private readonly images: HTMLElement;
   private readonly nPictures: number = 0;
@@ -20,7 +19,10 @@ class SlidingBanner {
     this.nPictures = this.images.childElementCount;
     this.realFirstPicture = this.firstPicture = this.images
       .children[0] as HTMLImageElement;
-    this.timer = window.setTimeout(this.autoSlide, SlidingBanner.interval);
+    this.timer = window.setTimeout(
+      this.autoSlide,
+      Constants.autoPlaySlideInterval
+    );
     this.isTimerSet = true;
     if (this.nPictures <= 1) return;
 
@@ -76,7 +78,10 @@ class SlidingBanner {
     this.firstPicture.style.transitionTimingFunction = "ease";
     this.sliding = false;
     if (!this.isTimerSet && !this.isTimerStopped) {
-      this.timer = window.setTimeout(this.autoSlide, SlidingBanner.interval);
+      this.timer = window.setTimeout(
+        this.autoSlide,
+        Constants.autoPlaySlideInterval
+      );
       this.isTimerSet = true;
     }
   };
@@ -97,7 +102,10 @@ class SlidingBanner {
   };
 
   private handlePointerLeave = () => {
-    this.timer = window.setTimeout(this.autoSlide, SlidingBanner.interval);
+    this.timer = window.setTimeout(
+      this.autoSlide,
+      Constants.autoPlaySlideInterval
+    );
     this.isTimerSet = true;
     this.isTimerStopped = false;
   };

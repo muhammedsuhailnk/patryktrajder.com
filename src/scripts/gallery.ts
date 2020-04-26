@@ -1,5 +1,4 @@
 class Gallery {
-  public static readonly abortClickDistance: number = 3; // px
   private static readonly bodyOverflow = document.body.style.overflow;
   private readonly closeButton: HTMLButtonElement;
   private readonly full: HTMLElement;
@@ -39,8 +38,8 @@ class Gallery {
     const offsetX = e.x - this.startX;
     const offsetY = e.y - this.startY;
     if (
-      Math.abs(offsetX) > Gallery.abortClickDistance ||
-      Math.abs(offsetY) > Gallery.abortClickDistance
+      Math.abs(offsetX) > Constants.abortClickDistance ||
+      Math.abs(offsetY) > Constants.abortClickDistance
     ) {
       this.abortClick = true;
       this.fullImg.classList.add("dragging");
@@ -100,8 +99,8 @@ class Gallery {
         const offsetX = e.x - this.startX;
         const offsetY = e.y - this.startY;
         if (
-          Math.abs(offsetX) > Gallery.abortClickDistance ||
-          Math.abs(offsetY) > Gallery.abortClickDistance
+          Math.abs(offsetX) > Constants.abortClickDistance ||
+          Math.abs(offsetY) > Constants.abortClickDistance
         )
           return;
 
@@ -190,7 +189,7 @@ class SliderItem {
     item.addEventListener("click", (e: MouseEvent) => {
       if (this.abortClick) return;
       const offset = e.x - this.startX;
-      if (Math.abs(offset) > Gallery.abortClickDistance) return;
+      if (Math.abs(offset) > Constants.abortClickDistance) return;
       gallery.showPreview(item);
     });
   }
@@ -210,7 +209,7 @@ class SliderItem {
   private handlePointerMove = (e: PointerEvent) => {
     if (!this.isGrabbing) return;
     const offset = e.x - this.startX;
-    if (Math.abs(offset) > Gallery.abortClickDistance) {
+    if (Math.abs(offset) > Constants.abortClickDistance) {
       this.abortClick = true;
       this.item.classList.add("dragging");
     }

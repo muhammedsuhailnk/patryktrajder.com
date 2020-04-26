@@ -80,7 +80,10 @@ gulp.task("deploy", function () {
 
 gulp.task("src", gulp.parallel(html, scripts, styles));
 
-gulp.task("dev", gulp.parallel("assets", "src", typescripts));
+gulp.task(
+  "dev",
+  gulp.series("clean", gulp.parallel("assets", "src", typescripts))
+);
 
 gulp.task(
   "dist",
