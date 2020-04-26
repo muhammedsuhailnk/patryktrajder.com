@@ -185,6 +185,24 @@ ul.links {
   margin-top: 12rem;
 }
 
+.yt-video {
+  margin: 3rem auto;
+  max-width: 50rem;
+
+  > div {
+    position: relative;
+    padding-top: 56.25%; // 16:9 ratio
+
+    iframe {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
 body {
   display: flex;
   flex-direction: column;
