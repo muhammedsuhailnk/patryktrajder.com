@@ -1,4 +1,6 @@
-class SlidingBanner {
+import Constants from "./constants";
+
+export default class SlidingBanner {
   private readonly firstPicture: HTMLImageElement;
   private readonly images: HTMLElement;
   private readonly nPictures: number = 0;
@@ -242,9 +244,3 @@ class SlidingBanner {
     this.isTimerSet = false;
   };
 }
-
-const banners: HTMLCollectionOf<Element> = document.getElementsByClassName(
-  "sliding-banner"
-);
-
-for (let i = 0; i < banners.length; i++) new SlidingBanner(banners[i]);

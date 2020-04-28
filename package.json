@@ -24,17 +24,15 @@
   "homepage": "https://github.com/JakubJanowski/patryktrajder.com#readme",
   "private": true,
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
     "babel-loader": "^8.1.0",
     "gulp": "^4.0.2",
     "gulp-sass": "^4.0.2",
     "path": "^0.12.7",
+    "ts-loader": "^7.0.1",
+    "typescript": "^3.8.3",
     "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-stream": "^5.2.1"
   },
-  "dependencies": {
-    "@babel/polyfill": "^7.8.7"
-  }
+  "dependencies": {}
 }

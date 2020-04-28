@@ -1,6 +1,7 @@
 const { spawn } = require("child_process");
 const gulp = require("gulp");
 const sass = require("gulp-sass");
+const webpack = require("webpack-stream");
 
 const distDir = "dist";
 const deployBranch = "gh-pages";
@@ -12,7 +13,7 @@ function cname() {
 function cursors() {
   return gulp
     .src("assets/cursors/**/*")
-    .pipe(gulp.dest(distDir + "/assets/cursors"));
+    .pipe(gulp.dest(distDir + "/assets/cursors/"));
 }
 
 function favicon() {
@@ -26,30 +27,42 @@ function html() {
 function icons() {
   return gulp
     .src("assets/icons/**/*")
-    .pipe(gulp.dest(distDir + "/assets/icons"));
+    .pipe(gulp.dest(distDir + "/assets/icons/"));
 }
 
 function images() {
   return gulp
     .src("assets/images/**/*")
-    .pipe(gulp.dest(distDir + "/assets/images"));
+    .pipe(gulp.dest(distDir + "/assets/images/"));
 }
 
 function scripts() {
-  return spawn("tsc", [], { shell: true, stdio: "inherit" });
-}
-
-function typescripts() {
   return gulp
     .src("src/scripts/**/*.ts")
-    .pipe(gulp.dest(distDir + "/src/scripts"));
+    .pipe(webpack(require("./webpack.config.js")))
+    .pipe(gulp.dest(distDir + "/src/"));
+}
+
+function scriptsDev() {
+  let config = require("./webpack.config.js");
+
+  config.mode = "development";
+  config.devtool = "inline-source-map";
+  config.optimization = {
+    minimize: false
+  };
+
+  return gulp
+    .src("src/scripts/**/*.ts")
+    .pipe(webpack(config))
+    .pipe(gulp.dest(distDir + "/src/"));
 }
 
 function styles() {
   return gulp
     .src("src/styles/main.scss")
     .pipe(sass())
-    .pipe(gulp.dest(distDir + "/src/styles"));
+    .pipe(gulp.dest(distDir + "/src/"));
 }
 
 gulp.task("assets", gulp.parallel(cursors, favicon, icons, images));
@@ -80,10 +93,9 @@ gulp.task("deploy", function () {
 
 gulp.task("src", gulp.parallel(html, scripts, styles));
 
-gulp.task(
-  "dev",
-  gulp.series("clean", gulp.parallel("assets", "src", typescripts))
-);
+gulp.task("srcDev", gulp.parallel(html, scriptsDev, styles));
+
+gulp.task("dev", gulp.series("clean", gulp.parallel("assets", "srcDev")));
 
 gulp.task(
   "dist",

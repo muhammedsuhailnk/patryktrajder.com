@@ -1,0 +1,12 @@
+.slider {
+  .items {
+    display: flex;
+    margin: 0 auto;
+
+    > * {
+      flex-basis: 0;
+      flex-grow: 1;
+      margin-left: 2.5rem;
+    }
+  }
+}

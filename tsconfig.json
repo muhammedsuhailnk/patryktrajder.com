@@ -4,9 +4,10 @@
     "baseUrl": "src/scripts",
     "declaration": true,
     "lib": ["ES6", "DOM"],
-    "module": "AMD",
-    "moduleResolution": "Classic",
-    "outFile": "dist/src/scripts.js",
+    "module": "ES6",
+    "moduleResolution": "Node",
+    "noImplicitAny": true,
+    "outDir": "dist/src/",
     "sourceMap": true,
     "strict": true,
     "target": "es5"
