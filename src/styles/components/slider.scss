@@ -1,11 +1,46 @@
 .slider {
+  overflow: hidden;
+  width: auto;
+
   .items {
-    display: flex;
-    margin: 0 auto;
+    cursor: move;
+    cursor: url("/assets/cursors/grab.cur"), auto;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    cursor: grab;
+    margin-bottom: -50px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding-bottom: 50px;
+    white-space: nowrap;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:active {
+      cursor: url("/assets/cursors/grabbing.cur"), auto;
+      cursor: -moz-grabbing;
+      cursor: -webkit-grabbing;
+      cursor: grabbing;
+    }
 
     > * {
-      flex-basis: 0;
-      flex-grow: 1;
+      cursor: pointer;
+      display: inline-block;
+
+      &.dragging:active {
+        cursor: move;
+        cursor: url("/assets/cursors/grabbing.cur"), auto;
+        cursor: -moz-grabbing;
+        cursor: -webkit-grabbing;
+        cursor: grabbing;
+      }
+    }
+
+    > * + * {
       margin-left: 2.5rem;
     }
   }

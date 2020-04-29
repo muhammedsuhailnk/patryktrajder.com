@@ -26,7 +26,7 @@ export default class Gallery {
     this.previewImg.addEventListener("click", this.showFullImage);
     this.setUpZoom();
 
-    const list = gallery.querySelector<HTMLElement>(".thumbListItems");
+    const list = gallery.querySelector<HTMLElement>(".thumbList");
     if (list) new Slider(list, this.showPreview);
   }
 

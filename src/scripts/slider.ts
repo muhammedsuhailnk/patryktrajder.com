@@ -7,11 +7,14 @@ export default class Slider {
   private scrollStartLeft: number = 0;
 
   constructor(slider: HTMLElement, onItemClick?: (item: HTMLElement) => void) {
-    this.slider = slider;
-    slider.addEventListener("pointerdown", this.handlePointerDown);
+    this.slider = slider.children[0] as HTMLElement;
+    this.slider.addEventListener("pointerdown", this.handlePointerDown);
 
-    for (let i = 0; i < slider.childNodes.length; i++) {
-      let item = new SliderItem(slider.childNodes[i] as HTMLElement, slider);
+    for (let i = 0; i < this.slider.childNodes.length; i++) {
+      let item = new SliderItem(
+        this.slider.childNodes[i] as HTMLElement,
+        this.slider
+      );
       item.onClick = onItemClick;
     }
   }
