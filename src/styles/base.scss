@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+a {
+  color: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
@@ -13,6 +21,10 @@ body {
     padding-top: 2em;
     position: relative;
     text-align: center;
+
+    a:hover {
+      text-decoration: none;
+    }
 
     h1 {
       color: $eerieBlack;
@@ -93,4 +105,8 @@ p {
   font-size: 1.2rem;
   line-height: 1.5rem;
   text-align: justify;
+
+  > a {
+    color: $azure;
+  }
 }

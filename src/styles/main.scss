@@ -6,6 +6,12 @@
 @import "components/slider";
 @import "components/sliding-banner";
 
+address {
+  p + p {
+    margin-top: 0.1rem;
+  }
+}
+
 svg.icon {
   display: inline-block;
   fill: currentColor;
@@ -112,8 +118,7 @@ ul.links {
   }
 }
 
-.more {
-  color: $lightGray;
+.single-out-link {
   font-size: 1.25rem;
   margin-top: 1rem;
 
