@@ -2,29 +2,29 @@
 {% set tab = "projects" %}
 
 {% block body %}
-  <div class="banner center-text">
-    <img src="/assets/images/projectsBanner.jpg"/>
-    <h1>Poznaj lepiej moje projekty</h1>
-  </div>
+  <section class="banner">
+    <div class="container center-text">
+      <img src="/assets/images/projectsBanner.jpg"/>
+      <h1>Poznaj lepiej moje projekty</h1>
+    </div>
+  </section>
   <main>
     <section class="categories topGap">
-      <ul>
-        <li>
-          <p>
-            <a href="#diyTools">Narzędzia DIY</a>
-          </p>
-        </li>
-        <li>
-          <p>
-            <a href="#gadgets">Wasze projekty</a>
-          </p>
-        </li>
-      </ul>
+      <a href="#myProjects">
+        <p>
+          Moje projekty
+        </p>
+      </a>
+      <a href="#yourProjects">
+        <p>
+          Wasze projekty
+        </p>
+      </a>
     </section>
 
     <section id="diyTools" class="topGap productList">
       <h1>
-        Narzędzia DIY
+        Moje projekty
       </h1>
       <h2 class="topGapMedium">
         <a href="hydraulic-power-pack/">Mobilny Agregat Hydrauliczny - Budowa</a>
@@ -48,7 +48,7 @@
 
     <section id="gadgets" class="topGapLarge">
       <h1>
-        Projekty Widzów:
+        Wasze projekty
       </h1>
       <p>
         Jeśli chcesz pochwalić się swoim projektem wyślij go na
