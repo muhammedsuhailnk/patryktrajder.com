@@ -91,22 +91,20 @@ ul.links {
 }
 
 .categories {
-  ul {
-    > li {
-      background-color: $aliceBlue;
-      color: $azure;
-      display: inline-block;
-      padding: 1rem;
+  > a {
+    background-color: $aliceBlue;
+    color: $azure;
+    display: inline-block;
+    padding: 1rem;
 
-      &:hover {
-        background-color: #eff4f9;
-        color: $usafaBlue;
-      }
+    &:hover {
+      background-color: #eff4f9;
+      color: $usafaBlue;
     }
+  }
 
-    > li + li {
-      margin-left: 1rem;
-    }
+  > a + a {
+    margin-left: 1rem;
   }
 }
 
