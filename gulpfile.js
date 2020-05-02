@@ -20,6 +20,10 @@ function favicon() {
   return gulp.src("favicon.ico").pipe(gulp.dest(distDir));
 }
 
+function googleYTAuth() {
+  return gulp.src("googleea67cce430aa48a1.html").pipe(gulp.dest(distDir));
+}
+
 function html() {
   return spawn("eleventy", [], { shell: true, stdio: "inherit" });
 }
@@ -99,5 +103,9 @@ gulp.task("dev", gulp.series("clean", gulp.parallel("assets", "srcDev")));
 
 gulp.task(
   "dist",
-  gulp.series("clean", gulp.parallel("assets", cname, "src"), "deploy")
+  gulp.series(
+    "clean",
+    gulp.parallel("assets", cname, googleYTAuth, "src"),
+    "deploy"
+  )
 );
