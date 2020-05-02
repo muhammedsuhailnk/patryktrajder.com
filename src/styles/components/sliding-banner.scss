@@ -10,6 +10,7 @@
       li.circle {
         background: white;
         border-radius: 50%;
+        box-shadow: 0 0 10px black;
         cursor: pointer;
         display: inline-block;
         height: 10px;
@@ -34,6 +35,8 @@
       color: white;
       cursor: pointer;
       display: none;
+      -webkit-filter: drop-shadow(0px 0px 10px black);
+      filter: drop-shadow(0px 0px 10px black);
       height: 6rem;
       margin: auto;
       opacity: 50%;

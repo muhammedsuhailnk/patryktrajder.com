@@ -1,6 +1,32 @@
 .slider {
   overflow: hidden;
+  position: relative;
   width: auto;
+
+  .arrow {
+    color: $eerieBlack;
+    cursor: pointer;
+    -webkit-filter: drop-shadow(0px 0px 10px white);
+    filter: drop-shadow(0px 0px 10px white);
+    height: 6rem;
+    margin: auto;
+    opacity: 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    &.left {
+      left: 0;
+    }
+
+    &.right {
+      right: 0;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 
   .items {
     cursor: move;

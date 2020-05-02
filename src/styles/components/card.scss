@@ -2,4 +2,12 @@
   vertical-align: top;
   width: 100%;
   max-width: 20rem;
+
+  &.placeholder.tmp {
+    background: #004f99;
+    border-radius: 10px;
+    color: white;
+    cursor: grab;
+    height: 180px;
+  }
 }
