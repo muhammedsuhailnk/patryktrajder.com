@@ -27,7 +27,7 @@ export default class Gallery {
     this.setUpZoom();
 
     const list = gallery.querySelector<HTMLElement>(".thumbList");
-    if (list) new Slider(list, this.showPreview);
+    if (list) new Slider(list, false, false, 0, this.showPreview);
   }
 
   public showPreview = (img: HTMLElement) => {

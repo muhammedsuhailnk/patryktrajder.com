@@ -1,61 +1,324 @@
 import Constants from "./constants";
 
 export default class Slider {
-  private readonly slider: HTMLElement;
+  private readonly firstItem: HTMLElement;
+  private readonly isCyclic: boolean;
+  private readonly items: HTMLElement;
+  private readonly navDots?: HTMLUListElement;
+  private readonly nItems: number;
+  private readonly secondItem: HTMLElement;
+  private readonly showNavDots: boolean;
+  private readonly slideDuration: number;
+  private currentIndex: number = 0;
   private isGrabbing: boolean = false;
+  private isTimerSet: boolean = false;
+  private isTimerStopped: boolean = false;
+  private minMarginLeft: number = 0;
+  private nAddedCopiesLeft: number = 0;
+  private nAddedCopiesRight: number = 0;
+  private realCurrentIndex: number = 0;
+  private realFirstItem: HTMLElement;
+  private sliding: boolean = false;
+  private startMarginLeft: number = 0;
   private startX: number = 0;
-  private scrollStartLeft: number = 0;
+  private timer?: number;
 
-  constructor(slider: HTMLElement, onItemClick?: (item: HTMLElement) => void) {
-    this.slider = slider.children[0] as HTMLElement;
-    this.slider.addEventListener("pointerdown", this.handlePointerDown);
+  constructor(
+    slider: HTMLElement,
+    isCyclic: boolean = false,
+    showNavDots: boolean = false,
+    slideDuration: number = 0,
+    onItemClick?: (item: HTMLElement) => void
+  ) {
+    this.isCyclic = isCyclic;
+    this.items = slider.querySelector(".items") as HTMLElement;
+    this.nItems = this.items.childElementCount;
+    this.realFirstItem = this.firstItem = this.items.children[0] as HTMLElement;
+    this.secondItem = this.items.children[1] as HTMLElement;
+    this.showNavDots = showNavDots;
+    this.slideDuration = slideDuration;
 
-    for (let i = 0; i < this.slider.childNodes.length; i++) {
-      let item = new SliderItem(
-        this.slider.childNodes[i] as HTMLElement,
-        this.slider
-      );
-      item.onClick = onItemClick;
+    if (slideDuration > 0) {
+      this.timer = window.setTimeout(this.autoSlide, slideDuration);
+      this.isTimerSet = true;
+      slider.addEventListener("pointerenter", this.handlePointerEnter);
+      slider.addEventListener("pointerleave", this.handlePointerLeave);
     }
+
+    if (showNavDots) {
+      this.navDots = slider.querySelector("ul") as HTMLUListElement;
+      this.setUpNavDots();
+    }
+
+    this.firstItem.style.marginLeft = "0";
+
+    for (let i = 0; i < this.items.children.length; i++) {
+      let item = this.items.children[i] as HTMLElement;
+      let sliderItem = new SliderItem(item, this.firstItem, this);
+      sliderItem.onClick = onItemClick;
+    }
+
+    const leftArrow = slider.querySelector(".left") as HTMLElement;
+    const rightArrow = slider.querySelector(".right") as HTMLElement;
+
+    this.firstItem.addEventListener(
+      "transitionend",
+      this.handleFirstPictureTransitionEnd
+    );
+    this.items.addEventListener("pointerdown", this.handlePointerDown);
+    leftArrow.addEventListener("click", () => this.slideLeft(1));
+    rightArrow.addEventListener("click", () => this.slideRight(1));
   }
+
+  public calculateMinMarginLeft = (): number => {
+    const contentWidth =
+      this.firstItem.clientWidth +
+      (this.secondItem.clientWidth +
+        parseFloat(this.secondItem.style.marginLeft)) *
+        (this.items.childElementCount - 1);
+    const minMargin = this.items.clientWidth - contentWidth;
+    if (minMargin > 0) return 0;
+    return minMargin;
+  };
+
+  private autoSlide = () => {
+    this.slideRight(1);
+  };
+
+  private handleNavDotClick = (li: HTMLLIElement) => {
+    let index = Number(li.dataset.index);
+    if (index === this.currentIndex) return;
+
+    let slideBy = index - this.currentIndex;
+    if (slideBy < 0) this.slideLeft(-slideBy);
+    else this.slideRight(slideBy);
+  };
 
   private handlePointerDown = (e: PointerEvent) => {
     this.isGrabbing = true;
     this.startX = e.x;
-    this.scrollStartLeft = this.slider.scrollLeft;
-    this.slider.setPointerCapture(e.pointerId);
-    this.slider.addEventListener("pointermove", this.handlePointerMove);
-    this.slider.addEventListener("pointerup", this.handleDragEnd);
-    this.slider.addEventListener("lostpointercapture", this.handleDragEnd);
+    this.startMarginLeft = parseFloat(this.firstItem.style.marginLeft) || 0;
+    this.minMarginLeft = this.calculateMinMarginLeft();
+    this.items.setPointerCapture(e.pointerId);
+    this.items.addEventListener("pointermove", this.handlePointerMove);
+    this.items.addEventListener("pointerup", this.handleDragEnd);
+    this.items.addEventListener("lostpointercapture", this.handleDragEnd);
+  };
+
+  private handlePointerEnter = () => {
+    window.clearTimeout(this.timer);
+    this.isTimerSet = false;
+    this.isTimerStopped = true;
   };
 
   private handlePointerMove = (e: PointerEvent) => {
     if (!this.isGrabbing) return;
     const offset = e.x - this.startX;
-    this.slider.scrollLeft = this.scrollStartLeft - offset;
+    let marginLeft = this.startMarginLeft + offset;
+    if (marginLeft < this.minMarginLeft) marginLeft = this.minMarginLeft;
+    else if (marginLeft > 0) marginLeft = 0;
+    this.firstItem.style.marginLeft = marginLeft + "px";
+  };
+
+  private handlePointerLeave = () => {
+    this.timer = window.setTimeout(this.autoSlide, this.slideDuration);
+    this.isTimerSet = true;
+    this.isTimerStopped = false;
   };
 
   private handleDragEnd = (e: PointerEvent) => {
     this.isGrabbing = false;
-    this.slider.releasePointerCapture(e.pointerId);
-    this.slider.removeEventListener("pointermove", this.handlePointerMove);
-    this.slider.removeEventListener("pointerup", this.handleDragEnd);
-    this.slider.removeEventListener("lostpointercapture", this.handleDragEnd);
+    this.items.releasePointerCapture(e.pointerId);
+    this.items.removeEventListener("pointermove", this.handlePointerMove);
+    this.items.removeEventListener("pointerup", this.handleDragEnd);
+    this.items.removeEventListener("lostpointercapture", this.handleDragEnd);
+  };
+
+  private handleFirstPictureTransitionEnd = () => {
+    this.firstItem.style.transitionTimingFunction = "ease";
+    this.sliding = false;
+    if (this.slideDuration > 0 && !this.isTimerSet && !this.isTimerStopped) {
+      this.timer = window.setTimeout(this.autoSlide, this.slideDuration);
+      this.isTimerSet = true;
+    }
+  };
+
+  private handleTransitionEnd = () => {
+    const realFirstPic = this.realFirstItem as HTMLImageElement;
+    realFirstPic.removeEventListener("transitionend", this.handleTransitionEnd);
+
+    while (this.nAddedCopiesLeft > 0) {
+      this.items.removeChild(this.items.children[0]);
+      this.nAddedCopiesLeft--;
+    }
+    while (this.nAddedCopiesRight > 0) {
+      this.items.removeChild(this.items.lastChild as ChildNode);
+      this.nAddedCopiesRight--;
+    }
+
+    this.realCurrentIndex = this.currentIndex;
+    this.realFirstItem = this.firstItem;
+    this.firstItem.className = "notransition";
+    this.firstItem.style.marginLeft = "-" + this.currentIndex * 100 + "%";
+    window.getComputedStyle(this.firstItem).marginLeft; // flush pending style changes
+    this.firstItem.className = "";
+    this.handleFirstPictureTransitionEnd();
+  };
+
+  private overflowLeft = (newIndex: number, by: number) => {
+    let pictureCopy;
+    let pictureRef;
+
+    let leftMargin = parseFloat(
+      window.getComputedStyle(this.realFirstItem).marginLeft
+    );
+    leftMargin = (leftMargin / this.realFirstItem.clientWidth) * 100 - 100;
+
+    this.realFirstItem.className = "notransition";
+    this.realFirstItem.style.marginLeft = "0";
+
+    for (let i = by; i > 1; i--) {
+      pictureRef = this.items.children[
+        this.nAddedCopiesLeft + newIndex + by - 1
+      ];
+      pictureCopy = pictureRef.cloneNode() as HTMLImageElement;
+      this.items.insertBefore(pictureCopy, this.realFirstItem);
+      this.realFirstItem = pictureCopy;
+      leftMargin -= 100;
+    }
+
+    pictureRef = this.items.children[this.nAddedCopiesLeft + newIndex + by - 1];
+    pictureCopy = pictureRef.cloneNode() as HTMLImageElement;
+
+    if (this.nAddedCopiesLeft > 0)
+      pictureCopy.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
+    pictureCopy.style.marginLeft = leftMargin + "%";
+    this.items.insertBefore(pictureCopy, this.realFirstItem);
+    window.getComputedStyle(pictureCopy).marginLeft; // flush pending style changes
+    this.realFirstItem.className = "";
+    pictureCopy.style.marginLeft = "0";
+
+    this.nAddedCopiesLeft += by;
+
+    this.realFirstItem.removeEventListener(
+      "transitionend",
+      this.handleTransitionEnd
+    );
+    this.realFirstItem = pictureCopy;
+    pictureCopy.addEventListener("transitionend", this.handleTransitionEnd);
+  };
+
+  private overflowRight = (newIndex: number, by: number) => {
+    let pictureCopy;
+    let pictureRef;
+
+    for (let i = by - 1; i > 0; i--) {
+      pictureRef = this.items.children[this.nAddedCopiesLeft + newIndex - i];
+      pictureCopy = pictureRef.cloneNode() as HTMLImageElement;
+      this.items.insertBefore(pictureCopy, null);
+    }
+
+    pictureRef = this.items.children[this.nAddedCopiesLeft + newIndex];
+    pictureCopy = pictureRef.cloneNode() as HTMLImageElement;
+
+    pictureCopy.style.marginLeft = "0";
+    this.items.insertBefore(pictureCopy, null);
+    this.realFirstItem.style.marginLeft = -this.realCurrentIndex * 100 + "%";
+    if (this.nAddedCopiesRight > 0)
+      this.realFirstItem.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
+
+    this.nAddedCopiesRight += by;
+
+    this.realFirstItem.addEventListener(
+      "transitionend",
+      this.handleTransitionEnd
+    );
+  };
+
+  private setUpNavDots = () => {
+    const _this: Slider = this;
+    let li: HTMLLIElement = document.createElement("li");
+    li.className = "circle current";
+    li.dataset.index = "0";
+    li.addEventListener("click", function () {
+      _this.handleNavDotClick(this);
+    });
+    this.navDots?.appendChild(li);
+
+    for (let i = 1; i < this.nItems; i++) {
+      li = document.createElement("li");
+      li.className = "circle";
+      li.dataset.index = i.toString();
+      li.addEventListener("click", function () {
+        _this.handleNavDotClick(this);
+      });
+      this.navDots?.appendChild(li);
+    }
+  };
+
+  private beforeSlide = (newIndex: number) => {
+    this.updateNavDots(newIndex);
+    this.currentIndex = newIndex;
+    if (this.slideDuration > 0) {
+      window.clearTimeout(this.timer);
+      this.isTimerSet = false;
+    }
+  };
+
+  private slide = (newIndex: number) => {
+    this.realFirstItem.style.marginLeft =
+      "-" + this.realCurrentIndex * 100 + "%";
+    if (this.sliding)
+      this.firstItem.style.transitionTimingFunction = "ease-out";
+    this.sliding = true;
+  };
+
+  private slideLeft = (by: number) => {
+    const newIndex = (this.currentIndex - by + this.nItems) % this.nItems;
+    this.beforeSlide(newIndex);
+
+    if (this.realCurrentIndex < by) {
+      this.overflowLeft(newIndex, by);
+    } else {
+      this.realCurrentIndex -= by;
+      this.slide(newIndex);
+    }
+  };
+
+  private slideRight = (by: number) => {
+    let newIndex = (this.currentIndex + by) % this.nItems;
+    this.realCurrentIndex += by;
+    this.beforeSlide(newIndex);
+
+    if (this.realCurrentIndex >= this.items.childElementCount) {
+      this.overflowRight(newIndex, by);
+    } else {
+      this.slide(newIndex);
+    }
+  };
+
+  private updateNavDots = (newIndex: number) => {
+    if (!this.showNavDots) return;
+    this.navDots?.children[this.currentIndex].classList.remove("current");
+    this.navDots?.children[newIndex].classList.add("current");
   };
 }
 
 class SliderItem {
   public onClick?: (item: HTMLElement) => void;
 
+  private readonly firstItem: HTMLElement;
   private readonly item: HTMLElement;
-  private readonly slider: HTMLElement;
+  private readonly slider: Slider;
   private abortClick: boolean = false;
   private isGrabbing: boolean = false;
+  private minMarginLeft: number = 0;
+  private startMarginLeft: number = 0;
   private startX: number = 0;
-  private scrollStartLeft: number = 0;
 
-  constructor(item: HTMLElement, slider: HTMLElement) {
+  constructor(item: HTMLElement, firstItem: HTMLElement, slider: Slider) {
     this.item = item;
+    this.firstItem = firstItem;
     this.slider = slider;
     item.addEventListener("pointerdown", this.handlePoinderDown);
 
@@ -71,8 +334,9 @@ class SliderItem {
     e.stopPropagation();
     this.abortClick = false;
     this.isGrabbing = true;
+    this.minMarginLeft = this.slider.calculateMinMarginLeft();
     this.startX = e.x;
-    this.scrollStartLeft = this.slider.scrollLeft;
+    this.startMarginLeft = parseFloat(this.firstItem.style.marginLeft) || 0;
     this.item.setPointerCapture(e.pointerId);
     this.item.addEventListener("pointermove", this.handlePointerMove);
     this.item.addEventListener("pointerup", this.handleSliderDragEnd);
@@ -86,7 +350,10 @@ class SliderItem {
       this.abortClick = true;
       this.item.classList.add("dragging");
     }
-    this.slider.scrollLeft = this.scrollStartLeft - offset;
+    let marginLeft = this.startMarginLeft + offset;
+    if (marginLeft < this.minMarginLeft) marginLeft = this.minMarginLeft;
+    else if (marginLeft > 0) marginLeft = 0;
+    this.firstItem.style.marginLeft = marginLeft + "px";
   };
 
   private handleSliderDragEnd = (e: PointerEvent) => {

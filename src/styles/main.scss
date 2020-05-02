@@ -4,7 +4,6 @@
 @import "components/card";
 @import "components/gallery";
 @import "components/slider";
-@import "components/sliding-banner";
 
 address {
   p + p {
@@ -88,6 +87,33 @@ ul.links {
         bottom: 0;
         text-shadow: 0 0 10px black;
         text-transform: uppercase;
+      }
+    }
+  }
+
+  .slider {
+    .arrow {
+      color: white;
+      display: none;
+      -webkit-filter: drop-shadow(0px 0px 10px black);
+      filter: drop-shadow(0px 0px 10px black);
+    }
+
+    .items {
+      display: flex;
+      overflow: hidden;
+
+      img {
+        -webkit-transition-duration: 0.5s;
+        -moz-transition-duration: 0.5s;
+        -o-transition-duration: 0.5s;
+        transition-duration: 0.5s;
+      }
+    }
+
+    &:hover {
+      .arrow {
+        display: block;
       }
     }
   }

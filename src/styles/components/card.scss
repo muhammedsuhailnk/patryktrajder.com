@@ -1,4 +1,5 @@
 .card {
+  cursor: pointer;
   vertical-align: top;
   width: 100%;
   max-width: 20rem;
@@ -10,4 +11,8 @@
     cursor: grab;
     height: 180px;
   }
+}
+
+.card + .card {
+  margin-left: 2.5rem;
 }

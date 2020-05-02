@@ -3,6 +3,37 @@
   position: relative;
   width: auto;
 
+  ul {
+    left: 0;
+    right: 0;
+    bottom: 5%;
+    position: absolute;
+    text-align: center;
+
+    li.circle {
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 10px black;
+      cursor: pointer;
+      display: inline-block;
+      height: 10px;
+      width: 10px;
+      opacity: 25%;
+
+      &:hover {
+        opacity: 50%;
+      }
+
+      &.current {
+        opacity: 1;
+      }
+    }
+
+    li + li {
+      margin-left: 15px;
+    }
+  }
+
   .arrow {
     color: $eerieBlack;
     cursor: pointer;
@@ -54,7 +85,6 @@
     }
 
     > * {
-      cursor: pointer;
       display: inline-block;
 
       &.dragging:active {
@@ -64,10 +94,6 @@
         cursor: -webkit-grabbing;
         cursor: grabbing;
       }
-    }
-
-    > * + * {
-      margin-left: 2.5rem;
     }
   }
 }
