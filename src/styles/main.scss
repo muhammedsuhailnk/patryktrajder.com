@@ -227,8 +227,10 @@ ul.links {
 }
 
 .social-media {
+  font-size: 0;
+
   a + a {
-    margin-left: 1.25rem;
+    margin-left: 1.3rem;
   }
 
   svg {
