@@ -70,6 +70,7 @@ export default class Slider {
       this.handleFirstPictureTransitionEnd
     );
     this.items.addEventListener("pointerdown", this.handlePointerDown);
+
     leftArrow?.addEventListener("click", () => this.slideLeft(1));
     rightArrow?.addEventListener("click", () => this.slideRight(1));
   }
