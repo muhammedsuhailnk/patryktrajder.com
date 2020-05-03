@@ -96,7 +96,7 @@
     overflow: hidden;
     width: auto;
 
-    .thumbListItems {
+    .items {
       cursor: move;
       cursor: url("/assets/cursors/grab.cur"), auto;
       cursor: -moz-grab;
@@ -134,5 +134,11 @@
         margin-left: 2%;
       }
     }
+  }
+}
+
+.row {
+  .gallery {
+    flex-grow: 1.5;
   }
 }

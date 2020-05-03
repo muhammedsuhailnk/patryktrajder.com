@@ -62,16 +62,16 @@ export default class Slider {
       sliderItem.onClick = onItemClick;
     }
 
-    const leftArrow = slider.querySelector(".left") as HTMLElement;
-    const rightArrow = slider.querySelector(".right") as HTMLElement;
+    const leftArrow = slider.querySelector(".left");
+    const rightArrow = slider.querySelector(".right");
 
     this.firstItem.addEventListener(
       "transitionend",
       this.handleFirstPictureTransitionEnd
     );
     this.items.addEventListener("pointerdown", this.handlePointerDown);
-    leftArrow.addEventListener("click", () => this.slideLeft(1));
-    rightArrow.addEventListener("click", () => this.slideRight(1));
+    leftArrow?.addEventListener("click", () => this.slideLeft(1));
+    rightArrow?.addEventListener("click", () => this.slideRight(1));
   }
 
   private calculateItemWidthWithGap = (): number => {
@@ -110,6 +110,7 @@ export default class Slider {
 
   public dragEnd = (offset: number) => {
     this.isGrabbing = false;
+    if (!this.isCyclic) return; // todo tmp solution
     this.firstItem.classList.remove("notransition");
     this.realCurrentIndex = this.currentIndex;
     this.realFirstItem = this.firstItem;
@@ -181,12 +182,15 @@ export default class Slider {
     this.updateNavDots(newIndex);
     this.currentIndex = newIndex;
 
-    this.handleTransitionEnd();
+    if (this.isCyclic) {
+      // todo tmp solution
+      this.handleTransitionEnd();
 
-    const firstItemCopy = this.firstItem.cloneNode() as HTMLElement;
-    firstItemCopy.style.marginLeft = "0";
-    this.items.insertBefore(firstItemCopy, null);
-    this.nAddedCopiesRight++;
+      const firstItemCopy = this.firstItem.cloneNode() as HTMLElement;
+      firstItemCopy.style.marginLeft = "0";
+      this.items.insertBefore(firstItemCopy, null);
+      this.nAddedCopiesRight++;
+    }
 
     this.minMarginLeft = this.calculateMinMarginLeft(this.itemWidthWithGap);
   };
