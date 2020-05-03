@@ -166,6 +166,14 @@ ul.links {
   transition: none !important;
 }
 
+.price {
+  margin-top: 0.5rem;
+
+  > * {
+    display: inline;
+  }
+}
+
 .productList {
   > h4 {
     margin-bottom: 0rem;
