@@ -7,7 +7,8 @@ for (let i = 0; i < banners.length; i++) {
   const bannerSlider = document.getElementsByClassName(
     "slider"
   )[0] as HTMLElement;
-  new Slider(bannerSlider, true, true, Constants.autoPlaySlideDuration);
+  if (bannerSlider)
+    new Slider(bannerSlider, true, true, Constants.autoPlaySlideDuration);
 }
 
 const sliders = document.getElementsByClassName("regular slider");
