@@ -247,7 +247,6 @@ export default class Slider {
   };
 
   private handleFirstPictureTransitionEnd = () => {
-    console.log("handleFirstPictureTransitionEnd");
     this.firstItem.style.transitionTimingFunction = "ease";
     this.sliding = false;
     if (this.slideDuration > 0 && !this.isTimerSet && !this.isTimerStopped) {
@@ -257,7 +256,6 @@ export default class Slider {
   };
 
   private handleTransitionEnd = () => {
-    console.log("handleTransitionEnd");
     const realFirstItemLocal = this.realFirstItem as HTMLElement;
     realFirstItemLocal.removeEventListener(
       "transitionend",
