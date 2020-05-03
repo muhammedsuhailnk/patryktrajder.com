@@ -70,9 +70,8 @@ ul.links {
       margin: 0 auto;
     }
 
-    &.center-text {
+    &.centered-text {
       position: relative;
-      text-align: center;
 
       h1 {
         color: white;
@@ -141,7 +140,7 @@ ul.links {
   }
 }
 
-.homepage {
+.centered-text {
   text-align: center;
 
   p {
@@ -200,7 +199,8 @@ ul.links {
 }
 
 .shrink {
-  width: 80%;
+  margin: 0 auto;
+  width: 60%;
 }
 
 .single-out {
