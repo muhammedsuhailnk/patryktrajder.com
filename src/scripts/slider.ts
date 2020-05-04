@@ -113,7 +113,6 @@ export default class Slider {
     this.isGrabbing = false;
     if (!this.isCyclic) return; // todo tmp solution
     this.firstItem.classList.remove("notransition");
-    this.realCurrentIndex = this.currentIndex;
     this.realFirstItem = this.firstItem;
     this.firstItem.style.transitionTimingFunction = "ease-out";
 
@@ -124,34 +123,18 @@ export default class Slider {
       if (marginLeft < this.minMarginLeft) marginLeft = this.minMarginLeft;
       else if (marginLeft > 0) marginLeft = 0;
     }
-    let newIndex;
+
+    let threshold;
+    if (offset > 0) threshold = Constants.DragSlideThreshold;
+    else threshold = 1 - Constants.DragSlideThreshold;
 
     const partialIndex = -marginLeft / this.itemWidthWithGap;
+    this.realCurrentIndex = ~~(partialIndex + 0.5);
+    let newIndex = ~~((partialIndex + threshold) % this.nItems);
 
-    if (offset > 0) {
-      newIndex = ~~((partialIndex + 0.2) % this.nItems);
-      if (this.currentIndex == newIndex) {
-        if (partialIndex - ~~partialIndex > 0.5) {
-          if (this.currentIndex === 0) {
-            this.realCurrentIndex = this.currentIndex = this.nItems - 1;
-            this.slideRight(1);
-          } else {
-            this.slideRight(0);
-          }
-        } else {
-          this.slideLeft(0);
-        }
-      } else {
-        this.slideLeft(1);
-      }
-    } else if (offset < 0) {
-      newIndex = ~~((partialIndex + 0.8) % this.nItems);
-      if (this.currentIndex == newIndex) {
-        if (partialIndex - ~~partialIndex > 0.5) this.slideRight(0);
-        else this.slideLeft(0);
-      } else {
-        this.slideRight(1);
-      }
+    if (this.currentIndex !== newIndex && offset !== 0) {
+      if (offset > 0) this.slideLeft(1);
+      else this.slideRight(1);
     } else {
       if (partialIndex - ~~partialIndex > 0.5) this.slideRight(0);
       else this.slideLeft(0);
@@ -325,17 +308,13 @@ export default class Slider {
   private overflowRight = (newIndex: number, by: number) => {
     let itemCopy, itemRef;
 
-    for (let i = by - 1; i > 0; i--) {
+    for (let i = by - 1; i >= 0; i--) {
       itemRef = this.items.children[this.nAddedCopiesLeft + newIndex - i];
       itemCopy = itemRef.cloneNode() as HTMLElement;
+      itemCopy.style.marginLeft = "0";
       this.items.insertBefore(itemCopy, null);
     }
 
-    itemRef = this.items.children[this.nAddedCopiesLeft + newIndex];
-    itemCopy = itemRef.cloneNode() as HTMLElement;
-
-    itemCopy.style.marginLeft = "0";
-    this.items.insertBefore(itemCopy, null);
     this.realFirstItem.style.marginLeft = -this.realCurrentIndex * 100 + "%";
     if (this.nAddedCopiesRight > 0)
       this.realFirstItem.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
