@@ -5,12 +5,6 @@
 @import "components/gallery";
 @import "components/slider";
 
-address {
-  p + p {
-    margin-top: 0.1rem;
-  }
-}
-
 svg.icon {
   display: inline-block;
   fill: currentColor;
@@ -261,6 +255,12 @@ footer {
     padding: 0 1rem;
     width: 70rem;
     max-width: 100%;
+
+    .links {
+      p + p {
+        margin-top: 0.1rem;
+      }
+    }
 
     .social-media {
       a + a {
