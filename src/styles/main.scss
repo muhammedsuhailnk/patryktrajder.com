@@ -12,14 +12,14 @@ svg.icon {
   stroke: currentColor;
   stroke-width: 0;
   width: 3em;
-}
 
-#icon-facebook {
-  color: #4267b2;
-}
+  &.facebook {
+    color: #4267b2;
+  }
 
-#icon-youtube {
-  color: #ff0000;
+  &.youtube {
+    color: #ff0000;
+  }
 }
 
 p.indent {
