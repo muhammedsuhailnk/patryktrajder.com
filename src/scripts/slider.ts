@@ -2,11 +2,11 @@ import Constants from "./constants";
 import Utils from "./utils";
 
 export default class Slider {
-  public realFirstItem: HTMLElement;
-
   private readonly firstItem: HTMLElement;
   private readonly isCyclic: boolean;
   private readonly items: HTMLElement;
+  private readonly leftArrow?: HTMLElement;
+  private readonly rightArrow?: HTMLElement;
   private readonly navDots?: HTMLUListElement;
   private readonly nItems: number;
   private readonly secondItem: HTMLElement;
@@ -22,6 +22,7 @@ export default class Slider {
   private nAddedCopiesLeft: number = 0;
   private nAddedCopiesRight: number = 0;
   private realCurrentIndex: number = 0;
+  private realFirstItem: HTMLElement;
   private sliding: boolean = false;
   private startMarginLeft: number = 0;
   private startX: number = 0;
@@ -36,6 +37,8 @@ export default class Slider {
   ) {
     this.isCyclic = isCyclic;
     this.items = slider.querySelector(".items") as HTMLElement;
+    this.leftArrow = slider.querySelector(".left") as HTMLElement;
+    this.rightArrow = slider.querySelector(".right") as HTMLElement;
     this.nItems = this.items.childElementCount;
     this.realFirstItem = this.firstItem = this.items.children[0] as HTMLElement;
     this.secondItem = this.items.children[1] as HTMLElement;
@@ -62,17 +65,13 @@ export default class Slider {
       sliderItem.onClick = onItemClick;
     }
 
-    const leftArrow = slider.querySelector(".left");
-    const rightArrow = slider.querySelector(".right");
-
     this.firstItem.addEventListener(
       "transitionend",
       this.handleFirstPictureTransitionEnd
     );
     this.items.addEventListener("pointerdown", this.handlePointerDown);
 
-    leftArrow?.addEventListener("click", () => this.slideLeft(1));
-    rightArrow?.addEventListener("click", () => this.slideRight(1));
+    this.setUpArrows();
   }
 
   private calculateItemWidthWithGap = (): number => {
@@ -98,6 +97,8 @@ export default class Slider {
     } else {
       if (marginLeft < this.minMarginLeft) marginLeft = this.minMarginLeft;
       else if (marginLeft > 0) marginLeft = 0;
+
+      this.updateArrows(marginLeft);
     }
     this.firstItem.style.marginLeft = marginLeft + "px";
 
@@ -125,8 +126,8 @@ export default class Slider {
     }
 
     let threshold;
-    if (offset > 0) threshold = Constants.DragSlideThreshold;
-    else threshold = 1 - Constants.DragSlideThreshold;
+    if (offset > 0) threshold = Constants.dragSlideThreshold;
+    else threshold = 1 - Constants.dragSlideThreshold;
 
     const partialIndex = -marginLeft / this.itemWidthWithGap;
     this.realCurrentIndex = ~~(partialIndex + 0.5);
@@ -326,6 +327,20 @@ export default class Slider {
       this.handleTransitionEnd
     );
   };
+  private setUpArrows = () => {
+    this.leftArrow?.addEventListener("click", () => this.slideLeft(1));
+    this.rightArrow?.addEventListener("click", () => this.slideRight(1));
+
+    if (!this.isCyclic) {
+      if (this.leftArrow) this.leftArrow.style.display = "none";
+      if (this.rightArrow) {
+        this.minMarginLeft = this.calculateMinMarginLeft(
+          this.calculateItemWidthWithGap()
+        );
+        if (this.minMarginLeft === 0) this.rightArrow.style.display = "none";
+      }
+    }
+  };
 
   private setUpNavDots = () => {
     const _this: Slider = this;
@@ -386,6 +401,18 @@ export default class Slider {
       this.overflowRight(newIndex, by);
     } else {
       this.slide();
+    }
+  };
+
+  private updateArrows = (marginLeft: number) => {
+    if (this.leftArrow) {
+      if (marginLeft < 0) this.leftArrow.style.display = "block";
+      else this.leftArrow.style.display = "none";
+    }
+    if (this.rightArrow) {
+      if (marginLeft > this.minMarginLeft)
+        this.rightArrow.style.display = "block";
+      else this.rightArrow.style.display = "none";
     }
   };
 
