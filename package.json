@@ -24,9 +24,9 @@
   "homepage": "https://github.com/JakubJanowski/patryktrajder.com#readme",
   "private": true,
   "devDependencies": {
-    "babel-loader": "^8.1.0",
     "gulp": "^4.0.2",
     "gulp-sass": "^4.0.2",
+    "html-minifier": "^4.0.0",
     "path": "^0.12.7",
     "ts-loader": "^7.0.1",
     "typescript": "^3.8.3",
