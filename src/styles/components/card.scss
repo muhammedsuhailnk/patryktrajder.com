@@ -11,6 +11,10 @@
     cursor: grab;
     height: 180px;
   }
+
+  img {
+    pointer-events: none;
+  }
 }
 
 .card + .card {
