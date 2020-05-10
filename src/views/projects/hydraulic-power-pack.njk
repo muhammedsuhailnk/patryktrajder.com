@@ -1,6 +1,11 @@
 {% extends "templates/layout.njk" %}
 {% set tab = "projects" %}
 
+{% block vectors %}
+  {% include "vectors/chevron-up.sym" %}
+  {% include "vectors/chevron-down.sym" %}
+{% endblock %}
+
 {% block body %}
   <main>
     <article>
@@ -19,28 +24,211 @@
           </div>
         </div>
 
-        <div>
-          <p class="single-out">Do pierwszego etapu budowy potrzebujemy:</p>
-
-          <ul class="dots">
-            <li>
-              <p>silnik elektryczny</p>
-            </li>
-            <li>
-              <p>łącznik dzbanowy</p>
-            </li>
-            <li>
-              <p>pompę hydrauliczna</p>
-            </li>
-            <li>
-              <p>sprzęgło kłowe</p>
-            </li>
-          </ul>
-
-          <p class="topGap">
-            Pracę najlepiej zacząć od połączenia silnika elektrycznego z pompą. Jest to bardzo łatwe zadanie jeśli masz większy budżet, ponieważ do tego celu dostępne są gotowe części. Musisz kupić silnik z mocowaniem kołnierzowym, łącznik dzwonowy, sprzęgło kłowe, oraz pompę. Pamiętaj jednak, aby wszystkie części były ze sobą kompatybilne.
-          </p>
+        <div class="expander materials shrink">
+          <header>
+            <p>Potrzebne materiały</p>
+          </header>
+          <div class="container">
+            <ul class="dots">
+              <li>
+                <p>silnik elektryczny,</p>
+              </li>
+              <li>
+                <p>pompa hydrauliczna,</p>
+              </li>
+              <li>
+                <p>łącznik dzwonowy,</p>
+              </li>
+              <li>
+                <p>sprzęgło kłowe,</p>
+              </li>
+              <li>
+                <p>rozdzielacz,</p>
+              </li>
+              <li>
+                <p>przewody hydrauliczne,</p>
+              </li>
+              <li>
+                <p>arkusz blachy (do budowy zbiornika),</p>
+              </li>
+              <li>
+                <p>termometr wraz z wskaźnikiem poziomu oleju,</p>
+              </li>
+              <li>
+                <p>kółka,</p>
+              </li>
+              <li>
+                <p>korek spustowy,</p>
+              </li>
+              <li>
+                <p>korek wlewu,</p>
+              </li>
+              <li>
+                <p>filtr oleju,</p>
+              </li>
+              <li>
+                <p>łącznik grodziowy,</p>
+              </li>
+              <li>
+                <p>ssak z siatki,</p>
+              </li>
+              <li>
+                <p>manometr,</p>
+              </li>
+              <li>
+                <p>przełącznik elektryczny,</p>
+              </li>
+              <li>
+                <p>olej hydrauliczny,</p>
+              </li>
+              <li>
+                <p>naklejki i farba 😉</p>
+              </li>
+            </ul>
+          </div>
+          <button>
+            <svg class="icon">
+              <use xlink:href="#icon-chevron-down"></use>
+            </svg>
+          </button>
         </div>
+
+        <div class="expander shrink tools topGap">
+          <header>
+            <p>Potrzebne narzędzia</p>
+          </header>
+          <div class="container">
+            <ul class="dots">
+              <li>
+                <p>tokarka,</p>
+              </li>
+              <li>
+                <p>oprzyrządowanie do tokarki:</p>
+                <ul class="dots">
+                  <li>
+                    <p>okular,</p>
+                  </li>
+                  <li>
+                    <p>wiertła z płetwą morsa,</p>
+                  </li>
+                  <li>
+                    <p>nóż do gwintów zewnętrznych,</p>
+                  </li>
+                  <li>
+                    <p>nóż do gwintów wewnętrzych,</p>
+                  </li>
+                  <li>
+                    <p>nóż do wytaczania,</p>
+                  </li>
+                  <li>
+                    <p>nóż do planowania,</p>
+                  </li>
+                  <li>
+                    <p>nóż do toczenia wzdłużnego,</p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>szlifierka kątowa + tarcze 1; 2,5; 4 mm,</p>
+              </li>
+              <li>
+                <p>spawarka wraz z osprzętem do spawania stali czarnej,</p>
+              </li>
+              <li>
+                <p>wiertarka stołowa,</p>
+              </li>
+              <li>
+                <p>palnik gazowy,</p>
+              </li>
+              <li>
+                <p>wkrętarka lub wiertarka,</p>
+              </li>
+              <li>
+                <p>gwintownik M8x1,25,</p>
+              </li>
+              <li>
+                <p>gwintownik M22x1,5,</p>
+              </li>
+              <li>
+                <p>pokrętło do gwintowników w zakresie M1-M10,</p>
+              </li>
+              <li>
+                <p>pokrętło do gwintowników w zakresie M13-M32,</p>
+              </li>
+              <li>
+                <p>fazownik / pogłebiacz stożkowy,</p>
+              </li>
+              <li>
+                <p>olejarka,</p>
+              </li>
+              <li>
+                <p>punktak,</p>
+              </li>
+              <li>
+                <p>ściski stolarskie,</p>
+              </li>
+              <li>
+                <p>dysk listkowy (papier ścierny na wiertarkę),</p>
+              </li>
+              <li>
+                <p>spray niebieski,</p>
+              </li>
+              <li>
+                <p>spray pomaranczowy,</p>
+              </li>
+              <li>
+                <p>pilniki, młotki i inne typowe narzędzia ręczne.</p>
+              </li>
+            </ul>
+
+            <p class="single-out topGap">Narzędzia pomiarowe:</p>
+            <ul class="dots">
+              <li>
+                <p>czujnik zegarowy,</p>
+              </li>
+              <li>
+                <p>średnicówka zegarowa w zakresie 100-140,</p>
+              </li>
+              <li>
+                <p>mikromierz 25-50,</p>
+              </li>
+              <li>
+                <p>mikromierz 50-75,</p>
+              </li>
+              <li>
+                <p>mikromierz 100-125,</p>
+              </li>
+              <li>
+                <p>mikromierz 125-150,</p>
+              </li>
+              <li>
+                <p>suwmiarka uniwersalna 0-150,</p>
+              </li>
+              <li>
+                <p>suwmiarka uniwersalna 0-250,</p>
+              </li>
+              <li>
+                <p>sprawdzian do gwintów.</p>
+              </li>
+            </ul>
+
+            <p class="single-out topGap">Narzędzia specjalistyczne:</p>
+            <ul class="dots">
+              <li>
+                <p>podkładka śniadaniowa w kwiaty.</p>
+              </li>
+            </ul>
+          </div>
+          <button>
+            <svg class="icon">
+              <use xlink:href="#icon-chevron-down"></use>
+            </svg>
+          </button>
+        </div>
+
+        <p class="topGap">
+          Pracę najlepiej zacząć od połączenia silnika elektrycznego z pompą. Jest to bardzo łatwe zadanie jeśli masz większy budżet, ponieważ do tego celu dostępne są gotowe części. Musisz kupić silnik z mocowaniem kołnierzowym, łącznik dzwonowy, sprzęgło kłowe, oraz pompę. Pamiętaj jednak, aby wszystkie części były ze sobą kompatybilne.
+        </p>
 
         <div class="row topGap">
           <div>

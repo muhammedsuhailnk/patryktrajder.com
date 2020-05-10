@@ -2,6 +2,7 @@
 @import "variables";
 @import "base";
 @import "components/card";
+@import "components/expander";
 @import "components/gallery";
 @import "components/slider";
 
@@ -31,6 +32,12 @@ ul.dots {
 
   > li {
     list-style-type: disc;
+
+    > ul.dots {
+      > li {
+        list-style-type: circle;
+      }
+    }
   }
 }
 
@@ -198,8 +205,13 @@ ul.dots {
 }
 
 .shrink {
-  margin: 0 auto;
   width: 60%;
+}
+
+img {
+  &.shrink {
+    margin: 0 auto;
+  }
 }
 
 .single-out {
@@ -243,7 +255,7 @@ body {
 }
 
 footer {
-  color: $lighterGray;
+  color: $silverSand;
   background-color: $eerieBlack;
   margin-top: 2.5rem;
   padding-top: 2.5rem;
