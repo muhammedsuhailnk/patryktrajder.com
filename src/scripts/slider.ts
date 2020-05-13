@@ -112,8 +112,8 @@ export default class Slider {
 
   public dragEnd = (offset: number) => {
     this.isGrabbing = false;
-    if (!this.isCyclic) return; // todo tmp solution
     this.firstItem.classList.remove("notransition");
+    if (!this.isCyclic) return; // todo tmp solution
     this.realFirstItem = this.firstItem;
     this.firstItem.style.transitionTimingFunction = "ease-out";
 
@@ -133,15 +133,20 @@ export default class Slider {
     this.realCurrentIndex = ~~(partialIndex + 0.5);
     let newIndex = ~~((partialIndex + threshold) % this.nItems);
 
-    if (this.currentIndex !== newIndex && offset !== 0) {
-      if (offset > 0) this.slideLeft(1);
-      else this.slideRight(1);
-    } else {
-      if (partialIndex - ~~partialIndex > 0.5) this.slideRight(0);
-      else this.slideLeft(0);
-    }
+    setTimeout(() => {
+      if (this.currentIndex !== newIndex && offset !== 0) {
+        if (offset > 0) this.slideLeft(1);
+        else this.slideRight(1);
+      } else {
+        if (partialIndex - ~~partialIndex > 0.5) this.slideRight(0);
+        else this.slideLeft(0);
+      }
 
-    this.firstItem.addEventListener("transitionend", this.handleTransitionEnd);
+      this.firstItem.addEventListener(
+        "transitionend",
+        this.handleTransitionEnd
+      );
+    });
   };
 
   public dragStart = () => {
@@ -222,7 +227,6 @@ export default class Slider {
 
   private handleDragEnd = (e: PointerEvent) => {
     const offset = e.x - this.startX;
-    this.firstItem.classList.remove("notransition");
     this.items.releasePointerCapture(e.pointerId);
     this.items.removeEventListener("pointermove", this.handlePointerMove);
     this.items.removeEventListener("pointerup", this.handleDragEnd);
