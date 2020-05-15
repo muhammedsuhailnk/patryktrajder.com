@@ -78,6 +78,23 @@ gulp.task("clean", function () {
   });
 });
 
+gulp.task("deploy-acc", function () {
+  return spawn(
+    "cd " +
+      distDir +
+      " && git init" +
+      " && git add ." +
+      ' && git commit -m "deploy"' +
+      " && git remote add origin https://github.com/JakubJanowski/acceptance.git" +
+      " && git push --force origin master:" +
+      deployBranch +
+      " && rimraf .git" +
+      " && cd ..",
+    [],
+    { shell: true, stdio: "inherit" }
+  );
+});
+
 gulp.task("deploy", function () {
   return spawn(
     "cd " +
@@ -100,6 +117,11 @@ gulp.task("src", gulp.parallel(html, scripts, styles));
 gulp.task("srcDev", gulp.parallel(html, scriptsDev, styles));
 
 gulp.task("dev", gulp.series("clean", gulp.parallel("assets", "srcDev")));
+
+gulp.task(
+  "acc",
+  gulp.series("clean", gulp.parallel("assets", "src"), "deploy-acc")
+);
 
 gulp.task(
   "dist",
