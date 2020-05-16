@@ -1,6 +1,7 @@
 const { spawn } = require("child_process");
 const gulp = require("gulp");
 const sass = require("gulp-sass");
+const rename = require("gulp-rename");
 const webpack = require("webpack-stream");
 
 const distDir = "dist";
@@ -8,6 +9,13 @@ const deployBranch = "gh-pages";
 
 function cname() {
   return gulp.src("CNAME").pipe(gulp.dest(distDir));
+}
+
+function cnameAcc() {
+  return gulp
+    .src("CNAME-acceptance")
+    .pipe(rename("CNAME"))
+    .pipe(gulp.dest(distDir));
 }
 
 function cursors() {
@@ -120,7 +128,7 @@ gulp.task("dev", gulp.series("clean", gulp.parallel("assets", "srcDev")));
 
 gulp.task(
   "acc",
-  gulp.series("clean", gulp.parallel("assets", "src"), "deploy-acc")
+  gulp.series("clean", gulp.parallel("assets", cnameAcc, "src"), "deploy-acc")
 );
 
 gulp.task(
