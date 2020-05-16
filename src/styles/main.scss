@@ -49,7 +49,6 @@ ul.dots {
   .container {
     margin: 0 auto;
     max-width: 120rem;
-    position: relative;
 
     img {
       margin: 0 auto;
@@ -97,15 +96,8 @@ ul.dots {
     }
 
     .items {
-      display: flex;
-
       img {
-        flex: none;
         pointer-events: none;
-        -webkit-transition-duration: 0.5s;
-        -moz-transition-duration: 0.5s;
-        -o-transition-duration: 0.5s;
-        transition-duration: 0.5s;
       }
     }
 

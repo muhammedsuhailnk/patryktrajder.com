@@ -65,7 +65,7 @@
     cursor: -moz-grab;
     cursor: -webkit-grab;
     cursor: grab;
-    display: inline-block;
+    display: inline-flex;
     overflow: hidden;
     white-space: nowrap;
     -webkit-touch-callout: none;
@@ -74,6 +74,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    vertical-align: top;
 
     &:active {
       cursor: url("/assets/cursors/grabbing.cur"), auto;
@@ -83,7 +84,13 @@
     }
 
     > * {
-      display: inline-block;
+      flex: none;
+      -webkit-transition-duration: 0.5s;
+      -moz-transition-duration: 0.5s;
+      -o-transition-duration: 0.5s;
+      transition-duration: 0.5s;
+      width: 100%;
+      height: 100%;
 
       &.dragging:active {
         cursor: move;

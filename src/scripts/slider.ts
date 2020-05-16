@@ -176,7 +176,7 @@ export default class Slider {
       // todo tmp solution
       this.handleTransitionEnd();
 
-      const firstItemCopy = this.firstItem.cloneNode() as HTMLElement;
+      const firstItemCopy = this.firstItem.cloneNode(true) as HTMLElement;
       firstItemCopy.style.marginLeft = "0";
       this.items.insertBefore(firstItemCopy, null);
       this.nAddedCopiesRight++;
@@ -283,14 +283,14 @@ export default class Slider {
 
     for (let i = by; i > 1; i--) {
       itemRef = this.items.children[this.nAddedCopiesLeft + newIndex + by - 1];
-      itemCopy = itemRef.cloneNode() as HTMLElement;
+      itemCopy = itemRef.cloneNode(true) as HTMLElement;
       this.items.insertBefore(itemCopy, this.realFirstItem);
       this.realFirstItem = itemCopy;
       leftMargin -= 100;
     }
 
     itemRef = this.items.children[this.nAddedCopiesLeft + newIndex + by - 1];
-    itemCopy = itemRef.cloneNode() as HTMLElement;
+    itemCopy = itemRef.cloneNode(true) as HTMLElement;
 
     if (this.nAddedCopiesLeft > 0)
       itemCopy.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
@@ -315,7 +315,7 @@ export default class Slider {
 
     for (let i = by - 1; i >= 0; i--) {
       itemRef = this.items.children[this.nAddedCopiesLeft + newIndex - i];
-      itemCopy = itemRef.cloneNode() as HTMLElement;
+      itemCopy = itemRef.cloneNode(true) as HTMLElement;
       itemCopy.style.marginLeft = "0";
       this.items.insertBefore(itemCopy, null);
     }
