@@ -2,6 +2,7 @@ import Constants from "./scripts/constants";
 import Expander from "./scripts/expander";
 import Gallery from "./scripts/gallery";
 import Slider from "./scripts/slider";
+import Promotion from "./scripts/promotion";
 
 const banners = document.getElementsByClassName("banner");
 for (let i = 0; i < banners.length; i++) {
@@ -21,3 +22,7 @@ for (let i = 0; i < galleries.length; i++) new Gallery(galleries[i]);
 const expanders = document.getElementsByClassName("expander");
 for (let i = 0; i < expanders.length; i++)
   new Expander(expanders[i] as HTMLElement);
+
+const products = document.getElementsByClassName("product-details");
+for (let i = 0; i < products.length; i++)
+  new Promotion(products[i] as HTMLElement, new Date(2020, 4, 18));
