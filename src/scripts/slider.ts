@@ -48,7 +48,7 @@ export default class Slider {
     this.slider = slider;
 
     if (slideDuration > 0) {
-      this.timer = window.setTimeout(this.autoSlide, slideDuration);
+      this.timer = setTimeout(this.autoSlide, slideDuration);
       this.isTimerSet = true;
       slider.addEventListener("pointerenter", this.handlePointerEnter);
       slider.addEventListener("pointerleave", this.handlePointerLeave);
@@ -74,12 +74,12 @@ export default class Slider {
     this.items.addEventListener("pointerdown", this.handlePointerDown);
 
     this.setUpArrows();
-    window.addEventListener("resize", this.handleWindowResize);
+    addEventListener("resize", this.handleWindowResize);
   }
 
   private calculateItemWidthWithGap = (): number => {
     const itemMarginLeft = parseFloat(
-      window.getComputedStyle(this.secondItem).marginLeft
+      getComputedStyle(this.secondItem).marginLeft
     );
     return this.secondItem.clientWidth + itemMarginLeft;
   };
@@ -158,7 +158,7 @@ export default class Slider {
     this.isGrabbing = true;
     this.sliding = true;
     this.startMarginLeft = parseFloat(
-      window.getComputedStyle(this.realFirstItem).marginLeft
+      getComputedStyle(this.realFirstItem).marginLeft
     );
     this.startMarginLeft += this.nAddedCopiesLeft * this.itemWidthWithGap;
     this.startMarginLeft = Utils.modNeg(
@@ -211,7 +211,7 @@ export default class Slider {
   };
 
   private handlePointerEnter = () => {
-    window.clearTimeout(this.timer);
+    clearTimeout(this.timer);
     this.isTimerSet = false;
     this.isTimerStopped = true;
   };
@@ -223,7 +223,7 @@ export default class Slider {
 
   private handlePointerLeave = () => {
     if (this.isGrabbing) return;
-    this.timer = window.setTimeout(this.autoSlide, this.slideDuration);
+    this.timer = setTimeout(this.autoSlide, this.slideDuration);
     this.isTimerSet = true;
     this.isTimerStopped = false;
   };
@@ -241,7 +241,7 @@ export default class Slider {
     this.firstItem.style.transitionTimingFunction = "ease";
     this.sliding = false;
     if (this.slideDuration > 0 && !this.isTimerSet && !this.isTimerStopped) {
-      this.timer = window.setTimeout(this.autoSlide, this.slideDuration);
+      this.timer = setTimeout(this.autoSlide, this.slideDuration);
       this.isTimerSet = true;
     }
   };
@@ -267,7 +267,7 @@ export default class Slider {
       this.realFirstItem = this.firstItem;
       this.firstItem.classList.add("notransition");
       this.firstItem.style.marginLeft = "-" + this.currentIndex * 100 + "%";
-      window.getComputedStyle(this.firstItem).marginLeft; // flush pending style changes
+      getComputedStyle(this.firstItem).marginLeft; // flush pending style changes
       this.firstItem.classList.remove("notransition");
       this.handleFirstPictureTransitionEnd();
     }
@@ -282,23 +282,8 @@ export default class Slider {
         this.items.clientWidth;
       if (newMarginLeft > 0) newMarginLeft = 0;
       this.realFirstItem.style.marginLeft = newMarginLeft + "px";
-      window.getComputedStyle(this.realFirstItem).marginLeft; // flush pending style changes
+      getComputedStyle(this.realFirstItem).marginLeft; // flush pending style changes
       this.realFirstItem.classList.remove("notransition");
-    } else {
-      //this.realFirstItem.classList.add("notransition");
-      // const oldWidth = this.itemWidthWithGap;
-      // const targetMarginLeft = this.realFirstItem.style.marginLeft;
-      // let marginLeftString = window.getComputedStyle(this.realFirstItem)
-      //   .marginLeft;
-      // let marginLeft = parseFloat(marginLeftString);
-      // if (marginLeftString[marginLeftString.length - 1] === "%")
-      //   marginLeft *= oldWidth / 100;
-      // this.itemWidthWithGap = this.calculateItemWidthWithGap();
-      // this.realFirstItem.style.marginLeft =
-      //   (marginLeft * this.itemWidthWithGap) / oldWidth + "px";
-      // window.getComputedStyle(this.realFirstItem).marginLeft; // flush pending style changes
-      // this.realFirstItem.classList.remove("notransition");
-      // this.realFirstItem.style.marginLeft = targetMarginLeft;
     }
   };
 
@@ -306,7 +291,7 @@ export default class Slider {
     let itemCopy, itemRef;
 
     let leftMargin = parseFloat(
-      window.getComputedStyle(this.realFirstItem).marginLeft
+      getComputedStyle(this.realFirstItem).marginLeft
     );
     leftMargin = (leftMargin / this.realFirstItem.clientWidth) * 100 - 100;
 
@@ -328,7 +313,7 @@ export default class Slider {
       itemCopy.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
     itemCopy.style.marginLeft = leftMargin + "%";
     this.items.insertBefore(itemCopy, this.realFirstItem);
-    window.getComputedStyle(itemCopy).marginLeft; // flush pending style changes
+    getComputedStyle(itemCopy).marginLeft; // flush pending style changes
     this.realFirstItem.classList.remove("notransition");
     itemCopy.style.marginLeft = "0";
 
@@ -403,7 +388,7 @@ export default class Slider {
     this.updateNavDots(newIndex);
     this.currentIndex = newIndex;
     if (this.slideDuration > 0) {
-      window.clearTimeout(this.timer);
+      clearTimeout(this.timer);
       this.isTimerSet = false;
     }
   };
