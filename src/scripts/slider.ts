@@ -12,6 +12,7 @@ export default class Slider {
   private readonly secondItem: HTMLElement;
   private readonly showNavDots: boolean;
   private readonly slideDuration: number;
+  private readonly slider: HTMLElement;
   private contentWidth: number = 0;
   private currentIndex: number = 0;
   private isGrabbing: boolean = false;
@@ -44,6 +45,7 @@ export default class Slider {
     this.secondItem = this.items.children[1] as HTMLElement;
     this.showNavDots = showNavDots;
     this.slideDuration = slideDuration;
+    this.slider = slider;
 
     if (slideDuration > 0) {
       this.timer = window.setTimeout(this.autoSlide, slideDuration);
@@ -72,6 +74,7 @@ export default class Slider {
     this.items.addEventListener("pointerdown", this.handlePointerDown);
 
     this.setUpArrows();
+    window.addEventListener("resize", this.handleWindowResize);
   }
 
   private calculateItemWidthWithGap = (): number => {
@@ -267,6 +270,35 @@ export default class Slider {
       window.getComputedStyle(this.firstItem).marginLeft; // flush pending style changes
       this.firstItem.classList.remove("notransition");
       this.handleFirstPictureTransitionEnd();
+    }
+  };
+
+  private handleWindowResize = () => {
+    if (this.items.clientWidth < this.slider.clientWidth) {
+      this.realFirstItem.classList.add("notransition");
+      let newMarginLeft =
+        parseFloat(this.realFirstItem.style.marginLeft) +
+        this.slider.clientWidth -
+        this.items.clientWidth;
+      if (newMarginLeft > 0) newMarginLeft = 0;
+      this.realFirstItem.style.marginLeft = newMarginLeft + "px";
+      window.getComputedStyle(this.realFirstItem).marginLeft; // flush pending style changes
+      this.realFirstItem.classList.remove("notransition");
+    } else {
+      //this.realFirstItem.classList.add("notransition");
+      // const oldWidth = this.itemWidthWithGap;
+      // const targetMarginLeft = this.realFirstItem.style.marginLeft;
+      // let marginLeftString = window.getComputedStyle(this.realFirstItem)
+      //   .marginLeft;
+      // let marginLeft = parseFloat(marginLeftString);
+      // if (marginLeftString[marginLeftString.length - 1] === "%")
+      //   marginLeft *= oldWidth / 100;
+      // this.itemWidthWithGap = this.calculateItemWidthWithGap();
+      // this.realFirstItem.style.marginLeft =
+      //   (marginLeft * this.itemWidthWithGap) / oldWidth + "px";
+      // window.getComputedStyle(this.realFirstItem).marginLeft; // flush pending style changes
+      // this.realFirstItem.classList.remove("notransition");
+      // this.realFirstItem.style.marginLeft = targetMarginLeft;
     }
   };
 
