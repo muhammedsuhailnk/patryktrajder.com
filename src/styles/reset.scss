@@ -107,6 +107,21 @@ body {
   line-height: 1;
 }
 
+blockquote {
+  quotes: none;
+
+  &:before,
+  &:after {
+    content: "";
+    content: none;
+  }
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #9a9a9a;
+}
+
 img {
   display: block;
   height: auto;
@@ -116,19 +131,9 @@ img {
 ol,
 ul {
   list-style: none;
-}
 
-li {
-  list-style-type: none;
-}
-
-blockquote {
-  quotes: none;
-
-  &:before,
-  &:after {
-    content: "";
-    content: none;
+  > li {
+    list-style-type: none;
   }
 }
 
