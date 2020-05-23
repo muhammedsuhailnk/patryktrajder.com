@@ -13,6 +13,7 @@ export default class Slider {
   private readonly showNavDots: boolean;
   private readonly slideDuration: number;
   private readonly slider: HTMLElement;
+  private readonly wrapper: HTMLElement;
   private abortClick: boolean = false;
   private contentWidth: number = 0;
   private currentIndex: number = 0;
@@ -37,7 +38,8 @@ export default class Slider {
     slideDuration: number = 0
   ) {
     this.isCyclic = isCyclic;
-    this.items = slider.querySelector(".items") as HTMLElement;
+    this.wrapper = slider.querySelector(".wrapper") as HTMLElement;
+    this.items = this.wrapper.querySelector(".items") as HTMLElement;
     this.leftArrow = slider.querySelector(".left") as HTMLElement;
     this.rightArrow = slider.querySelector(".right") as HTMLElement;
     this.nItems = this.items.childElementCount;
@@ -59,12 +61,12 @@ export default class Slider {
       this.setUpNavDots();
     }
 
-    this.firstItem.style.marginLeft = "0";
-    this.firstItem.addEventListener(
+    this.items.style.marginLeft = "0";
+    this.items.addEventListener(
       "transitionend",
       this.handleFirstPictureTransitionEnd
     );
-    this.items.addEventListener("pointerdown", this.handlePointerDown, true);
+    this.wrapper.addEventListener("pointerdown", this.handlePointerDown, true);
     this.items.addEventListener("click", this.handleClick, true);
     this.setUpArrows();
     addEventListener("resize", this.handleWindowResize);
@@ -81,7 +83,7 @@ export default class Slider {
     const contentWidth =
       this.firstItem.clientWidth +
       itemWidthWithGap * (this.items.childElementCount - 1);
-    const minMargin = this.slider.clientWidth - contentWidth;
+    const minMargin = this.items.clientWidth - contentWidth;
     if (minMargin > 0) return 0;
     return minMargin;
   };
@@ -96,7 +98,7 @@ export default class Slider {
 
       this.updateArrows(marginLeft);
     }
-    this.firstItem.style.marginLeft = marginLeft + "px";
+    this.items.style.marginLeft = marginLeft + "px";
 
     const newIndex = ~~(
       (-marginLeft / this.itemWidthWithGap + 0.5) %
@@ -108,10 +110,10 @@ export default class Slider {
 
   public dragEnd = (offset: number) => {
     this.isGrabbing = false;
-    this.firstItem.classList.remove("notransition");
+    this.items.classList.remove("notransition");
     if (!this.isCyclic) return; // todo tmp solution
     this.realFirstItem = this.firstItem;
-    this.firstItem.style.transitionTimingFunction = "ease-out";
+    this.items.style.transitionTimingFunction = "ease-out";
 
     let marginLeft = this.startMarginLeft + offset;
     if (this.isCyclic) {
@@ -138,10 +140,7 @@ export default class Slider {
         else this.slideLeft(0);
       }
 
-      this.firstItem.addEventListener(
-        "transitionend",
-        this.handleTransitionEnd
-      );
+      this.items.addEventListener("transitionend", this.handleTransitionEnd);
     });
   };
 
@@ -150,16 +149,14 @@ export default class Slider {
     this.contentWidth = this.nItems * this.itemWidthWithGap; // todo do something with additional gap
     this.isGrabbing = true;
     this.sliding = true;
-    this.startMarginLeft = parseFloat(
-      getComputedStyle(this.realFirstItem).marginLeft
-    );
+    this.startMarginLeft = parseFloat(getComputedStyle(this.items).marginLeft);
     this.startMarginLeft += this.nAddedCopiesLeft * this.itemWidthWithGap;
     this.startMarginLeft = Utils.modNeg(
       this.startMarginLeft,
       this.contentWidth
     );
-    this.firstItem.style.marginLeft = this.startMarginLeft + "px";
-    this.firstItem.classList.add("notransition");
+    this.items.style.marginLeft = this.startMarginLeft + "px";
+    this.items.classList.add("notransition");
 
     const newIndex = ~~(
       (-this.startMarginLeft / this.itemWidthWithGap + 0.5) %
@@ -173,7 +170,6 @@ export default class Slider {
       this.handleTransitionEnd();
 
       const firstItemCopy = this.firstItem.cloneNode(true) as HTMLElement;
-      firstItemCopy.style.marginLeft = "0";
       this.items.insertBefore(firstItemCopy, null);
       this.nAddedCopiesRight++;
     }
@@ -203,11 +199,15 @@ export default class Slider {
 
   private handleDragEnd = (e: PointerEvent) => {
     const offset = e.x - this.startX;
-    this.items.classList.remove("dragging");
+    this.wrapper.classList.remove("dragging");
     (e.target as HTMLElement).releasePointerCapture(e.pointerId);
-    this.items.removeEventListener("pointermove", this.handlePointerMove, true);
-    this.items.removeEventListener("pointerup", this.handleDragEnd, true);
-    this.items.removeEventListener(
+    this.wrapper.removeEventListener(
+      "pointermove",
+      this.handlePointerMove,
+      true
+    );
+    this.wrapper.removeEventListener("pointerup", this.handleDragEnd, true);
+    this.wrapper.removeEventListener(
       "lostpointercapture",
       this.handleDragEnd,
       true
@@ -219,9 +219,13 @@ export default class Slider {
     this.abortClick = false;
     this.startX = e.x;
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
-    this.items.addEventListener("pointermove", this.handlePointerMove, true);
-    this.items.addEventListener("pointerup", this.handleDragEnd, true);
-    this.items.addEventListener("lostpointercapture", this.handleDragEnd, true);
+    this.wrapper.addEventListener("pointermove", this.handlePointerMove, true);
+    this.wrapper.addEventListener("pointerup", this.handleDragEnd, true);
+    this.wrapper.addEventListener(
+      "lostpointercapture",
+      this.handleDragEnd,
+      true
+    );
     this.dragStart();
   };
 
@@ -235,7 +239,7 @@ export default class Slider {
     const offset = e.x - this.startX;
     if (Math.abs(offset) > Constants.abortClickDistance) {
       this.abortClick = true;
-      this.items.classList.add("dragging");
+      this.wrapper.classList.add("dragging");
       e.stopPropagation();
       e.preventDefault();
     }
@@ -250,7 +254,7 @@ export default class Slider {
   };
 
   private handleFirstPictureTransitionEnd = () => {
-    this.firstItem.style.transitionTimingFunction = "ease";
+    //this.items.style.transitionTimingFunction = "ease";
     this.sliding = false;
     if (this.slideDuration > 0 && !this.isTimerSet && !this.isTimerStopped) {
       this.timer = setTimeout(this.autoSlide, this.slideDuration);
@@ -259,11 +263,7 @@ export default class Slider {
   };
 
   private handleTransitionEnd = () => {
-    const realFirstItemLocal = this.realFirstItem as HTMLElement;
-    realFirstItemLocal.removeEventListener(
-      "transitionend",
-      this.handleTransitionEnd
-    );
+    this.items.removeEventListener("transitionend", this.handleTransitionEnd);
 
     while (this.nAddedCopiesLeft > 0) {
       this.items.removeChild(this.items.children[0]);
@@ -277,38 +277,33 @@ export default class Slider {
     if (!this.isGrabbing) {
       this.realCurrentIndex = this.currentIndex;
       this.realFirstItem = this.firstItem;
-      this.firstItem.classList.add("notransition");
-      this.firstItem.style.marginLeft = "-" + this.currentIndex * 100 + "%";
-      getComputedStyle(this.firstItem).marginLeft; // flush pending style changes
-      this.firstItem.classList.remove("notransition");
+      this.items.classList.add("notransition");
+      this.items.style.marginLeft = "-" + this.currentIndex * 100 + "%";
+      getComputedStyle(this.items).marginLeft; // flush pending style changes
+      this.items.classList.remove("notransition");
       this.handleFirstPictureTransitionEnd();
     }
   };
 
   private handleWindowResize = () => {
     if (this.items.clientWidth < this.slider.clientWidth) {
-      this.realFirstItem.classList.add("notransition");
+      this.items.classList.add("notransition");
       let newMarginLeft =
-        parseFloat(this.realFirstItem.style.marginLeft) +
+        parseFloat(this.items.style.marginLeft) +
         this.slider.clientWidth -
         this.items.clientWidth;
       if (newMarginLeft > 0) newMarginLeft = 0;
-      this.realFirstItem.style.marginLeft = newMarginLeft + "px";
-      getComputedStyle(this.realFirstItem).marginLeft; // flush pending style changes
-      this.realFirstItem.classList.remove("notransition");
+      this.items.style.marginLeft = newMarginLeft + "px";
+      getComputedStyle(this.items).marginLeft; // flush pending style changes
+      this.items.classList.remove("notransition");
     }
   };
 
   private overflowLeft = (newIndex: number, by: number) => {
     let itemCopy, itemRef;
 
-    let leftMargin = parseFloat(
-      getComputedStyle(this.realFirstItem).marginLeft
-    );
+    let leftMargin = parseFloat(getComputedStyle(this.items).marginLeft);
     leftMargin = (leftMargin / this.realFirstItem.clientWidth) * 100 - 100;
-
-    this.realFirstItem.classList.add("notransition");
-    this.realFirstItem.style.marginLeft = "0";
 
     for (let i = by; i > 1; i--) {
       itemRef = this.items.children[this.nAddedCopiesLeft + newIndex + by - 1];
@@ -322,43 +317,34 @@ export default class Slider {
     itemCopy = itemRef.cloneNode(true) as HTMLElement;
 
     if (this.nAddedCopiesLeft > 0)
-      itemCopy.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
-    itemCopy.style.marginLeft = leftMargin + "%";
+      this.items.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
+    this.items.classList.add("notransition");
+    this.items.style.marginLeft = leftMargin + "%";
     this.items.insertBefore(itemCopy, this.realFirstItem);
     getComputedStyle(itemCopy).marginLeft; // flush pending style changes
-    this.realFirstItem.classList.remove("notransition");
-    itemCopy.style.marginLeft = "0";
+    this.items.classList.remove("notransition");
+    this.items.style.marginLeft = "0";
 
     this.nAddedCopiesLeft += by;
 
-    this.realFirstItem.removeEventListener(
-      "transitionend",
-      this.handleTransitionEnd
-    );
     this.realFirstItem = itemCopy;
-    itemCopy.addEventListener("transitionend", this.handleTransitionEnd);
+    this.items.addEventListener("transitionend", this.handleTransitionEnd);
   };
 
   private overflowRight = (newIndex: number, by: number) => {
-    let itemCopy, itemRef;
-
     for (let i = by - 1; i >= 0; i--) {
-      itemRef = this.items.children[this.nAddedCopiesLeft + newIndex - i];
-      itemCopy = itemRef.cloneNode(true) as HTMLElement;
-      itemCopy.style.marginLeft = "0";
+      let itemRef = this.items.children[this.nAddedCopiesLeft + newIndex - i];
+      let itemCopy = itemRef.cloneNode(true) as HTMLElement;
       this.items.insertBefore(itemCopy, null);
     }
 
-    this.realFirstItem.style.marginLeft = -this.realCurrentIndex * 100 + "%";
+    this.items.style.marginLeft = -this.realCurrentIndex * 100 + "%";
     if (this.nAddedCopiesRight > 0)
-      this.realFirstItem.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
+      this.items.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
 
     this.nAddedCopiesRight += by;
 
-    this.realFirstItem.addEventListener(
-      "transitionend",
-      this.handleTransitionEnd
-    );
+    this.items.addEventListener("transitionend", this.handleTransitionEnd);
   };
   private setUpArrows = () => {
     this.leftArrow?.addEventListener("click", () => this.slideLeft(1));
@@ -406,10 +392,8 @@ export default class Slider {
   };
 
   private slide = () => {
-    this.realFirstItem.style.marginLeft =
-      "-" + this.realCurrentIndex * 100 + "%";
-    if (this.sliding)
-      this.firstItem.style.transitionTimingFunction = "ease-out";
+    this.items.style.marginLeft = "-" + this.realCurrentIndex * 100 + "%";
+    if (this.sliding) this.items.style.transitionTimingFunction = "ease-out";
     this.sliding = true;
   };
 
