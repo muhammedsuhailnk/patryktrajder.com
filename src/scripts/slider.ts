@@ -68,8 +68,6 @@ export default class Slider {
       "transitionend",
       this.handleFirstPictureTransitionEnd
     );
-    this.wrapper.addEventListener("pointerdown", this.handlePointerDown, true);
-    this.items.addEventListener("click", this.handleClick, true);
     addEventListener("resize", this.handleWindowResize);
   }
 
@@ -87,8 +85,7 @@ export default class Slider {
     return this.secondItem.clientWidth + itemMarginLeft;
   };
 
-  private calculateMinMarginLeft = (itemWidthWithGap: number): number => {
-    const contentWidth = this.calculateContentWidth(itemWidthWithGap);
+  private calculateMinMarginLeft = (contentWidth: number): number => {
     const minMargin = this.items.clientWidth - contentWidth;
     if (minMargin > 0) return 0;
     return minMargin;
@@ -180,7 +177,8 @@ export default class Slider {
       this.nAddedCopiesRight++;
     }
 
-    this.minMarginLeft = this.calculateMinMarginLeft(this.itemWidthWithGap);
+    const contentWidth = this.calculateContentWidth(this.itemWidthWithGap);
+    this.minMarginLeft = this.calculateMinMarginLeft(contentWidth);
   };
 
   private autoSlide = () => {
@@ -295,13 +293,34 @@ export default class Slider {
     this.itemWidthWithGap = this.calculateItemWidthWithGap();
     const contentWidth = this.calculateContentWidth(this.itemWidthWithGap);
     if (contentWidth < this.items.clientWidth) {
-      this.items.style.justifyContent = "center";
+      this.wrapper.classList.add("center");
       this.items.classList.add("notransition");
       this.items.style.marginLeft = "0";
       getComputedStyle(this.items).marginLeft; // flush pending style changes
       this.items.classList.remove("notransition");
+      this.wrapper.removeEventListener(
+        "pointerdown",
+        this.handlePointerDown,
+        true
+      );
+      this.items.removeEventListener("click", this.handleClick, true);
     } else {
-      this.items.style.justifyContent = "flex-start";
+      this.minMarginLeft = this.calculateMinMarginLeft(contentWidth);
+      if (
+        parseFloat(getComputedStyle(this.items).marginLeft) < this.minMarginLeft
+      ) {
+        this.items.classList.add("notransition");
+        this.items.style.marginLeft = this.minMarginLeft + "px";
+        getComputedStyle(this.items).marginLeft; // flush pending style changes
+        this.items.classList.remove("notransition");
+      }
+      this.wrapper.classList.remove("center");
+      this.wrapper.addEventListener(
+        "pointerdown",
+        this.handlePointerDown,
+        true
+      );
+      this.items.addEventListener("click", this.handleClick, true);
     }
   };
 
@@ -359,9 +378,10 @@ export default class Slider {
     if (!this.isCyclic) {
       if (this.leftArrow) this.leftArrow.style.display = "none";
       if (this.rightArrow) {
-        this.minMarginLeft = this.calculateMinMarginLeft(
+        const contentWidth = this.calculateContentWidth(
           this.calculateItemWidthWithGap()
         );
+        this.minMarginLeft = this.calculateMinMarginLeft(contentWidth);
         if (this.minMarginLeft === 0) this.rightArrow.style.display = "none";
       }
     }

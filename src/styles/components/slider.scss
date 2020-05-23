@@ -60,25 +60,33 @@
   }
 
   > .wrapper {
-    cursor: move;
-    cursor: url("/assets/cursors/grab.cur"), auto;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
-    cursor: grab;
+    &.center {
+      > .items {
+        justify-content: center;
+      }
+    }
 
-    &:active {
-      cursor: url("/assets/cursors/grabbing.cur"), auto;
-      cursor: -moz-grabbing;
-      cursor: -webkit-grabbing;
-      cursor: grabbing;
+    &:not(.center) {
+      cursor: move;
+      cursor: url("/assets/cursors/grab.cur"), auto;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+      cursor: grab;
 
-      &.dragging {
-        > .items * {
-          cursor: move;
-          cursor: url("/assets/cursors/grabbing.cur"), auto;
-          cursor: -moz-grabbing;
-          cursor: -webkit-grabbing;
-          cursor: grabbing;
+      &:active {
+        cursor: url("/assets/cursors/grabbing.cur"), auto;
+        cursor: -moz-grabbing;
+        cursor: -webkit-grabbing;
+        cursor: grabbing;
+
+        &.dragging {
+          > .items * {
+            cursor: move;
+            cursor: url("/assets/cursors/grabbing.cur"), auto;
+            cursor: -moz-grabbing;
+            cursor: -webkit-grabbing;
+            cursor: grabbing;
+          }
         }
       }
     }
