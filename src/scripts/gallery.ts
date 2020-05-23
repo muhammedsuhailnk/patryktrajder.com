@@ -1,13 +1,17 @@
 import Constants from "./constants";
+import Slider from "./slider";
 
 export default class Gallery {
   private readonly closeButton: HTMLButtonElement;
   private readonly full: HTMLElement;
   private readonly fullImg: HTMLImageElement;
   private readonly gallery: Element;
+  private readonly nThumbs?: number;
   private readonly previewImg: HTMLImageElement;
+  private readonly slider?: Slider;
   private abortClick: boolean = false;
   private isGrabbing: boolean = false;
+  private nLoadedThumbs: number = 0;
   private startLeft: number = 0;
   private startTop: number = 0;
   private startX: number = 0;
@@ -25,17 +29,32 @@ export default class Gallery {
     this.previewImg.addEventListener("click", this.showFullImage);
     this.setUpZoom();
 
-    const list = gallery.querySelector<HTMLElement>(".slider .items");
-    if (list) {
-      for (let i = 0; i < list.childElementCount; i++)
-        list.children[i].addEventListener("click", () =>
-          this.showPreview(list.children[i] as HTMLImageElement)
-        );
+    const sliderElement = gallery.querySelector<HTMLElement>(".slider");
+    if (sliderElement) {
+      this.slider = new Slider(sliderElement as HTMLElement);
+      const list = sliderElement.querySelector<HTMLElement>(".items");
+      if (list) {
+        this.nThumbs = list.childElementCount;
+        for (let i = 0; i < this.nThumbs; i++) {
+          let thumb = list.children[i] as HTMLImageElement;
+          thumb.addEventListener("click", () => this.showPreview(thumb));
+          thumb.addEventListener("load", () => this.handleThumbLoad(thumb), {
+            once: true
+          });
+        }
+      }
     }
   }
 
   public showPreview = (img: HTMLImageElement) => {
     this.previewImg.src = img.src.replace("h100.jpg", "h400.jpg");
+  };
+
+  private handleThumbLoad = (thumb: HTMLImageElement) => {
+    this.nLoadedThumbs++;
+    if (this.nLoadedThumbs === this.nThumbs) {
+      this.slider?.update();
+    }
   };
 
   private handlePointerMove = (e: PointerEvent) => {

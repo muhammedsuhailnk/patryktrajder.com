@@ -71,6 +71,10 @@ export default class Slider {
     addEventListener("resize", this.handleWindowResize);
   }
 
+  public update(): void {
+    this.handleWindowResize();
+  }
+
   private calculateContentWidth = (itemWidthWithGap: number): number => {
     return (
       this.firstItem.clientWidth +
