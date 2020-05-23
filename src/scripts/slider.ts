@@ -61,16 +61,24 @@ export default class Slider {
       this.setUpNavDots();
     }
 
-    this.items.style.marginLeft = "0";
+    this.setUpArrows();
+    this.handleWindowResize();
+    //this.items.style.marginLeft = "0"; todo remove if everything works
     this.items.addEventListener(
       "transitionend",
       this.handleFirstPictureTransitionEnd
     );
     this.wrapper.addEventListener("pointerdown", this.handlePointerDown, true);
     this.items.addEventListener("click", this.handleClick, true);
-    this.setUpArrows();
     addEventListener("resize", this.handleWindowResize);
   }
+
+  private calculateContentWidth = (itemWidthWithGap: number): number => {
+    return (
+      this.firstItem.clientWidth +
+      itemWidthWithGap * (this.items.childElementCount - 1)
+    );
+  };
 
   private calculateItemWidthWithGap = (): number => {
     const itemMarginLeft = parseFloat(
@@ -80,9 +88,7 @@ export default class Slider {
   };
 
   private calculateMinMarginLeft = (itemWidthWithGap: number): number => {
-    const contentWidth =
-      this.firstItem.clientWidth +
-      itemWidthWithGap * (this.items.childElementCount - 1);
+    const contentWidth = this.calculateContentWidth(itemWidthWithGap);
     const minMargin = this.items.clientWidth - contentWidth;
     if (minMargin > 0) return 0;
     return minMargin;
@@ -286,16 +292,16 @@ export default class Slider {
   };
 
   private handleWindowResize = () => {
-    if (this.items.clientWidth < this.slider.clientWidth) {
+    this.itemWidthWithGap = this.calculateItemWidthWithGap();
+    const contentWidth = this.calculateContentWidth(this.itemWidthWithGap);
+    if (contentWidth < this.items.clientWidth) {
+      this.items.style.justifyContent = "center";
       this.items.classList.add("notransition");
-      let newMarginLeft =
-        parseFloat(this.items.style.marginLeft) +
-        this.slider.clientWidth -
-        this.items.clientWidth;
-      if (newMarginLeft > 0) newMarginLeft = 0;
-      this.items.style.marginLeft = newMarginLeft + "px";
+      this.items.style.marginLeft = "0";
       getComputedStyle(this.items).marginLeft; // flush pending style changes
       this.items.classList.remove("notransition");
+    } else {
+      this.items.style.justifyContent = "flex-start";
     }
   };
 
