@@ -90,45 +90,16 @@
     }
   }
 
-  .thumbList {
-    height: 10.3vw;
-    max-height: 6rem;
+  .slider {
     margin-top: 1rem;
-    overflow: hidden;
-    width: auto;
 
     .items {
-      cursor: move;
-      cursor: url("/assets/cursors/grab.cur"), auto;
-      cursor: -moz-grab;
-      cursor: -webkit-grab;
-      cursor: grab;
-      height: 8rem;
-      overflow-x: scroll;
-      overflow-y: hidden;
-      white-space: nowrap;
-
-      &:active {
-        cursor: url("/assets/cursors/grabbing.cur"), auto;
-        cursor: -moz-grabbing;
-        cursor: -webkit-grabbing;
-        cursor: grabbing;
-      }
-
       img {
         cursor: pointer;
         display: inline-block;
         height: 10.3vw;
         max-height: 6rem;
         width: auto;
-
-        &.dragging:active {
-          cursor: move;
-          cursor: url("/assets/cursors/grabbing.cur"), auto;
-          cursor: -moz-grabbing;
-          cursor: -webkit-grabbing;
-          cursor: grabbing;
-        }
       }
 
       img + img {

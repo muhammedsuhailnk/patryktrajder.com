@@ -1,5 +1,4 @@
 import Constants from "./constants";
-import Slider from "./slider";
 
 export default class Gallery {
   private readonly closeButton: HTMLButtonElement;
@@ -26,15 +25,17 @@ export default class Gallery {
     this.previewImg.addEventListener("click", this.showFullImage);
     this.setUpZoom();
 
-    const list = gallery.querySelector<HTMLElement>(".thumbList");
-    if (list) new Slider(list, false, false, 0, this.showPreview);
+    const list = gallery.querySelector<HTMLElement>(".slider .items");
+    if (list) {
+      for (let i = 0; i < list.childElementCount; i++)
+        list.children[i].addEventListener("click", () =>
+          this.showPreview(list.children[i] as HTMLImageElement)
+        );
+    }
   }
 
-  public showPreview = (img: HTMLElement) => {
-    this.previewImg.src = (img as HTMLImageElement).src.replace(
-      "h100.jpg",
-      "h400.jpg"
-    );
+  public showPreview = (img: HTMLImageElement) => {
+    this.previewImg.src = img.src.replace("h100.jpg", "h400.jpg");
   };
 
   private handlePointerMove = (e: PointerEvent) => {

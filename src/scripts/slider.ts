@@ -13,6 +13,7 @@ export default class Slider {
   private readonly showNavDots: boolean;
   private readonly slideDuration: number;
   private readonly slider: HTMLElement;
+  private abortClick: boolean = false;
   private contentWidth: number = 0;
   private currentIndex: number = 0;
   private isGrabbing: boolean = false;
@@ -33,8 +34,7 @@ export default class Slider {
     slider: HTMLElement,
     isCyclic: boolean = false,
     showNavDots: boolean = false,
-    slideDuration: number = 0,
-    onItemClick?: (item: HTMLElement) => void
+    slideDuration: number = 0
   ) {
     this.isCyclic = isCyclic;
     this.items = slider.querySelector(".items") as HTMLElement;
@@ -60,19 +60,12 @@ export default class Slider {
     }
 
     this.firstItem.style.marginLeft = "0";
-
-    for (let i = 0; i < this.items.children.length; i++) {
-      let item = this.items.children[i] as HTMLElement;
-      let sliderItem = new SliderItem(item, this.firstItem, this);
-      sliderItem.onClick = onItemClick;
-    }
-
     this.firstItem.addEventListener(
       "transitionend",
       this.handleFirstPictureTransitionEnd
     );
-    this.items.addEventListener("pointerdown", this.handlePointerDown);
-
+    this.items.addEventListener("pointerdown", this.handlePointerDown, true);
+    this.items.addEventListener("click", this.handleClick, true);
     this.setUpArrows();
     addEventListener("resize", this.handleWindowResize);
   }
@@ -88,7 +81,7 @@ export default class Slider {
     const contentWidth =
       this.firstItem.clientWidth +
       itemWidthWithGap * (this.items.childElementCount - 1);
-    const minMargin = this.items.clientWidth - contentWidth;
+    const minMargin = this.slider.clientWidth - contentWidth;
     if (minMargin > 0) return 0;
     return minMargin;
   };
@@ -201,12 +194,34 @@ export default class Slider {
     else this.slideRight(slideBy);
   };
 
+  private handleClick = (e: MouseEvent) => {
+    if (this.abortClick) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  };
+
+  private handleDragEnd = (e: PointerEvent) => {
+    const offset = e.x - this.startX;
+    this.items.classList.remove("dragging");
+    (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+    this.items.removeEventListener("pointermove", this.handlePointerMove, true);
+    this.items.removeEventListener("pointerup", this.handleDragEnd, true);
+    this.items.removeEventListener(
+      "lostpointercapture",
+      this.handleDragEnd,
+      true
+    );
+    this.dragEnd(offset);
+  };
+
   private handlePointerDown = (e: PointerEvent) => {
+    this.abortClick = false;
     this.startX = e.x;
-    this.items.setPointerCapture(e.pointerId);
-    this.items.addEventListener("pointermove", this.handlePointerMove);
-    this.items.addEventListener("pointerup", this.handleDragEnd);
-    this.items.addEventListener("lostpointercapture", this.handleDragEnd);
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    this.items.addEventListener("pointermove", this.handlePointerMove, true);
+    this.items.addEventListener("pointerup", this.handleDragEnd, true);
+    this.items.addEventListener("lostpointercapture", this.handleDragEnd, true);
     this.dragStart();
   };
 
@@ -218,6 +233,12 @@ export default class Slider {
 
   private handlePointerMove = (e: PointerEvent) => {
     const offset = e.x - this.startX;
+    if (Math.abs(offset) > Constants.abortClickDistance) {
+      this.abortClick = true;
+      this.items.classList.add("dragging");
+      e.stopPropagation();
+      e.preventDefault();
+    }
     this.drag(offset);
   };
 
@@ -226,15 +247,6 @@ export default class Slider {
     this.timer = setTimeout(this.autoSlide, this.slideDuration);
     this.isTimerSet = true;
     this.isTimerStopped = false;
-  };
-
-  private handleDragEnd = (e: PointerEvent) => {
-    const offset = e.x - this.startX;
-    this.items.releasePointerCapture(e.pointerId);
-    this.items.removeEventListener("pointermove", this.handlePointerMove);
-    this.items.removeEventListener("pointerup", this.handleDragEnd);
-    this.items.removeEventListener("lostpointercapture", this.handleDragEnd);
-    this.dragEnd(offset);
   };
 
   private handleFirstPictureTransitionEnd = () => {
@@ -441,60 +453,5 @@ export default class Slider {
     if (!this.showNavDots) return;
     this.navDots?.children[this.currentIndex].classList.remove("current");
     this.navDots?.children[newIndex].classList.add("current");
-  };
-}
-
-class SliderItem {
-  public onClick?: (item: HTMLElement) => void;
-
-  private readonly item: HTMLElement;
-  private readonly slider: Slider;
-  private abortClick: boolean = false;
-  private startX: number = 0;
-
-  constructor(item: HTMLElement, firstItem: HTMLElement, slider: Slider) {
-    this.item = item;
-    this.slider = slider;
-    item.addEventListener("pointerdown", this.handlePointerDown);
-
-    item.addEventListener("click", (e: MouseEvent) => {
-      if (this.abortClick) return;
-      const offset = e.x - this.startX;
-      if (Math.abs(offset) > Constants.abortClickDistance) return;
-      this.onClick?.(item);
-    });
-  }
-
-  private handlePointerDown = (e: PointerEvent) => {
-    e.stopPropagation();
-    this.abortClick = false;
-    this.startX = e.x;
-    this.item.setPointerCapture(e.pointerId);
-    this.item.addEventListener("pointermove", this.handlePointerMove);
-    this.item.addEventListener("pointerup", this.handleSliderDragEnd);
-    this.item.addEventListener("lostpointercapture", this.handleSliderDragEnd);
-    this.slider.dragStart();
-  };
-
-  private handlePointerMove = (e: PointerEvent) => {
-    const offset = e.x - this.startX;
-    if (Math.abs(offset) > Constants.abortClickDistance) {
-      this.abortClick = true;
-      this.item.classList.add("dragging");
-    }
-    this.slider.drag(offset);
-  };
-
-  private handleSliderDragEnd = (e: PointerEvent) => {
-    const offset = e.x - this.startX;
-    this.item.classList.remove("dragging");
-    this.item.releasePointerCapture(e.pointerId);
-    this.item.removeEventListener("pointermove", this.handlePointerMove);
-    this.item.removeEventListener("pointerup", this.handleSliderDragEnd);
-    this.item.removeEventListener(
-      "lostpointercapture",
-      this.handleSliderDragEnd
-    );
-    this.slider.dragEnd(offset);
   };
 }
