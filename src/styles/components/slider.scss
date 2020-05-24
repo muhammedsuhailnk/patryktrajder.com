@@ -60,6 +60,8 @@
   }
 
   > .wrapper {
+    touch-action: pan-y pinch-zoom;
+
     &.center {
       > .items {
         justify-content: center;
