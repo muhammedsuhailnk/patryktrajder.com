@@ -27,6 +27,9 @@ export default class Gallery {
     ) as HTMLImageElement;
 
     this.previewImg.addEventListener("click", this.showFullImage);
+    this.fullImg.addEventListener("dragstart", (e) => {
+      e.preventDefault();
+    });
     this.setUpZoom();
 
     const sliderElement = gallery.querySelector<HTMLElement>(".slider");
@@ -105,9 +108,15 @@ export default class Gallery {
   };
 
   private showFullImage = () => {
-    this.full.style.display = "block";
     this.fullImg.src = this.previewImg.src.replace("-h400.jpg", ".jpg");
-    document.body.style.overflow = "hidden";
+    this.fullImg.addEventListener(
+      "load",
+      () => {
+        this.full.style.display = "block";
+        document.body.style.overflow = "hidden";
+      },
+      { once: true }
+    );
   };
 
   private setUpZoom = () => {

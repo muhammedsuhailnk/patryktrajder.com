@@ -68,6 +68,9 @@ export default class Slider {
       "transitionend",
       this.handleFirstPictureTransitionEnd
     );
+    this.items.addEventListener("dragstart", (e) => {
+      e.preventDefault();
+    });
     addEventListener("resize", this.handleWindowResize);
   }
 
