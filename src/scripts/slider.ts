@@ -15,7 +15,7 @@ export default class Slider {
   private readonly slider: HTMLElement;
   private readonly wrapper: HTMLElement;
   private abortClick: boolean = false;
-  private contentWidth: number = 0;
+  private contentWidthMod: number = 0;
   private currentIndex: number = 0;
   private isGrabbing: boolean = false;
   private isTimerSet: boolean = false;
@@ -25,7 +25,6 @@ export default class Slider {
   private nAddedCopiesLeft: number = 0;
   private nAddedCopiesRight: number = 0;
   private realCurrentIndex: number = 0;
-  private realFirstItem: HTMLElement;
   private sliding: boolean = false;
   private startMarginLeft: number = 0;
   private startX: number = 0;
@@ -43,7 +42,7 @@ export default class Slider {
     this.leftArrow = slider.querySelector(".left") as HTMLElement;
     this.rightArrow = slider.querySelector(".right") as HTMLElement;
     this.nItems = this.items.childElementCount;
-    this.realFirstItem = this.firstItem = this.items.children[0] as HTMLElement;
+    this.firstItem = this.items.children[0] as HTMLElement;
     this.secondItem = this.items.children[1] as HTMLElement;
     this.showNavDots = showNavDots;
     this.slideDuration = slideDuration;
@@ -63,7 +62,6 @@ export default class Slider {
 
     this.setUpArrows();
     this.handleWindowResize();
-    //this.items.style.marginLeft = "0"; todo remove if everything works
     this.items.addEventListener(
       "transitionend",
       this.handleFirstPictureTransitionEnd
@@ -101,7 +99,7 @@ export default class Slider {
   public drag = (offset: number) => {
     let marginLeft = this.startMarginLeft + offset;
     if (this.isCyclic) {
-      marginLeft = Utils.modNeg(marginLeft, this.contentWidth);
+      marginLeft = Utils.modNeg(marginLeft, this.contentWidthMod);
     } else {
       if (marginLeft < this.minMarginLeft) marginLeft = this.minMarginLeft;
       else if (marginLeft > 0) marginLeft = 0;
@@ -122,12 +120,11 @@ export default class Slider {
     this.isGrabbing = false;
     this.items.classList.remove("notransition");
     if (!this.isCyclic) return; // todo tmp solution
-    this.realFirstItem = this.firstItem;
     this.items.style.transitionTimingFunction = "ease-out";
 
     let marginLeft = this.startMarginLeft + offset;
     if (this.isCyclic) {
-      marginLeft = Utils.modNeg(marginLeft, this.contentWidth);
+      marginLeft = Utils.modNeg(marginLeft, this.contentWidthMod);
     } else {
       if (marginLeft < this.minMarginLeft) marginLeft = this.minMarginLeft;
       else if (marginLeft > 0) marginLeft = 0;
@@ -156,17 +153,25 @@ export default class Slider {
 
   public dragStart = () => {
     this.itemWidthWithGap = this.calculateItemWidthWithGap();
-    this.contentWidth = this.nItems * this.itemWidthWithGap; // todo do something with additional gap
+    this.contentWidthMod = this.nItems * this.itemWidthWithGap;
     this.isGrabbing = true;
     this.sliding = true;
     this.startMarginLeft = parseFloat(getComputedStyle(this.items).marginLeft);
-    this.startMarginLeft += this.nAddedCopiesLeft * this.itemWidthWithGap;
-    this.startMarginLeft = Utils.modNeg(
-      this.startMarginLeft,
-      this.contentWidth
-    );
-    this.items.style.marginLeft = this.startMarginLeft + "px";
-    this.items.classList.add("notransition");
+
+    if (this.isCyclic) {
+      this.startMarginLeft += this.nAddedCopiesLeft * this.itemWidthWithGap;
+      this.startMarginLeft = Utils.modNeg(
+        this.startMarginLeft,
+        this.contentWidthMod
+      );
+
+      this.removeCopies();
+      const firstItemCopy = this.firstItem.cloneNode(true) as HTMLElement;
+      this.items.insertBefore(firstItemCopy, null);
+      this.nAddedCopiesRight++;
+    } else {
+      this.handleFirstPictureTransitionEnd();
+    }
 
     const newIndex = ~~(
       (-this.startMarginLeft / this.itemWidthWithGap + 0.5) %
@@ -175,14 +180,8 @@ export default class Slider {
     this.updateNavDots(newIndex);
     this.currentIndex = newIndex;
 
-    if (this.isCyclic) {
-      // todo tmp solution
-      this.handleTransitionEnd();
-
-      const firstItemCopy = this.firstItem.cloneNode(true) as HTMLElement;
-      this.items.insertBefore(firstItemCopy, null);
-      this.nAddedCopiesRight++;
-    }
+    this.items.style.marginLeft = this.startMarginLeft + "px";
+    this.items.classList.add("notransition");
 
     const contentWidth = this.calculateContentWidth(this.itemWidthWithGap);
     this.minMarginLeft = this.calculateMinMarginLeft(contentWidth);
@@ -265,7 +264,7 @@ export default class Slider {
   };
 
   private handleFirstPictureTransitionEnd = () => {
-    //this.items.style.transitionTimingFunction = "ease";
+    this.items.style.transitionTimingFunction = "ease";
     this.sliding = false;
     if (this.slideDuration > 0 && !this.isTimerSet && !this.isTimerStopped) {
       this.timer = setTimeout(this.autoSlide, this.slideDuration);
@@ -273,21 +272,25 @@ export default class Slider {
     }
   };
 
-  private handleTransitionEnd = () => {
-    this.items.removeEventListener("transitionend", this.handleTransitionEnd);
-
+  private removeCopies = () => {
     while (this.nAddedCopiesLeft > 0) {
       this.items.removeChild(this.items.children[0]);
       this.nAddedCopiesLeft--;
     }
+
     while (this.nAddedCopiesRight > 0) {
       this.items.removeChild(this.items.lastChild as ChildNode);
       this.nAddedCopiesRight--;
     }
+  };
+
+  private handleTransitionEnd = () => {
+    this.items.removeEventListener("transitionend", this.handleTransitionEnd);
+
+    this.removeCopies();
 
     if (!this.isGrabbing) {
       this.realCurrentIndex = this.currentIndex;
-      this.realFirstItem = this.firstItem;
       this.items.classList.add("notransition");
       this.items.style.marginLeft = "-" + this.currentIndex * 100 + "%";
       getComputedStyle(this.items).marginLeft; // flush pending style changes
@@ -335,13 +338,12 @@ export default class Slider {
     let itemCopy, itemRef;
 
     let leftMargin = parseFloat(getComputedStyle(this.items).marginLeft);
-    leftMargin = (leftMargin / this.realFirstItem.clientWidth) * 100 - 100;
+    leftMargin = (leftMargin / this.firstItem.clientWidth) * 100 - 100;
 
     for (let i = by; i > 1; i--) {
       itemRef = this.items.children[this.nAddedCopiesLeft + newIndex + by - 1];
       itemCopy = itemRef.cloneNode(true) as HTMLElement;
-      this.items.insertBefore(itemCopy, this.realFirstItem);
-      this.realFirstItem = itemCopy;
+      this.items.insertBefore(itemCopy, this.items.firstChild);
       leftMargin -= 100;
     }
 
@@ -352,14 +354,13 @@ export default class Slider {
       this.items.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
     this.items.classList.add("notransition");
     this.items.style.marginLeft = leftMargin + "%";
-    this.items.insertBefore(itemCopy, this.realFirstItem);
+    this.items.insertBefore(itemCopy, this.items.firstChild);
     getComputedStyle(itemCopy).marginLeft; // flush pending style changes
     this.items.classList.remove("notransition");
     this.items.style.marginLeft = "0";
 
     this.nAddedCopiesLeft += by;
 
-    this.realFirstItem = itemCopy;
     this.items.addEventListener("transitionend", this.handleTransitionEnd);
   };
 
