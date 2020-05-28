@@ -289,7 +289,8 @@ export default class Slider {
     if (!this.isGrabbing) {
       this.realCurrentIndex = this.currentIndex;
       this.items.classList.add("notransition");
-      this.items.style.marginLeft = "-" + this.currentIndex * 100 + "%";
+      this.items.style.marginLeft =
+        -this.currentIndex * this.itemWidthWithGap + "px";
       getComputedStyle(this.items).marginLeft; // flush pending style changes
       this.items.classList.remove("notransition");
       this.handleFirstPictureTransitionEnd();
@@ -337,13 +338,13 @@ export default class Slider {
     let itemCopy, itemRef;
 
     let leftMargin = parseFloat(getComputedStyle(this.items).marginLeft);
-    leftMargin = (leftMargin / this.firstItem.clientWidth) * 100 - 100;
+    leftMargin -= this.itemWidthWithGap;
 
     for (let i = by; i > 1; i--) {
       itemRef = this.items.children[this.nAddedCopiesLeft + newIndex + by - 1];
       itemCopy = itemRef.cloneNode(true) as HTMLElement;
       this.items.insertBefore(itemCopy, this.items.firstChild);
-      leftMargin -= 100;
+      leftMargin -= this.itemWidthWithGap;
     }
 
     itemRef = this.items.children[this.nAddedCopiesLeft + newIndex + by - 1];
@@ -352,7 +353,7 @@ export default class Slider {
     if (this.nAddedCopiesLeft > 0)
       this.items.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
     this.items.classList.add("notransition");
-    this.items.style.marginLeft = leftMargin + "%";
+    this.items.style.marginLeft = leftMargin + "px";
     this.items.insertBefore(itemCopy, this.items.firstChild);
     getComputedStyle(itemCopy).marginLeft; // flush pending style changes
     this.items.classList.remove("notransition");
@@ -370,7 +371,8 @@ export default class Slider {
       this.items.insertBefore(itemCopy, null);
     }
 
-    this.items.style.marginLeft = -this.realCurrentIndex * 100 + "%";
+    this.items.style.marginLeft =
+      -this.realCurrentIndex * this.itemWidthWithGap + "px";
     if (this.nAddedCopiesRight > 0)
       this.items.style.transitionTimingFunction = "ease-out"; // make it so there is no easily noticable jump in sliding velocity
 
@@ -424,7 +426,8 @@ export default class Slider {
   };
 
   private slide = () => {
-    this.items.style.marginLeft = "-" + this.realCurrentIndex * 100 + "%";
+    this.items.style.marginLeft =
+      -this.realCurrentIndex * this.itemWidthWithGap + "px";
     if (this.sliding) this.items.style.transitionTimingFunction = "ease-out";
     this.sliding = true;
   };
