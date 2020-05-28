@@ -15,6 +15,7 @@ export default class Slider {
   private readonly slider: HTMLElement;
   private readonly wrapper: HTMLElement;
   private abortClick: boolean = false;
+  private contentWidth: number = 0;
   private contentWidthMod: number = 0;
   private currentIndex: number = 0;
   private isGrabbing: boolean = false;
@@ -48,6 +49,8 @@ export default class Slider {
     this.slideDuration = slideDuration;
     this.slider = slider;
 
+    this.handleWindowResize();
+
     if (slideDuration > 0) {
       this.timer = setTimeout(this.autoSlide, slideDuration);
       this.isTimerSet = true;
@@ -61,7 +64,6 @@ export default class Slider {
     }
 
     this.setUpArrows();
-    this.handleWindowResize();
     this.items.addEventListener(
       "transitionend",
       this.handleFirstPictureTransitionEnd
@@ -165,7 +167,6 @@ export default class Slider {
   };
 
   private dragStart = () => {
-    this.itemWidthWithGap = this.calculateItemWidthWithGap();
     this.contentWidthMod = this.nItems * this.itemWidthWithGap;
     this.isGrabbing = true;
     this.sliding = true;
@@ -195,9 +196,6 @@ export default class Slider {
 
     this.items.style.marginLeft = this.startMarginLeft + "px";
     this.items.classList.add("notransition");
-
-    const contentWidth = this.calculateContentWidth(this.itemWidthWithGap);
-    this.minMarginLeft = this.calculateMinMarginLeft(contentWidth);
   };
 
   private handleClick = (e: MouseEvent) => {
@@ -300,8 +298,10 @@ export default class Slider {
 
   private handleWindowResize = () => {
     this.itemWidthWithGap = this.calculateItemWidthWithGap();
-    const contentWidth = this.calculateContentWidth(this.itemWidthWithGap);
-    if (contentWidth < this.items.clientWidth) {
+    this.contentWidth = this.calculateContentWidth(this.itemWidthWithGap);
+    this.minMarginLeft = this.calculateMinMarginLeft(this.contentWidth);
+
+    if (this.contentWidth < this.items.clientWidth) {
       this.wrapper.classList.add("center");
       this.items.classList.add("notransition");
       this.items.style.marginLeft = "0";
@@ -314,7 +314,6 @@ export default class Slider {
       );
       this.items.removeEventListener("click", this.handleClick, true);
     } else {
-      this.minMarginLeft = this.calculateMinMarginLeft(contentWidth);
       if (
         parseFloat(getComputedStyle(this.items).marginLeft) < this.minMarginLeft
       ) {
@@ -323,6 +322,7 @@ export default class Slider {
         getComputedStyle(this.items).marginLeft; // flush pending style changes
         this.items.classList.remove("notransition");
       }
+
       this.wrapper.classList.remove("center");
       this.wrapper.addEventListener(
         "pointerdown",
@@ -378,19 +378,15 @@ export default class Slider {
 
     this.items.addEventListener("transitionend", this.handleTransitionEnd);
   };
+
   private setUpArrows = () => {
     this.leftArrow?.addEventListener("click", () => this.slideLeft(1));
     this.rightArrow?.addEventListener("click", () => this.slideRight(1));
 
     if (!this.isCyclic) {
       if (this.leftArrow) this.leftArrow.style.display = "none";
-      if (this.rightArrow) {
-        const contentWidth = this.calculateContentWidth(
-          this.calculateItemWidthWithGap()
-        );
-        this.minMarginLeft = this.calculateMinMarginLeft(contentWidth);
-        if (this.minMarginLeft === 0) this.rightArrow.style.display = "none";
-      }
+      if (this.rightArrow && this.minMarginLeft === 0)
+        this.rightArrow.style.display = "none";
     }
   };
 
