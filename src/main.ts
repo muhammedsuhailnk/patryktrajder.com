@@ -5,9 +5,7 @@ import Slider from "./scripts/slider";
 
 const banners = document.getElementsByClassName("banner");
 for (let i = 0; i < banners.length; i++) {
-  const bannerSlider = banners[i].getElementsByClassName(
-    "slider"
-  )[0] as HTMLElement;
+  const bannerSlider = banners[i].querySelector(".slider") as HTMLElement;
   if (bannerSlider)
     new Slider(bannerSlider, {
       isCyclic: true,

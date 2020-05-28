@@ -37,6 +37,7 @@ export default class Slider {
   private minMarginLeft: number = 0;
   private nAddedCopiesLeft: number = 0;
   private nAddedCopiesRight: number = 0;
+  private previousOffset: number = 0;
   private realCurrentIndex: number = 0;
   private sliding: boolean = false;
   private startMarginLeft: number = 0;
@@ -117,6 +118,8 @@ export default class Slider {
   };
 
   private drag = (offset: number) => {
+    this.previousOffset = offset;
+
     let marginLeft = this.startMarginLeft + offset;
     if (this.options.isCyclic) {
       marginLeft = Utils.modNeg(marginLeft, this.contentWidthMod);
@@ -137,6 +140,8 @@ export default class Slider {
   };
 
   private dragEnd = (offset: number) => {
+    this.previousOffset = 0;
+
     this.isGrabbing = false;
     this.items.classList.remove("notransition");
     if (this.options.slideDuration > 0)
@@ -213,7 +218,6 @@ export default class Slider {
   };
 
   private handleDragEnd = (e: PointerEvent) => {
-    const offset = e.x - this.startX;
     this.wrapper.classList.remove("dragging");
     (e.target as HTMLElement).releasePointerCapture(e.pointerId);
     this.wrapper.removeEventListener(
@@ -227,6 +231,11 @@ export default class Slider {
       this.handleDragEnd,
       true
     );
+
+    let offset;
+    if (e.type === "lostpointercapture") offset = this.previousOffset;
+    else offset = e.x - this.startX;
+
     this.dragEnd(offset);
   };
 
