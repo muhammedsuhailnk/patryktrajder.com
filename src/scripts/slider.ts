@@ -1,19 +1,30 @@
 import Constants from "./constants";
 import Utils from "./utils";
 
+export interface ISliderOptions {
+  isCyclic: boolean;
+  showNavDots: boolean;
+  slideDuration: number;
+  snapItems: boolean;
+}
+
+const defaultOptions: ISliderOptions = {
+  isCyclic: false,
+  showNavDots: false,
+  slideDuration: 0,
+  snapItems: true
+};
+
 export default class Slider {
   private readonly firstItem: HTMLElement;
-  private readonly isCyclic: boolean;
   private readonly items: HTMLElement;
   private readonly leftArrow?: HTMLElement;
   private readonly rightArrow?: HTMLElement;
   private readonly navDots?: HTMLUListElement;
   private readonly nItems: number;
+  private readonly options: ISliderOptions;
   private readonly secondItem: HTMLElement;
-  private readonly showNavDots: boolean;
-  private readonly slideDuration: number;
   private readonly slider: HTMLElement;
-  private readonly snapItems: boolean;
   private readonly wrapper: HTMLElement;
   private abortClick: boolean = false;
   private contentWidth: number = 0;
@@ -32,14 +43,8 @@ export default class Slider {
   private startX: number = 0;
   private timer?: number;
 
-  constructor(
-    slider: HTMLElement,
-    isCyclic: boolean = false,
-    showNavDots: boolean = false,
-    slideDuration: number = 0,
-    snapItems: boolean = true
-  ) {
-    this.isCyclic = isCyclic;
+  constructor(slider: HTMLElement, options?: Partial<ISliderOptions>) {
+    this.options = { ...defaultOptions, ...options };
     this.wrapper = slider.querySelector(".wrapper") as HTMLElement;
     this.items = this.wrapper.querySelector(".items") as HTMLElement;
     this.leftArrow = slider.querySelector(".left") as HTMLElement;
@@ -47,21 +52,18 @@ export default class Slider {
     this.nItems = this.items.childElementCount;
     this.firstItem = this.items.children[0] as HTMLElement;
     this.secondItem = this.items.children[1] as HTMLElement;
-    this.showNavDots = showNavDots;
-    this.slideDuration = slideDuration;
-    this.snapItems = snapItems;
     this.slider = slider;
 
     this.handleWindowResize();
 
-    if (slideDuration > 0) {
-      this.timer = setTimeout(this.autoSlide, slideDuration);
+    if (this.options.slideDuration > 0) {
+      this.timer = setTimeout(this.autoSlide, this.options.slideDuration);
       this.isTimerSet = true;
       slider.addEventListener("pointerenter", this.handlePointerEnter);
       slider.addEventListener("pointerleave", this.handlePointerLeave);
     }
 
-    if (showNavDots) {
+    if (this.options.showNavDots) {
       this.navDots = slider.querySelector("ul") as HTMLUListElement;
       this.setUpNavDots();
     }
@@ -88,7 +90,7 @@ export default class Slider {
   private beforeSlide = (newIndex: number) => {
     this.updateNavDots(newIndex);
     this.currentIndex = newIndex;
-    if (this.slideDuration > 0) {
+    if (this.options.slideDuration > 0) {
       clearTimeout(this.timer);
       this.isTimerSet = false;
     }
@@ -116,7 +118,7 @@ export default class Slider {
 
   private drag = (offset: number) => {
     let marginLeft = this.startMarginLeft + offset;
-    if (this.isCyclic) {
+    if (this.options.isCyclic) {
       marginLeft = Utils.modNeg(marginLeft, this.contentWidthMod);
     } else {
       if (marginLeft < this.minMarginLeft) marginLeft = this.minMarginLeft;
@@ -137,13 +139,13 @@ export default class Slider {
   private dragEnd = (offset: number) => {
     this.isGrabbing = false;
     this.items.classList.remove("notransition");
-    if (this.slideDuration > 0)
+    if (this.options.slideDuration > 0)
       this.items.style.transitionTimingFunction = "ease-out";
 
-    if (!this.snapItems) return;
+    if (!this.options.snapItems) return;
 
     let marginLeft = this.startMarginLeft + offset;
-    if (this.isCyclic) {
+    if (this.options.isCyclic) {
       marginLeft = Utils.modNeg(marginLeft, this.contentWidthMod);
     } else {
       if (marginLeft < this.minMarginLeft) marginLeft = this.minMarginLeft;
@@ -177,7 +179,7 @@ export default class Slider {
     this.sliding = true;
     this.startMarginLeft = parseFloat(getComputedStyle(this.items).marginLeft);
 
-    if (this.isCyclic) {
+    if (this.options.isCyclic) {
       this.startMarginLeft += this.nAddedCopiesLeft * this.itemWidthWithGap;
       this.startMarginLeft = Utils.modNeg(
         this.startMarginLeft,
@@ -270,7 +272,7 @@ export default class Slider {
 
   private handlePointerLeave = () => {
     if (this.isGrabbing) return;
-    this.timer = setTimeout(this.autoSlide, this.slideDuration);
+    this.timer = setTimeout(this.autoSlide, this.options.slideDuration);
     this.isTimerSet = true;
     this.isTimerStopped = false;
   };
@@ -278,8 +280,12 @@ export default class Slider {
   private handleFirstPictureTransitionEnd = () => {
     this.items.style.transitionTimingFunction = "ease";
     this.sliding = false;
-    if (this.slideDuration > 0 && !this.isTimerSet && !this.isTimerStopped) {
-      this.timer = setTimeout(this.autoSlide, this.slideDuration);
+    if (
+      this.options.slideDuration > 0 &&
+      !this.isTimerSet &&
+      !this.isTimerStopped
+    ) {
+      this.timer = setTimeout(this.autoSlide, this.options.slideDuration);
       this.isTimerSet = true;
     }
   };
@@ -388,7 +394,7 @@ export default class Slider {
     this.leftArrow?.addEventListener("click", () => this.slideLeft(1));
     this.rightArrow?.addEventListener("click", () => this.slideRight(1));
 
-    if (!this.isCyclic) {
+    if (!this.options.isCyclic) {
       if (this.leftArrow) this.leftArrow.style.display = "none";
       if (this.rightArrow && this.minMarginLeft === 0)
         this.rightArrow.style.display = "none";
@@ -472,7 +478,7 @@ export default class Slider {
   };
 
   private updateNavDots = (newIndex: number) => {
-    if (!this.showNavDots) return;
+    if (!this.options.showNavDots) return;
     this.navDots?.children[this.currentIndex].classList.remove("current");
     this.navDots?.children[newIndex].classList.add("current");
   };

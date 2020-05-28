@@ -9,7 +9,11 @@ for (let i = 0; i < banners.length; i++) {
     "slider"
   )[0] as HTMLElement;
   if (bannerSlider)
-    new Slider(bannerSlider, true, true, Constants.autoPlaySlideDuration);
+    new Slider(bannerSlider, {
+      isCyclic: true,
+      showNavDots: true,
+      slideDuration: Constants.autoPlaySlideDuration
+    });
 }
 
 const sliders = document.getElementsByClassName("regular slider");
