@@ -211,7 +211,6 @@ export default class Slider {
   };
 
   private handleDragEnd = (e: PointerEvent) => {
-    console.log("end  " + e.x + " " + e.y);
     const offset = e.x - this.startX;
     this.wrapper.classList.remove("dragging");
     (e.target as HTMLElement).releasePointerCapture(e.pointerId);
@@ -259,7 +258,6 @@ export default class Slider {
   };
 
   private handlePointerMove = (e: PointerEvent) => {
-    console.log("move " + e.x + " " + e.y);
     const offset = e.x - this.startX;
     if (Math.abs(offset) > Constants.abortClickDistance) {
       this.abortClick = true;
