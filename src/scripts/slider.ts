@@ -13,6 +13,7 @@ export default class Slider {
   private readonly showNavDots: boolean;
   private readonly slideDuration: number;
   private readonly slider: HTMLElement;
+  private readonly snapItems: boolean;
   private readonly wrapper: HTMLElement;
   private abortClick: boolean = false;
   private contentWidth: number = 0;
@@ -35,7 +36,8 @@ export default class Slider {
     slider: HTMLElement,
     isCyclic: boolean = false,
     showNavDots: boolean = false,
-    slideDuration: number = 0
+    slideDuration: number = 0,
+    snapItems: boolean = true
   ) {
     this.isCyclic = isCyclic;
     this.wrapper = slider.querySelector(".wrapper") as HTMLElement;
@@ -47,6 +49,7 @@ export default class Slider {
     this.secondItem = this.items.children[1] as HTMLElement;
     this.showNavDots = showNavDots;
     this.slideDuration = slideDuration;
+    this.snapItems = snapItems;
     this.slider = slider;
 
     this.handleWindowResize();
@@ -136,6 +139,8 @@ export default class Slider {
     this.items.classList.remove("notransition");
     if (this.slideDuration > 0)
       this.items.style.transitionTimingFunction = "ease-out";
+
+    if (!this.snapItems) return;
 
     let marginLeft = this.startMarginLeft + offset;
     if (this.isCyclic) {
