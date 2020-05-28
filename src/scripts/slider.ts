@@ -296,10 +296,13 @@ export default class Slider {
     this.removeCopies();
 
     if (!this.isGrabbing) {
+      let marginLeft = -this.currentIndex * this.itemWidthWithGap;
+      if (!this.options.isCyclic && marginLeft < this.minMarginLeft)
+        marginLeft = this.minMarginLeft;
+
       this.realCurrentIndex = this.currentIndex;
       this.items.classList.add("notransition");
-      this.items.style.marginLeft =
-        -this.currentIndex * this.itemWidthWithGap + "px";
+      this.items.style.marginLeft = marginLeft + "px";
       getComputedStyle(this.items).marginLeft; // flush pending style changes
       this.items.classList.remove("notransition");
       this.handleFirstPictureTransitionEnd();
@@ -435,8 +438,11 @@ export default class Slider {
   };
 
   private slide = () => {
-    this.items.style.marginLeft =
-      -this.realCurrentIndex * this.itemWidthWithGap + "px";
+    let marginLeft = -this.realCurrentIndex * this.itemWidthWithGap;
+    if (!this.options.isCyclic && marginLeft < this.minMarginLeft)
+      marginLeft = this.minMarginLeft;
+
+    this.items.style.marginLeft = marginLeft + "px";
     if (this.sliding) this.items.style.transitionTimingFunction = "ease-out";
     this.sliding = true;
   };
