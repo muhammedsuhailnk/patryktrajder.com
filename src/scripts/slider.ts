@@ -76,6 +76,19 @@ export default class Slider {
     this.handleWindowResize();
   }
 
+  private autoSlide = () => {
+    this.slideRight(1);
+  };
+
+  private beforeSlide = (newIndex: number) => {
+    this.updateNavDots(newIndex);
+    this.currentIndex = newIndex;
+    if (this.slideDuration > 0) {
+      clearTimeout(this.timer);
+      this.isTimerSet = false;
+    }
+  };
+
   private calculateContentWidth = (itemWidthWithGap: number): number => {
     return (
       this.firstItem.clientWidth +
@@ -96,7 +109,7 @@ export default class Slider {
     return minMargin;
   };
 
-  public drag = (offset: number) => {
+  private drag = (offset: number) => {
     let marginLeft = this.startMarginLeft + offset;
     if (this.isCyclic) {
       marginLeft = Utils.modNeg(marginLeft, this.contentWidthMod);
@@ -116,11 +129,11 @@ export default class Slider {
     this.currentIndex = newIndex;
   };
 
-  public dragEnd = (offset: number) => {
+  private dragEnd = (offset: number) => {
     this.isGrabbing = false;
     this.items.classList.remove("notransition");
-    if (!this.isCyclic) return; // todo tmp solution
-    this.items.style.transitionTimingFunction = "ease-out";
+    if (this.slideDuration > 0)
+      this.items.style.transitionTimingFunction = "ease-out";
 
     let marginLeft = this.startMarginLeft + offset;
     if (this.isCyclic) {
@@ -151,7 +164,7 @@ export default class Slider {
     });
   };
 
-  public dragStart = () => {
+  private dragStart = () => {
     this.itemWidthWithGap = this.calculateItemWidthWithGap();
     this.contentWidthMod = this.nItems * this.itemWidthWithGap;
     this.isGrabbing = true;
@@ -187,19 +200,6 @@ export default class Slider {
     this.minMarginLeft = this.calculateMinMarginLeft(contentWidth);
   };
 
-  private autoSlide = () => {
-    this.slideRight(1);
-  };
-
-  private handleNavDotClick = (li: HTMLLIElement) => {
-    let index = Number(li.dataset.index);
-    if (index === this.currentIndex) return;
-
-    let slideBy = index - this.currentIndex;
-    if (slideBy < 0) this.slideLeft(-slideBy);
-    else this.slideRight(slideBy);
-  };
-
   private handleClick = (e: MouseEvent) => {
     if (this.abortClick) {
       e.stopPropagation();
@@ -208,6 +208,7 @@ export default class Slider {
   };
 
   private handleDragEnd = (e: PointerEvent) => {
+    console.log("end  " + e.x + " " + e.y);
     const offset = e.x - this.startX;
     this.wrapper.classList.remove("dragging");
     (e.target as HTMLElement).releasePointerCapture(e.pointerId);
@@ -223,6 +224,15 @@ export default class Slider {
       true
     );
     this.dragEnd(offset);
+  };
+
+  private handleNavDotClick = (li: HTMLLIElement) => {
+    let index = Number(li.dataset.index);
+    if (index === this.currentIndex) return;
+
+    let slideBy = index - this.currentIndex;
+    if (slideBy < 0) this.slideLeft(-slideBy);
+    else this.slideRight(slideBy);
   };
 
   private handlePointerDown = (e: PointerEvent) => {
@@ -246,6 +256,7 @@ export default class Slider {
   };
 
   private handlePointerMove = (e: PointerEvent) => {
+    console.log("move " + e.x + " " + e.y);
     const offset = e.x - this.startX;
     if (Math.abs(offset) > Constants.abortClickDistance) {
       this.abortClick = true;
@@ -269,18 +280,6 @@ export default class Slider {
     if (this.slideDuration > 0 && !this.isTimerSet && !this.isTimerStopped) {
       this.timer = setTimeout(this.autoSlide, this.slideDuration);
       this.isTimerSet = true;
-    }
-  };
-
-  private removeCopies = () => {
-    while (this.nAddedCopiesLeft > 0) {
-      this.items.removeChild(this.items.children[0]);
-      this.nAddedCopiesLeft--;
-    }
-
-    while (this.nAddedCopiesRight > 0) {
-      this.items.removeChild(this.items.lastChild as ChildNode);
-      this.nAddedCopiesRight--;
     }
   };
 
@@ -416,12 +415,15 @@ export default class Slider {
     }
   };
 
-  private beforeSlide = (newIndex: number) => {
-    this.updateNavDots(newIndex);
-    this.currentIndex = newIndex;
-    if (this.slideDuration > 0) {
-      clearTimeout(this.timer);
-      this.isTimerSet = false;
+  private removeCopies = () => {
+    while (this.nAddedCopiesLeft > 0) {
+      this.items.removeChild(this.items.children[0]);
+      this.nAddedCopiesLeft--;
+    }
+
+    while (this.nAddedCopiesRight > 0) {
+      this.items.removeChild(this.items.lastChild as ChildNode);
+      this.nAddedCopiesRight--;
     }
   };
 
