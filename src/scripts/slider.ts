@@ -15,6 +15,8 @@ const defaultOptions: ISliderOptions = {
   snapItems: true
 };
 
+// items should have the same width
+// snapItems: false and arrows not supported
 export default class Slider {
   private readonly firstItem: HTMLElement;
   private readonly items: HTMLElement;
@@ -333,8 +335,10 @@ export default class Slider {
     this.itemWidthWithGap = this.calculateItemWidthWithGap();
     this.contentWidth = this.calculateContentWidth(this.itemWidthWithGap);
     this.minMarginLeft = this.calculateMinMarginLeft(this.contentWidth);
+    let marginLeft;
 
     if (this.contentWidth < this.items.clientWidth) {
+      marginLeft = 0;
       this.wrapper.classList.add("center");
       this.items.classList.add("notransition");
       this.items.style.marginLeft = "0";
@@ -347,9 +351,9 @@ export default class Slider {
       );
       this.items.removeEventListener("click", this.handleClick, true);
     } else {
-      if (
-        parseFloat(getComputedStyle(this.items).marginLeft) < this.minMarginLeft
-      ) {
+      marginLeft = parseFloat(getComputedStyle(this.items).marginLeft);
+
+      if (marginLeft < this.minMarginLeft) {
         this.items.classList.add("notransition");
         this.items.style.marginLeft = this.minMarginLeft + "px";
         getComputedStyle(this.items).marginLeft; // flush pending style changes
@@ -364,6 +368,8 @@ export default class Slider {
       );
       this.items.addEventListener("click", this.handleClick, true);
     }
+
+    if (!this.options.isCyclic) this.updateArrows(marginLeft);
   };
 
   private overflowLeft = (newIndex: number, by: number) => {
@@ -459,8 +465,10 @@ export default class Slider {
 
   private slide = () => {
     let marginLeft = -this.realCurrentIndex * this.itemWidthWithGap;
-    if (!this.options.isCyclic && marginLeft < this.minMarginLeft)
-      marginLeft = this.minMarginLeft;
+    if (!this.options.isCyclic) {
+      if (marginLeft < this.minMarginLeft) marginLeft = this.minMarginLeft;
+      this.updateArrows(marginLeft);
+    }
 
     this.items.style.marginLeft = marginLeft + "px";
     if (this.sliding) this.items.style.transitionTimingFunction = "ease-out";
@@ -493,12 +501,12 @@ export default class Slider {
 
   private updateArrows = (marginLeft: number) => {
     if (this.leftArrow) {
-      if (marginLeft < 0) this.leftArrow.style.display = "block";
+      if (marginLeft < 0) this.leftArrow.style.removeProperty("display");
       else this.leftArrow.style.display = "none";
     }
     if (this.rightArrow) {
       if (marginLeft > this.minMarginLeft)
-        this.rightArrow.style.display = "block";
+        this.rightArrow.style.removeProperty("display");
       else this.rightArrow.style.display = "none";
     }
   };

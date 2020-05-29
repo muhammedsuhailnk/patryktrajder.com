@@ -34,9 +34,7 @@ export default class Gallery {
 
     const sliderElement = gallery.querySelector<HTMLElement>(".slider");
     if (sliderElement) {
-      this.slider = new Slider(sliderElement as HTMLElement, {
-        snapItems: false
-      });
+      this.slider = new Slider(sliderElement as HTMLElement);
       const list = sliderElement.querySelector<HTMLElement>(".items");
       if (list) {
         this.nThumbs = list.childElementCount;
