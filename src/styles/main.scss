@@ -42,10 +42,6 @@ ul.dots {
   }
 }
 
-.bottomGapMedium {
-  margin-bottom: 6rem;
-}
-
 .categories {
   margin-left: -1rem; // todo tmp
   margin-top: -1rem; // todo tmp
@@ -75,6 +71,22 @@ ul.dots {
   p {
     text-align: center;
   }
+}
+
+.gap-bottom-medium {
+  margin-bottom: 6rem;
+}
+
+.gap-top {
+  margin-top: 2rem;
+}
+
+.gap-top-medium {
+  margin-top: 6rem;
+}
+
+.gap-top-large {
+  margin-top: 12rem;
 }
 
 .single-out-link {
@@ -161,7 +173,7 @@ ul.dots {
   }
 }
 
-.productList {
+.product-list {
   > h4 {
     margin-bottom: 0rem;
   }
@@ -181,7 +193,7 @@ ul.dots {
     min-width: 20rem;
   }
 
-  &.topGap {
+  &.gap-top {
     margin-top: -0.5rem;
   }
 }
@@ -198,18 +210,6 @@ ul.dots {
 .single-out {
   font-weight: 500;
   margin-bottom: 0.5rem;
-}
-
-.topGap {
-  margin-top: 2rem;
-}
-
-.topGapMedium {
-  margin-top: 6rem;
-}
-
-.topGapLarge {
-  margin-top: 12rem;
 }
 
 .yt-video {
