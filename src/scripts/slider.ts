@@ -110,7 +110,7 @@ export default class Slider {
     const itemMarginLeft = parseFloat(
       getComputedStyle(this.secondItem).marginLeft
     );
-    return this.secondItem.clientWidth + itemMarginLeft;
+    return this.firstItem.clientWidth + itemMarginLeft;
   };
 
   private calculateMinMarginLeft = (contentWidth: number): number => {
