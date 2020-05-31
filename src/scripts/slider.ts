@@ -17,6 +17,7 @@ const defaultOptions: ISliderOptions = {
 
 // items should have the same width
 // snapItems: false and arrows not supported
+// cyclic lists with items narrower than items container not supported
 export default class Slider {
   private readonly firstItem: HTMLElement;
   private readonly items: HTMLElement;
@@ -36,6 +37,7 @@ export default class Slider {
   private isTimerSet: boolean = false;
   private isTimerStopped: boolean = false;
   private itemWidthWithGap: number = 0;
+  private lastIndex: number = 0;
   private lastItemOverflow: number = 0;
   private minMarginLeft: number = 0;
   private nAddedCopiesLeft: number = 0;
@@ -112,6 +114,13 @@ export default class Slider {
       getComputedStyle(this.secondItem).marginLeft
     );
     return this.firstItem.clientWidth + itemMarginLeft;
+  };
+
+  private calculateLastIndex = (
+    itemWidthWithGap: number,
+    minMarginLeft: number
+  ): number => {
+    return Math.ceil(-minMarginLeft / itemWidthWithGap);
   };
 
   private calculateLastItemOverflow = (itemWidthWithGap: number): number => {
@@ -232,6 +241,7 @@ export default class Slider {
       this.items.insertBefore(firstItemCopy, null);
       this.nAddedCopiesRight++;
     } else {
+      this.updateArrows(this.startMarginLeft);
       this.handleFirstPictureTransitionEnd();
     }
 
@@ -357,6 +367,10 @@ export default class Slider {
     this.minMarginLeft = this.calculateMinMarginLeft(this.contentWidth);
     this.lastItemOverflow = this.calculateLastItemOverflow(
       this.itemWidthWithGap
+    );
+    this.lastIndex = this.calculateLastIndex(
+      this.itemWidthWithGap,
+      this.minMarginLeft
     );
     let marginLeft;
 
@@ -524,13 +538,14 @@ export default class Slider {
 
   private updateArrows = (marginLeft: number) => {
     if (this.leftArrow) {
-      if (marginLeft < 0) this.leftArrow.style.removeProperty("display");
-      else this.leftArrow.style.display = "none";
+      if (this.calculateIndex(marginLeft) === 0)
+        this.leftArrow.style.display = "none";
+      else this.leftArrow.style.removeProperty("display");
     }
     if (this.rightArrow) {
-      if (marginLeft > this.minMarginLeft)
-        this.rightArrow.style.removeProperty("display");
-      else this.rightArrow.style.display = "none";
+      if (this.calculateIndex(marginLeft) === this.lastIndex)
+        this.rightArrow.style.display = "none";
+      else this.rightArrow.style.removeProperty("display");
     }
   };
 
