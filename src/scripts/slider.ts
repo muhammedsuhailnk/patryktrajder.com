@@ -36,6 +36,7 @@ export default class Slider {
   private isTimerSet: boolean = false;
   private isTimerStopped: boolean = false;
   private itemWidthWithGap: number = 0;
+  private lastItemOverflow: number = 0;
   private minMarginLeft: number = 0;
   private nAddedCopiesLeft: number = 0;
   private nAddedCopiesRight: number = 0;
@@ -113,10 +114,38 @@ export default class Slider {
     return this.firstItem.clientWidth + itemMarginLeft;
   };
 
+  private calculateLastItemOverflow = (itemWidthWithGap: number): number => {
+    return (
+      itemWidthWithGap -
+      ((this.items.clientWidth - this.firstItem.clientWidth) % itemWidthWithGap)
+    );
+  };
+
   private calculateMinMarginLeft = (contentWidth: number): number => {
     const minMargin = this.items.clientWidth - contentWidth;
     if (minMargin > 0) return 0;
     return minMargin;
+  };
+
+  private calculateIndex = (marginLeft: number): number => {
+    return this.calculateRealIndex(marginLeft) % this.nItems;
+  };
+
+  private calculateRealIndex = (
+    marginLeft: number,
+    offset: number = 0
+  ): number => {
+    if (
+      !this.options.isCyclic &&
+      marginLeft - this.minMarginLeft < this.lastItemOverflow / 2
+    )
+      return ~~(
+        -marginLeft / this.itemWidthWithGap +
+        offset +
+        1 -
+        this.lastItemOverflow / this.itemWidthWithGap / 2
+      );
+    return ~~(-marginLeft / this.itemWidthWithGap + offset + 0.5);
   };
 
   private drag = (offset: number) => {
@@ -133,10 +162,7 @@ export default class Slider {
     }
     this.items.style.marginLeft = marginLeft + "px";
 
-    const newIndex = ~~(
-      (-marginLeft / this.itemWidthWithGap + 0.5) %
-      this.nItems
-    );
+    const newIndex = this.calculateIndex(marginLeft);
     this.updateNavDots(newIndex);
     this.currentIndex = newIndex;
   };
@@ -152,6 +178,7 @@ export default class Slider {
     if (!this.options.snapItems) return;
 
     let dragSlideTreshold = Constants.dragSlideThreshold;
+    let snapTreshold = 0.5;
     let marginLeft = this.startMarginLeft + offset;
     if (this.options.isCyclic) {
       marginLeft = Utils.modNeg(marginLeft, this.contentWidthMod);
@@ -160,32 +187,28 @@ export default class Slider {
       else if (marginLeft > 0) marginLeft = 0;
 
       if (marginLeft - this.itemWidthWithGap < this.minMarginLeft) {
-        const lastItemVisiblePart =
-          ((this.items.clientWidth - this.firstItem.clientWidth) %
-            this.itemWidthWithGap) /
-          this.itemWidthWithGap;
-        const newDragSlideTreshold = (1 - lastItemVisiblePart) / 2;
-        if (newDragSlideTreshold < Constants.dragSlideThreshold)
-          dragSlideTreshold = newDragSlideTreshold;
+        const lastItemInvisiblePart =
+          this.lastItemOverflow / this.itemWidthWithGap;
+        snapTreshold = lastItemInvisiblePart / 2;
+        if (snapTreshold < Constants.dragSlideThreshold)
+          dragSlideTreshold = snapTreshold;
       }
     }
 
-    let threshold;
-    if (offset > 0) threshold = dragSlideTreshold;
-    else threshold = 1 - dragSlideTreshold;
-
     const partialIndex = -marginLeft / this.itemWidthWithGap;
-    this.realCurrentIndex = ~~(partialIndex + 0.5);
-    let newIndex = ~~((partialIndex + threshold) % this.nItems);
+    const offsetRatio = offset / this.itemWidthWithGap;
+    let additionalOffset = 0;
+    if (offsetRatio > dragSlideTreshold) additionalOffset = -0.5;
+    else if (offsetRatio < -dragSlideTreshold) additionalOffset = 0.5;
+
+    this.realCurrentIndex = this.calculateRealIndex(marginLeft);
+    let newRealIndex = this.calculateRealIndex(marginLeft, additionalOffset);
 
     setTimeout(() => {
-      if (this.currentIndex !== newIndex && offset !== 0) {
-        if (offset > 0) this.slideLeft(1);
-        else this.slideRight(1);
-      } else {
-        if (partialIndex - ~~partialIndex > 0.5) this.slideRight(0);
-        else this.slideLeft(0);
-      }
+      if (this.realCurrentIndex > newRealIndex) this.slideLeft(1);
+      else if (this.realCurrentIndex < newRealIndex) this.slideRight(1);
+      else if (partialIndex - ~~partialIndex > snapTreshold) this.slideRight(0);
+      else this.slideLeft(0);
 
       this.items.addEventListener("transitionend", this.handleTransitionEnd);
     });
@@ -212,10 +235,7 @@ export default class Slider {
       this.handleFirstPictureTransitionEnd();
     }
 
-    const newIndex = ~~(
-      (-this.startMarginLeft / this.itemWidthWithGap + 0.5) %
-      this.nItems
-    );
+    const newIndex = this.calculateIndex(this.startMarginLeft);
     this.updateNavDots(newIndex);
     this.currentIndex = newIndex;
 
@@ -335,6 +355,9 @@ export default class Slider {
     this.itemWidthWithGap = this.calculateItemWidthWithGap();
     this.contentWidth = this.calculateContentWidth(this.itemWidthWithGap);
     this.minMarginLeft = this.calculateMinMarginLeft(this.contentWidth);
+    this.lastItemOverflow = this.calculateLastItemOverflow(
+      this.itemWidthWithGap
+    );
     let marginLeft;
 
     if (this.contentWidth < this.items.clientWidth) {
