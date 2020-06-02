@@ -40,6 +40,7 @@
       .close {
         color: $eerieBlack;
         cursor: pointer;
+        font-size: 3rem;
         position: fixed;
         top: 1rem;
         right: 1rem;
@@ -50,11 +51,6 @@
 
         &:active {
           background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        svg.icon {
-          height: 3em;
-          width: 3em;
         }
       }
     }
