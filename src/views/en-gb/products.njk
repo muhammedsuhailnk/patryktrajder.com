@@ -1,0 +1,61 @@
+{% extends "templates/layout-en-gb.njk" %}
+{% set tab = "products" %}
+
+{% block body %}
+  <div class="banner">
+    <div class="container">
+      <img src="/assets/images/products-banner-w1920.jpg" alt="Tools on the workshop wall"/>
+    </div>
+  </div>
+
+  <main>
+    <nav class="categories gap-top">
+      <a href="#diy-tools">
+        <p>
+          DIY tools
+        </p>
+      </a>
+      <a href="#gadgets">
+        <p>
+          Gadgets
+        </p>
+      </a>
+    </nav>
+
+    <article id="diy-tools" class="gap-top product-list">
+      <h1 class="gap-bottom-medium">
+        DIY tools
+      </h1>
+      <section style="background: #f4f9ff; padding: 1rem;">
+        <h2>
+          <a href="super-booster-2000/">Tube Notcher - Super Booster 2000</a>
+        </h2>
+        <h4 style="color: #999999; margin-top: 0.5rem;">Pipe/profile punching machine - assembly kit</h4>
+        <div class="row gap-top">
+          <div>
+            <p>
+              Like me, aren't you a big fan of tube / profile processing for welding? Do you like tinkering, building buggies, go-karts, railings, railings or any constellation from pipes or profiles? If so, I would like to introduce you to a device that can really make your work easier 😉.
+            </p>
+            <p class="single-out-link">
+              <a href="super-booster-2000/">More information...</a>
+            </p>
+          </div>
+          <div>
+            <a href="super-booster-2000/">
+              <img src="/assets/images/super-booster-2000/thumb-w1120.jpg" alt="Super Booster 2000"/>
+            </a>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <article id="gadgets" class="gap-top-large">
+      <h1>
+        Gadgets
+      </h1>
+      <p>
+        If you want any cups or T-shirts, let me know at&#32;<a href="mailto:iwantacup@trajder.com">iwantacup@trajder.com</a>&#32;xD
+      </p>
+    </article>
+  </main>
+{% endblock %}

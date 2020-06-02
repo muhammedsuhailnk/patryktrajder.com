@@ -1,0 +1,24 @@
+.language-dropdown {
+  font-size: 1.5rem;
+  position: absolute;
+  text-align: left;
+
+  > button.current {
+    margin-top: 14px;
+
+    > .flag {
+      margin-right: 0.5rem;
+    }
+  }
+
+  > .list {
+    height: 0;
+    overflow: hidden;
+    transition-duration: 0.2s;
+
+    > * {
+      display: block;
+      padding: 0.25rem 0;
+    }
+  }
+}

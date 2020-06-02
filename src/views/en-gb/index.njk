@@ -1,0 +1,134 @@
+{% extends "templates/layout-en-gb.njk" %}
+{% set tab = "home" %}
+
+{% block vectors %}
+    {% include "vectors/arrow-left.sym" %}
+    {% include "vectors/arrow-right.sym" %}
+{% endblock %}
+
+{% block body %}
+    <div class="banner sliding-banner">
+        <div class="container slider">
+            <div class="wrapper">
+                <div class="items">
+                    <img draggable="false" src="/assets/images/banner1-h730.jpg" alt="First slide"/>
+                    <img draggable="false" src="/assets/images/banner2-h730.jpg" alt="Second slajd"/>
+                </div>
+            </div>
+            <ul></ul>
+            <button class="arrow left">
+                <svg class="icon">
+                    <use xlink:href="#icon-arrow-left"></use>
+                </svg>
+            </button>
+            <button class="arrow right">
+                <svg class="icon">
+                    <use xlink:href="#icon-arrow-right"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <main>
+        <article class="centered-text gap-top-medium">
+            <section>
+                <h1>Shortly about the channel</h1>
+                <p>
+                    The main idea of the channel is to run a series with crazy inventions and experiments. I wanted to create a cool workshop, but I couldn't afford to buy expensive equipment at such a young age (I started at 14). So I decided to build it myself. You could say it's a bit of a half-measure to the point. However, I liked creating my own tools so much that I'm not going to leave it behind and on my channel you will find both crazy inventions and building tools that I use in other series. You can see the series from tool building here:
+                </p>
+                <div class="yt-video">
+                    <div>
+                        <iframe src="https://www.youtube-nocookie.com/embed/a3s6aUMMPb8?rel=0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+                    </div>
+                </div>
+                <p>
+                    When it comes to "crazy inventions", my head is full of ideas, but so far I have spent all my free time on learning how to record, assemble and build tools. What I do is a combination of my two biggest passions, namely recording and DIY in every issue (both more and less needed by the world 😉). If you want to know more about me&#32;<a href="about/">click here</a>.
+                </p>
+            </section>
+            <section class="gap-top-medium">
+                <h1>Newest projects</h1>
+                <div class="regular slider">
+                    <div class="wrapper">
+                        <div class="items">
+                            {# <div class="card">
+              <a draggable="false" href="projects/hydraulic-cylinder/"><img draggable="false" src="/assets/images/projects/hydraulic-cylinder/thumb.jpg" alt="Hydraulic cylinder"></a>
+            </div> #}
+                            <div class="card">
+                                <div>
+                                    <a class="thumb" draggable="false" href="projects/hydraulic-power-pack/"><img draggable="false" src="/assets/images/projects/hydraulic-power-pack/thumb-w320.jpg" alt="Mobile hydraulic power unit"></a>
+                                    <div class="container">
+                                        <h4>
+                                            <a draggable="false" href="projects/hydraulic-power-pack/">Hydraulic Power Pack</a>
+                                        </h4>
+                                        <h5>Check how to make a mobile hydraulic unit. I will use it for my press, and many other hydraulics-related equipment that I hope to build in the future. Most of the elements such as: steel, electric motor, manifold come from scrap metal, which allowed to reduce construction costs to a minimum ;)</h5>
+                                        <div><hr></div>
+                                        <a class="link" draggable="false" href="projects/hydraulic-power-pack/">Go to the article</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="placeholder tmp">
+                                    <div style="display: flex; align-items: center; height: 100%;">
+                                        <p style="width: 100%;">More projects soon...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="arrow left">
+                        <svg class="icon">
+                            <use xlink:href="#icon-arrow-left"></use>
+                        </svg>
+                    </button>
+                    <button class="arrow right">
+                        <svg class="icon">
+                            <use xlink:href="#icon-arrow-right"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div style="margin-top: 1rem;">The article on the construction of the hydraulic cylinder will be available shortly ;)</div>
+            </section>
+            <section class="gap-top-medium">
+                <h1>Newest products</h1>
+                <div class="regular slider">
+                    <div class="wrapper">
+                        <div class="items">
+                            <div class="card">
+                                <div>
+                                    <a class="thumb" draggable="false" href="/products/super-booster-2000/">
+                                        <img draggable="false" src="/assets/images/super-booster-2000/thumb-w320.jpg" alt="Super Booster 2000">
+                                    </a>
+                                    <div class="container">
+                                        <h4>
+                                            <a draggable="false" href="/products/super-booster-2000/">Super Booster 2000</a>
+                                        </h4>
+                                        <h5>Like me, aren't you a big fan of tube / profile processing for welding? Do you like tinkering, building buggies, go-karts, railings, railings or any constellation from pipes or profiles? If so, I would like to introduce you to a device that can really make your work easier 😉.</h5>
+                                        <div><hr></div>
+                                        <a class="link" draggable="false" href="/products/super-booster-2000/">Go to the offer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="placeholder tmp" style="background: #f98525;">
+                                    <div style="display: flex; align-items: center; height: 100%;">
+                                        <p style="width: 100%;">More products soon...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="arrow left">
+                        <svg class="icon">
+                            <use xlink:href="#icon-arrow-left"></use>
+                        </svg>
+                    </button>
+                    <button class="arrow right">
+                        <svg class="icon">
+                            <use xlink:href="#icon-arrow-right"></use>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+        </article>
+    </main>
+{% endblock %}
