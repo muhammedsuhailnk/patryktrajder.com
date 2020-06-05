@@ -13,6 +13,7 @@ export default class Expander {
     this.svgUse = expander.querySelector("use") as SVGUseElement;
 
     button.addEventListener("click", this.toggle);
+    addEventListener("resize", this.handleWindowResize);
   }
 
   private toggle = () => {
@@ -25,6 +26,13 @@ export default class Expander {
       this.svgUse.href.baseVal = "#icon-chevron-down";
       if (window.scrollY > this.expander.offsetTop)
         window.scrollTo(window.scrollX, this.expander.offsetTop);
+    }
+  };
+
+  private handleWindowResize = () => {
+    if (this.isExpanded) {
+      this.container.style.height = "auto";
+      this.container.style.height = this.container.scrollHeight + "px";
     }
   };
 }
