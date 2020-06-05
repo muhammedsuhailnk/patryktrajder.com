@@ -41,16 +41,6 @@ button {
   outline: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  overflow-wrap: break-word;
-}
-
 h1 {
   font-size: 2.5rem;
   margin-bottom: 2.5rem;
@@ -89,6 +79,10 @@ main {
   img {
     border-radius: 10px;
   }
+
+  @media (max-width: 150px) {
+    padding: 0;
+  }
 }
 
 nav {
@@ -97,14 +91,21 @@ nav {
   > ul {
     > li {
       display: inline-block;
-      margin: 0 0.35rem 2rem 0.35rem;
+      max-width: 100%;
+      padding: 0 0.35rem 2rem 0.35rem;
+      vertical-align: middle;
 
       > a {
         color: $eerieBlack;
+        display: block;
         padding: 0.6rem 1.2rem;
 
         &:hover {
           color: $azure;
+        }
+
+        @media (max-width: 150px) {
+          padding: 0.6rem 0;
         }
       }
 

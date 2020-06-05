@@ -1,6 +1,5 @@
 .language-dropdown {
   font-size: 1.5rem;
-  position: absolute;
   text-align: left;
 
   > button.current {
@@ -14,6 +13,7 @@
   > .list {
     height: 0;
     overflow: hidden;
+    position: absolute;
     transition-duration: 0.2s;
 
     > * {
