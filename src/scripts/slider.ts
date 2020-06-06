@@ -181,8 +181,7 @@ export default class Slider {
 
     this.isGrabbing = false;
     this.items.classList.remove("notransition");
-    if (this.options.slideDuration > 0)
-      this.items.style.transitionTimingFunction = "ease-out";
+    this.items.style.transitionTimingFunction = "ease-out";
 
     if (!this.options.snapItems) return;
 
@@ -457,8 +456,14 @@ export default class Slider {
   };
 
   private setUpArrows = () => {
-    this.leftArrow?.addEventListener("click", () => this.slideLeft(1));
-    this.rightArrow?.addEventListener("click", () => this.slideRight(1));
+    this.leftArrow?.addEventListener("click", () => {
+      this.slideLeft(1);
+      this.items.style.transitionTimingFunction = "ease-out";
+    });
+    this.rightArrow?.addEventListener("click", () => {
+      this.slideRight(1);
+      this.items.style.transitionTimingFunction = "ease-out";
+    });
 
     if (!this.options.isCyclic) {
       if (this.leftArrow) this.leftArrow.style.display = "none";
