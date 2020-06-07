@@ -33,28 +33,28 @@
 
         <header>
             <h1>
-                <a href="/">Patryk Trajder</a>
+                <a href="/" title="Strona główna">Patryk Trajder</a>
             </h1>
             <nav>
                 <ul>
                     <li {% if tab === "home" %} class="current" {% endif %}>
-                        <a href="/">Witaj</a>
+                        <a href="/" title="Strona główna">Witaj</a>
                     </li>
                     <li {% if tab === "about" %} class="current" {% endif %}>
-                        <a href="/about/">O mnie</a>
+                        <a href="/about/" title="O mnie">O mnie</a>
                     </li>
                     <li {% if tab === "products" %} class="current" {% endif %}>
-                        <a href="/products/">Produkty</a>
+                        <a href="/products/" title="Produkty">Produkty</a>
                     </li>
                     <li {% if tab === "projects" %} class="current" {% endif %}>
-                        <a href="/projects/">Projekty</a>
+                        <a href="/projects/" title="Projekty">Projekty</a>
                     </li>
                     <li>
-                        <a href="#contact">Kontakt</a>
+                        <a href="#contact" title="Kontakt">Kontakt</a>
                     </li>
                     <li>
                         <div class="language-dropdown">
-                            <button class="current">
+                            <button class="current" title="Zmień język">
                                 <svg class="icon flag">
                                     <use xlink:href="#icon-flag-pl"></use>
                                 </svg>
@@ -63,7 +63,7 @@
                                 </svg>
                             </button>
                             <div class="list">
-                                <button data-lang="en-gb">
+                                <button data-lang="en-gb" title="Angielski">
                                     <svg class="icon">
                                         <use xlink:href="#icon-flag-en-gb"></use>
                                     </svg>
@@ -83,37 +83,39 @@
             <div class="row">
                 <h1>Kontakt</h1>
                 <div class="social-media">
-                    <a href="https://www.youtube.com/channel/UCg3hDpgzJpqBMBo4K-0aGrw" target="_blank">
-                        <svg class="icon youtube">
-                            <use xlink:href="#icon-youtube"></use>
-                        </svg>
-                    </a>
-                    <a href="https://facebook.com/trajder.serwis" target="_blank">
-                        <svg class="icon facebook">
-                            <use xlink:href="#icon-facebook"></use>
-                        </svg>
-                    </a>
-                    <a href="https://www.instagram.com/patryktrajder/" target="_blank">
-                        <svg class="icon">
-                            <use xlink:href="#icon-instagram"></use>
-                        </svg>
-                    </a>
+                    <div>
+                        <a href="https://www.youtube.com/channel/UCg3hDpgzJpqBMBo4K-0aGrw" rel="noreferrer" target="_blank" title="Mój kanał na Youtubie">
+                            <svg class="icon youtube">
+                                <use xlink:href="#icon-youtube"></use>
+                            </svg>
+                        </a>
+                        <a href="https://facebook.com/trajder.serwis" rel="noreferrer" target="_blank" title="Mój fanpage na Facebooku">
+                            <svg class="icon facebook">
+                                <use xlink:href="#icon-facebook"></use>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/patryktrajder/" rel="noreferrer" target="_blank" title="Mój profil na Instagramie">
+                            <svg class="icon">
+                                <use xlink:href="#icon-instagram"></use>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="row links">
                 <div>
                     <h3>W sprawie zakupu:</h3>
                     <p>
-                        <a href="mailto:sklep@trajder.com">sklep@trajder.com</a>
+                        <a href="mailto:sklep@trajder.com" title="sklep@trajder.com">sklep@trajder.com</a>
                     </p>
                     <p>
-                        <a href="https://facebook.com/trajder.serwis" target="_blank">facebook.com/trajder.serwis</a>
+                        <a href="https://facebook.com/trajder.serwis" rel="noreferrer" target="_blank" title="Mój fanpage na Facebooku">facebook.com/trajder.serwis</a>
                     </p>
                 </div>
                 <div>
                     <h3>Współpraca / zapytania biznesowe:</h3>
                     <p>
-                        <a href="mailto:patryk@trajder.com">patryk@trajder.com</a>
+                        <a href="mailto:patryk@trajder.com" title="patryk@trajder.com">patryk@trajder.com</a>
                     </p>
                 </div>
             </div>
@@ -124,7 +126,7 @@
                     <li>&copy; Patryk Trajder. All rights reserved.</li>
                     <li>
                         Design:&#32;
-                        <a href="http://github.com/jakubjanowski" target="_blank">Jakub Janowski</a>
+                        <a href="http://github.com/jakubjanowski" rel="noreferrer" target="_blank" title="Potrzebujesz strony internetowej?">Jakub Janowski</a>
                     </li>
                 </ul>
             </div>

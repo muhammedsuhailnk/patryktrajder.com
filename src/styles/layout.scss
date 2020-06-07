@@ -1,0 +1,59 @@
+p.indent {
+  margin-left: 2rem;
+}
+
+.centered-text {
+  text-align: center;
+
+  p {
+    text-align: center;
+  }
+}
+
+.gap-bottom-medium {
+  margin-bottom: 6rem;
+}
+
+.gap-top {
+  margin-top: 2rem;
+}
+
+.gap-top-medium {
+  margin-top: 6rem;
+}
+
+.gap-top-large {
+  margin-top: 12rem;
+}
+
+.row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin: -2.5rem 0 2rem -2.5rem;
+
+  > * {
+    flex-basis: 0;
+    flex-grow: 1;
+    margin-top: 2.5rem;
+    margin-left: 2.5rem;
+    min-width: 0;
+
+    @media (max-width: 768px) {
+      flex-basis: 100%;
+    }
+  }
+
+  &.gap-top {
+    margin-top: -0.5rem;
+  }
+}
+
+.shrink {
+  max-width: 40.8rem; // 60% of 70rem
+
+  &.center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

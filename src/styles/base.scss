@@ -13,6 +13,8 @@ a {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
   > header {
@@ -41,14 +43,107 @@ button {
   outline: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  overflow-wrap: break-word;
+footer {
+  color: $silverSand;
+  background-color: $eerieBlack;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+
+  p > a {
+    color: $aliceBlue;
+  }
+
+  section.container {
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 70rem;
+    max-width: 100%;
+
+    .links {
+      p + p {
+        margin-top: 0.1rem;
+      }
+    }
+
+    .social-media {
+      > div {
+        margin: -1rem 0 0 -1.3rem;
+
+        a {
+          margin-left: 1.3rem;
+        }
+
+        svg {
+          font-size: 2.5rem;
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    @media (max-width: 150px) {
+      padding: 0;
+    }
+  }
+
+  .copyright {
+    color: $usafaBlue;
+    margin: 3rem 2rem 2rem 2rem;
+    text-align: center;
+
+    a {
+      color: $azure;
+    }
+
+    > div {
+      background: $prussianBlue;
+      border-radius: 10px;
+      display: inline-block;
+      max-width: 100%;
+      padding: 0.3rem 1rem;
+
+      ul.separated-list {
+        display: inline-flex;
+        flex-wrap: wrap;
+        margin-right: -2px;
+        overflow: hidden;
+
+        li {
+          border-left: solid 1px $usafaBlue;
+          flex-grow: 1;
+          margin: 0.25rem 2px 0.25rem -2px;
+          max-width: 100%;
+          overflow-wrap: break-word;
+          padding: 0.3rem 1rem;
+        }
+      }
+    }
+
+    @media (max-width: 400px) {
+      margin: 3rem 1rem 2rem 1rem;
+
+      > div {
+        padding: 0.3rem 0;
+      }
+    }
+
+    @media (max-width: 150px) {
+      margin: 0;
+
+      > div {
+        ul.separated-list {
+          max-width: calc(100% - 2px);
+
+          li {
+            padding: 0.3rem 0;
+          }
+        }
+      }
+    }
+  }
+
+  .row {
+    align-items: flex-start;
+  }
 }
 
 h1 {
@@ -89,6 +184,10 @@ main {
   img {
     border-radius: 10px;
   }
+
+  @media (max-width: 150px) {
+    padding: 0;
+  }
 }
 
 nav {
@@ -97,14 +196,21 @@ nav {
   > ul {
     > li {
       display: inline-block;
-      margin: 0 0.35rem 2rem 0.35rem;
+      max-width: 100%;
+      padding: 0 0.35rem 2rem 0.35rem;
+      vertical-align: middle;
 
       > a {
         color: $eerieBlack;
+        display: block;
         padding: 0.6rem 1.2rem;
 
         &:hover {
           color: $azure;
+        }
+
+        @media (max-width: 150px) {
+          padding: 0.6rem 0;
         }
       }
 

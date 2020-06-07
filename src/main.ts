@@ -1,19 +1,11 @@
-import Constants from "./scripts/constants";
+import Banner from "./scripts/banner";
 import Expander from "./scripts/expander";
 import Gallery from "./scripts/gallery";
 import LanguageDropdown from "./scripts/language-dropdown";
 import Slider from "./scripts/slider";
 
 const banners = document.getElementsByClassName("banner");
-for (let i = 0; i < banners.length; i++) {
-  const bannerSlider = banners[i].querySelector(".slider") as HTMLElement;
-  if (bannerSlider)
-    new Slider(bannerSlider, {
-      isCyclic: true,
-      showNavDots: true,
-      slideDuration: Constants.autoPlaySlideDuration
-    });
-}
+for (let i = 0; i < banners.length; i++) new Banner(banners[i] as HTMLElement);
 
 const sliders = document.getElementsByClassName("regular slider");
 for (let i = 0; i < sliders.length; i++) new Slider(sliders[i] as HTMLElement);
