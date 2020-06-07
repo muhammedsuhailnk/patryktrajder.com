@@ -1,4 +1,5 @@
 import Banner from "./scripts/banner";
+import Checkbox from "./scripts/checkbox";
 import Expander from "./scripts/expander";
 import Gallery from "./scripts/gallery";
 import LanguageDropdown from "./scripts/language-dropdown";
@@ -6,6 +7,9 @@ import Slider from "./scripts/slider";
 
 const banners = document.getElementsByClassName("banner");
 for (let i = 0; i < banners.length; i++) new Banner(banners[i] as HTMLElement);
+
+let checkbox = document.querySelector("#super-booster-2000 .checkbox");
+if (checkbox) new Checkbox(checkbox as HTMLElement, 689, 599, 179, 159, true);
 
 const sliders = document.getElementsByClassName("regular slider");
 for (let i = 0; i < sliders.length; i++) new Slider(sliders[i] as HTMLElement);

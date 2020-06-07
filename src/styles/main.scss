@@ -7,6 +7,7 @@
 @import "components/expander";
 @import "components/gallery";
 @import "components/language-dropdown";
+@import "components/product-details";
 @import "components/slider";
 
 svg.icon {
@@ -78,69 +79,6 @@ ul.dots {
   -o-transition: none !important;
   -ms-transition: none !important;
   transition: none !important;
-}
-
-.product-details {
-  .contact {
-    margin-left: -1rem;
-
-    a {
-      background: $cultured;
-      border-radius: 10px;
-      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3), 0 -1px 0px rgba(0, 0, 0, 0.03);
-      display: inline-block;
-      margin: 1rem 0 0 1rem;
-      max-width: 100%;
-      padding: 0.45rem 1rem 0.55rem 1rem;
-      position: relative;
-
-      &::before {
-        background: black;
-        border-radius: 10px;
-        content: "";
-        opacity: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-      }
-
-      &:hover::before {
-        opacity: 0.05;
-      }
-
-      &:active::before {
-        opacity: 0.1;
-      }
-
-      &.email {
-        svg {
-          font-size: 1.25rem;
-          margin-bottom: -0.3rem;
-        }
-      }
-
-      &.messenger {
-        svg {
-          margin-bottom: -0.2rem;
-          font-size: 1rem;
-        }
-      }
-
-      svg {
-        margin-right: 0.5rem;
-      }
-    }
-  }
-
-  .price {
-    margin-top: 0.5rem;
-
-    > * {
-      display: inline;
-    }
-  }
 }
 
 .product-list {
