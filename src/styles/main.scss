@@ -44,6 +44,10 @@ ul.dots {
   margin: -1rem 0 0 -1rem;
   max-width: 100%;
 
+  &.gap-top {
+    margin-top: 1rem;
+  }
+
   > a {
     background-color: $aliceBlue;
     color: $azure;
