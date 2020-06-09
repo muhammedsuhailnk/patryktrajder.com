@@ -21,6 +21,11 @@ export default class LanguageDropdown {
     }
   }
 
+  public static getLanguage(): string {
+    if (location.pathname.substr(0, 6) === "/en-gb") return "en-gb";
+    else return "pl";
+  }
+
   private changeLanguage(language: string): any {
     let url;
     if (language === "pl") {
