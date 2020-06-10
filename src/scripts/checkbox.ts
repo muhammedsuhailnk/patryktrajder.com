@@ -39,12 +39,12 @@ export default class Checkbox {
     ) as HTMLSpanElement;
     if (this.isChecked) {
       if (LanguageDropdown.getLanguage() === "pl")
-        valueSpan.innerHTML = this.priceWith + " PLN";
-      else valueSpan.innerHTML = this.priceWithEn + " USD";
+        valueSpan.innerHTML = this.priceWith.toString();
+      else valueSpan.innerHTML = this.priceWithEn.toString();
     } else {
       if (LanguageDropdown.getLanguage() === "pl")
-        valueSpan.innerHTML = this.priceWithout + " PLN";
-      else valueSpan.innerHTML = this.priceWithoutEn + " USD";
+        valueSpan.innerHTML = this.priceWithout.toString();
+      else valueSpan.innerHTML = this.priceWithoutEn.toString();
     }
   };
 }
