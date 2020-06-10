@@ -59,6 +59,10 @@ function notFoundStyles() {
     .pipe(gulp.dest(distDir + "/src/"));
 }
 
+function robots() {
+  return gulp.src("robots.txt").pipe(gulp.dest(distDir));
+}
+
 function scripts() {
   return gulp
     .src("src/scripts/**/*.ts")
@@ -79,6 +83,10 @@ function scriptsDev() {
     .src("src/scripts/**/*.ts")
     .pipe(webpack(config))
     .pipe(gulp.dest(distDir + "/src/"));
+}
+
+function sitemap() {
+  return gulp.src("sitemap.xml").pipe(gulp.dest(distDir));
 }
 
 function styles() {
@@ -131,6 +139,8 @@ gulp.task("deploy", function () {
   );
 });
 
+gulp.task("rootfiles", gulp.parallel(cname, googleYTAuth, robots, sitemap));
+
 gulp.task(
   "src",
   gulp.parallel(html, notFoundPage, notFoundStyles, scripts, styles)
@@ -150,9 +160,5 @@ gulp.task(
 
 gulp.task(
   "dist",
-  gulp.series(
-    "clean",
-    gulp.parallel("assets", cname, googleYTAuth, "src"),
-    "deploy"
-  )
+  gulp.series("clean", gulp.parallel("assets", "rootfiles", "src"), "deploy")
 );
