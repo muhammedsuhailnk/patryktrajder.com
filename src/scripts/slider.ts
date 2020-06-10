@@ -27,7 +27,6 @@ export default class Slider {
   private readonly nItems: number;
   private readonly options: ISliderOptions;
   private readonly secondItem: HTMLElement;
-  private readonly slider: HTMLElement;
   private readonly wrapper: HTMLElement;
   private abortClick: boolean = false;
   private contentWidth: number = 0;
@@ -49,7 +48,10 @@ export default class Slider {
   private startX: number = 0;
   private timer?: number;
 
-  constructor(slider: HTMLElement, options?: Partial<ISliderOptions>) {
+  constructor(
+    private readonly slider: HTMLElement,
+    options?: Partial<ISliderOptions>
+  ) {
     this.options = { ...defaultOptions, ...options };
     this.wrapper = slider.querySelector(".wrapper") as HTMLElement;
     this.items = this.wrapper.querySelector(".items") as HTMLElement;

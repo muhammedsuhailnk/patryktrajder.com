@@ -5,7 +5,6 @@ export default class Gallery {
   private readonly closeButton: HTMLButtonElement;
   private readonly full: HTMLElement;
   private readonly fullImg: HTMLImageElement;
-  private readonly gallery: Element;
   private readonly nThumbs?: number;
   private readonly previewImg: HTMLImageElement;
   private readonly slider?: Slider;
@@ -17,8 +16,7 @@ export default class Gallery {
   private startX: number = 0;
   private startY: number = 0;
 
-  constructor(gallery: Element) {
-    this.gallery = gallery;
+  constructor(private readonly gallery: Element) {
     this.full = gallery.querySelector(".full") as HTMLElement;
     this.fullImg = this.full.querySelector("img") as HTMLImageElement;
     this.closeButton = this.full.querySelector(".close") as HTMLButtonElement;

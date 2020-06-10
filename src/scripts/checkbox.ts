@@ -4,11 +4,11 @@ export default class Checkbox {
   private readonly svgUse: SVGUseElement;
 
   constructor(
-    private container: HTMLElement,
-    private priceWith: number,
-    private priceWithout: number,
-    private priceWithEn: number,
-    private priceWithoutEn: number,
+    private readonly container: HTMLElement,
+    private readonly priceWith: number,
+    private readonly priceWithout: number,
+    private readonly priceWithEn: number,
+    private readonly priceWithoutEn: number,
     private isChecked: boolean = false
   ) {
     let icon = container.querySelector("svg.icon") as HTMLElement;
