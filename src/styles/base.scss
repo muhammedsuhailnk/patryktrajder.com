@@ -181,12 +181,22 @@ main {
   width: 70rem;
   max-width: 100%;
 
-  img {
+  img,
+  .image-loading {
     border-radius: 10px;
   }
 
   @media (max-width: 150px) {
     padding: 0;
+  }
+}
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
   }
 }
 
@@ -230,5 +240,48 @@ p {
 
   > a {
     color: $azure;
+  }
+}
+
+.image-loading {
+  animation: placeHolderShimmer 1.8s linear infinite forwards;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #fafafa 8%, #f4f4f4 38%, #fafafa 54%);
+  // background: $aliceBlue;
+  // background: linear-gradient(
+  //   to right,
+  //   $aliceBlueLight 8%,
+  //   $aliceBlue 38%,
+  //   $aliceBlueLight 54%
+  // );
+  background-size: 1000px 640px;
+  display: block;
+  position: relative;
+  padding-top: 56.25%;
+
+  > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &.ratio3to2 {
+    padding-top: 2/3 * 100%;
+  }
+
+  &.ratio4to3 {
+    padding-top: 3/4 * 100%;
+  }
+}
+
+.image-placeholder {
+  display: block;
+  position: relative;
+  padding-top: 56.25%;
+
+  > img {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }

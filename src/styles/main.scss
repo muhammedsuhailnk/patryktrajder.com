@@ -64,15 +64,6 @@ ul.dots {
   }
 }
 
-.single-out-link {
-  font-size: 1.25rem;
-  margin-top: 1rem;
-
-  &:hover {
-    color: $azure;
-  }
-}
-
 .notransition {
   -webkit-transition: none !important;
   -moz-transition: none !important;
@@ -90,6 +81,15 @@ ul.dots {
 .single-out {
   font-weight: 500;
   margin-bottom: 0.5rem;
+}
+
+.single-out-link {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+
+  &:hover {
+    color: $azure;
+  }
 }
 
 .yt-video {

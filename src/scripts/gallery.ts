@@ -7,6 +7,7 @@ export default class Gallery {
   private readonly fullImg: HTMLImageElement;
   private readonly nThumbs?: number;
   private readonly previewImg: HTMLImageElement;
+  private readonly previewImgWrapper: HTMLDivElement;
   private readonly slider?: Slider;
   private abortClick: boolean = false;
   private isGrabbing: boolean = false;
@@ -20,8 +21,11 @@ export default class Gallery {
     this.full = gallery.querySelector(".full") as HTMLElement;
     this.fullImg = this.full.querySelector("img") as HTMLImageElement;
     this.closeButton = this.full.querySelector(".close") as HTMLButtonElement;
-    this.previewImg = gallery.querySelector(
-      ".preview > img"
+    this.previewImgWrapper = gallery.querySelector(
+      ".preview .image-loading"
+    ) as HTMLImageElement;
+    this.previewImg = this.previewImgWrapper.querySelector(
+      "img"
     ) as HTMLImageElement;
 
     this.previewImg.addEventListener("click", this.showFullImage);
@@ -49,6 +53,8 @@ export default class Gallery {
 
   public showPreview = (img: HTMLImageElement) => {
     this.previewImg.src = img.src.replace("h100.jpg", "h400.jpg");
+    const ratio = img.dataset.ratio || "56.25";
+    this.previewImgWrapper.style.paddingTop = ratio + "%";
   };
 
   private handleThumbLoad = (thumb: HTMLImageElement) => {
