@@ -1,3 +1,5 @@
+@import "../variables.scss";
+
 .gallery {
   .full {
     background-color: rgba(0, 0, 0, 0.5);
@@ -10,6 +12,13 @@
     z-index: 1;
 
     .container {
+      background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg' width='120'><defs><filter id='a' x='-50%25' y='-50%25' width='200%25' height='200%25'><feDropShadow dx='0' dy='0' stdDeviation='5' flood-color='white' flood-opacity='0.6'/></filter></defs><circle cx='60' cy='60' r='46' fill='transparent' stroke-width='8' stroke='" + encodecolor(
+          $princetonOrange
+        ) + "' stroke-linecap='round' stroke-dasharray='60,300' style='filter:url(%23a)%3B'><animateTransform attributeName='transform' attributeType='XML' type='rotate' from='0 60 60' to='360 60 60' dur='1s' repeatCount='indefinite'></animateTransform></circle><circle cx='60' cy='60' r='46' fill='transparent' stroke-width='8' stroke='" + encodecolor(
+          $azure
+        ) + "' stroke-linecap='round' stroke-dasharray='60, 300' style='filter:url(%23a)%3B'><animateTransform attributeName='transform' attributeType='XML' type='rotate' from='-180 60 60' to='180 60 60' dur='1s' repeatCount='indefinite'></animateTransform></circle></svg>");
+      background-position: center center;
+      background-repeat: no-repeat;
       bottom: 0;
       left: 0;
       margin: 1rem;

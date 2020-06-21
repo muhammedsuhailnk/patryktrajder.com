@@ -113,14 +113,8 @@ export default class Gallery {
 
   private showFullImage = () => {
     this.fullImg.src = this.previewImg.src.replace("-h400.jpg", ".jpg");
-    this.fullImg.addEventListener(
-      "load",
-      () => {
-        this.full.style.display = "block";
-        document.body.style.overflow = "hidden";
-      },
-      { once: true }
-    );
+    this.full.style.display = "block";
+    document.body.style.overflow = "hidden";
   };
 
   private setUpZoom = () => {
