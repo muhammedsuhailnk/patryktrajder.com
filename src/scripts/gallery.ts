@@ -4,6 +4,7 @@ import Slider from "./slider";
 export default class Gallery {
   private readonly closeButton: HTMLButtonElement;
   private readonly full: HTMLElement;
+  private readonly fullContainer: HTMLElement;
   private readonly fullImg: HTMLImageElement;
   private readonly nThumbs?: number;
   private readonly previewImg: HTMLImageElement;
@@ -19,7 +20,8 @@ export default class Gallery {
 
   constructor(private readonly gallery: Element) {
     this.full = gallery.querySelector(".full") as HTMLElement;
-    this.fullImg = this.full.querySelector("img") as HTMLImageElement;
+    this.fullContainer = this.full.querySelector(".container") as HTMLElement;
+    this.fullImg = this.fullContainer.querySelector("img") as HTMLImageElement;
     this.closeButton = this.full.querySelector(".close") as HTMLButtonElement;
     this.previewImgWrapper = gallery.querySelector(
       ".preview .image-loading"
@@ -113,8 +115,16 @@ export default class Gallery {
 
   private showFullImage = () => {
     this.fullImg.src = this.previewImg.src.replace("-h400.jpg", ".jpg");
+    this.fullContainer.classList.add("spinner");
     this.full.style.display = "block";
     document.body.style.overflow = "hidden";
+    this.fullImg.addEventListener(
+      "load",
+      () => {
+        this.fullContainer.classList.remove("spinner");
+      },
+      { once: true }
+    );
   };
 
   private setUpZoom = () => {
