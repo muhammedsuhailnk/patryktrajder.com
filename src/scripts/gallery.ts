@@ -2,11 +2,14 @@ import Constants from "./constants";
 import Slider from "./slider";
 
 export default class Gallery {
+  private readonly previewAspectRatio: number = 56.25; // %
+
   private readonly closeButton: HTMLButtonElement;
   private readonly full: HTMLElement;
   private readonly fullContainer: HTMLElement;
   private readonly fullImg: HTMLImageElement;
   private readonly nThumbs?: number;
+  private readonly preview: HTMLDivElement;
   private readonly previewImg: HTMLImageElement;
   private readonly previewImgWrapper: HTMLDivElement;
   private readonly slider?: Slider;
@@ -23,8 +26,9 @@ export default class Gallery {
     this.fullContainer = this.full.querySelector(".container") as HTMLElement;
     this.fullImg = this.fullContainer.querySelector("img") as HTMLImageElement;
     this.closeButton = this.full.querySelector(".close") as HTMLButtonElement;
-    this.previewImgWrapper = gallery.querySelector(
-      ".preview .image-loading"
+    this.preview = gallery.querySelector(".preview") as HTMLImageElement;
+    this.previewImgWrapper = this.preview.querySelector(
+      ".image-loading"
     ) as HTMLImageElement;
     this.previewImg = this.previewImgWrapper.querySelector(
       "img"
@@ -54,9 +58,17 @@ export default class Gallery {
   }
 
   public showPreview = (img: HTMLImageElement) => {
+    const ratio = img.dataset.ratio || this.previewAspectRatio.toString();
     this.previewImg.src = img.src.replace("h100.jpg", "h400.jpg");
-    const ratio = img.dataset.ratio || "56.25";
-    this.previewImgWrapper.style.paddingTop = ratio + "%";
+    this.previewImg.addEventListener(
+      "load",
+      () => {
+        this.previewImgWrapper.style.paddingTop = ratio + "%";
+        this.preview.style.maxWidth =
+          (this.previewAspectRatio / parseFloat(ratio)) * 100 + "%";
+      },
+      { once: true }
+    );
   };
 
   private handleThumbLoad = (thumb: HTMLImageElement) => {
