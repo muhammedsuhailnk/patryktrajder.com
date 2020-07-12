@@ -142,15 +142,3 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
-q {
-  quotes: "“" "”" "‘" "’";
-
-  &:after {
-    content: close-quote;
-  }
-
-  &:before {
-    content: open-quote;
-  }
-}
