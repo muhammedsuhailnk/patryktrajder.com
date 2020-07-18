@@ -86,6 +86,13 @@
       width: auto;
       max-width: 100%;
     }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .slider {
@@ -124,7 +131,7 @@
         $princetonOrange
       ) + "' stroke-linecap='round' stroke-dasharray='60,300' style='filter:url(%23a)%3B'><animateTransform attributeName='transform' attributeType='XML' type='rotate' from='0 60 60' to='360 60 60' dur='1s' repeatCount='indefinite'></animateTransform></circle><circle cx='60' cy='60' r='46' fill='transparent' stroke-width='8' stroke='" + encodecolor(
         $azure
-      ) + "' stroke-linecap='round' stroke-dasharray='60, 300' style='filter:url(%23a)%3B'><animateTransform attributeName='transform' attributeType='XML' type='rotate' from='-180 60 60' to='180 60 60' dur='1s' repeatCount='indefinite'></animateTransform></circle></svg>");
+      ) + "' stroke-linecap='round' stroke-dasharray='60,300' style='filter:url(%23a)%3B'><animateTransform attributeName='transform' attributeType='XML' type='rotate' from='-180 60 60' to='180 60 60' dur='1s' repeatCount='indefinite'></animateTransform></circle></svg>");
     background-position: center center;
     background-repeat: no-repeat;
   }

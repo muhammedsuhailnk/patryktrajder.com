@@ -11,6 +11,7 @@ export default class Gallery {
   private readonly nThumbs?: number;
   private readonly preview: HTMLDivElement;
   private readonly previewImg: HTMLImageElement;
+  private readonly previewImgOverlay: HTMLDivElement;
   private readonly previewImgWrapper: HTMLDivElement;
   private readonly slider?: Slider;
   private abortClick: boolean = false;
@@ -30,6 +31,9 @@ export default class Gallery {
     this.previewImgWrapper = this.preview.querySelector(
       ".image-loading"
     ) as HTMLImageElement;
+    this.previewImgOverlay = this.previewImgWrapper.querySelector(
+      ".overlay"
+    ) as HTMLDivElement;
     this.previewImg = this.previewImgWrapper.querySelector(
       "img"
     ) as HTMLImageElement;
@@ -60,12 +64,14 @@ export default class Gallery {
   public showPreview = (img: HTMLImageElement) => {
     const ratio = img.dataset.ratio || this.previewAspectRatio.toString();
     this.previewImg.src = img.src.replace("h100.jpg", "h400.jpg");
+    this.previewImgOverlay.classList.add("spinner");
     this.previewImg.addEventListener(
       "load",
       () => {
         this.previewImgWrapper.style.paddingTop = ratio + "%";
         this.preview.style.maxWidth =
           (this.previewAspectRatio / parseFloat(ratio)) * 100 + "%";
+        this.previewImgOverlay.classList.remove("spinner");
       },
       { once: true }
     );
