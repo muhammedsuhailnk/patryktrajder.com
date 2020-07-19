@@ -10,19 +10,37 @@
 {% block vectors %}
   {% include "vectors/arrow-left.sym" %}
   {% include "vectors/arrow-right.sym" %}
-  {% include "vectors/close.sym" %}
   {% include "vectors/check-square.sym" %}
+  {% include "vectors/chevron-up.sym" %}
+  {% include "vectors/chevron-down.sym" %}
+  {% include "vectors/close.sym" %}
+  {% include "vectors/home.sym" %}
   {% include "vectors/mail.sym" %}
   {% include "vectors/messenger.sym" %}
   {% include "vectors/square.sym" %}
-  {% include "vectors/chevron-up.sym" %}
-  {% include "vectors/chevron-down.sym" %}
 {% endblock %}
 
 {% block body %}
   <main id="super-booster-2000">
     <article>
       <header class="gap-top">
+        <nav class="breadcrumbs">
+          <a href="/">
+            <svg class="home icon">
+              <use xlink:href="#icon-home"></use>
+            </svg>
+          </a>
+          <svg class="icon">
+            <use xlink:href="#icon-arrow-right"></use>
+          </svg>
+          <a href="/products/">Produkty</a>
+          <svg class="icon">
+            <use xlink:href="#icon-arrow-right"></use>
+          </svg>
+          <a href="/products/super-booster-2000/">
+            <b>Super Booster 2000</b>
+          </a>
+        </nav>
         <nav class="categories">
           <a href="instruction/" title="Instrukcja montażu">
             <p>

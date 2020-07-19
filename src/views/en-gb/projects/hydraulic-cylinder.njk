@@ -6,11 +6,33 @@
   <title>How to build a hydraulic cylinder | Patryk Trajder</title>
 {% endblock meta %}
 
+{% block vectors %}
+  {% include "vectors/arrow-right.sym" %}
+  {% include "vectors/home.sym" %}
+{% endblock %}
+
 {% block body %}
   <main>
     <article>
       <section class="gap-top">
         <header>
+          <nav class="breadcrumbs">
+            <a href="/en-gb/">
+              <svg class="home icon">
+                <use xlink:href="#icon-home"></use>
+              </svg>
+            </a>
+            <svg class="icon">
+              <use xlink:href="#icon-arrow-right"></use>
+            </svg>
+            <a href="/en-gb/projects/">Projects</a>
+            <svg class="icon">
+              <use xlink:href="#icon-arrow-right"></use>
+            </svg>
+            <a href="/en-gb/projects/hydraulic-cylinder/">
+              <b>Hydraulic cylinder</b>
+            </a>
+          </nav>
           <h1>How to build a hydraulic cylinder</h1>
         </header>
         <div class="row gap-top">

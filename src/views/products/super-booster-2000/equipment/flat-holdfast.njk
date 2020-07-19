@@ -6,10 +6,40 @@
     <title>Docisk płaski | Wyposażenie | Wykrawarka do rur | Patryk Trajder</title>
 {% endblock meta %}
 
+{% block vectors %}
+    {% include "vectors/arrow-right.sym" %}
+    {% include "vectors/home.sym" %}
+{% endblock %}
+
 {% block body %}
     <main>
         <article>
             <header class="gap-top">
+                <nav class="breadcrumbs">
+                    <a href="/">
+                        <svg class="home icon">
+                            <use xlink:href="#icon-home"></use>
+                        </svg>
+                    </a>
+                    <svg class="icon">
+                        <use xlink:href="#icon-arrow-right"></use>
+                    </svg>
+                    <a href="/products/">Produkty</a>
+                    <svg class="icon">
+                        <use xlink:href="#icon-arrow-right"></use>
+                    </svg>
+                    <a href="/products/super-booster-2000/">Super Booster 2000</a>
+                    <svg class="icon">
+                        <use xlink:href="#icon-arrow-right"></use>
+                    </svg>
+                    <a href="/products/super-booster-2000/equipment/">Wyposażenie</a>
+                    <svg class="icon">
+                        <use xlink:href="#icon-arrow-right"></use>
+                    </svg>
+                    <a href="/products/super-booster-2000/equipment/flat-holdfast/">
+                        <b>Docisk płaski</b>
+                    </a>
+                </nav>
                 <h1>Tube Notcher - Super Booster 2000 - Wyposażenie dodatkowe</h1>
             </header>
             <section class="gap-top">
