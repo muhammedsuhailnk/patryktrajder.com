@@ -2,6 +2,7 @@ const { spawn } = require("child_process");
 const gulp = require("gulp");
 const sass = require("gulp-sass");
 const rename = require("gulp-rename");
+const replace = require("gulp-replace");
 const webpack = require("webpack-stream");
 
 const distDir = "dist";
@@ -57,6 +58,13 @@ function notFoundStyles() {
     .src("src/styles/404.scss")
     .pipe(sass())
     .pipe(gulp.dest(distDir + "/src/"));
+}
+
+function replaceSpace() {
+  return gulp
+    .src(distDir + "/**/*.html")
+    .pipe(replace("&#32;", " "))
+    .pipe(gulp.dest(distDir));
 }
 
 function robots() {
@@ -143,12 +151,24 @@ gulp.task("rootfiles", gulp.parallel(cname, googleYTAuth, robots, sitemap));
 
 gulp.task(
   "src",
-  gulp.parallel(html, notFoundPage, notFoundStyles, scripts, styles)
+  gulp.parallel(
+    gulp.series(html, replaceSpace),
+    notFoundPage,
+    notFoundStyles,
+    scripts,
+    styles
+  )
 );
 
 gulp.task(
   "srcDev",
-  gulp.parallel(html, notFoundPage, notFoundStyles, scriptsDev, styles)
+  gulp.parallel(
+    gulp.series(html, replaceSpace),
+    notFoundPage,
+    notFoundStyles,
+    scriptsDev,
+    styles
+  )
 );
 
 gulp.task("dev", gulp.series("clean", gulp.parallel("assets", "srcDev")));
