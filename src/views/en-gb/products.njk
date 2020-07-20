@@ -6,6 +6,11 @@
   <title>Products | Patryk Trajder</title>
 {% endblock meta %}
 
+{% block vectors %}
+  {% include "vectors/arrow-right.sym" %}
+  {% include "vectors/home.sym" %}
+{% endblock %}
+
 {% block body %}
   <div class="banner">
     <div class="container">
@@ -16,7 +21,22 @@
   </div>
 
   <main>
-    <nav class="categories gap-top">
+    <nav class="breadcrumbs gap-top">
+      <span>
+        <a href="/en-gb/">
+          <svg class="home icon">
+            <use xlink:href="#icon-home"></use>
+          </svg>
+        </a>
+        <svg class="icon">
+          <use xlink:href="#icon-arrow-right"></use>
+        </svg>
+      </span>
+      <a href="/en-gb/products/">
+        <b>Products</b>
+      </a>
+    </nav>
+    <nav class="categories">
       <a href="#diy-tools" title="DIY tools">
         <p>
           DIY tools

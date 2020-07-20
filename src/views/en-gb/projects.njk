@@ -6,6 +6,11 @@
   <title>Projects | Patryk Trajder</title>
 {% endblock meta %}
 
+{% block vectors %}
+  {% include "vectors/arrow-right.sym" %}
+  {% include "vectors/home.sym" %}
+{% endblock %}
+
 {% block body %}
   <section class="banner">
     <div class="container centered-text">
@@ -16,7 +21,22 @@
     </div>
   </section>
   <main>
-    <nav class="categories gap-top">
+    <nav class="breadcrumbs gap-top">
+      <span>
+        <a href="/en-gb/">
+          <svg class="home icon">
+            <use xlink:href="#icon-home"></use>
+          </svg>
+        </a>
+        <svg class="icon">
+          <use xlink:href="#icon-arrow-right"></use>
+        </svg>
+      </span>
+      <a href="/en-gb/projects/">
+        <b>Projects</b>
+      </a>
+    </nav>
+    <nav class="categories">
       <a href="#my-projects" title="My projects">
         <p>
           My projects

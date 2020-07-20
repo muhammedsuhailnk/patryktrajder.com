@@ -46,10 +46,19 @@ ul.dots {
 }
 
 .breadcrumbs {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: start;
 
   a {
     color: $azure;
+  }
+
+  span {
+    display: inline-block;
+  }
+
+  > * {
+    margin-bottom: 0.5rem;
   }
 
   .icon {
