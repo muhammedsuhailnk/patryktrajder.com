@@ -6,10 +6,42 @@
     <title>Instrukcja montażu | Wykrawarka do rur | Patryk Trajder</title>
 {% endblock meta %}
 
+{% block vectors %}
+    {% include "vectors/arrow-right.sym" %}
+    {% include "vectors/home.sym" %}
+{% endblock %}
+
 {% block body %}
     <main>
         <article>
             <header class="gap-top">
+                <nav class="breadcrumbs">
+                    <span>
+                        <a href="/">
+                            <svg class="home icon">
+                                <use xlink:href="#icon-home"></use>
+                            </svg>
+                        </a>
+                        <svg class="icon">
+                            <use xlink:href="#icon-arrow-right"></use>
+                        </svg>
+                    </span>
+                    <span>
+                        <a href="/products/">Produkty</a>
+                        <svg class="icon">
+                            <use xlink:href="#icon-arrow-right"></use>
+                        </svg>
+                    </span>
+                    <span>
+                        <a href="/products/super-booster-2000/">Super Booster 2000</a>
+                        <svg class="icon">
+                            <use xlink:href="#icon-arrow-right"></use>
+                        </svg>
+                    </span>
+                    <a href="/products/super-booster-2000/equipment/">
+                        <b>Instrukcja</b>
+                    </a>
+                </nav>
                 <h1>Tube Notcher - Super Booster 2000 - Instrukcja montażu</h1>
             </header>
             <section>

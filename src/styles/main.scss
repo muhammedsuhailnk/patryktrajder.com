@@ -10,6 +10,10 @@
 @import "components/product-details";
 @import "components/slider";
 
+b {
+  font-weight: 700;
+}
+
 svg.icon {
   display: inline-block;
   fill: currentColor;
@@ -37,6 +41,35 @@ ul.dots {
       > li {
         list-style-type: circle;
       }
+    }
+  }
+}
+
+.breadcrumbs {
+  margin-bottom: 1.5rem;
+  text-align: start;
+
+  a {
+    color: $azure;
+  }
+
+  span {
+    display: inline-block;
+  }
+
+  > * {
+    margin-bottom: 0.5rem;
+  }
+
+  .icon {
+    color: slategrey;
+    font-size: 1rem;
+    margin: 0 0.25rem -2px;
+
+    &.home {
+      color: $azure;
+      font-size: 1.5rem;
+      margin: 0 0 -5px;
     }
   }
 }

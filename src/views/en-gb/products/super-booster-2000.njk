@@ -10,8 +10,9 @@
 {% block vectors %}
   {% include "vectors/arrow-left.sym" %}
   {% include "vectors/arrow-right.sym" %}
-  {% include "vectors/close.sym" %}
   {% include "vectors/check-square.sym" %}
+  {% include "vectors/close.sym" %}
+  {% include "vectors/home.sym" %}
   {% include "vectors/mail.sym" %}
   {% include "vectors/messenger.sym" %}
   {% include "vectors/square.sym" %}
@@ -23,6 +24,27 @@
   <main id="super-booster-2000">
     <article>
       <header class="gap-top">
+        <nav class="breadcrumbs">
+          <span>
+            <a href="/en-gb/">
+              <svg class="home icon">
+                <use xlink:href="#icon-home"></use>
+              </svg>
+            </a>
+            <svg class="icon">
+              <use xlink:href="#icon-arrow-right"></use>
+            </svg>
+          </span>
+          <span>
+            <a href="/en-gb/products/">Products</a>
+            <svg class="icon">
+              <use xlink:href="#icon-arrow-right"></use>
+            </svg>
+          </span>
+          <a href="/en-gb/products/super-booster-2000/">
+            <b>Super Booster 2000</b>
+          </a>
+        </nav>
         <nav class="categories">
           <a href="instruction/" title="Assembly instruction">
             <p>
@@ -94,6 +116,9 @@
               <svg class="icon">
                 <use xlink:href="#icon-mail"></use>
               </svg>Email</a>
+          </div>
+          <div class="availability">
+            <p>Available from&#32;<s>stock</s>&#32;garage.</p>
           </div>
           <div class="options">
             <div>Especially for you, I give you the opportunity to modify your order - so that the price is affordable for everyone. The cost of producing a roller on cnc machines with the quality I have imposed on myself is so expensive that maybe someone who has access to the lathe will decide to save it and make it a bit cheaper on their own. 😉</div>

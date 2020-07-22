@@ -6,10 +6,32 @@
   <title>O mnie | Patryk Trajder</title>
 {% endblock meta %}
 
+{% block vectors %}
+  {% include "vectors/arrow-right.sym" %}
+  {% include "vectors/home.sym" %}
+{% endblock %}
+
 {% block body %}
   <main>
     <article class="centered-text">
-      <h1 class="gap-top">Poznajmy się lepiej!</h1>
+      <header class="gap-top">
+        <nav class="breadcrumbs">
+          <span>
+            <a href="/">
+              <svg class="home icon">
+                <use xlink:href="#icon-home"></use>
+              </svg>
+            </a>
+            <svg class="icon">
+              <use xlink:href="#icon-arrow-right"></use>
+            </svg>
+          </span>
+          <a href="/about/">
+            <b>O mnie</b>
+          </a>
+        </nav>
+        <h1>Poznajmy się lepiej!</h1>
+      </header>
 
       <div class="center shrink gap-top">
         <div class="image-loading" style="padding-top: 74.85%;">

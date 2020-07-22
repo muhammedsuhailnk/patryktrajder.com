@@ -10,17 +10,51 @@
 {% block vectors %}
   {% include "vectors/arrow-left.sym" %}
   {% include "vectors/arrow-right.sym" %}
-  {% include "vectors/close.sym" %}
-  {% include "vectors/mail.sym" %}
-  {% include "vectors/messenger.sym" %}
   {% include "vectors/chevron-up.sym" %}
   {% include "vectors/chevron-down.sym" %}
+  {% include "vectors/close.sym" %}
+  {% include "vectors/home.sym" %}
+  {% include "vectors/mail.sym" %}
+  {% include "vectors/messenger.sym" %}
 {% endblock %}
 
 {% block body %}
   <main>
     <article>
       <header class="gap-top">
+        <nav class="breadcrumbs">
+          <span>
+            <a href="/">
+              <svg class="home icon">
+                <use xlink:href="#icon-home"></use>
+              </svg>
+            </a>
+            <svg class="icon">
+              <use xlink:href="#icon-arrow-right"></use>
+            </svg>
+          </span>
+          <span>
+            <a href="/products/">Produkty</a>
+            <svg class="icon">
+              <use xlink:href="#icon-arrow-right"></use>
+            </svg>
+          </span>
+          <span>
+            <a href="/products/super-booster-2000/">Super Booster 2000</a>
+            <svg class="icon">
+              <use xlink:href="#icon-arrow-right"></use>
+            </svg>
+          </span>
+          <span>
+            <a href="/products/super-booster-2000/equipment/">Wyposażenie</a>
+            <svg class="icon">
+              <use xlink:href="#icon-arrow-right"></use>
+            </svg>
+          </span>
+          <a href="/products/super-booster-2000/equipment/metal-sheets/">
+            <b>Blachy wycinane laserem</b>
+          </a>
+        </nav>
         <h1 class="gap-top">Blachy wycinane laserem - Elementy do budowy wykrawarki SuperBooster2000.</h1>
       </header>
 
