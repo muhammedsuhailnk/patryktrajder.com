@@ -2,8 +2,8 @@ import Banner from "./scripts/banner";
 import Checkbox from "./scripts/checkbox";
 import Expander from "./scripts/expander";
 import Gallery from "./scripts/gallery";
+import Header from "./scripts/header";
 import LanguageDropdown from "./scripts/language-dropdown";
-import Menu from "./scripts/menu";
 import Slider from "./scripts/slider";
 
 const banners = document.getElementsByClassName("banner");
@@ -22,8 +22,8 @@ const expanders = document.getElementsByClassName("expander");
 for (let i = 0; i < expanders.length; i++)
   new Expander(expanders[i] as HTMLElement);
 
-const menus = document.getElementsByClassName("menu");
-for (let i = 0; i < menus.length; i++) new Menu(menus[i] as HTMLElement);
+const header = document.querySelector("body > header");
+if (header) new Header(header as HTMLElement);
 
 const languageDropdowns = document.getElementsByClassName("language-dropdown");
 for (let i = 0; i < languageDropdowns.length; i++)

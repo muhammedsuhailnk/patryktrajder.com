@@ -10,6 +10,11 @@
     }
   }
 
+  svg {
+    -webkit-filter: drop-shadow(0 0 5px white);
+    filter: drop-shadow(0 0 5px white);
+  }
+
   > .list {
     height: 0;
     overflow: hidden;

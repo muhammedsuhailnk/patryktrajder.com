@@ -16,12 +16,23 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding-top: 7rem;
 
   > header {
+    background: white;
     border-bottom: solid 1px $silverSand;
     padding: 2rem 1rem 0;
-    position: relative;
     text-align: center;
+    min-height: 4rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    -webkit-transition: height 0.2s linear;
+    -moz-transition: height 0.2s linear;
+    -o-transition: height 0.2s linear;
+    transition: height 0.2s linear;
+    z-index: 1;
 
     a:hover {
       text-decoration: none;
@@ -29,9 +40,11 @@ body {
 
     h1 {
       color: $eerieBlack;
-      font-size: 2.5rem;
       font-weight: 100;
-      margin-bottom: 2.5rem;
+
+      @media (max-width: 330px) {
+        font-size: 1.875rem;
+      }
     }
 
     .menu {
@@ -109,9 +122,16 @@ body {
       }
     }
 
-    @media (max-width: 630px) {
+    @media (max-width: 635px) {
+      align-items: center;
       display: flex;
       justify-content: space-between;
+      max-height: 7rem;
+      padding: 2rem 1rem;
+
+      h1 {
+        margin-bottom: 0.5rem;
+      }
 
       .menu {
         z-index: 1;
@@ -121,12 +141,11 @@ body {
         }
 
         nav {
-          background: white;
+          background: rgba(white, 0.8);
           height: 0;
           overflow: hidden;
           padding: 0;
           position: fixed;
-          top: calc(7rem + 1px);
           left: 0;
           right: 0;
           bottom: 0;
@@ -150,8 +169,6 @@ body {
 
         &.open {
           nav {
-            height: calc(100% - 7rem - 1px);
-
             ul {
               opacity: 1;
               padding-top: 2rem;
@@ -162,7 +179,7 @@ body {
     }
   }
 
-  @media (max-width: 630px) {
+  @media (max-width: 635px) {
     &.hide-overflow {
       overflow: hidden;
     }
@@ -348,6 +365,7 @@ nav {
       display: inline-block;
       max-width: 100%;
       padding: 0 0.35rem 2rem 0.35rem;
+      text-shadow: white 0 0 5px;
       vertical-align: middle;
 
       > a {

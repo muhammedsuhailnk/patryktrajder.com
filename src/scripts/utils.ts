@@ -19,4 +19,8 @@ export default class Utils {
     }
     return i;
   }
+
+  public static remToPx(nRem: number) {
+    return nRem * parseInt(getComputedStyle(document.documentElement).fontSize);
+  }
 }
