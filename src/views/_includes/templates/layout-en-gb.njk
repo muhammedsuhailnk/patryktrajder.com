@@ -36,102 +36,106 @@
             <h1>
                 <a href="/en-gb/" title="Homepage">Patryk Trajder</a>
             </h1>
-            <nav>
-                <ul>
-                    <li {% if tab === "home" %} class="current" {% endif %}>
-                        <a href="/en-gb/" title="Homepage">Home</a>
-                    </li>
-                    <li {% if tab === "about" %} class="current" {% endif %}>
-                        <a href="/en-gb/about/" title="About me">About me</a>
-                    </li>
-                    <li {% if tab === "products" %} class="current" {% endif %}>
-                        <a href="/en-gb/products/" title="Products">Products</a>
-                    </li>
-                    <li {% if tab === "projects" %} class="current" {% endif %}>
-                        <a href="/en-gb/projects/" title="Projects">Projects</a>
-                    </li>
-                    <li>
-                        <a href="#contact" title="Contact">Contact</a>
-                    </li>
-                    <li>
-                        <div class="language-dropdown">
-                            <button class="current" title="Change language">
-                                <svg class="icon flag">
-                                    <use xlink:href="#icon-flag-en-gb"></use>
-                                </svg>
-                                <svg class="icon arrow">
-                                    <use xlink:href="#icon-arrow-drop-down"></use>
-                                </svg>
-                            </button>
-                            <div class="list">
-                                <button data-lang="pl" title="Polish">
-                                    <svg class="icon">
-                                        <use xlink:href="#icon-flag-pl"></use>
+            <div class="menu">
+                <nav>
+                    <ul>
+                        <li {% if tab === "home" %} class="current" {% endif %}>
+                            <a href="/en-gb/" title="Homepage">Home</a>
+                        </li>
+                        <li {% if tab === "about" %} class="current" {% endif %}>
+                            <a href="/en-gb/about/" title="About me">About me</a>
+                        </li>
+                        <li {% if tab === "products" %} class="current" {% endif %}>
+                            <a href="/en-gb/products/" title="Products">Products</a>
+                        </li>
+                        <li {% if tab === "projects" %} class="current" {% endif %}>
+                            <a href="/en-gb/projects/" title="Projects">Projects</a>
+                        </li>
+                        <li>
+                            <a href="#contact" title="Contact">Contact</a>
+                        </li>
+                        <li>
+                            <div class="language-dropdown">
+                                <button class="current" title="Change language">
+                                    <svg class="icon flag">
+                                        <use xlink:href="#icon-flag-en-gb"></use>
+                                    </svg>
+                                    <svg class="icon arrow">
+                                        <use xlink:href="#icon-arrow-drop-down"></use>
                                     </svg>
                                 </button>
+                                <div class="list">
+                                    <button data-lang="pl" title="Polish">
+                                        <svg class="icon">
+                                            <use xlink:href="#icon-flag-pl"></use>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
+                        </li>
+                    </ul>
+                </nav>
+                <button class="menu-button" aria-label="Menu">
+                    <div></div>
+                </button>
+            </div>
+        </header>
+
+        {% block body %}{% endblock %}
+
+        <footer>
+            <section id="contact" class="container">
+                <div class="contact row">
+                    <h1>Contact</h1>
+                    <div class="social-media">
+                        <div>
+                            <a href="https://www.youtube.com/channel/UCg3hDpgzJpqBMBo4K-0aGrw" rel="noreferrer" target="_blank" title="My Youtube channel">
+                                <svg class="icon youtube">
+                                    <use xlink:href="#icon-youtube"></use>
+                                </svg>
+                            </a>
+                            <a href="https://facebook.com/patryktrajder" rel="noreferrer" target="_blank" title="My fanpage on Facebook">
+                                <svg class="icon facebook">
+                                    <use xlink:href="#icon-facebook"></use>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/patryktrajder" rel="noreferrer" target="_blank" title="My Instagram profile">
+                                <svg class="icon">
+                                    <use xlink:href="#icon-instagram"></use>
+                                </svg>
+                            </a>
                         </div>
                     </div>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    {% block body %}{% endblock %}
-
-    <footer>
-        <section id="contact" class="container">
-            <div class="contact row">
-                <h1>Contact</h1>
-                <div class="social-media">
+                </div>
+                <div class="links row">
                     <div>
-                        <a href="https://www.youtube.com/channel/UCg3hDpgzJpqBMBo4K-0aGrw" rel="noreferrer" target="_blank" title="My Youtube channel">
-                            <svg class="icon youtube">
-                                <use xlink:href="#icon-youtube"></use>
-                            </svg>
-                        </a>
-                        <a href="https://facebook.com/patryktrajder" rel="noreferrer" target="_blank" title="My fanpage on Facebook">
-                            <svg class="icon facebook">
-                                <use xlink:href="#icon-facebook"></use>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/patryktrajder" rel="noreferrer" target="_blank" title="My Instagram profile">
-                            <svg class="icon">
-                                <use xlink:href="#icon-instagram"></use>
-                            </svg>
-                        </a>
+                        <h3>Purchase enquiries:</h3>
+                        <p>
+                            <a href="mailto:shop@trajder.com" title="shop@trajder.com">shop@trajder.com</a>
+                        </p>
+                        <p>
+                            <a href="https://facebook.com/patryktrajder" rel="noreferrer" target="_blank" title="My fanpage on Facebook">facebook.com/patryktrajder</a>
+                        </p>
+                    </div>
+                    <div>
+                        <h3>Collaboration / business questions:</h3>
+                        <p>
+                            <a href="mailto:patryk@trajder.com" title="patryk@trajder.com">patryk@trajder.com</a>
+                        </p>
                     </div>
                 </div>
-            </div>
-            <div class="links row">
+            </section>
+            <div class="copyright">
                 <div>
-                    <h3>Purchase enquiries:</h3>
-                    <p>
-                        <a href="mailto:shop@trajder.com" title="shop@trajder.com">shop@trajder.com</a>
-                    </p>
-                    <p>
-                        <a href="https://facebook.com/patryktrajder" rel="noreferrer" target="_blank" title="My fanpage on Facebook">facebook.com/patryktrajder</a>
-                    </p>
-                </div>
-                <div>
-                    <h3>Collaboration / business questions:</h3>
-                    <p>
-                        <a href="mailto:patryk@trajder.com" title="patryk@trajder.com">patryk@trajder.com</a>
-                    </p>
+                    <ul class="separated-list">
+                        <li>&copy; Patryk Trajder. All rights reserved.</li>
+                        <li>
+                            Design:&#32;
+                            <a href="https://www.linkedin.com/in/jakubjanowski" rel="noreferrer" target="_blank" title="Need a website?">Jakub Janowski</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </section>
-        <div class="copyright">
-            <div>
-                <ul class="separated-list">
-                    <li>&copy; Patryk Trajder. All rights reserved.</li>
-                    <li>
-                        Design:&#32;
-                        <a href="https://www.linkedin.com/in/jakubjanowski" rel="noreferrer" target="_blank" title="Need a website?">Jakub Janowski</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </footer>
-</body>
+        </footer>
+    </body>
 </html>
