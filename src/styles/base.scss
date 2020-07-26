@@ -28,10 +28,10 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    -webkit-transition: height 0.2s linear;
-    -moz-transition: height 0.2s linear;
-    -o-transition: height 0.2s linear;
-    transition: height 0.2s linear;
+    -webkit-transition: height 0.2s ease-out;
+    -moz-transition: height 0.2s ease-out;
+    -o-transition: height 0.2s ease-out;
+    transition: height 0.2s ease-out;
     z-index: 1;
 
     a:hover {
