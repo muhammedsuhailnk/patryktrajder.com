@@ -50,7 +50,7 @@ p.indent {
 }
 
 .shrink {
-  max-width: 40.8rem; // 60% of 70rem
+  max-width: 0.6 * 70rem;
 
   &.center {
     margin-left: auto;

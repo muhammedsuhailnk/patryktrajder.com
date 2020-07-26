@@ -28,17 +28,8 @@
         text-shadow: 0 0 10px black;
         text-transform: uppercase;
 
-        //todo tmp solution
-        @media screen and (max-width: 800px) {
-          font-size: 2.5rem;
-        }
-
-        @media screen and (max-width: 600px) {
-          font-size: 2rem;
-        }
-
-        @media screen and (max-width: 500px) {
-          font-size: 1.5rem;
+        @media (max-width: 1000px) {
+          font-size: 5.6vw;
         }
       }
     }

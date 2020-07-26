@@ -44,7 +44,6 @@ export default class Header {
     if (this.headerHeight <= headerMinHeight)
       this.headerHeight = headerMinHeight + 1;
 
-    //this.headerHeight++; // account for 1px bottom border
     this.header.style.height = this.headerHeight + "px";
   };
 

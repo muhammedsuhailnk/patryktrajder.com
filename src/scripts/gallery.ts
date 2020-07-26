@@ -2,7 +2,7 @@ import Constants from "./constants";
 import Slider from "./slider";
 
 export default class Gallery {
-  private readonly previewAspectRatio: number = 56.25; // %
+  private readonly previewAspectRatio: number = 56.25; // %, 16:9 ratio
 
   private readonly closeButton: HTMLButtonElement;
   private readonly full: HTMLElement;
