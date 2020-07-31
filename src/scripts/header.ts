@@ -22,7 +22,7 @@ export default class Header {
 
     this.mediaQuery.addEventListener("change", this.handleHeaderHeightChange);
     document.addEventListener("scroll", this.handleHeaderHeightChange);
-    this.navigation.addEventListener("transitionend", this.onNavOpened);
+    this.navigation.addEventListener("transitionend", this.onToggled);
     menuButton.addEventListener("click", this.toggle);
 
     for (let i = 0; i < anchors.length; i++)
@@ -47,8 +47,11 @@ export default class Header {
     this.header.style.height = this.headerHeight + "px";
   };
 
-  private onNavOpened = () => {
-    this.navigation.style.overflow = "auto";
+  private onToggled = () => {
+    if (this.isOpen) {
+      this.navigation.style.overflow = "auto";
+      this.navigation.classList.add("opened");
+    }
   };
 
   private toggle = () => {
@@ -63,6 +66,7 @@ export default class Header {
         "calc((100% - " + this.headerHeight + "px)";
     } else {
       this.navigation.style.removeProperty("height");
+      this.navigation.classList.remove("opened");
     }
   };
 }
