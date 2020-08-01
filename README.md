@@ -28,7 +28,7 @@ $ cd patryktrajder.com
 # Install dependencies
 $ npm i
 
-# Run the app
+# Compile the files
 $ gulp dev
 ```
 
