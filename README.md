@@ -1,21 +1,29 @@
 ## Table of contents
-* [General info](#general-info)
-* [Technologies](#technologies)
-* [Setup](#setup)
+
+- [General info](#general-info)
+- [Technologies](#technologies)
+- [Setup](#setup)
 
 ## General info
-A static website for Youtuber's portfolio ([https://patryktrajder.com](patryktrajder.com)).
+
+A static website for Youtuber's portfolio ([patryktrajder.com](https://patryktrajder.com)).
 
 ## Technologies
-Project is created with:
-- Nunjucks
-- TypeScript (version: 3.8.3)
-- Sass
-- gulp (version: 4.0.2)
-- webpack (version: 4.42.1)
-- 
+
+The website is written in the following languages:
+
+- Nunjucks,
+- Sass,
+- TypeScript.
+
+The following tools are used for compilation:
+
+- eleventy (version: 0.11.0),
+- gulp (version: 4.0.2),
+- webpack (version: 4.42.1).
 
 ## Setup
+
 To run this project, run thw following commands from your command line:
 
 ```
@@ -29,7 +37,10 @@ $ cd patryktrajder.com
 $ npm i
 
 # Compile the files
-$ gulp dev
+$ npm run dev
+
+# Start the server
+$ npm start
 ```
 
-The website files will be generated in `/dist/` directory. You can use e.g. Visual Studio Code extension "Live Server" to run the server and specify its root as `/dist/`.
+The website files will be generated in `patryktrajder.com/dist/` directory and the server will host the website at `localhost:8080`.
