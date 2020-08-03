@@ -16,7 +16,7 @@ const defaultOptions: ISliderOptions = {
 };
 
 // items should have the same width
-// snapItems: false and arrows not supported
+// snapItems == false with arrows not supported
 // cyclic lists with items narrower than items container not supported
 export default class Slider {
   private readonly firstItem: HTMLElement;

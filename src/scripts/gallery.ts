@@ -2,7 +2,7 @@ import Constants from "./constants";
 import Slider from "./slider";
 
 export default class Gallery {
-  private readonly previewAspectRatio: number = 56.25; // %
+  private readonly previewAspectRatio: number = 56.25; // %, 16:9 ratio
 
   private readonly closeButton: HTMLButtonElement;
   private readonly full: HTMLElement;
@@ -146,13 +146,15 @@ export default class Gallery {
   };
 
   private setUpZoom = () => {
-    this.closeButton.addEventListener("click", () => {
+    this.full.addEventListener("click", () => {
       document.body.style.overflow = Constants.bodyOverflow;
       this.full.style.display = "none";
       this.zoomOut();
     });
 
     this.fullImg.addEventListener("click", (e: MouseEvent) => {
+      e.stopPropagation();
+
       if (this.full.classList.contains("zoom")) {
         if (this.abortClick) return;
 

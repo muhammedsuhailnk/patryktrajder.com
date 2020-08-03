@@ -4,9 +4,11 @@
   "description": "Youtuber's portfolio website",
   "main": "index.js",
   "scripts": {
-    "babel": "./node_modules/.bin/babel src -d dist",
-    "dev": "webpack --watch --mode=development",
-    "dist": "webpack --mode=production",
+    "acc": "gulp acc",
+    "dev": "gulp dev",
+    "dist": "gulp dist",
+    "eleventy": "eleventy",
+    "start": "http-server dist",
     "test": "echo \\\"Error: no test specified\\\" && exit 1"
   },
   "repository": {
@@ -24,11 +26,13 @@
   "homepage": "https://github.com/JakubJanowski/patryktrajder.com#readme",
   "private": true,
   "devDependencies": {
+    "@11ty/eleventy": "^0.11.0",
     "gulp": "^4.0.2",
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.0.0",
     "gulp-sass": "^4.0.2",
     "html-minifier": "^4.0.0",
+    "http-server": "^0.12.3",
     "path": "^0.12.7",
     "ts-loader": "^7.0.1",
     "typescript": "^3.8.3",

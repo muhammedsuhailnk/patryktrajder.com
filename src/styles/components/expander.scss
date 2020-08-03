@@ -73,7 +73,7 @@
   }
 
   > .container {
-    padding: 0 1rem 0.65rem 1rem;
+    padding: 0 1rem 0.625rem 1rem;
     overflow: hidden;
     height: 5.5rem;
     min-height: 5.5rem;
@@ -84,7 +84,7 @@
     transition-duration: 0.5s;
 
     @media (max-width: 150px) {
-      padding: 0 0 0.65rem 0;
+      padding: 0 0 0.625rem 0;
     }
   }
 }
