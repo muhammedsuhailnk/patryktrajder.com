@@ -33,51 +33,53 @@
         </svg>
 
         <header>
-            <h1>
-                <a href="/" title="Strona główna">Patryk Trajder</a>
-            </h1>
-            <div class="menu">
-                <nav>
-                    <ul>
-                        <li {% if tab === "home" %} class="current" {% endif %}>
-                            <a href="/" title="Strona główna">Witaj</a>
-                        </li>
-                        <li {% if tab === "about" %} class="current" {% endif %}>
-                            <a href="/about/" title="O mnie">O mnie</a>
-                        </li>
-                        <li {% if tab === "products" %} class="current" {% endif %}>
-                            <a href="/products/" title="Produkty">Produkty</a>
-                        </li>
-                        <li {% if tab === "projects" %} class="current" {% endif %}>
-                            <a href="/projects/" title="Projekty">Projekty</a>
-                        </li>
-                        <li>
-                            <a href="#contact" title="Kontakt">Kontakt</a>
-                        </li>
-                        <li>
-                            <div class="language-dropdown">
-                                <button class="current" title="Zmień język">
-                                    <svg class="icon flag">
-                                        <use xlink:href="#icon-flag-pl"></use>
-                                    </svg>
-                                    <svg class="icon arrow">
-                                        <use xlink:href="#icon-arrow-drop-down"></use>
-                                    </svg>
-                                </button>
-                                <div class="list">
-                                    <button data-lang="en-gb" title="Angielski">
-                                        <svg class="icon">
-                                            <use xlink:href="#icon-flag-en-gb"></use>
+            <div>
+                <h1>
+                    <a href="/" title="Strona główna">Patryk Trajder</a>
+                </h1>
+                <div class="menu">
+                    <nav>
+                        <ul>
+                            <li {% if tab === "home" %} class="current" {% endif %}>
+                                <a href="/" title="Strona główna">Witaj</a>
+                            </li>
+                            <li {% if tab === "about" %} class="current" {% endif %}>
+                                <a href="/about/" title="O mnie">O mnie</a>
+                            </li>
+                            <li {% if tab === "products" %} class="current" {% endif %}>
+                                <a href="/products/" title="Produkty">Produkty</a>
+                            </li>
+                            <li {% if tab === "projects" %} class="current" {% endif %}>
+                                <a href="/projects/" title="Projekty">Projekty</a>
+                            </li>
+                            <li>
+                                <a href="#contact" title="Kontakt">Kontakt</a>
+                            </li>
+                            <li>
+                                <div class="language-dropdown">
+                                    <button class="current" title="Zmień język">
+                                        <svg class="icon flag">
+                                            <use xlink:href="#icon-flag-pl"></use>
+                                        </svg>
+                                        <svg class="icon arrow">
+                                            <use xlink:href="#icon-arrow-drop-down"></use>
                                         </svg>
                                     </button>
+                                    <div class="list">
+                                        <button data-lang="en-gb" title="Angielski">
+                                            <svg class="icon">
+                                                <use xlink:href="#icon-flag-en-gb"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-                <button class="menu-button" aria-label="Menu">
-                    <div></div>
-                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                    <button class="menu-button" aria-label="Menu">
+                        <div></div>
+                    </button>
+                </div>
             </div>
         </header>
 

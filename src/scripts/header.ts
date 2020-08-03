@@ -5,7 +5,8 @@ export default class Header {
   private readonly menu: HTMLElement;
   private readonly navigation: HTMLElement;
   private readonly mediaQuery: MediaQueryList;
-  private headerHeight: number = Utils.remToPx(Constants.headerMaxHeight);
+  private headerHeight: number;
+  private isMenuHorizontal: boolean = false;
   private isOpen: boolean = false;
 
   constructor(private readonly header: HTMLElement) {
@@ -19,6 +20,7 @@ export default class Header {
     this.mediaQuery = window.matchMedia(
       "(max-width: " + Constants.headerMenuWidthThreshold + "px)"
     );
+    this.headerHeight = this.getInitialHeaderHeight();
 
     this.mediaQuery.addEventListener("change", this.handleHeaderHeightChange);
     document.addEventListener("scroll", this.handleHeaderHeightChange);
@@ -29,20 +31,61 @@ export default class Header {
       anchors[i].addEventListener("click", this.toggle);
   }
 
-  private handleHeaderHeightChange = () => {
-    if (!this.mediaQuery.matches) {
-      this.header.style.removeProperty("height");
-      return;
-    }
+  private getInitialHeaderHeight = () => {
+    const remScale = Utils.remToPx(1);
+    let headerMaxHeight;
 
+    if (this.mediaQuery.matches)
+      headerMaxHeight = Constants.headerMaxHeightMobile;
+    else headerMaxHeight = Constants.headerMaxHeightDesktop;
+
+    return Math.max(
+      headerMaxHeight * remScale - window.pageYOffset,
+      Constants.headerMinHeight * remScale
+    );
+  };
+
+  private handleHeaderHeightChange = () => {
     const remScale = Utils.remToPx(1);
     const headerMinHeight = Constants.headerMinHeight * remScale;
+    let headerMaxHeight;
 
-    this.headerHeight =
-      Constants.headerMaxHeight * remScale - window.pageYOffset;
+    if (this.mediaQuery.matches)
+      headerMaxHeight = Constants.headerMaxHeightMobile;
+    else headerMaxHeight = Constants.headerMaxHeightDesktop;
 
-    if (this.headerHeight <= headerMinHeight)
-      this.headerHeight = headerMinHeight + 1;
+    this.headerHeight = Math.max(
+      headerMaxHeight * remScale - window.pageYOffset,
+      headerMinHeight
+    );
+
+    if (this.mediaQuery.matches)
+      this.navigation.style.top = this.headerHeight + "px";
+
+    if (this.headerHeight <= headerMinHeight) {
+      this.navigation.style.removeProperty("padding-bottom");
+      if (this.mediaQuery.matches) {
+        this.isMenuHorizontal = false;
+        this.header.classList.remove("horizontal");
+      } else if (!this.isMenuHorizontal) {
+        this.isMenuHorizontal = true;
+        this.headerHeight = headerMinHeight + 1;
+        this.header.classList.add("horizontal");
+      }
+    } else {
+      this.isMenuHorizontal = false;
+      this.header.classList.remove("horizontal");
+      if (!this.mediaQuery.matches) {
+        this.navigation.style.paddingBottom =
+          ((Constants.headerNavMaxPaddingBottom -
+            Constants.headerNavMinPaddingBottom) *
+            (this.headerHeight - headerMinHeight)) /
+            ((Constants.headerMaxHeightDesktop - Constants.headerMinHeight) *
+              remScale) +
+          Constants.headerNavMinPaddingBottom +
+          "rem";
+      }
+    }
 
     this.header.style.height = this.headerHeight + "px";
   };

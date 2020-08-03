@@ -17,13 +17,14 @@
 
   > .list {
     height: 0;
+    margin: -0.25rem -0.5rem;
     overflow: hidden;
     position: absolute;
     transition-duration: 0.2s;
 
     > * {
       display: block;
-      padding: 0.25rem 0;
+      padding: 0.5rem;
     }
   }
 }
