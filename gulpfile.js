@@ -1,6 +1,7 @@
 const { spawn } = require("child_process");
 const gulp = require("gulp");
 const sass = require("gulp-sass");
+const readlineSync = require("readline-sync");
 const rename = require("gulp-rename");
 const replace = require("gulp-replace");
 const webpack = require("webpack-stream");
@@ -97,6 +98,14 @@ function sitemap() {
   return gulp.src("sitemap.xml").pipe(gulp.dest(distDir));
 }
 
+function sitemapReminder(done) {
+  if (readlineSync.keyInYN("Did you update the sitemap?")) {
+    return done();
+  }
+  console.log("Ok, aborting deployment.");
+  process.exit(1);
+}
+
 function styles() {
   return gulp
     .src("src/styles/main.scss")
@@ -180,5 +189,10 @@ gulp.task(
 
 gulp.task(
   "dist",
-  gulp.series("clean", gulp.parallel("assets", "rootfiles", "src"), "deploy")
+  gulp.series(
+    sitemapReminder,
+    "clean",
+    gulp.parallel("assets", "rootfiles", "src"),
+    "deploy"
+  )
 );
