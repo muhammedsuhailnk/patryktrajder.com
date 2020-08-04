@@ -108,8 +108,14 @@ ul.dots {
 }
 
 .preview-list {
-  > h4 {
-    margin-bottom: 0;
+  > section {
+    background: $aliceBlue;
+    padding: 1rem;
+
+    > h4 {
+      color: $subtitleColor;
+      margin-bottom: 0;
+    }
   }
 }
 
