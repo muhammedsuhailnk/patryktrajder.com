@@ -20,25 +20,23 @@ body {
     }
 
     &.horizontal {
-      h1 {
-        position: absolute;
-      }
+      & > div {
+        padding-bottom: 0.75rem;
 
-      .menu {
-        nav {
-          padding: 0 0 0.75rem 0;
-          transform: translateX(50%);
-          -webkit-transition: transform 0.2s ease-out;
-          -moz-transition: transform 0.2s ease-out;
-          -o-transition: transform 0.2s ease-out;
-          transition: transform 0.2s ease-out;
+        h1 {
+          bottom: 0.25rem;
+          margin: 0;
+          padding-bottom: inherit;
+          position: absolute;
+        }
 
-          ul {
-            transform: translateX(-50%);
-            -webkit-transition: transform 0.2s ease-out;
-            -moz-transition: transform 0.2s ease-out;
-            -o-transition: transform 0.2s ease-out;
-            transition: transform 0.2s ease-out;
+        .menu {
+          nav {
+            transform: translateX(50%);
+
+            ul {
+              transform: translateX(-50%);
+            }
           }
         }
       }
@@ -50,7 +48,7 @@ body {
       bottom: 0;
       margin: 0 auto;
       max-width: 70rem;
-      padding: 2rem 1rem 0;
+      padding: 2rem 1rem;
       position: absolute;
 
       h1 {
@@ -64,10 +62,18 @@ body {
 
       .menu {
         nav {
-          padding-bottom: 2rem;
+          padding-bottom: 0;
+          -webkit-transition: transform 0.2s ease-out;
+          -moz-transition: transform 0.2s ease-out;
+          -o-transition: transform 0.2s ease-out;
+          transition: transform 0.2s ease-out;
 
           ul {
             display: inline-block;
+            -webkit-transition: transform 0.2s ease-out;
+            -moz-transition: transform 0.2s ease-out;
+            -o-transition: transform 0.2s ease-out;
+            transition: transform 0.2s ease-out;
 
             li {
               padding: 0 0.35rem;

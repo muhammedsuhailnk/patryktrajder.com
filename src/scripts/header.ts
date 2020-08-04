@@ -5,12 +5,14 @@ export default class Header {
   private readonly menu: HTMLElement;
   private readonly navigation: HTMLElement;
   private readonly mediaQuery: MediaQueryList;
+  private readonly wrapper: HTMLDivElement;
   private headerHeight: number;
   private isMenuHorizontal: boolean = false;
   private isOpen: boolean = false;
 
   constructor(private readonly header: HTMLElement) {
-    this.menu = header.querySelector(".menu") as HTMLElement;
+    this.wrapper = header.querySelector("div") as HTMLDivElement;
+    this.menu = this.wrapper.querySelector(".menu") as HTMLElement;
     this.navigation = this.menu.querySelector("nav") as HTMLElement;
     const menuButton = this.menu.querySelector(
       ".menu-button"
@@ -63,26 +65,26 @@ export default class Header {
       this.navigation.style.top = this.headerHeight + "px";
 
     if (this.headerHeight <= headerMinHeight) {
-      this.navigation.style.removeProperty("padding-bottom");
+      this.wrapper.style.removeProperty("padding-bottom");
+      this.headerHeight = headerMinHeight + 1;
       if (this.mediaQuery.matches) {
         this.isMenuHorizontal = false;
         this.header.classList.remove("horizontal");
       } else if (!this.isMenuHorizontal) {
         this.isMenuHorizontal = true;
-        this.headerHeight = headerMinHeight + 1;
         this.header.classList.add("horizontal");
       }
     } else {
       this.isMenuHorizontal = false;
       this.header.classList.remove("horizontal");
       if (!this.mediaQuery.matches) {
-        this.navigation.style.paddingBottom =
-          ((Constants.headerNavMaxPaddingBottom -
-            Constants.headerNavMinPaddingBottom) *
+        this.wrapper.style.paddingBottom =
+          ((Constants.headerDivMaxPaddingBottom -
+            Constants.headerDivMinPaddingBottom) *
             (this.headerHeight - headerMinHeight)) /
             ((Constants.headerMaxHeightDesktop - Constants.headerMinHeight) *
               remScale) +
-          Constants.headerNavMinPaddingBottom +
+          Constants.headerDivMinPaddingBottom +
           "rem";
       }
     }
