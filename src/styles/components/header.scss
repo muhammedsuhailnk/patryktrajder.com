@@ -24,10 +24,22 @@ body {
         padding-bottom: 0.75rem;
 
         h1 {
-          bottom: 0.25rem;
-          margin: 0;
-          padding-bottom: inherit;
-          position: absolute;
+          opacity: 0;
+          -webkit-transition: opacity 0.5s linear;
+          -moz-transition: opacity 0.5s linear;
+          -ms-transition: opacity 0.5s linear;
+          -o-transition: opacity 0.5s linear;
+          transition: opacity 0.5s linear;
+
+          &.second-logo {
+            opacity: 1;
+            visibility: visible;
+            -webkit-transition: opacity 0.5s linear;
+            -moz-transition: opacity 0.5s linear;
+            -ms-transition: opacity 0.5s linear;
+            -o-transition: opacity 0.5s linear;
+            transition: opacity 0.5s linear;
+          }
         }
 
         .menu {
@@ -54,9 +66,28 @@ body {
       h1 {
         color: $eerieBlack;
         font-weight: 100;
+        -webkit-transition: opacity 0.5s 0.2s linear;
+        -moz-transition: opacity 0.5s 0.2s linear;
+        -ms-transition: opacity 0.5s 0.2s linear;
+        -o-transition: opacity 0.5s 0.2s linear;
+        transition: opacity 0.5s 0.2s linear;
 
         @media (max-width: 330px) {
           font-size: 1.875rem;
+        }
+
+        &.second-logo {
+          bottom: 0.25rem;
+          opacity: 0;
+          margin: 0;
+          padding-bottom: inherit;
+          position: absolute;
+          -webkit-transition: opacity 0.2s linear, visibility 0s 0.2s;
+          -moz-transition: opacity 0.2s linear, visibility 0s 0.2s;
+          -ms-transition: opacity 0.2s linear, visibility 0s 0.2s;
+          -o-transition: opacity 0.2s linear, visibility 0s 0.2s;
+          transition: opacity 0.2s linear, visibility 0s 0.2s;
+          visibility: hidden;
         }
       }
 
@@ -65,6 +96,7 @@ body {
           padding-bottom: 0;
           -webkit-transition: transform 0.2s ease-out;
           -moz-transition: transform 0.2s ease-out;
+          -ms-transition: transform 0.2s ease-out;
           -o-transition: transform 0.2s ease-out;
           transition: transform 0.2s ease-out;
 
@@ -72,6 +104,7 @@ body {
             display: inline-block;
             -webkit-transition: transform 0.2s ease-out;
             -moz-transition: transform 0.2s ease-out;
+            -ms-transition: transform 0.2s ease-out;
             -o-transition: transform 0.2s ease-out;
             transition: transform 0.2s ease-out;
 
@@ -168,6 +201,19 @@ body {
 
         h1 {
           margin-bottom: 0.5rem;
+          -webkit-transition: none;
+          -moz-transition: none;
+          -ms-transition: none;
+          -o-transition: none;
+          transition: none;
+
+          &.second-logo {
+            -webkit-transition: none;
+            -moz-transition: none;
+            -ms-transition: none;
+            -o-transition: none;
+            transition: none;
+          }
         }
 
         .menu {
@@ -188,6 +234,7 @@ body {
             bottom: 0;
             -webkit-transition: height 0.5s, top 0.2s ease-out;
             -moz-transition: height 0.5s, top 0.2s ease-out;
+            -ms-transition: height 0.5s, top 0.2s ease-out;
             -o-transition: height 0.5s, top 0.2s ease-out;
             transition: height 0.5s, top 0.2s ease-out;
 
@@ -195,6 +242,7 @@ body {
               opacity: 0;
               -webkit-transition: 0.5s;
               -moz-transition: 0.5s;
+              -ms-transition: 0.5s;
               -o-transition: 0.5s;
               transition: 0.5s;
 
