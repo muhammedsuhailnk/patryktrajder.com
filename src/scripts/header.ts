@@ -97,8 +97,6 @@ export default class Header {
     }
 
     this.header.style.height = this.headerHeight + "px";
-    if (this.mediaQuery.matches)
-      this.navigation.style.top = this.headerHeight + "px";
   };
 
   private onToggled = () => {
@@ -115,9 +113,8 @@ export default class Header {
 
     this.isOpen = !this.isOpen;
     if (this.isOpen) {
-      this.navigation.style.top = this.headerHeight + "px";
       this.navigation.style.height =
-        "calc((100% - " + this.headerHeight + "px)";
+        "calc((100vh - " + this.headerHeight + "px)";
     } else {
       this.navigation.style.removeProperty("height");
       this.navigation.classList.remove("opened");
