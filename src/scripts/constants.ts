@@ -8,6 +8,6 @@ export default class Constants {
   public static readonly headerDivMinPaddingBottom: number = 0.75; // rem
   public static readonly headerMaxHeightDesktop: number = 11.75; // rem
   public static readonly headerMaxHeightMobile: number = 7; // rem
-  public static readonly headerMenuWidthThreshold: number = 635; // px
+  public static readonly headerMenuWidthThreshold: number = 899; // px
   public static readonly headerMinHeight: number = 4; // rem
 }

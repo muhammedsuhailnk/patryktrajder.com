@@ -24,13 +24,18 @@ export default class Header {
     );
     this.headerHeight = this.getInitialHeaderHeight();
 
-    this.mediaQuery.addEventListener("change", this.handleHeaderHeightChange);
-    document.addEventListener("scroll", this.handleHeaderHeightChange);
     this.navigation.addEventListener("transitionend", this.onToggled);
     menuButton.addEventListener("click", this.toggle);
 
     for (let i = 0; i < anchors.length; i++)
       anchors[i].addEventListener("click", this.toggle);
+
+    this.handleHeaderHeightChange();
+    setTimeout(() => {
+      this.mediaQuery.addEventListener("change", this.handleMediaQueryChange);
+      document.addEventListener("scroll", this.handleHeaderHeightChange);
+      setTimeout(() => header.classList.add("animate"));
+    }); // wait for header to render
   }
 
   private getInitialHeaderHeight = () => {
@@ -47,6 +52,12 @@ export default class Header {
     );
   };
 
+  private handleMediaQueryChange = () => {
+    this.header.classList.remove("animate");
+    this.handleHeaderHeightChange();
+    getComputedStyle(this.navigation).transition;
+    this.header.classList.add("animate");
+  };
   private handleHeaderHeightChange = () => {
     const remScale = Utils.remToPx(1);
     const headerMinHeight = Constants.headerMinHeight * remScale;
@@ -61,12 +72,8 @@ export default class Header {
       headerMinHeight
     );
 
-    if (this.mediaQuery.matches)
-      this.navigation.style.top = this.headerHeight + "px";
-
     if (this.headerHeight <= headerMinHeight) {
       this.wrapper.style.removeProperty("padding-bottom");
-      this.headerHeight = headerMinHeight + 1;
       if (this.mediaQuery.matches) {
         this.isMenuHorizontal = false;
         this.header.classList.remove("horizontal");
@@ -90,6 +97,8 @@ export default class Header {
     }
 
     this.header.style.height = this.headerHeight + "px";
+    if (this.mediaQuery.matches)
+      this.navigation.style.top = this.headerHeight + "px";
   };
 
   private onToggled = () => {
