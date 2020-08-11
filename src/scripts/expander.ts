@@ -1,4 +1,5 @@
 import Constants from "./constants";
+import Utils from "./utils";
 
 export default class Expander {
   private readonly svgUse: SVGUseElement;
@@ -23,7 +24,10 @@ export default class Expander {
       this.container.style.height = Constants.expanderMinHeight + "rem";
       this.svgUse.href.baseVal = "#icon-chevron-down";
       if (window.scrollY > this.expander.offsetTop)
-        window.scrollTo(window.scrollX, this.expander.offsetTop);
+        window.scrollTo(
+          window.scrollX,
+          this.expander.offsetTop - Utils.remToPx(Constants.headerMinHeight)
+        );
     }
   };
 
