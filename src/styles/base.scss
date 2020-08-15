@@ -87,7 +87,6 @@ nav {
       display: inline-block;
       max-width: 100%;
       padding: 0 0.35rem 2rem 0.35rem;
-      text-shadow: white 0 0 5px;
       vertical-align: middle;
 
       > a {
@@ -144,6 +143,10 @@ p {
 
   &.ratio4to3 {
     padding-top: 3/4 * 100%;
+  }
+
+  &.ratio28to39 {
+    padding-top: 39/28 * 100%;
   }
 }
 
