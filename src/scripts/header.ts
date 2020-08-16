@@ -28,7 +28,7 @@ export default class Header {
     menuButton.addEventListener("click", this.toggle);
 
     for (let i = 0; i < anchors.length; i++)
-      anchors[i].addEventListener("click", this.toggle);
+      anchors[i].addEventListener("click", this.handleAnchorClick);
 
     this.handleHeaderHeightChange();
     setTimeout(() => {
@@ -50,6 +50,10 @@ export default class Header {
       headerMaxHeight * remScale - window.pageYOffset,
       Constants.headerMinHeight * remScale
     );
+  };
+
+  private handleAnchorClick = () => {
+    if (this.mediaQuery.matches) this.toggle();
   };
 
   private handleMediaQueryChange = () => {
