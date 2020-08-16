@@ -3,100 +3,142 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://patryktrajder.com/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
+        <lastmod>2020-08-16T08:56:00+00:00</lastmod>
         <priority>1.00</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb"/>
     </url>
     <url>
         <loc>https://patryktrajder.com/en-gb/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
+        <lastmod>2020-08-16T08:56:00+00:00</lastmod>
         <priority>1.00</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb"/>
     </url>
     <url>
         <loc>https://patryktrajder.com/about/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
         <priority>0</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/about/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/about/"/>
     </url>
     <url>
         <loc>https://patryktrajder.com/en-gb/about/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
         <priority>0</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/about/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/about/"/>
     </url>
     <url>
         <loc>https://patryktrajder.com/products/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
         <priority>0.5</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/"/>
     </url>
     <url>
         <loc>https://patryktrajder.com/en-gb/products/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
         <priority>0.5</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/"/>
     </url>
     <url>
         <loc>https://patryktrajder.com/projects/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
+        <lastmod>2020-08-16T08:56:00+00:00</lastmod>
         <priority>0.3</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/projects/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/projects/"/>
     </url>
     <url>
         <loc>https://patryktrajder.com/en-gb/projects/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
         <priority>0.3</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/projects/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/projects/"/>
     </url>
     <url>
-        <loc>https://patryktrajder.com/projects/hydraulic-power-pack/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
-        <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/hydraulic-power-pack/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/hydraulic-power-pack/"/>
-    </url>
-    <url>
-        <loc>https://patryktrajder.com/en-gb/projects/hydraulic-power-pack/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
-        <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/hydraulic-power-pack/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/hydraulic-power-pack/"/>
-    </url>
-    <url>
         <loc>https://patryktrajder.com/products/super-booster-2000/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
         <priority>1</priority>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/super-booster-2000/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/super-booster-2000/"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/super-booster-2000/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/super-booster-2000/"/>
     </url>
     <url>
         <loc>https://patryktrajder.com/en-gb/products/super-booster-2000/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
         <priority>1</priority>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/super-booster-2000/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/super-booster-2000/"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/super-booster-2000/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/super-booster-2000/"/>
     </url>
     <url>
         <loc>https://patryktrajder.com/products/super-booster-2000/instruction/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
         <priority>0</priority>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/super-booster-2000/instruction/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/super-booster-2000/instruction/"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/super-booster-2000/instruction/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/super-booster-2000/instruction/"/>
     </url>
     <url>
         <loc>https://patryktrajder.com/en-gb/products/super-booster-2000/instruction/</loc>
-        <lastmod>2020-07-23T21:00:00+00:00</lastmod>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
         <priority>0</priority>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/super-booster-2000/instruction/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/super-booster-2000/instruction/"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/super-booster-2000/instruction/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/super-booster-2000/instruction/"/>
+    </url>
+    <url>
+        <loc>https://patryktrajder.com/products/super-booster-2000/equipment/</loc>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
+        <priority>0.1</priority>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/super-booster-2000/equipment/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/super-booster-2000/equipment/"/>
+    </url>
+    <url>
+        <loc>https://patryktrajder.com/en-gb/products/super-booster-2000/equipment/</loc>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
+        <priority>0.1</priority>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/super-booster-2000/equipment/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/super-booster-2000/equipment/"/>
+    </url>
+    <url>
+        <loc>https://patryktrajder.com/products/super-booster-2000/equipment/metal-sheets/</loc>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/super-booster-2000/equipment/metal-sheets/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/super-booster-2000/equipment/metal-sheets/"/>
+    </url>
+    <url>
+        <loc>https://patryktrajder.com/en-gb/products/super-booster-2000/equipment/metal-sheets/</loc>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/super-booster-2000/equipment/metal-sheets/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/super-booster-2000/equipment/metal-sheets/"/>
+    </url>
+    <url>
+        <loc>https://patryktrajder.com/projects/hydraulic-power-pack/</loc>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/projects/hydraulic-power-pack/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/projects/hydraulic-power-pack/"/>
+    </url>
+    <url>
+        <loc>https://patryktrajder.com/en-gb/projects/hydraulic-power-pack/</loc>
+        <lastmod>2020-08-16T08:05:00+00:00</lastmod>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/projects/hydraulic-power-pack/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/projects/hydraulic-power-pack/"/>
+    </url>
+    <url>
+        <loc>https://patryktrajder.com/projects/hydraulic-cylinder/</loc>
+        <lastmod>2020-08-16T08:56:00+00:00</lastmod>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/projects/hydraulic-cylinder/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/projects/hydraulic-cylinder/"/>
+    </url>
+    <url>
+        <loc>https://patryktrajder.com/en-gb/projects/hydraulic-cylinder/</loc>
+        <lastmod>2020-08-16T08:56:00+00:00</lastmod>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/projects/hydraulic-cylinder/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/projects/hydraulic-cylinder/"/>
     </url>
 </urlset>
