@@ -16,6 +16,13 @@ b {
   font-weight: 700;
 }
 
+p {
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
 svg.icon {
   display: inline-block;
   fill: currentColor;
