@@ -1,4 +1,4 @@
-const { spawn } = require("child_process");
+const { spawn, spawnSync } = require("child_process");
 const gulp = require("gulp");
 const sass = require("gulp-sass");
 const readlineSync = require("readline-sync");
@@ -106,6 +106,27 @@ function sitemapReminder(done) {
   process.exit(1);
 }
 
+function packagesReminder(done) {
+  let process = spawnSync("npm outdated", [], {
+    shell: true
+  });
+  if (process.stdout.byteLength > 0) {
+    spawnSync("npm outdated", [], {
+      shell: true,
+      stdio: "inherit"
+    });
+    if (
+      !readlineSync.keyInYN(
+        "There are outdated packages, do you want to continue?"
+      )
+    ) {
+      console.log("Ok, aborting deployment.");
+      process.exit(2);
+    }
+  }
+  done();
+}
+
 function styles() {
   return gulp
     .src("src/styles/main.scss")
@@ -191,6 +212,7 @@ gulp.task(
   "dist",
   gulp.series(
     sitemapReminder,
+    packagesReminder,
     "clean",
     gulp.parallel("assets", "rootfiles", "src"),
     "deploy"
