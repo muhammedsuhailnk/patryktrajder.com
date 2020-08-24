@@ -2,842 +2,842 @@
 {% set tab = "projects" %}
 
 {% block meta %}
-  <link rel="canonical" href="https://patryktrajder.com/projects/hydraulic-power-pack/"/>
-  <title>Jak zbudować mobilny agregat hydrauliczny | Patryk Trajder</title>
+    <link rel="canonical" href="https://patryktrajder.com/projects/hydraulic-power-pack/"/>
+    <title>Jak zbudować mobilny agregat hydrauliczny | Patryk Trajder</title>
 {% endblock meta %}
 
 {% block vectors %}
-  {% include "vectors/arrow-right.sym" %}
-  {% include "vectors/chevron-up.sym" %}
-  {% include "vectors/chevron-down.sym" %}
-  {% include "vectors/home.sym" %}
+    {% include "vectors/arrow-right.sym" %}
+    {% include "vectors/chevron-up.sym" %}
+    {% include "vectors/chevron-down.sym" %}
+    {% include "vectors/home.sym" %}
 {% endblock %}
 
 {% block body %}
-  <main>
-    <article>
-      <section class="gap-top">
-        <header>
-          <nav class="breadcrumbs">
-            <span>
-              <a href="/">
-                <svg class="home icon">
-                  <use xlink:href="#icon-home"></use>
-                </svg>
-              </a>
-              <svg class="icon">
-                <use xlink:href="#icon-arrow-right"></use>
-              </svg>
-            </span>
-            <span>
-              <a href="/projects/">Projekty</a>
-              <svg class="icon">
-                <use xlink:href="#icon-arrow-right"></use>
-              </svg>
-            </span>
-            <a href="/projects/hydraulic-power-pack/">
-              <b>Mobilny agregat hydrauliczny</b>
-            </a>
-          </nav>
-          <h1>Jak zbudować mobilny agregat hydrauliczny</h1>
-        </header>
-        <div class="row">
-          <div>
-            <p>
-              Gdy zaczynałem budowę agregatu nie miałem żadnego pojęcia o hydraulice. Zakładałem, że jest to temat bardzo prosty. Szybko zrozumiałem, że nawet do tak pozornie prostej budowy po raz kolejny (o zgrozo!) potrzebuję matematyki, której w szkole nie chciałem się uczyć myśląc&#32;<q>i tak mi się to do niczego nie przyda</q>. Zbieranie doświadczenia z tej dziedziny było dla mnie wyjątkowo trudne z racji na brak znajomych w branży oraz słaby dostęp do informacji. Po wyczerpującym research’u w Internecie i książkach, po 2-3 tygodniach byłem gotowy do podjęcia pracy. Z racji, że zdobyte przeze mnie informacje i spostrzeżenia podaję Ci&#32;<q>na tacy</q>&#32;liczę, że Ty uzbrojony w moje wskazówki i głowę na karku zdobędziesz tę tajemną wiedzę w 10 minut. 🙂 Mam też nadzieję, że unikniesz niepotrzebnych wydatków, wypadków i zaoszczędzisz czas. Większość rad jest&#32;<q>z życia wzięte</q>&#32;i oparte są na moich błędach. Nie biorę odpowiedzialności za to, co będziesz robić we własnym warsztatacie, tak więc uważaj - z hydrauliką serio nie ma żartów. 😀
-            </p>
-          </div>
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/thumb.jpg" alt="gotowy hydrauliczny zespół napędowy"/>
-            </div>
-          </div>
-        </div>
-
-        <div class="expander materials shrink">
-          <header>
-            <p>Potrzebne materiały</p>
-          </header>
-          <div class="container">
-            <ul class="dots">
-              <li>
-                <p>silnik elektryczny,</p>
-              </li>
-              <li>
-                <p>pompa hydrauliczna,</p>
-              </li>
-              <li>
-                <p>łącznik dzwonowy,</p>
-              </li>
-              <li>
-                <p>sprzęgło kłowe,</p>
-              </li>
-              <li>
-                <p>rozdzielacz,</p>
-              </li>
-              <li>
-                <p>przewody hydrauliczne,</p>
-              </li>
-              <li>
-                <p>arkusz blachy (do budowy zbiornika),</p>
-              </li>
-              <li>
-                <p>termometr wraz z wskaźnikiem poziomu oleju,</p>
-              </li>
-              <li>
-                <p>kółka,</p>
-              </li>
-              <li>
-                <p>korek spustowy,</p>
-              </li>
-              <li>
-                <p>korek wlewu,</p>
-              </li>
-              <li>
-                <p>filtr oleju,</p>
-              </li>
-              <li>
-                <p>łącznik grodziowy,</p>
-              </li>
-              <li>
-                <p>ssak z siatki,</p>
-              </li>
-              <li>
-                <p>manometr,</p>
-              </li>
-              <li>
-                <p>przełącznik elektryczny,</p>
-              </li>
-              <li>
-                <p>olej hydrauliczny,</p>
-              </li>
-              <li>
-                <p>naklejki i farba 😉</p>
-              </li>
-            </ul>
-          </div>
-          <button>
-            <svg class="icon">
-              <use xlink:href="#icon-chevron-down"></use>
-            </svg>
-          </button>
-        </div>
-
-        <div class="expander shrink tools gap-top">
-          <header>
-            <p>Potrzebne narzędzia</p>
-          </header>
-          <div class="container">
-            <ul class="dots">
-              <li>
-                <p>tokarka,</p>
-              </li>
-              <li>
-                <p>oprzyrządowanie do tokarki:</p>
-                <ul class="dots">
-                  <li>
-                    <p>wiertła z płetwą morsa,</p>
-                  </li>
-                  <li>
-                    <p>nóż do wytaczania,</p>
-                  </li>
-                  <li>
-                    <p>nóż do planowania,</p>
-                  </li>
-                  <li>
-                    <p>nóż do toczenia wzdłużnego,</p>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <p>szlifierka kątowa + tarcze 1; 2,5; 4 mm,</p>
-              </li>
-              <li>
-                <p>spawarka wraz z osprzętem do spawania stali czarnej,</p>
-              </li>
-              <li>
-                <p>wiertarka stołowa,</p>
-              </li>
-              <li>
-                <p>palnik gazowy,</p>
-              </li>
-              <li>
-                <p>wkrętarka lub wiertarka,</p>
-              </li>
-              <li>
-                <p>gwintownik M10x1,50</p>
-              </li>
-              <li>
-                <p>pokrętło do gwintowników w zakresie M1-M10,</p>
-              </li>
-              <li>
-                <p>fazownik / pogłebiacz stożkowy,</p>
-              </li>
-              <li>
-                <p>olejarka,</p>
-              </li>
-              <li>
-                <p>punktak,</p>
-              </li>
-              <li>
-                <p>ściski stolarskie,</p>
-              </li>
-              <li>
-                <p>dysk listkowy (papier ścierny na wiertarkę),</p>
-              </li>
-              <li>
-                <p>spray niebieski,</p>
-              </li>
-              <li>
-                <p>spray pomaranczowy,</p>
-              </li>
-              <li>
-                <p>pilniki, młotki i inne typowe narzędzia ręczne.</p>
-              </li>
-            </ul>
-
-            <p class="single-out gap-top">Narzędzia pomiarowe:</p>
-            <ul class="dots">
-              <li>
-                <p>czujnik zegarowy,</p>
-              </li>
-              <li>
-                <p>suwmiarka uniwersalna 0-150,</p>
-              </li>
-              <li>
-                <p>suwmiarka uniwersalna 0-250,</p>
-              </li>
-            </ul>
-
-            <p class="single-out gap-top">Narzędzia specjalistyczne:</p>
-            <ul class="dots">
-              <li>
-                <p>zakuwarka do węży hydraulicznych.</p>
-              </li>
-            </ul>
-          </div>
-          <button>
-            <svg class="icon">
-              <use xlink:href="#icon-chevron-down"></use>
-            </svg>
-          </button>
-        </div>
-
-        <p class="gap-top">
-          Pracę najlepiej zacząć od połączenia silnika elektrycznego z pompą. Jest to bardzo łatwe zadanie jeśli masz większy budżet, ponieważ do tego celu dostępne są gotowe części. Musisz kupić silnik z mocowaniem kołnierzowym, łącznik dzwonowy, sprzęgło kłowe, oraz pompę. Pamiętaj jednak, aby wszystkie części były ze sobą kompatybilne.
-        </p>
-
-        <div class="row gap-top">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail1-m1120.jpg" alt="pokazuje silnik elektryczny"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Ja w moim projekcie wykorzystałem silnik z odzysku, który znalazłem na złomie. Łącznik dzwonowy zrobiłem sam, ponieważ oryginalny nie pasowałby do mojego silnika. Na szczęście udało mi się zastosować oryginalne sprzęgło kłowe.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail4-m1120.jpg" alt="części potrzebne do budowy pompy"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Przy wyborze pompy oraz silnika musisz najpierw zastanowić się do czego chcesz ich używać. Jest to istotne ze względu na oczekiwane parametry tj. ciśnienie robocze oraz wydajność litrów na minutę. Pierwszy parametr dotyczy mocy, a drugi szybkości wysuwu tłoka.
-
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail3-m1120.jpg" alt="sprawdzanie, czy części są dopasowane"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Przykładowo, jeśli chcesz używać agregatu do prasy, to powinieneś kupić pompę z jak największym maksymalnym ciśnieniem i zarazem jak najmniejszym przepływem litrów na minutę. W ten sposób uzyskasz wolną, dokładną pracę, a zarazem dużą moc. Z kolei przy budowie łuparki, sprawa wygląda całkiem odwrotnie – będziesz potrzebował bardzo szybkiego wysuwu tłoka, przy stosunkowo niedużej mocy.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail5-m1120.jpg" alt="sprawdzanie pasowania części"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Mój agregat ma służyć zarówno do prasy jak i łuparki, więc poszedłem na kompromis i dobrałem parametry pomiędzy. Jednak jak powszechnie wiadomo&#32;<q>jeśli coś jest do wszystkiego to jest do …. (sam sobie dokończ)</q>.😉
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail6-m1120.jpg" alt="gotowy zespół pompy i silnika"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Pamiętaj również, że zwiększenie parametrów mocy lub litrów na minutę zwiększa wprost proporcjonalnie zapotrzebowanie na wielkość silnika elektrycznego. Aby wszystko ułatwić przedstawiam wzór matematyczny, z którego korzystałem:
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/wzory.jpg" alt="obliczenia"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Na szybkość wysuwu<br>Na moc w tonach jaka uzyskamy<br>Jaki silnik potrzebujemy (wkrótce uzupełnie artykuł)
-            </p>
-          </div>
-        </div>
-
-        <div>
-          <p class="single-out">Najtrudniejsze już za Tobą. Aby móc przejść do następnego etapu budowy będziesz potrzebował poniższych części:
-          </p>
-
-          <ul class="dots">
-            <li>
-              <p>blacha do budowy zbiornika</p>
-            </li>
-            <li>
-              <p>kółka</p>
-            </li>
-            <li>
-              <p>Korek spustu oleju</p>
-            </li>
-            <li>
-              <p>niebieska farba, naklejki ;)
-              </p>
-            </li>
-          </ul>
-        </div>
-
-        <div class="row gap-top">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail7-m1120.jpg" alt="palnik gazowy"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Gdy już posiadasz powyższe elementy, możesz przejść do budowy zbiornika. Pamiętaj o wstępnym przypasowaniu wszystkich podzespołów.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail9-m1120.jpg" alt="cięcie palnikiem tlenowym"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Do zaprojektowania zbiornika musisz znać kilka wartości:
-              <br>
-              pojemność Twojego cylindra, (ew. wszystkich cylindrów, które będą zasilane) przy maksymalnym wysuwie.
-              <br>
-              Do tego możesz wykorzytać np. wzór: π(d/2)&#178;·l, gdzie:
-              <br>d - średnica wewnętrzna cylindra
-              <br>l - długość naszego cylindra
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail13-w1120.jpg" alt="spawanie zbiornika na olej"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Gdy już wiesz, że potrzebujesz przykładowo 20l oleju na same siłowniki i przewody, to polecam Ci powiększyć tę wartość przynajmniej trzykrotnie. (WTF?) Dlaczego?<br>
-              Już wyjaśniam.
-            </p>
-          </div>
-        </div>
-
-        <div>
-          <p class="single-out">Po pierwsze:</p>
-
-          <p class="indent">
-            Ssaka pompy nie mocujemy na samym dole zbiornika, aby nie zaciągał brudu z dołu.</p>
-
-          <p class="single-out">Po drugie:</p>
-
-          <p class="indent">Podczas pracy agregatu olej się nagrzewa, a co za tym idzie będzie go więcej. Gdy będzie go więcej to dłużej będzie się nagrzewać.</p>
-
-          <p class="single-out">Po trzecie:</p>
-
-          <p class="indent">
-            Praca nawet nowego siłownika powoduje delikatne straty oleju. Im większy będziemy mieli zapas, tym rzadziej będziemy musieli go uzupełniać.</p>
-
-          <p class="single-out">Po czwarte:</p>
-
-          <p class="indent">Myśl przyszłościowo - jeśli będziesz chciał kiedyś podłączyć większy siłownik, to nie będziesz musiał przerabiać zbiornika.</p>
-
-          <p class="gap-top">
-            Oczywiście duży zbiornik to nie tylko zalety, ale i wady. Jak idzie się łatwo domyślić większy zbiornik będzie cięższy, a co za tym idzie mniej mobilny. Ponadto będzie potrzebował więcej oleju do pracy, więc jednostkowy koszt zakupu oleju będzie wyższy.
-          </p>
-        </div>
-
-        <div class="row gap-top">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail14-w1120.jpg" alt="spawanie wzmocnień do zbiornika na olej"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Jeśli już znasz pojemność swojego zbiornika, następnym krokiem będzie obliczenie jego wielkości. Odnośnie samego zbiornika możesz wykorzystać stary zbiornik po LPG. Osobiście nie polecam takiego rozwiązania jeśli się na tym nie znasz. Chodzi mi oczywiście o Twoje bezpieczeństwo. (Cięcie zbiornika można porównać do grzybobrania. Podobno trującego grzyba można zjeść, ale tylko raz. Tak samo jest już sam wiesz z czym.) Wzór na zbiornik walcowy o pojemności 60l:
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail15-w1120.jpg" alt="spawanie wzmocnień"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Gdy już jednak uzmysłowiłeś sobie, że wykorzystanie zbiornika po LPG mogłoby nominować Cię do nagrody Darwina, to polecam Ci zbudowanie zbiornika o bryle prostopadłościanu lub sześcianu (co kto lubi).<br>
-              Wzór aby uzyskać 60l: (tutaj bedzie wzór)
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail16-w1120.jpg" alt="spawanie korka spustowego oleju"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Często dostawałem pytania o dokładne wymiary i sam takich szukałem. Mam nadzieję, że powyżej wyjaśniłem już wystarczająco dlaczego nie powinienem Ci narzucać konkretnych.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail17-w1120.jpg" alt="spawanie osi do kółek do zbiornika"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Na górze zbiornika przyspawaj gruby kątownik, taki w którym dasz radę zrobić gwint.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail18-w1120.jpg" alt="spawanie stopki do zbiornika"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Jeśli chcesz żeby Twój agregat był mobilny, co swoją drogą polecam Ci z całego serca musisz przyspawać oś, do której zamontujesz kółka i zrobić stópkę.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail19-w1120.jpg" alt="spawanie podpory zbiornika hydraulicznego"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Szkielet zbiornika jest już gotowy.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail20-w1120.jpg" alt="malowanie zbiornika hydraulicznego"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Jeśli chcesz chwalić się swoim agregatem wśród innych warsztatowych Mirków, to fajnie jakbyś go jeszcze pomalował, żeby całkiem zzielenieli z zazdrości.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail21-w1120.jpg" alt="malowanie zbiornika hydraulicznego"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Poza tym pomalowany zbiornik prezentuje się o wiele lepiej i milej Ci będzie skręcać kolejne podzespoły.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail22-w1120.jpg" alt="montaż koła z oponą do zbiornika"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Czas na montaż kółek...
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail23-w1120.jpg" alt="instalacja temometru"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              ...oraz termometru wraz z wskaźnikiem poziomu oleju.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail24-w1120.jpg" alt="wiercenie otworów"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              W kątowniku wywierć otwory, które później nagwintujsz.
-            </p>
-          </div>
-        </div>
-
-        <div>
-          <p class="single-out gap-top-medium">Super! Zbiornik jest już gotowy. Czas na płytę montażową. To mój ulubiony etap budowy. Będziesz potrzebował wszystkie części, które mają się na tej płycie znaleźć, a więc:
-          </p>
-
-          <ul class="dots">
-            <li>
-              <p>Łącznik grodziowy</p>
-            </li>
-            <li>
-              <p>łącznik dzwonowy</p>
-            </li>
-            <li>
-              <p>Korek wlewu</p>
-            </li>
-            <li>
-              <p>Filtr oleju</p>
-            </li>
-          </ul>
-        </div>
-
-        <div class="row gap-top">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail26-w1120.jpg" alt="trasowanie blachy stalowej"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Odrysuj ich kształty (tak będzie najłatwiej)...
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail27-w1120.jpg" alt="wycinanie otworów w płycie stalowej"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              ...i zabierz się za wycinanie oraz wiercenie.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail31-w1120.jpg" alt="Powitanie kota"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Przy kolejnym kroku będzięmy potrzebował pomocnika. ;)
-            </p>
-          </div>
-        </div>
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail29-w1120.jpg" alt="spawanie profila do blachy"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              Teraz czas przyspawać&#32;<q>nogę</q>&#32;(profil), na której będzie umieszczony rozdzielacz. Tutaj również nie mogę podać konkretnych wymiarów, ponieważ każdy może kupić inne części (o innych wymiarach).
-            </p>
-          </div>
-        </div>
-        <div class="row">
-          <div>
-            <div class="image-loading">
-              <img src="/assets/images/projects/hydraulic-power-pack/detail30-w1120.jpg" alt="spawanie profilu"/>
-            </div>
-          </div>
-          <div>
-            <p>
-              * spawanie *
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail34-w1120.jpg" alt="malowanie metalowej płyty"/>
+    <main>
+        <article>
+            <section class="gap-top">
+                <header>
+                    <nav class="breadcrumbs">
+                        <span>
+                            <a href="/" title="Strona główna">
+                                <svg class="home icon">
+                                    <use xlink:href="#icon-home"></use>
+                                </svg>
+                            </a>
+                            <svg class="icon">
+                                <use xlink:href="#icon-arrow-right"></use>
+                            </svg>
+                        </span>
+                        <span>
+                            <a href="/projects/">Projekty</a>
+                            <svg class="icon">
+                                <use xlink:href="#icon-arrow-right"></use>
+                            </svg>
+                        </span>
+                        <a href="/projects/hydraulic-power-pack/">
+                            <b>Mobilny agregat hydrauliczny</b>
+                        </a>
+                    </nav>
+                    <h1>Jak zbudować mobilny agregat hydrauliczny</h1>
+                </header>
+                <div class="row">
+                    <div>
+                        <p>
+                            Gdy zaczynałem budowę agregatu nie miałem żadnego pojęcia o hydraulice. Zakładałem, że jest to temat bardzo prosty. Szybko zrozumiałem, że nawet do tak pozornie prostej budowy po raz kolejny (o zgrozo!) potrzebuję matematyki, której w szkole nie chciałem się uczyć myśląc&#32;<q>i tak mi się to do niczego nie przyda</q>. Zbieranie doświadczenia z tej dziedziny było dla mnie wyjątkowo trudne z racji na brak znajomych w branży oraz słaby dostęp do informacji. Po wyczerpującym research’u w Internecie i książkach, po 2-3 tygodniach byłem gotowy do podjęcia pracy. Z racji, że zdobyte przeze mnie informacje i spostrzeżenia podaję Ci&#32;<q>na tacy</q>&#32;liczę, że Ty uzbrojony w moje wskazówki i głowę na karku zdobędziesz tę tajemną wiedzę w 10 minut. 🙂 Mam też nadzieję, że unikniesz niepotrzebnych wydatków, wypadków i zaoszczędzisz czas. Większość rad jest&#32;<q>z życia wzięte</q>&#32;i oparte są na moich błędach. Nie biorę odpowiedzialności za to, co będziesz robić we własnym warsztatacie, tak więc uważaj - z hydrauliką serio nie ma żartów. 😀
+                        </p>
+                    </div>
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/thumb.jpg" alt="gotowy hydrauliczny zespół napędowy"/>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div>
-                <p>
-                  Tutaj również warto pomalować płytę montażową. Najlepiej zrobić to w tym momencie, aby później wszystkiego nie rozbierać i marnować uszczelek.
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail35-w1120.jpg" alt="montaż płyty na silniku"/>
-                </div>
-              </div>
-              <div>
-                <p>
-                  Przykręć silnik elektryczny, pamiętając o uszczelce.
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail36-w1120.jpg" alt="przykręcenie blachy do silnika"/>
-                </div>
-              </div>
-              <div>
-                <p>
-                  Do zamocowania silnika użyj nakrętek samokontrujących.
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail37-w1120.jpg" alt="montaż łącznika grodziowego"/>
-                </div>
-              </div>
-              <div>
-                <p>
-                  Teraz czas na montaż łącznika grodziowego.
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail38-w1120.jpg" alt="montaż gumowych węży hydraulicznych"/>
-                </div>
-              </div>
-              <div>
-                <p>
-                  Gdy wszystko już jest skręcone, ustal długość przewodów hydraulicznych, które będziesz musiał zakuć w specjalnym zakładzie. Nie popełniaj mojego błędu i nie kupuj ich wcześniej, bo bardzo ciężko trafić z rozmiarem. Ja musiałem je kupić aż dwa razy. Nie dość, że nie jestem za bardzo rozgarnięty to teraz w dodatku i biedny.
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail39-w1120.jpg" alt="montowanie ssaka do pompy"/>
-                </div>
-              </div>
-              <div>
-                <p>
-                  Jeśli chcesz żeby Twój agregat był zawsze w dobrej kondycji niczym Krzysiek Ibisz zamocuj sitko na ssaku oleju.
-                </p>
-              </div>
-            </div>
 
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail41-w1120.jpg" alt="Przykręcenie sita do wlewu oleju"/>
+                <div class="expander materials shrink">
+                    <header>
+                        <p>Potrzebne materiały</p>
+                    </header>
+                    <div class="container">
+                        <ul class="dots">
+                            <li>
+                                <p>silnik elektryczny,</p>
+                            </li>
+                            <li>
+                                <p>pompa hydrauliczna,</p>
+                            </li>
+                            <li>
+                                <p>łącznik dzwonowy,</p>
+                            </li>
+                            <li>
+                                <p>sprzęgło kłowe,</p>
+                            </li>
+                            <li>
+                                <p>rozdzielacz,</p>
+                            </li>
+                            <li>
+                                <p>przewody hydrauliczne,</p>
+                            </li>
+                            <li>
+                                <p>arkusz blachy (do budowy zbiornika),</p>
+                            </li>
+                            <li>
+                                <p>termometr wraz z wskaźnikiem poziomu oleju,</p>
+                            </li>
+                            <li>
+                                <p>kółka,</p>
+                            </li>
+                            <li>
+                                <p>korek spustowy,</p>
+                            </li>
+                            <li>
+                                <p>korek wlewu,</p>
+                            </li>
+                            <li>
+                                <p>filtr oleju,</p>
+                            </li>
+                            <li>
+                                <p>łącznik grodziowy,</p>
+                            </li>
+                            <li>
+                                <p>ssak z siatki,</p>
+                            </li>
+                            <li>
+                                <p>manometr,</p>
+                            </li>
+                            <li>
+                                <p>przełącznik elektryczny,</p>
+                            </li>
+                            <li>
+                                <p>olej hydrauliczny,</p>
+                            </li>
+                            <li>
+                                <p>naklejki i farba 😉</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <button>
+                        <svg class="icon">
+                            <use xlink:href="#icon-chevron-down"></use>
+                        </svg>
+                    </button>
                 </div>
-              </div>
-              <div>
-                <p>
-                  Sitko pod korkiem wlewu oleju dodatkowo ograniczy zanieczyszczenia w zbiorniku.
-                </p>
-              </div>
-            </div>
 
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail25-w1120.jpg" alt="kot w środku zbiornika hydraulicznego"/>
+                <div class="expander shrink tools gap-top">
+                    <header>
+                        <p>Potrzebne narzędzia</p>
+                    </header>
+                    <div class="container">
+                        <ul class="dots">
+                            <li>
+                                <p>tokarka,</p>
+                            </li>
+                            <li>
+                                <p>oprzyrządowanie do tokarki:</p>
+                                <ul class="dots">
+                                    <li>
+                                        <p>wiertła z płetwą morsa,</p>
+                                    </li>
+                                    <li>
+                                        <p>nóż do wytaczania,</p>
+                                    </li>
+                                    <li>
+                                        <p>nóż do planowania,</p>
+                                    </li>
+                                    <li>
+                                        <p>nóż do toczenia wzdłużnego,</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>szlifierka kątowa + tarcze 1; 2,5; 4 mm,</p>
+                            </li>
+                            <li>
+                                <p>spawarka wraz z osprzętem do spawania stali czarnej,</p>
+                            </li>
+                            <li>
+                                <p>wiertarka stołowa,</p>
+                            </li>
+                            <li>
+                                <p>palnik gazowy,</p>
+                            </li>
+                            <li>
+                                <p>wkrętarka lub wiertarka,</p>
+                            </li>
+                            <li>
+                                <p>gwintownik M10x1,50</p>
+                            </li>
+                            <li>
+                                <p>pokrętło do gwintowników w zakresie M1-M10,</p>
+                            </li>
+                            <li>
+                                <p>fazownik / pogłebiacz stożkowy,</p>
+                            </li>
+                            <li>
+                                <p>olejarka,</p>
+                            </li>
+                            <li>
+                                <p>punktak,</p>
+                            </li>
+                            <li>
+                                <p>ściski stolarskie,</p>
+                            </li>
+                            <li>
+                                <p>dysk listkowy (papier ścierny na wiertarkę),</p>
+                            </li>
+                            <li>
+                                <p>spray niebieski,</p>
+                            </li>
+                            <li>
+                                <p>spray pomaranczowy,</p>
+                            </li>
+                            <li>
+                                <p>pilniki, młotki i inne typowe narzędzia ręczne.</p>
+                            </li>
+                        </ul>
+
+                        <p class="single-out gap-top">Narzędzia pomiarowe:</p>
+                        <ul class="dots">
+                            <li>
+                                <p>czujnik zegarowy,</p>
+                            </li>
+                            <li>
+                                <p>suwmiarka uniwersalna 0-150,</p>
+                            </li>
+                            <li>
+                                <p>suwmiarka uniwersalna 0-250,</p>
+                            </li>
+                        </ul>
+
+                        <p class="single-out gap-top">Narzędzia specjalistyczne:</p>
+                        <ul class="dots">
+                            <li>
+                                <p>zakuwarka do węży hydraulicznych.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <button>
+                        <svg class="icon">
+                            <use xlink:href="#icon-chevron-down"></use>
+                        </svg>
+                    </button>
                 </div>
-              </div>
-              <div>
-                <p>
-                  Teraz upewnij się czy nie masz kota w zbiorniku. Jeśli już ustalisz, że jest pusty to możesz skręcić płytę montażową oraz zbiornik w całość.
-                </p>
-              </div>
-            </div>
 
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail42-w1120.jpg" alt="montaż pompy z silnikiem do zbiornika"/>
+                <p class="gap-top">
+                    Pracę najlepiej zacząć od połączenia silnika elektrycznego z pompą. Jest to bardzo łatwe zadanie jeśli masz większy budżet, ponieważ do tego celu dostępne są gotowe części. Musisz kupić silnik z mocowaniem kołnierzowym, łącznik dzwonowy, sprzęgło kłowe, oraz pompę. Pamiętaj jednak, aby wszystkie części były ze sobą kompatybilne.
+                </p>
+
+                <div class="row gap-top">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail1-m1120.jpg" alt="pokazuje silnik elektryczny"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Ja w moim projekcie wykorzystałem silnik z odzysku, który znalazłem na złomie. Łącznik dzwonowy zrobiłem sam, ponieważ oryginalny nie pasowałby do mojego silnika. Na szczęście udało mi się zastosować oryginalne sprzęgło kłowe.
+                        </p>
+                    </div>
                 </div>
-              </div>
-              <div>
-                <p>na tym etapie również będziesz potrzebować pomocną dłoń współpracownika, lub mamy ;)
-                </p>
-              </div>
-            </div>
 
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail47-w1120.jpg" alt="Przykręcenie węży hydraulicznych do rozdzielacza"/>
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail4-m1120.jpg" alt="części potrzebne do budowy pompy"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Przy wyborze pompy oraz silnika musisz najpierw zastanowić się do czego chcesz ich używać. Jest to istotne ze względu na oczekiwane parametry tj. ciśnienie robocze oraz wydajność litrów na minutę. Pierwszy parametr dotyczy mocy, a drugi szybkości wysuwu tłoka.
+
+                        </p>
+                    </div>
                 </div>
-              </div>
-              <div>
-                <p>
-                  Skręcając przewody do rozdzielacza zwróć uwagę, aby podłączyć je z odpowiedniej strony! Możesz podejrzeć jak ja to zrobiłem oglądając mój film. Przewód zasilający od pompy z reguły (z reguły!) podłączamy od strony, gdzie jest regulator ciśnienia. Na nowym rozdzielaczu powinny być strzałki, ale jeśli ich nie ma to po prostu sprawdź jego specyfikację.
-                </p>
-              </div>
-            </div>
 
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail44-w1120.jpg" alt="montaż wyłącznika elektrycznego"/>
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail3-m1120.jpg" alt="sprawdzanie, czy części są dopasowane"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Przykładowo, jeśli chcesz używać agregatu do prasy, to powinieneś kupić pompę z jak największym maksymalnym ciśnieniem i zarazem jak najmniejszym przepływem litrów na minutę. W ten sposób uzyskasz wolną, dokładną pracę, a zarazem dużą moc. Z kolei przy budowie łuparki, sprawa wygląda całkiem odwrotnie – będziesz potrzebował bardzo szybkiego wysuwu tłoka, przy stosunkowo niedużej mocy.
+                        </p>
+                    </div>
                 </div>
-              </div>
-              <div>
-                <p>
-                  Gratuluję, jesteś już na ostatniej prostej. Teraz czas na elektrykę. Ja podłączyłem silnik w trójkąt gwiazdę, ale nie jest to wymagane (przynajmniej do silnika 5.5 kw). Może podświadomie chciałem wyleczyć moje kompleksy na komentarze pod innym filmem. że tego nie potrafię. 😉 Generalnie nie jest to trudne, ale tutaj uważaj. Z prądem nie ma żartów! 😀
-                </p>
-              </div>
-            </div>
 
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail48-w1120.jpg" alt="wlewanie oleju"/>
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail5-m1120.jpg" alt="sprawdzanie pasowania części"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Mój agregat ma służyć zarówno do prasy jak i łuparki, więc poszedłem na kompromis i dobrałem parametry pomiędzy. Jednak jak powszechnie wiadomo&#32;<q>jeśli coś jest do wszystkiego to jest do …. (sam sobie dokończ)</q>.😉
+                        </p>
+                    </div>
                 </div>
-              </div>
-              <div>
-                <p>
-                  Teraz już tylko pozostało Ci nalać olej i zrobić próbę.
-                </p>
-              </div>
-            </div>
 
-            <div class="row">
-              <div>
-                <div class="image-loading">
-                  <img src="/assets/images/projects/hydraulic-power-pack/detail45-w1120.jpg" alt="eksplozja zaworu hydraulicznego"/>
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail6-m1120.jpg" alt="gotowy zespół pompy i silnika"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Pamiętaj również, że zwiększenie parametrów mocy lub litrów na minutę zwiększa wprost proporcjonalnie zapotrzebowanie na wielkość silnika elektrycznego. Aby wszystko ułatwić przedstawiam wzór matematyczny, z którego korzystałem:
+                        </p>
+                    </div>
                 </div>
-              </div>
-              <div>
-                <p>
-                  Na koniec jeszcze jedna, przyjacielska rada. Dokładnie sprawdzaj czy aby na pewno części, które kupujesz ze złomu nadają się do użycia. Tak jak mogłeś zauważyć na moim filmie, u mnie skończyło się to nieciekawie. Zalałem cały warsztat olejem, a przy okazji dowiedziałem się, że zmycie oleju z włosów to niełatwe zadanie. 😉
-                </p>
-              </div>
-            </div>
 
-            <section class="gap-top-medium">
-              <h1>Brawo! Twój własny, wspaniały, wyśmienity, niepowtarzalny agregat hydrauliczny gotowy!
-              </h1>
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/wzory.jpg" alt="obliczenia"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Na szybkość wysuwu<br>Na moc w tonach jaka uzyskamy<br>Jaki silnik potrzebujemy (wkrótce uzupełnie artykuł)
+                        </p>
+                    </div>
+                </div>
 
-              <div class="row">
                 <div>
-                  <div class="image-loading">
-                    <img src="/assets/images/projects/hydraulic-power-pack/detail46-w1120.jpg" alt="gotowy hydrauliczny zespół napędowy "/>
-                  </div>
+                    <p class="single-out">Najtrudniejsze już za Tobą. Aby móc przejść do następnego etapu budowy będziesz potrzebował poniższych części:
+                    </p>
+
+                    <ul class="dots">
+                        <li>
+                            <p>blacha do budowy zbiornika</p>
+                        </li>
+                        <li>
+                            <p>kółka</p>
+                        </li>
+                        <li>
+                            <p>Korek spustu oleju</p>
+                        </li>
+                        <li>
+                            <p>niebieska farba, naklejki ;)
+                            </p>
+                        </li>
+                    </ul>
                 </div>
+
+                <div class="row gap-top">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail7-m1120.jpg" alt="palnik gazowy"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Gdy już posiadasz powyższe elementy, możesz przejść do budowy zbiornika. Pamiętaj o wstępnym przypasowaniu wszystkich podzespołów.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail9-m1120.jpg" alt="cięcie palnikiem tlenowym"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Do zaprojektowania zbiornika musisz znać kilka wartości:
+                            <br>
+                            pojemność Twojego cylindra, (ew. wszystkich cylindrów, które będą zasilane) przy maksymalnym wysuwie.
+                            <br>
+                            Do tego możesz wykorzytać np. wzór: π(d/2)&#178;·l, gdzie:
+                            <br>d - średnica wewnętrzna cylindra
+                            <br>l - długość naszego cylindra
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail13-w1120.jpg" alt="spawanie zbiornika na olej"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Gdy już wiesz, że potrzebujesz przykładowo 20l oleju na same siłowniki i przewody, to polecam Ci powiększyć tę wartość przynajmniej trzykrotnie. (WTF?) Dlaczego?<br>
+                            Już wyjaśniam.
+                        </p>
+                    </div>
+                </div>
+
                 <div>
-                  <p>
-                    Powyższy artykuł udostępniam za darmo, nie oczekując nic w zamian. Mimo wszystko będzie mi bardzo miło, gdy po zbudowaniu swojego agregatu wyślesz mi zdjęcie z Twoim projektem, do którego jakby nie patrzeć dołożyłem kilka rad. 🙂 Będzie to najlepsze odwdzięczenie się i znak dla mnie, że to co robię ma sens.
-                  </p>
-                </div>
-              </div>
+                    <p class="single-out">Po pierwsze:</p>
 
-              <div class="row">
+                    <p class="indent">
+                        Ssaka pompy nie mocujemy na samym dole zbiornika, aby nie zaciągał brudu z dołu.</p>
+
+                    <p class="single-out">Po drugie:</p>
+
+                    <p class="indent">Podczas pracy agregatu olej się nagrzewa, a co za tym idzie będzie go więcej. Gdy będzie go więcej to dłużej będzie się nagrzewać.</p>
+
+                    <p class="single-out">Po trzecie:</p>
+
+                    <p class="indent">
+                        Praca nawet nowego siłownika powoduje delikatne straty oleju. Im większy będziemy mieli zapas, tym rzadziej będziemy musieli go uzupełniać.</p>
+
+                    <p class="single-out">Po czwarte:</p>
+
+                    <p class="indent">Myśl przyszłościowo - jeśli będziesz chciał kiedyś podłączyć większy siłownik, to nie będziesz musiał przerabiać zbiornika.</p>
+
+                    <p class="gap-top">
+                        Oczywiście duży zbiornik to nie tylko zalety, ale i wady. Jak idzie się łatwo domyślić większy zbiornik będzie cięższy, a co za tym idzie mniej mobilny. Ponadto będzie potrzebował więcej oleju do pracy, więc jednostkowy koszt zakupu oleju będzie wyższy.
+                    </p>
+                </div>
+
+                <div class="row gap-top">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail14-w1120.jpg" alt="spawanie wzmocnień do zbiornika na olej"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Jeśli już znasz pojemność swojego zbiornika, następnym krokiem będzie obliczenie jego wielkości. Odnośnie samego zbiornika możesz wykorzystać stary zbiornik po LPG. Osobiście nie polecam takiego rozwiązania jeśli się na tym nie znasz. Chodzi mi oczywiście o Twoje bezpieczeństwo. (Cięcie zbiornika można porównać do grzybobrania. Podobno trującego grzyba można zjeść, ale tylko raz. Tak samo jest już sam wiesz z czym.) Wzór na zbiornik walcowy o pojemności 60l:
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail15-w1120.jpg" alt="spawanie wzmocnień"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Gdy już jednak uzmysłowiłeś sobie, że wykorzystanie zbiornika po LPG mogłoby nominować Cię do nagrody Darwina, to polecam Ci zbudowanie zbiornika o bryle prostopadłościanu lub sześcianu (co kto lubi).<br>
+                            Wzór aby uzyskać 60l: (tutaj bedzie wzór)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail16-w1120.jpg" alt="spawanie korka spustowego oleju"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Często dostawałem pytania o dokładne wymiary i sam takich szukałem. Mam nadzieję, że powyżej wyjaśniłem już wystarczająco dlaczego nie powinienem Ci narzucać konkretnych.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail17-w1120.jpg" alt="spawanie osi do kółek do zbiornika"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Na górze zbiornika przyspawaj gruby kątownik, taki w którym dasz radę zrobić gwint.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail18-w1120.jpg" alt="spawanie stopki do zbiornika"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Jeśli chcesz żeby Twój agregat był mobilny, co swoją drogą polecam Ci z całego serca musisz przyspawać oś, do której zamontujesz kółka i zrobić stópkę.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail19-w1120.jpg" alt="spawanie podpory zbiornika hydraulicznego"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Szkielet zbiornika jest już gotowy.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail20-w1120.jpg" alt="malowanie zbiornika hydraulicznego"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Jeśli chcesz chwalić się swoim agregatem wśród innych warsztatowych Mirków, to fajnie jakbyś go jeszcze pomalował, żeby całkiem zzielenieli z zazdrości.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail21-w1120.jpg" alt="malowanie zbiornika hydraulicznego"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Poza tym pomalowany zbiornik prezentuje się o wiele lepiej i milej Ci będzie skręcać kolejne podzespoły.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail22-w1120.jpg" alt="montaż koła z oponą do zbiornika"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Czas na montaż kółek...
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail23-w1120.jpg" alt="instalacja temometru"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            ...oraz termometru wraz z wskaźnikiem poziomu oleju.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail24-w1120.jpg" alt="wiercenie otworów"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            W kątowniku wywierć otwory, które później nagwintujsz.
+                        </p>
+                    </div>
+                </div>
+
                 <div>
-                  <div class="image-loading">
-                    <img src="/assets/images/projects/hydraulic-power-pack/thumb.jpg" alt="agregat hydrauliczny zasilany na prąd"/>
-                  </div>
+                    <p class="single-out gap-top-medium">Super! Zbiornik jest już gotowy. Czas na płytę montażową. To mój ulubiony etap budowy. Będziesz potrzebował wszystkie części, które mają się na tej płycie znaleźć, a więc:
+                    </p>
+
+                    <ul class="dots">
+                        <li>
+                            <p>Łącznik grodziowy</p>
+                        </li>
+                        <li>
+                            <p>łącznik dzwonowy</p>
+                        </li>
+                        <li>
+                            <p>Korek wlewu</p>
+                        </li>
+                        <li>
+                            <p>Filtr oleju</p>
+                        </li>
+                    </ul>
                 </div>
-                <div>
-                  <p>
-                    Jeśli chcesz wspomóc mój dalszy rozwój, możesz przekazać dobrowolną darowiznę. Ucieszy mnie nawet 1 zł (słownie: złotówka ;)), bo po odjęciu 18% podatku nadal otrzymam zawrotne 82 grosze. :D
-                    <br>
-                    Na dole artykułu powinien być przycisk od donejtu'ów ;)
-                    <br>
-                    Dziękuję!
-                  </p>
+
+                <div class="row gap-top">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail26-w1120.jpg" alt="trasowanie blachy stalowej"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Odrysuj ich kształty (tak będzie najłatwiej)...
+                        </p>
+                    </div>
                 </div>
-              </div>
 
-              <p class="gap-top">
-                <h3>Poniżej przedstawiam Tobie film z budowy agregatu... ;)
-                </h3>
-              </p>
-
-              <div class="yt-video">
-                <div>
-                  <iframe src="https://www.youtube-nocookie.com/embed/a3s6aUMMPb8?rel=0" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" title="Mobilny agregat hydrauliczny - budowa"></iframe>
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail27-w1120.jpg" alt="wycinanie otworów w płycie stalowej"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            ...i zabierz się za wycinanie oraz wiercenie.
+                        </p>
+                    </div>
                 </div>
-              </div>
-            </section>
 
-          </section>
-        </article>
-      </main>
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail31-w1120.jpg" alt="Powitanie kota"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Przy kolejnym kroku będzięmy potrzebował pomocnika. ;)
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail29-w1120.jpg" alt="spawanie profila do blachy"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            Teraz czas przyspawać&#32;<q>nogę</q>&#32;(profil), na której będzie umieszczony rozdzielacz. Tutaj również nie mogę podać konkretnych wymiarów, ponieważ każdy może kupić inne części (o innych wymiarach).
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <div class="image-loading">
+                            <img src="/assets/images/projects/hydraulic-power-pack/detail30-w1120.jpg" alt="spawanie profilu"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            * spawanie *
+                        </p>
+                    </div>
+                </div>
 
-    {% endblock %}
+                <div class="row">
+                    <div>
+
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail34-w1120.jpg" alt="malowanie metalowej płyty"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    Tutaj również warto pomalować płytę montażową. Najlepiej zrobić to w tym momencie, aby później wszystkiego nie rozbierać i marnować uszczelek.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail35-w1120.jpg" alt="montaż płyty na silniku"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    Przykręć silnik elektryczny, pamiętając o uszczelce.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail36-w1120.jpg" alt="przykręcenie blachy do silnika"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    Do zamocowania silnika użyj nakrętek samokontrujących.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail37-w1120.jpg" alt="montaż łącznika grodziowego"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    Teraz czas na montaż łącznika grodziowego.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail38-w1120.jpg" alt="montaż gumowych węży hydraulicznych"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    Gdy wszystko już jest skręcone, ustal długość przewodów hydraulicznych, które będziesz musiał zakuć w specjalnym zakładzie. Nie popełniaj mojego błędu i nie kupuj ich wcześniej, bo bardzo ciężko trafić z rozmiarem. Ja musiałem je kupić aż dwa razy. Nie dość, że nie jestem za bardzo rozgarnięty to teraz w dodatku i biedny.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail39-w1120.jpg" alt="montowanie ssaka do pompy"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    Jeśli chcesz żeby Twój agregat był zawsze w dobrej kondycji niczym Krzysiek Ibisz zamocuj sitko na ssaku oleju.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail41-w1120.jpg" alt="Przykręcenie sita do wlewu oleju"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    Sitko pod korkiem wlewu oleju dodatkowo ograniczy zanieczyszczenia w zbiorniku.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail25-w1120.jpg" alt="kot w środku zbiornika hydraulicznego"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    Teraz upewnij się czy nie masz kota w zbiorniku. Jeśli już ustalisz, że jest pusty to możesz skręcić płytę montażową oraz zbiornik w całość.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail42-w1120.jpg" alt="montaż pompy z silnikiem do zbiornika"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>na tym etapie również będziesz potrzebować pomocną dłoń współpracownika, lub mamy ;)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail47-w1120.jpg" alt="Przykręcenie węży hydraulicznych do rozdzielacza"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    Skręcając przewody do rozdzielacza zwróć uwagę, aby podłączyć je z odpowiedniej strony! Możesz podejrzeć jak ja to zrobiłem oglądając mój film. Przewód zasilający od pompy z reguły (z reguły!) podłączamy od strony, gdzie jest regulator ciśnienia. Na nowym rozdzielaczu powinny być strzałki, ale jeśli ich nie ma to po prostu sprawdź jego specyfikację.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail44-w1120.jpg" alt="montaż wyłącznika elektrycznego"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    Gratuluję, jesteś już na ostatniej prostej. Teraz czas na elektrykę. Ja podłączyłem silnik w trójkąt gwiazdę, ale nie jest to wymagane (przynajmniej do silnika 5.5 kw). Może podświadomie chciałem wyleczyć moje kompleksy na komentarze pod innym filmem. że tego nie potrafię. 😉 Generalnie nie jest to trudne, ale tutaj uważaj. Z prądem nie ma żartów! 😀
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail48-w1120.jpg" alt="wlewanie oleju"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    Teraz już tylko pozostało Ci nalać olej i zrobić próbę.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div>
+                                <div class="image-loading">
+                                    <img src="/assets/images/projects/hydraulic-power-pack/detail45-w1120.jpg" alt="eksplozja zaworu hydraulicznego"/>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    Na koniec jeszcze jedna, przyjacielska rada. Dokładnie sprawdzaj czy aby na pewno części, które kupujesz ze złomu nadają się do użycia. Tak jak mogłeś zauważyć na moim filmie, u mnie skończyło się to nieciekawie. Zalałem cały warsztat olejem, a przy okazji dowiedziałem się, że zmycie oleju z włosów to niełatwe zadanie. 😉
+                                </p>
+                            </div>
+                        </div>
+
+                        <section class="gap-top-medium">
+                            <h1>Brawo! Twój własny, wspaniały, wyśmienity, niepowtarzalny agregat hydrauliczny gotowy!
+                            </h1>
+
+                            <div class="row">
+                                <div>
+                                    <div class="image-loading">
+                                        <img src="/assets/images/projects/hydraulic-power-pack/detail46-w1120.jpg" alt="gotowy hydrauliczny zespół napędowy "/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>
+                                        Powyższy artykuł udostępniam za darmo, nie oczekując nic w zamian. Mimo wszystko będzie mi bardzo miło, gdy po zbudowaniu swojego agregatu wyślesz mi zdjęcie z Twoim projektem, do którego jakby nie patrzeć dołożyłem kilka rad. 🙂 Będzie to najlepsze odwdzięczenie się i znak dla mnie, że to co robię ma sens.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div>
+                                    <div class="image-loading">
+                                        <img src="/assets/images/projects/hydraulic-power-pack/thumb.jpg" alt="agregat hydrauliczny zasilany na prąd"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>
+                                        Jeśli chcesz wspomóc mój dalszy rozwój, możesz przekazać dobrowolną darowiznę. Ucieszy mnie nawet 1 zł (słownie: złotówka ;)), bo po odjęciu 18% podatku nadal otrzymam zawrotne 82 grosze. :D
+                                        <br>
+                                        Na dole artykułu powinien być przycisk od donejtu'ów ;)
+                                        <br>
+                                        Dziękuję!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p class="gap-top">
+                                <h3>Poniżej przedstawiam Tobie film z budowy agregatu... ;)
+                                </h3>
+                            </p>
+
+                            <div class="yt-video">
+                                <div>
+                                    <iframe src="https://www.youtube-nocookie.com/embed/a3s6aUMMPb8?rel=0" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" title="Mobilny agregat hydrauliczny - budowa"></iframe>
+                                </div>
+                            </div>
+                        </section>
+
+                    </section>
+                </article>
+            </main>
+
+        {% endblock %}
