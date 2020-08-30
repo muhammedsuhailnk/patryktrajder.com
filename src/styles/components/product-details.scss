@@ -1,4 +1,23 @@
 .product-details {
+  .assembly-difficulty {
+    margin-top: 1.5rem;
+
+    > * {
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    > p {
+      margin-right: 1rem;
+    }
+
+    svg {
+      margin-bottom: -6px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
   .availability {
     color: #289b38;
     margin-top: 0.5rem;
