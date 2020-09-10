@@ -2,7 +2,7 @@ import Constants from "./constants";
 import Slider from "./slider";
 
 export default class Gallery {
-  private readonly previewAspectRatio: number = 56.25; // %, 16:9 ratio
+  private readonly previewAspectRatio: number = 0.5625; // %, 16:9 ratio
 
   private readonly closeButton: HTMLButtonElement;
   private readonly full: HTMLElement;
@@ -62,15 +62,35 @@ export default class Gallery {
   }
 
   public showPreview = (img: HTMLImageElement) => {
-    const ratio = img.dataset.ratio || this.previewAspectRatio.toString();
-    this.previewImg.src = img.src.replace("h100.jpg", "h400.jpg");
+    let ratio: number;
+    let width1x: number;
+    if (img.dataset.ratio) {
+      ratio = parseFloat(img.dataset.ratio) / 100;
+      width1x = Math.round(Constants.galleryPreviewHeight / ratio);
+    } else {
+      ratio = this.previewAspectRatio;
+      width1x = Constants.galleryPreviewWidth;
+    }
+
+    const imgBasePath = img.src.slice(0, -"h100.jpg".length);
+    const ratioMultiplier = this.previewAspectRatio / ratio;
+    this.previewImg.sizes =
+      `(max-width: 768px) calc((100vw - 2rem) * ${ratioMultiplier}),` +
+      `(max-width: 70em) calc((100vw - 4.5em) * 3 / 5 * ${ratioMultiplier}),` +
+      `calc(65.5em * 3 / 5 * ${ratioMultiplier})`;
+    this.previewImg.src = imgBasePath + "h400.jpg";
+    this.previewImg.srcset =
+      `${imgBasePath}h${Constants.galleryPreviewHeight}.jpg ${width1x}w,` +
+      `${imgBasePath}w${2 * width1x}.jpg ${2 * width1x}w,` +
+      `${imgBasePath}w${3 * width1x}.jpg ${3 * width1x}w,` +
+      `${imgBasePath}w${4 * width1x}.jpg ${4 * width1x}w`;
     this.previewImgOverlay.classList.add("spinner");
     this.previewImg.addEventListener(
       "load",
       () => {
-        this.previewImgWrapper.style.paddingTop = ratio + "%";
+        this.previewImgWrapper.style.paddingTop = ratio * 100 + "%";
         this.preview.style.maxWidth =
-          (this.previewAspectRatio / parseFloat(ratio)) * 100 + "%";
+          (this.previewAspectRatio / ratio) * 100 + "%";
         this.previewImgOverlay.classList.remove("spinner");
       },
       { once: true }
