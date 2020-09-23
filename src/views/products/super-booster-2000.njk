@@ -19,6 +19,7 @@
   {% include "vectors/home.sym" %}
   {% include "vectors/mail.sym" %}
   {% include "vectors/messenger.sym" %}
+  {% include "vectors/mobile.sym" %}
   {% include "vectors/square.sym" %}
 {% endblock %}
 
@@ -117,14 +118,28 @@
               <span class="value">689</span>,<span class="cents">00</span>&#32;PLN (brutto)</h3>
           </div>
           <div class="contact">
-            <a class="messenger" href="https://www.messenger.com/t/patryktrajder" rel="noreferrer" target="_blank" title="Napisz do mnie na Messengerze">
-              <svg class="icon">
+            <a class="messenger option" href="https://www.messenger.com/t/patryktrajder" rel="noreferrer" target="_blank" title="Napisz do mnie na Messengerze">
+              <svg class="icon messenger">
                 <use xlink:href="#icon-messenger"></use>
               </svg>Messenger</a>
-            <a class="email" href="mailto:sklep@trajder.com" target="_blank" title="sklep@trajder.com">
+            <a class="email option" href="mailto:sklep@trajder.com" target="_blank" title="sklep@trajder.com">
               <svg class="icon">
                 <use xlink:href="#icon-mail"></use>
               </svg>Email</a>
+            <div class="phone" href="tel:+48602106170" target="_blank">
+              <div class="hold-on-click option">
+                <svg class="icon">
+                  <use xlink:href="#icon-mobile"></use>
+                </svg>
+                <span class="text">Telefon</span>
+                <span class="number">602 106 170</span>
+              </div>
+              <div class="invisible option">
+                <svg class="icon">
+                  <use xlink:href="#icon-mobile"></use>
+                </svg>602 106 170
+              </div>
+            </div>
           </div>
           <div class="availability">
             <p>Dostępne w&#32;<s>magazynie</s>&#32;garażu.</p>

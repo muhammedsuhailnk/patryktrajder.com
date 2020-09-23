@@ -3,6 +3,7 @@ import Checkbox from "./scripts/checkbox";
 import Expander from "./scripts/expander";
 import Gallery from "./scripts/gallery";
 import Header from "./scripts/header";
+import HoldOnClick from "./scripts/hold-on-click";
 import LanguageDropdown from "./scripts/language-dropdown";
 import Slider from "./scripts/slider";
 
@@ -24,6 +25,9 @@ for (let i = 0; i < expanders.length; i++)
 
 const header = document.querySelector("body > header");
 if (header) new Header(header as HTMLElement);
+
+const holdContainer = document.querySelector(".hold-on-click");
+if (holdContainer) new HoldOnClick(holdContainer as HTMLElement);
 
 const languageDropdowns = document.getElementsByClassName("language-dropdown");
 for (let i = 0; i < languageDropdowns.length; i++)

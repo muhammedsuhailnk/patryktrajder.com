@@ -122,6 +122,12 @@ p {
   }
 }
 
+svg {
+  &.messenger {
+    color: #00b2ff;
+  }
+}
+
 .image-loading {
   animation: placeHolderShimmer 1.8s linear infinite forwards;
   background: #f6f7f8;

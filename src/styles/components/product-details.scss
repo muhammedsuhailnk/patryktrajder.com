@@ -1,3 +1,5 @@
+@import "../variables.scss";
+
 .product-details {
   .assembly-difficulty {
     margin-top: 1.5rem;
@@ -26,7 +28,74 @@
   .contact {
     margin-left: -1rem;
 
-    a {
+    > a,
+    > div {
+      display: inline-block;
+      vertical-align: bottom;
+
+      &.email {
+        padding-left: 44px;
+
+        svg {
+          font-size: 1.25rem;
+          left: 16px;
+          bottom: 6px;
+          position: absolute;
+        }
+      }
+
+      &.messenger {
+        svg {
+          margin-bottom: -0.2rem;
+          font-size: 1rem;
+        }
+      }
+
+      &.phone {
+        svg {
+          margin-bottom: -2px;
+          font-size: 1rem;
+        }
+
+        .number {
+          display: none;
+        }
+
+        :not(.invisible) {
+          &:hover,
+          &.hold {
+            .text {
+              display: none;
+            }
+
+            .number {
+              display: inline-block;
+            }
+          }
+
+          &.hold {
+            box-shadow: 0 2px 3px rgba($princetonOrange, 1),
+              0 -1px 0px rgba($princetonOrange, 0.1);
+          }
+        }
+
+        .invisible {
+          display: block;
+          height: 0;
+          visibility: collapse;
+          margin-top: 0;
+          overflow: hidden;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+      }
+
+      svg {
+        margin-right: 0.5rem;
+      }
+    }
+
+    .option {
       background: $cultured;
       border-radius: 10px;
       box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3), 0 -1px 0px rgba(0, 0, 0, 0.03);
@@ -55,25 +124,17 @@
       &:active::before {
         opacity: 0.1;
       }
-
-      &.email {
-        svg {
-          font-size: 1.25rem;
-          margin-bottom: -0.3rem;
-        }
-      }
-
-      &.messenger {
-        svg {
-          margin-bottom: -0.2rem;
-          font-size: 1rem;
-        }
-      }
-
-      svg {
-        margin-right: 0.5rem;
-      }
     }
+  }
+
+  .note-asterisk {
+    font-size: 1.5rem;
+    margin-left: 2px;
+  }
+
+  .note {
+    margin-top: 2rem;
+    font-size: 1rem;
   }
 
   .options {
