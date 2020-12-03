@@ -1,0 +1,31 @@
+export default class Gallery {
+    private readonly gallery;
+    private readonly previewAspectRatio;
+    private readonly closeButton;
+    private readonly full;
+    private readonly fullContainer;
+    private readonly fullImg;
+    private readonly nThumbs?;
+    private readonly preview;
+    private readonly previewImg;
+    private readonly previewImgOverlay;
+    private readonly previewImgWrapper;
+    private readonly slider?;
+    private abortClick;
+    private isGrabbing;
+    private nLoadedThumbs;
+    private startLeft;
+    private startTop;
+    private startX;
+    private startY;
+    constructor(gallery: Element);
+    showPreview: (img: HTMLImageElement) => void;
+    private handleThumbLoad;
+    private handlePointerMove;
+    private handleDragEnd;
+    private handlePointerDown;
+    private showFullImage;
+    private setUpZoom;
+    private zoomIn;
+    private zoomOut;
+}
