@@ -2,9 +2,9 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml">
-    <url>UPDATED
+    <url>
         <loc>https://patryktrajder.com/</loc>
-        <lastmod>2020-09-23T19:05:00+00:00</lastmod>
+        <lastmod>2020-12-03T16:35:00+00:00</lastmod>
         <priority>1.00</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/"/>
@@ -44,9 +44,9 @@
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/"/>
     </url>
-    <url>UPDATED
+    <url>
         <loc>https://patryktrajder.com/projects/</loc>
-        <lastmod>2020-09-23T19:05:00+00:00</lastmod>
+        <lastmod>2020-12-03T16:35:00+00:00</lastmod>
         <priority>0.3</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/projects/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/projects/"/>
@@ -67,7 +67,7 @@
     </url>
     <url>
         <loc>https://patryktrajder.com/en-gb/products/super-booster-2000/</loc>
-        <lastmod>2020-09-23T19:05:00+00:00</lastmod>
+        <lastmod>2020-12-03T16:35:00+00:00</lastmod>
         <priority>1</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/super-booster-2000/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/super-booster-2000/"/>
@@ -109,15 +109,14 @@
     </url>
     <url>
         <loc>https://patryktrajder.com/en-gb/products/super-booster-2000/equipment/metal-sheets/</loc>
-        <lastmod>2020-09-23T19:05:00+00:00</lastmod>
+        <lastmod>2020-12-03T16:35:00+00:00</lastmod>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/products/super-booster-2000/equipment/metal-sheets/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/products/super-booster-2000/equipment/metal-sheets/"/>
     </url>
     <url>
-    UPDATED
         <loc>https://patryktrajder.com/projects/hydraulic-power-pack/</loc>
-        <lastmod>2020-09-23T19:05:00+00:00</lastmod>
+        <lastmod>2020-12-03T16:35:00+00:00</lastmod>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="pl" href="https://patryktrajder.com/projects/hydraulic-power-pack/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://patryktrajder.com/en-gb/projects/hydraulic-power-pack/"/>
