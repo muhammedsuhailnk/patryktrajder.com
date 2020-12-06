@@ -66,7 +66,10 @@ export default class Slider {
     this.handleWindowResize();
 
     if (this.options.slideDuration > 0) {
-      this.timer = setTimeout(this.autoSlide, this.options.slideDuration);
+      this.timer = window.setTimeout(
+        this.autoSlide,
+        this.options.slideDuration
+      );
       this.isTimerSet = true;
       slider.addEventListener("pointerenter", this.handlePointerEnter);
       slider.addEventListener("pointerleave", this.handlePointerLeave);
@@ -333,7 +336,7 @@ export default class Slider {
 
   private handlePointerLeave = () => {
     if (this.isGrabbing) return;
-    this.timer = setTimeout(this.autoSlide, this.options.slideDuration);
+    this.timer = window.setTimeout(this.autoSlide, this.options.slideDuration);
     this.isTimerSet = true;
     this.isTimerStopped = false;
   };
@@ -346,7 +349,10 @@ export default class Slider {
       !this.isTimerSet &&
       !this.isTimerStopped
     ) {
-      this.timer = setTimeout(this.autoSlide, this.options.slideDuration);
+      this.timer = window.setTimeout(
+        this.autoSlide,
+        this.options.slideDuration
+      );
       this.isTimerSet = true;
     }
   };

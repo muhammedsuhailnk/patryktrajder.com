@@ -1,9 +1,10 @@
 const { spawn, spawnSync } = require("child_process");
 const gulp = require("gulp");
-const sass = require("gulp-sass");
+const merge = require("merge-stream");
 const readlineSync = require("readline-sync");
 const rename = require("gulp-rename");
 const replace = require("gulp-replace");
+const sass = require("gulp-sass");
 const webpack = require("webpack-stream");
 
 const distDir = "dist";
@@ -50,6 +51,15 @@ function images() {
     .pipe(gulp.dest(distDir + "/assets/images/"));
 }
 
+function manifests() {
+  var paths = ["manifest_pl.json", "manifest_en-gb.json"];
+  var tasks = paths.map(function (path) {
+    return gulp.src(path).pipe(gulp.dest(distDir));
+  });
+
+  return merge(tasks);
+}
+
 function notFoundPage() {
   return gulp.src("src/404.html").pipe(gulp.dest(distDir));
 }
@@ -59,6 +69,27 @@ function notFoundStyles() {
     .src("src/styles/404.scss")
     .pipe(sass())
     .pipe(gulp.dest(distDir + "/src/"));
+}
+
+function packagesReminder(done) {
+  let process = spawnSync("npm outdated", [], {
+    shell: true
+  });
+  if (process.stdout.byteLength > 0) {
+    spawnSync("npm outdated", [], {
+      shell: true,
+      stdio: "inherit"
+    });
+    if (
+      !readlineSync.keyInYN(
+        "There are outdated packages, do you want to continue?"
+      )
+    ) {
+      console.log("Ok, aborting deployment.");
+      process.exit(2);
+    }
+  }
+  done();
 }
 
 function replaceSpace() {
@@ -106,27 +137,6 @@ function sitemapReminder(done) {
   process.exit(1);
 }
 
-function packagesReminder(done) {
-  let process = spawnSync("npm outdated", [], {
-    shell: true
-  });
-  if (process.stdout.byteLength > 0) {
-    spawnSync("npm outdated", [], {
-      shell: true,
-      stdio: "inherit"
-    });
-    if (
-      !readlineSync.keyInYN(
-        "There are outdated packages, do you want to continue?"
-      )
-    ) {
-      console.log("Ok, aborting deployment.");
-      process.exit(2);
-    }
-  }
-  done();
-}
-
 function styles() {
   return gulp
     .src("src/styles/main.scss")
@@ -134,7 +144,7 @@ function styles() {
     .pipe(gulp.dest(distDir + "/src/"));
 }
 
-gulp.task("assets", gulp.parallel(cursors, favicon, icons, images));
+gulp.task("assets", gulp.parallel(cursors, favicon, icons, images, manifests));
 
 gulp.task("clean", function () {
   return spawn("rimraf " + distDir, [], {
